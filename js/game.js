@@ -5,7 +5,7 @@ var config = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 0 },
+      gravity: { y: 0, x: 0 },
       debug: true
     }
   },
@@ -19,6 +19,123 @@ var config = {
 
 var game = new Phaser.Game(config);
 var physics;
+var scene;
+
+class gun {
+  constructor() {
+
+  }
+}
+
+class tank2 extends Phaser.Physics.Arcade.Sprite {
+
+  gun;
+  name;
+  currentSpeed = 0;
+  movebackSpeed = 0;
+  canFire = true;
+
+  constructor(scene, x, y, texture, frame, walls) {
+
+    super(scene, x, y, texture, frame);
+
+    this.scene = scene;
+
+    //scene DisplayList and UpdateList to add a game to
+
+    this.scene.add.existing(this);
+
+    this.scene.physics.world.enable(this);
+
+    this.setTexture(texture, frame);
+
+    this.setPosition(x, y);
+
+    this.setSize(1, 1);
+
+    this.setOffset(0, 0);
+    this.setActive(true);
+    this.gun = physics.add.sprite(0, 0, 'gun');
+    this.gun.setOrigin(0.5, 0.5);
+    this.gun.setCollideWorldBounds(true);
+    scene.physics.add.collider(this.body, walls);
+    scene.physics.add.collider(this.gun, walls);
+    //scene.sys.updateList.add(this);
+
+  }
+
+  fireCd(time) {
+    this.canFire = false;
+    setTimeout(function () {
+      this.canFire = true;
+    }, time);
+  }
+
+  preUpdate() {
+    this.update(); // Comment this and update stop working
+  }
+
+  update() {
+    this.gun.x = this.x;
+    this.gun.y = this.y;
+    this.gun.angle = this.angle;
+    //
+
+    var cursors = scene.input.keyboard.createCursorKeys();
+    var pointer = scene.input.activePointer;
+    if (cursors.left.isDown) {
+      this.angle -= 4;
+    }
+    else if (cursors.right.isDown) {
+      this.angle += 4;
+
+    }
+
+    if (pointer.isDown) {
+      stars.children.iterate(function (child, player) {
+        if (!child.visible && canFire) {
+          fireCd(1000);
+          child.enableBody();
+          child.visible = true;
+          child.angle = player.angle;
+          child.x = player.x;
+          child.y = player.y;
+          physics.velocityFromRotation(player.rotation, 800, child.body.velocity);
+        }
+      });
+    }
+    if (cursors.down.isDown) {
+      movebackSpeed = 300;
+    }
+    if (cursors.up.isDown) {
+      currentSpeed = 300;
+
+    } else {
+      if (currentSpeed > 0) {
+        currentSpeed -= 15;
+      }
+      if (movebackSpeed > 0) {
+        movebackSpeed -= 5;
+      }
+    }
+
+    if (currentSpeed > 0) {
+      this.scene.physics.velocityFromRotation(this.rotation, currentSpeed, this.body.velocity);
+      this.scene.physics.velocityFromRotation(this.rotation, currentSpeed, this.gun.body.velocity);
+    } else {
+      if (movebackSpeed > 0) {
+        this.scene.physics.velocityFromRotation(this.rotation, -movebackSpeed, this.body.velocity);
+        this.scene.physics.velocityFromRotation(this.rotation, -movebackSpeed, this.gun.body.velocity);
+      } else {
+        this.setVelocity(0);
+      }
+    }
+    //player.update();
+
+    //
+  }
+
+}
 
 class tank {
   name;
@@ -37,6 +154,7 @@ class tank {
     physics.add.collider(this.tankBase, walls);
     physics.add.collider(this.gun, walls);
     this.update();
+    //scene.sys.updateList.add(this);
   }
   update() {
     this.gun.x = this.tankBase.x;
@@ -56,6 +174,7 @@ var canFire = true;
 
 function preload() {
   physics = game.scene.keys.default.physics;
+  scene = game.scene.keys.default;
   this.load.image('sky', 'assets/sky.png');
   this.load.image('ground', 'assets/platform.png');
   this.load.image('star', 'assets/star.png');
@@ -74,8 +193,9 @@ function create() {
   platforms.create(50, 250, 'ground');
   platforms.create(750, 220, 'ground');
 
-  player = new tank(platforms);
+  testTank = new tank2(this, 200, 200, 'tank', 0, platforms);
 
+  player = new tank(platforms);
   player2 = new tank(player);
   player.addColider(player2.tankBase);
 
@@ -118,54 +238,5 @@ function fireCd(time) {
 }
 
 function update(time, delta) {
-  cursors = this.input.keyboard.createCursorKeys();
-  var pointer = this.input.activePointer;
-  if (cursors.left.isDown) {
-    player.tankBase.angle -= 4;
-  }
-  else if (cursors.right.isDown) {
-    player.tankBase.angle += 4;
 
-  }
-
-  if (pointer.isDown) {
-    stars.children.iterate(function (child) {
-      if (!child.visible && canFire) {
-        fireCd();
-        child.enableBody();
-        child.visible = true;
-        child.angle = player.tankBase.angle;
-        child.x = player.tankBase.x;
-        child.y = player.tankBase.y;
-        physics.velocityFromRotation(player.tankBase.rotation, 800, child.body.velocity);
-      }
-    });
-  }
-  if (cursors.down.isDown) {
-    movebackSpeed = 300;
-  }
-  if (cursors.up.isDown) {
-    currentSpeed = 300;
-
-  } else {
-    if (currentSpeed > 0) {
-      currentSpeed -= 15;
-    }
-    if (movebackSpeed > 0) {
-      movebackSpeed -= 5;
-    }
-  }
-
-  if (currentSpeed > 0) {
-    this.physics.velocityFromRotation(player.tankBase.rotation, currentSpeed, player.tankBase.body.velocity);
-    this.physics.velocityFromRotation(player.tankBase.rotation, currentSpeed, player.gun.body.velocity);
-  } else {
-    if (movebackSpeed > 0) {
-      this.physics.velocityFromRotation(player.tankBase.rotation, -movebackSpeed, player.tankBase.body.velocity);
-      this.physics.velocityFromRotation(player.tankBase.rotation, -movebackSpeed, player.gun.body.velocity);
-    } else {
-      player.tankBase.setVelocity(0);
-    }
-  }
-  //player.update();
 }
