@@ -3,13 +3,14 @@
 
 // we've started you off with Express (https://expressjs.com/)
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
-const express = require("express");
-const app = express();
+var express = require('express');
+var app = express();
+var server = app.listen(process.env.PORT);
+var io = require('socket.io')(server);
 require('@geckos.io/phaser-on-nodejs');
 const Phaser = require('phaser');
 const jQuery = require('jQuery');
 //const io = require('socket.io');
-var io = require('socket.io')(server);
 const config = {
   type: Phaser.HEADLESS,//Phaser.AUTO,
   width: 1024,
@@ -63,7 +64,6 @@ class tank extends Phaser.Physics.Matter.Sprite {
 var id = Math.round(jQuery.now()*Math.random());
 var drawing = false;
 var clients = {};
-var socket = io();
 var game = new Phaser.Game(config);
 var scene;
 //this.input.mouse.disableContextMenu()
@@ -294,27 +294,6 @@ function update(time, delta) {
   }
 }
 
-socket.on('tankMove', function (data) {
-  
-  log(data);
-		
-		if(! (data.id in clients)){
-			// тут создать танк игрока 2
-			clients[data.id] = new tank(this, 200, 200, "tank");
-		}
-		
-		// Is the user drawing?
-		if(data.id != id && clients[data.id]){
-			clients[data.id].x = data.x;
-      clients[data.id].y = data.y;
-      clients[data.id].rotation = data.angle;
-		}
-		
-		// Saving the current client state
-		//clients[data.id] = data;
-		//clients[data.id].updated = $.now();
-	});
-
 
 
 class Game {
@@ -349,9 +328,9 @@ app.get("/dreams", (request, response) => {
 });
 
 // listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
+/*const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
-});
+});*/
 
 io.sockets.on('connection', function (socket) {
 	// Start listening for mouse move events
