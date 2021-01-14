@@ -5,6 +5,50 @@
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
 const app = express();
+require('@geckos.io/phaser-on-nodejs')
+const Phaser = require('phaser')
+
+const config = {
+  type: Phaser.AUTO,//Phaser.HEADLESS,
+  width: 1024,
+  height: 640,
+  physics: {
+    default: "matter",
+    matter: {
+      gravity: { y: 0, x: 0 },
+      debug: true
+    }
+  },
+  // disable audio
+  audio: {
+    noAudio: true
+  },
+  scene: {
+    preload: () => {
+      console.log('server preload')
+    },
+    create: () => {
+      console.log('server create')
+    },
+    update: () => {
+      // console.log('server update')
+    }
+  },
+  title: 'Phaser server app',
+  backgroundColor: '#06C6F8',
+  transparent: true,
+  disableContextMenu: true
+}
+
+class Game {
+  static initialize() {
+    console.log('initializing server game')
+    ;(() => new Phaser.Game(config))()
+  }
+}
+
+Game.initialize()
+
 
 // our default array of dreams
 const dreams = [

@@ -1,29 +1,31 @@
 # hello-express
 
-A server that serves a webpage, its resources, and some data
+Сервер, который обслуживает веб-страницу, ее ресурсы и некоторые данные.
 
 
 ## Your Project
 
-On the front-end,
+В интерфейсе
 
-- Edit `views/index.html` to change the content of the webpage
-- `public/client.js` is the javacript that runs when you load the webpage
-- `public/style.css` is the styles for `views/index.html`
-- Drag in `assets`, like images or music, to add them to your project
+- Отредактируйте `views / index.html`, чтобы изменить содержимое веб-страницы.
+- `public / client.js` - это javacript, который запускается при загрузке веб-страницы.
+- `public / style.css` - это стили для` views / index.html`
+- Перетащите «активы», например изображения или музыку, чтобы добавить их в свой проект.
 
-On the back-end,
+На серверной стороне
 
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
+- ваше приложение начинается с server.js
+- добавить фреймворки и пакеты в `package.json`
+- безопасно хранить секреты приложений в .env (никто не может видеть это, кроме вас и людей, которых вы приглашаете)
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy.
+Нажмите «Показать» в заголовке, чтобы увидеть ваше приложение вживую. Обновления вашего кода будут немедленно развернуты.
 
 
 ## Made by [Glitch](https://glitch.com/)
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+**Glitch** это дружелюбное сообщество, в котором вы создадите приложение своей мечты. 
+Glitch позволяет мгновенно создавать, ремикшировать, редактировать и размещать приложение, 
+бота или сайт, а также приглашать соавторов или помощников для одновременного редактирования кода вместе с вами.
 
 Find out more [about Glitch](https://glitch.com/about).
 

@@ -10,7 +10,10 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "socket.io": "^3.0.5",
+    "phaser": "^3.52.0",
+    "@geckos.io/phaser-on-nodejs": "^1.2.3"
   },
   "engines": {
     "node": "12.x"
