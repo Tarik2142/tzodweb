@@ -9,7 +9,7 @@ require('@geckos.io/phaser-on-nodejs')
 const Phaser = require('phaser')
 
 const config = {
-  type: Phaser.AUTO,//Phaser.HEADLESS,
+  type: Phaser.HEADLESS,//Phaser.AUTO,
   width: 1024,
   height: 640,
   physics: {
@@ -39,6 +39,28 @@ const config = {
   transparent: true,
   disableContextMenu: true
 }
+function log(text){
+  console.log(text);
+}
+class gun extends Phaser.Physics.Matter.Sprite {
+  constructor(scene, x, y, texture, frame) {
+    super(scene.matter.world, x, y, texture);
+    scene.add.existing(this);
+  }
+}
+class tank extends Phaser.Physics.Matter.Sprite {
+  gun;
+  speed;
+  armor;
+  constructor(scene, x, y, texture, frame, walls) {
+    super(scene.matter.world, x, y, texture);
+    scene.add.existing(this);
+  }
+  update() {}
+}
+var id = Math.round($.now()*Math.random());
+
+
 
 class Game {
   static initialize() {
@@ -48,7 +70,6 @@ class Game {
 }
 
 Game.initialize()
-
 
 // our default array of dreams
 const dreams = [
