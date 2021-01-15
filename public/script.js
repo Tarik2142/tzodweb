@@ -95,7 +95,7 @@ function create() {
   this.matter.world.debugGraphic.visible = true;
   this.matter.world.disableGravity();
   this.matter.world.setBounds();
-  this.add.image(400, 300, "sky");
+  //this.add.image(400, 300, "sky");
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
   gun = this.add.image(0, 0, "gun");
 
@@ -242,9 +242,15 @@ function update(time, delta) {
   var cursors = scene.input.keyboard.createCursorKeys();
   var pointer = scene.input.activePointer;
   if (cursors.left.isDown) {
-    player.setRotation(player.rotation - 0.1);
+    socket.emit('leftisDown',{
+				'id': id
+			});
+    //player.setRotation(player.rotation - 0.1);
   } else if (cursors.right.isDown) {
-    player.setRotation(player.rotation + 0.1);
+    socket.emit('rightisDown',{
+				'id': id
+			});
+    //player.setRotation(player.rotation + 0.1);
   }
 
   if (pointer.isDown) {
@@ -277,7 +283,10 @@ function update(time, delta) {
     }*/
   //gun.rotation=Math.atan2(pointer.y - gun.y, pointer.x - gun.x)
   if (cursors.down.isDown) {
-    player.thrustBack(0.05);
+    socket.emit('downisDown',{
+				'id': id
+			});
+    //player.thrustBack(0.05);
     
     //scoreText.x=pointer.x;
     //scoreText.y=pointer.y;
@@ -289,6 +298,21 @@ function update(time, delta) {
     //player.thrust(0.05);
   }
 }
+socket.on('downisDown', function (data) {
+		if(data.id != id && clients[data.id]){
+			clients[data.id].thrustBack(0.05);
+		}
+	});
+socket.on('leftisDown', function (data) {
+		if(data.id != id && clients[data.id]){
+			clients[data.id].setRotation(clients[data.id].rotation - 0.1);
+		}
+	});
+socket.on('rightisDown', function (data) {
+		if(data.id != id && clients[data.id]){
+			clients[data.id].setRotation(clients[data.id].rotation + 0.1);
+		}
+	});
 socket.on('upisDown', function (data) {
 		if(data.id != id && clients[data.id]){
 			clients[data.id].thrust(0.05);
@@ -316,5 +340,9 @@ socket.on('tankCreate', function (data) {
 		if(! (data.id in clients)){
 			// тут создать танк игрока 2
 			clients[data.id] = new tank(scene, 200, 200, "tank");
+      clients[data.id].setFrictionAir(0.5);
+      clients[data.id].setPosition(500, 500);
+      clients[data.id].setMass(5);
+      clients[data.id].setCollisionCategory(cat1);
 		}
 	});

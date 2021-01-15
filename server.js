@@ -332,7 +332,7 @@ io.sockets.on('connection', function (socket) {
 	/*socket.on('tankMove', function (data) {
 		// This line sends the event (broadcasts it)
 		// to everyone except the originating client. upisDown
-		socket.broadcast.emit('tankMove', data);
+		socket.broadcast.emit('tankMove', data);downisDown leftisDown rightisDown
 	});*/
   socket.on('upisDown', function (data) {
 		// This line sends the event (broadcasts it)
