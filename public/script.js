@@ -103,7 +103,7 @@ socket.on('tankMove', function (data) {
 	});
 socket.on('tankCreate', function (data) {
   if(data.id != id && !clients[data.id]){
-		createTank(scene,data.id);
+		createTank(scene,data.id,data.posx,data.posy);
     socket.emit('tankCreate',{
       'id': id,
       'posx':posx,
@@ -149,8 +149,12 @@ function create() {
   
 
   //console.log(this);
-  createTank(this,id);
-  socket.emit('tankCreate',{'id': id});
+  createTank(this,id,posx,posy);
+  socket.emit('tankCreate',{
+      'id': id,
+      'posx':posx,
+      'posy':posy
+    });
   
   
 
@@ -350,7 +354,7 @@ game.matter.add.gameObject(gun[id]);
 
   //player.setRotation(45);
   clients[id].setFrictionAir(0.5);
-  clients[id].setPosition(Math.round(500*Math.random()), Math.round(500*Math.random()));
+  clients[id].setPosition(x, y);
   gun[id].depth = 1;
   clients[id].setMass(5);
   clients[id].setCollisionCategory(cat1);
