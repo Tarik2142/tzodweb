@@ -64,7 +64,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
 var id = Math.round(jQuery.now()*Math.random());
 var drawing = false;
 var clients = {};
-var game = new Phaser.Game(config);
+//var game = new Phaser.Game(config);
 var scene;
 //this.input.mouse.disableContextMenu()
 var currentSpeed = 0;
@@ -290,20 +290,20 @@ function update(time, delta) {
     scoreText.y=pointer.y;
   }
   if (cursors.up.isDown) {
-    player.thrust(0.05);
+    //player.thrust(0.05);
   }
 }
 
 
 
-class Game {
+class game {
   static initialize() {
-    console.log('initializing server game')
-    ;(() => new Phaser.Game(config))()
+    console.log('initializing server game');
+    (() => new Phaser.Game(config))()
   }
 }
 
-Game.initialize()
+game.initialize()
 
 // our default array of dreams
 const dreams = [
@@ -343,5 +343,6 @@ io.sockets.on('connection', function (socket) {
 		// This line sends the event (broadcasts it)
 		// to everyone except the originating client. upisDown
 		socket.broadcast.emit('upisDown', data);
+    player.thrust(0.05);
 	});
 });
