@@ -7,10 +7,22 @@ var express = require('express');
 var app = express();
 var server = app.listen(process.env.PORT);
 var io = require('socket.io')(server);
-const Phaser = require('@geckos.io/phaser-on-nodejs');
+require('@geckos.io/phaser-on-nodejs')
+const Phaser = require('phaser')
 const jQuery = require('jQuery');
 //const io = require('socket.io');
-const config = {
+// set the fps you need
+const FPS = 30
+global.phaserOnNodeFPS = FPS // default is 60
+class MainScene extends Phaser.Scene {
+  constructor() {
+    super('MainScene')
+  }
+  create() {
+    console.log('it works!')
+  }
+}
+/*const config = {
   type: Phaser.HEADLESS,//Phaser.AUTO,
   width: 1024,
   height: 640,
@@ -34,20 +46,38 @@ const config = {
   backgroundColor: '#06C6F8',
   transparent: true,
   disableContextMenu: true
+}*/
+const config = {
+  type: Phaser.HEADLESS,
+  width: 1280,
+  height: 720,
+  banner: false,
+  audio: false,
+  scene: [MainScene],
+  fps: {
+    target: FPS
+  },
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 300 }
+    }
+  }
 }
+new Phaser.Game(config)
 function log(text){
   console.log(text);
 }
 
 
-class game {
+/*class game {
   static initialize() {
     console.log('initializing server game');
     (() => new Phaser.Game(config))()
   }
 }
 
-game.initialize()
+game.initialize()*/
 
 // our default array of dreams
 

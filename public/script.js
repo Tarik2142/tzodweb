@@ -133,6 +133,7 @@ function create() {
   gun.setCollidesWith(cat2);
   this.matter.add.constraint(player, gun, 0, 0);
   socket.emit('tankCreate',{'id': id});
+  createTank(id);
 }
 
 //-----TEST------
@@ -337,7 +338,10 @@ socket.on('tankMove', function (data) {
 		//clients[data.id].updated = $.now();
 	});
 socket.on('tankCreate', function (data) {
-		if(! (data.id in clients)){
+		createTank(id);
+	});
+function createTank (id) {
+  if(! (data.id in clients)){
 			// тут создать танк игрока 2
 			clients[data.id] = new tank(scene, 200, 200, "tank");
       clients[data.id].setFrictionAir(0.5);
@@ -345,4 +349,4 @@ socket.on('tankCreate', function (data) {
       clients[data.id].setMass(5);
       clients[data.id].setCollisionCategory(cat1);
 		}
-	});
+}
