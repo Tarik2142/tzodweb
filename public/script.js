@@ -45,7 +45,7 @@ class gun extends Phaser.Physics.Matter.Sprite {
   update() {}
 }*/
 
-var id = Math.round(Math.random());
+var id = Math.round(100*Math.random());
 	
 	// A flag for drawing activity
 	var drawing = false;
