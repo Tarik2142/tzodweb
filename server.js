@@ -117,5 +117,6 @@ io.sockets.on('connection', function (socket) {
 	});
   socket.on('tankCreate', function (data) {
 		socket.broadcast.emit('tankCreate', data);
+    log(data);
 	});
 });

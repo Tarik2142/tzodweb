@@ -34,7 +34,7 @@ class gun extends Phaser.Physics.Matter.Sprite {
   }
 }
 
-class tank extends Phaser.Physics.Matter.Sprite {
+/*class tank extends Phaser.Physics.Matter.Sprite {
   gun;
   speed;
   armor;
@@ -43,13 +43,14 @@ class tank extends Phaser.Physics.Matter.Sprite {
     scene.add.existing(this);
   }
   update() {}
-}
+}*/
 
 var id = Math.round(Math.random());
 	
 	// A flag for drawing activity
 	var drawing = false;
 	var clients = {};
+  var clients = {};
 	var socket = io();
 
 var game = new Phaser.Game(config);
@@ -97,7 +98,7 @@ function create() {
   this.matter.world.setBounds();
   this.add.image(400, 300, "sky");
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-  gun = this.add.image(0, 0, "gun");
+  
 
   //console.log(this);
   createTank(this,id);
@@ -236,15 +237,15 @@ function update(time, delta) {
       //fireBullet(this, gun);//player
     }
   }
-  var mat=Math.atan2(pointer.y - gun.y, pointer.x - gun.x);
+  var mat=Math.atan2(pointer.y - gun[id].y, pointer.x - gun[id].x);
   //scoreText.setText('Score: ' + mat);
-  var poz=gun.rotation-mat;
+  var poz=gun[id].rotation-mat;
   //scoreText.setText(poz+'Score: ' + mat);
       if (poz>0.05&&poz<3.14||poz<-3.15){
         //console.log("-");
-        gun.rotation=gun.rotation-0.05;
+        gun[id].rotation=gun[id].rotation-0.05;
       }else if (poz<-0.05&&poz>-3.14||poz>3.15){
-      gun.rotation=gun.rotation+0.05;
+      gun[id].rotation=gun[id].rotation+0.05;
         //console.log("+");
       }
   
@@ -321,14 +322,16 @@ socket.on('tankMove', function (data) {
 		//clients[data.id].updated = $.now();
 	});
 socket.on('tankCreate', function (data) {
-		createTank(this,data.id);
+		createTank(scene,data.id);
 	});
 function createTank (game,id) {
+  log(id);
   if(! (id in clients)){
 			// тут создать танк игрока 2
 			clients[id] = game.add.sprite(64, 64, "tank");
+      gun[id] = game.add.image(0, 0, "gun");
 game.matter.add.gameObject(clients[id]);
-game.matter.add.gameObject(gun);
+game.matter.add.gameObject(gun[id]);
 
   cat1 = game.matter.world.nextCategory();
   cat2 = game.matter.world.nextCategory();
@@ -337,11 +340,11 @@ game.matter.add.gameObject(gun);
   //player.setRotation(45);
   clients[id].setFrictionAir(0.5);
   clients[id].setPosition(500, 500);
-  gun.depth = 1;
+  gun[id].depth = 1;
   clients[id].setMass(5);
   clients[id].setCollisionCategory(cat1);
-  gun.setCollisionCategory(cat2);
-  gun.setCollidesWith(cat2);
-  game.matter.add.constraint(clients[id], gun, 0, 0);
+  gun[id].setCollisionCategory(cat2);
+  gun[id].setCollidesWith(cat2);
+  game.matter.add.constraint(clients[id], gun[id], 0, 0);
 		}
 }
