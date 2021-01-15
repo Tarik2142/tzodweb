@@ -46,7 +46,8 @@ class gun extends Phaser.Physics.Matter.Sprite {
 }*/
 
 var id = Math.round(100*Math.random());
-	
+	var posx = Math.round(500*Math.random());
+  var posy = Math.round(500*Math.random());
 	// A flag for drawing activity
 	var drawing = false;
 	var clients = {};
@@ -101,9 +102,13 @@ socket.on('tankMove', function (data) {
 		//clients[data.id].updated = $.now();
 	});
 socket.on('tankCreate', function (data) {
-  if(data.id != id){
+  if(data.id != id && !clients[data.id]){
 		createTank(scene,data.id);
-    socket.emit('tankCreate',{'id': id});}
+    socket.emit('tankCreate',{
+      'id': id,
+      'posx':posx,
+      'posy':posy
+    });}
 	});
 function preload() {
   scene = game.scene.keys.default;
@@ -330,7 +335,7 @@ function update(time, delta) {
   }
 }
 
-function createTank (game,id) {
+function createTank (game,id,x,y) {
   log(id);
   if(! (id in clients)){
 			// тут создать танк игрока 2
@@ -345,7 +350,7 @@ game.matter.add.gameObject(gun[id]);
 
   //player.setRotation(45);
   clients[id].setFrictionAir(0.5);
-  clients[id].setPosition(500, 500);
+  clients[id].setPosition(Math.round(500*Math.random()), Math.round(500*Math.random()));
   gun[id].depth = 1;
   clients[id].setMass(5);
   clients[id].setCollisionCategory(cat1);
