@@ -1,5 +1,5 @@
 
-console.log("hello world :o");
+//console.log("hello world :o");
 //import Phaser from 'phaser';
 var config = {
   type: Phaser.AUTO,
@@ -27,12 +27,12 @@ function log(text){
   console.log(text);
 }
 
-class gun extends Phaser.Physics.Matter.Sprite {
+/*class gun extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame) {
     super(scene.matter.world, x, y, texture);
     scene.add.existing(this);
   }
-}
+}*/
 
 /*class tank extends Phaser.Physics.Matter.Sprite {
   gun;
