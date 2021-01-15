@@ -132,6 +132,7 @@ function create() {
   gun.setCollisionCategory(cat2);
   gun.setCollidesWith(cat2);
   this.matter.add.constraint(player, gun, 0, 0);
+  socket.emit('tankCreate',{'id': id});
 }
 
 //-----TEST------
@@ -289,20 +290,9 @@ function update(time, delta) {
   }
 }
 socket.on('upisDown', function (data) {
-		
-		if(! (data.id in clients)){
-			// тут создать танк игрока 2
-			clients[data.id] = new tank(scene, 200, 200, "tank");
-		}
-		
-		// Is the user drawing?
 		if(data.id != id && clients[data.id]){
 			clients[data.id].thrust(0.05);
 		}
-		
-		// Saving the current client state
-		//clients[data.id] = data;
-		//clients[data.id].updated = $.now();
 	});
 socket.on('tankMove', function (data) {
 		
@@ -321,4 +311,10 @@ socket.on('tankMove', function (data) {
 		// Saving the current client state
 		//clients[data.id] = data;
 		//clients[data.id].updated = $.now();
+	});
+socket.on('tankCreate', function (data) {
+		if(! (data.id in clients)){
+			// тут создать танк игрока 2
+			clients[data.id] = new tank(scene, 200, 200, "tank");
+		}
 	});

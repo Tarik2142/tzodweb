@@ -27,15 +27,9 @@ const config = {
     noAudio: true
   },
   scene: {
-    preload: () => {
-      console.log('server preload')
-    },
-    create: () => {
-      console.log('server create')
-    },
-    update: () => {
-      // console.log('server update')
-    }
+    preload: preload,
+    create: create,
+    update: update
   },
   title: 'Phaser server app',
   backgroundColor: '#06C6F8',
@@ -75,6 +69,7 @@ var scoreText;
 //var player,gun1,tank2;
 
 function preload() {
+  log("preload");
   scene = game.scene.keys.default;
   this.load.image(
     "sky",
@@ -343,6 +338,9 @@ io.sockets.on('connection', function (socket) {
 		// This line sends the event (broadcasts it)
 		// to everyone except the originating client. upisDown
 		socket.broadcast.emit('upisDown', data);
-    player.thrust(0.05);
+    //player.thrust(0.05);
+	});
+  socket.on('tankCreate', function (data) {
+		socket.broadcast.emit('tankCreate', data);
 	});
 });
