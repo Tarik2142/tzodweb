@@ -334,9 +334,14 @@ app.get("/dreams", (request, response) => {
 
 io.sockets.on('connection', function (socket) {
 	// Start listening for mouse move events
-	socket.on('tankMove', function (data) {
+	/*socket.on('tankMove', function (data) {
 		// This line sends the event (broadcasts it)
-		// to everyone except the originating client.
+		// to everyone except the originating client. upisDown
 		socket.broadcast.emit('tankMove', data);
+	});*/
+  socket.on('upisDown', function (data) {
+		// This line sends the event (broadcasts it)
+		// to everyone except the originating client. upisDown
+		socket.broadcast.emit('upisDown', data);
 	});
 });

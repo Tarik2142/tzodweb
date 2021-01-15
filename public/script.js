@@ -277,14 +277,33 @@ function update(time, delta) {
   //gun.rotation=Math.atan2(pointer.y - gun.y, pointer.x - gun.x)
   if (cursors.down.isDown) {
     player.thrustBack(0.05);
+    
     //scoreText.x=pointer.x;
     //scoreText.y=pointer.y;
   }
   if (cursors.up.isDown) {
-    player.thrust(0.05);
+    socket.emit('upisDown',{
+				'id': id
+			});
+    //player.thrust(0.05);
   }
 }
-
+socket.on('upisDown', function (data) {
+		
+		if(! (data.id in clients)){
+			// тут создать танк игрока 2
+			clients[data.id] = new tank(scene, 200, 200, "tank");
+		}
+		
+		// Is the user drawing?
+		if(data.id != id && clients[data.id]){
+			clients[data.id].thrust(0.05);
+		}
+		
+		// Saving the current client state
+		//clients[data.id] = data;
+		//clients[data.id].updated = $.now();
+	});
 socket.on('tankMove', function (data) {
 		
 		if(! (data.id in clients)){
