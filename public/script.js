@@ -95,13 +95,15 @@ function create() {
   this.matter.world.debugGraphic.visible = true;
   this.matter.world.disableGravity();
   this.matter.world.setBounds();
-  //this.add.image(400, 300, "sky");
+  this.add.image(400, 300, "sky");
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
   gun = this.add.image(0, 0, "gun");
 
   //console.log(this);
-
-  player = this.add.sprite(64, 64, "tank");
+  createTank(this,id);
+  socket.emit('tankCreate',{'id': id});
+  
+  
 
   this.matter.add
     .gameObject(this.add.image(600, 400, "ground", 0))
@@ -115,25 +117,6 @@ function create() {
     .gameObject(this.add.image(750, 220, "ground", 0))
     .setStatic(true)
     .setName("platform");
-
-  this.matter.add.gameObject(player);
-  this.matter.add.gameObject(gun);
-
-  cat1 = this.matter.world.nextCategory();
-  cat2 = this.matter.world.nextCategory();
-  cat3 = this.matter.world.nextCategory();
-
-  //player.setRotation(45);
-  player.setFrictionAir(0.5);
-  player.setPosition(500, 500);
-  gun.depth = 1;
-  player.setMass(5);
-  player.setCollisionCategory(cat1);
-  gun.setCollisionCategory(cat2);
-  gun.setCollidesWith(cat2);
-  this.matter.add.constraint(player, gun, 0, 0);
-  socket.emit('tankCreate',{'id': id});
-  createTank(id);
 }
 
 //-----TEST------
@@ -226,7 +209,7 @@ function fireCd(time) {
 
 var lastEmit = $.now();
 
-function handleMove(){
+/*function handleMove(){
   
 			socket.emit('tankMove',{
 				'x': player.x,
@@ -236,10 +219,10 @@ function handleMove(){
 				'id': id
 			});
 			lastEmit = $.now();
-}
+}*/
 
 function update(time, delta) {
-  handleMove()
+  //handleMove()
   var cursors = scene.input.keyboard.createCursorKeys();
   var pointer = scene.input.activePointer;
   
@@ -338,15 +321,27 @@ socket.on('tankMove', function (data) {
 		//clients[data.id].updated = $.now();
 	});
 socket.on('tankCreate', function (data) {
-		createTank(id);
+		createTank(this,data.id);
 	});
-function createTank (id) {
-  if(! (data.id in clients)){
+function createTank (game,id) {
+  if(! (id in clients)){
 			// тут создать танк игрока 2
-			clients[data.id] = new tank(scene, 200, 200, "tank");
-      clients[data.id].setFrictionAir(0.5);
-      clients[data.id].setPosition(500, 500);
-      clients[data.id].setMass(5);
-      clients[data.id].setCollisionCategory(cat1);
+			clients[id] = game.add.sprite(64, 64, "tank");
+game.matter.add.gameObject(clients[id]);
+game.matter.add.gameObject(gun);
+
+  cat1 = game.matter.world.nextCategory();
+  cat2 = game.matter.world.nextCategory();
+  cat3 = game.matter.world.nextCategory();
+
+  //player.setRotation(45);
+  clients[id].setFrictionAir(0.5);
+  clients[id].setPosition(500, 500);
+  gun.depth = 1;
+  clients[id].setMass(5);
+  clients[id].setCollisionCategory(cat1);
+  gun.setCollisionCategory(cat2);
+  gun.setCollidesWith(cat2);
+  game.matter.add.constraint(clients[id], gun, 0, 0);
 		}
 }

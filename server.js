@@ -98,11 +98,11 @@ app.get("/", (request, response) => {
 
 io.sockets.on('connection', function (socket) {
 	// Start listening for mouse move events
-	socket.on('tankMove', function (data) {
+	/*socket.on('tankMove', function (data) {
 		// This line sends the event (broadcasts it)
 		// to everyone except the originating client. upisDown
 		socket.broadcast.emit('tankMove', data);
-	});
+	});*/
   socket.on('upisDown', function (data) {
 		socket.broadcast.emit('upisDown', data);
 	});
