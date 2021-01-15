@@ -277,8 +277,8 @@ function update(time, delta) {
   //gun.rotation=Math.atan2(pointer.y - gun.y, pointer.x - gun.x)
   if (cursors.down.isDown) {
     player.thrustBack(0.05);
-    scoreText.x=pointer.x;
-    scoreText.y=pointer.y;
+    //scoreText.x=pointer.x;
+    //scoreText.y=pointer.y;
   }
   if (cursors.up.isDown) {
     player.thrust(0.05);
