@@ -62,6 +62,49 @@ var lastFired = 0;
 var canFire = true;
 var scoreText;
 //var player,gun1,tank2;
+socket.on('downisDown', function (data) {
+		if(data.id != id && clients[data.id]){
+			clients[data.id].thrustBack(0.05);
+		}
+	});
+socket.on('leftisDown', function (data) {
+		if(data.id != id && clients[data.id]){
+			clients[data.id].setRotation(clients[data.id].rotation - 0.1);
+		}
+	});
+socket.on('rightisDown', function (data) {
+		if(data.id != id && clients[data.id]){
+			clients[data.id].setRotation(clients[data.id].rotation + 0.1);
+		}
+	});
+socket.on('upisDown', function (data) {
+		if(data.id != id && clients[data.id]){
+			clients[data.id].thrust(0.05);
+		}
+	});
+socket.on('tankMove', function (data) {
+		
+		if(! (data.id in clients)){
+			// тут создать танк игрока 2
+			clients[data.id] = new tankew(scene, 200, 200, "tank");
+		}
+		
+		// Is the user drawing?
+		if(data.id != id && clients[data.id]){
+			clients[data.id].x = data.x;
+      clients[data.id].y = data.y;
+      clients[data.id].rotation = data.angle;
+		}
+		
+		// Saving the current client state
+		//clients[data.id] = data;
+		//clients[data.id].updated = $.now();
+	});
+socket.on('tankCreate', function (data) {
+  if(data.id != id){
+		createTank(scene,data.id);
+    socket.emit('tankCreate',{'id': id});}
+	});
 function preload() {
   scene = game.scene.keys.default;
   this.load.image(
@@ -224,6 +267,7 @@ var lastEmit = $.now();
 
 function update(time, delta) {
   //handleMove()
+  
   var cursors = scene.input.keyboard.createCursorKeys();
   var pointer = scene.input.activePointer;
   
@@ -257,6 +301,7 @@ function update(time, delta) {
     }*/
   //gun.rotation=Math.atan2(pointer.y - gun.y, pointer.x - gun.x)
   if (cursors.down.isDown) {
+  
     socket.emit('downisDown',{
 				'id': id
 			});
@@ -266,6 +311,7 @@ function update(time, delta) {
     //scoreText.y=pointer.y;
   }
   else if (cursors.up.isDown) {
+    
     socket.emit('upisDown',{
 				'id': id
 			});
@@ -283,47 +329,7 @@ function update(time, delta) {
     //player.setRotation(player.rotation + 0.1);
   }
 }
-socket.on('downisDown', function (data) {
-		if(data.id != id && clients[data.id]){
-			clients[data.id].thrustBack(0.05);
-		}
-	});
-socket.on('leftisDown', function (data) {
-		if(data.id != id && clients[data.id]){
-			clients[data.id].setRotation(clients[data.id].rotation - 0.1);
-		}
-	});
-socket.on('rightisDown', function (data) {
-		if(data.id != id && clients[data.id]){
-			clients[data.id].setRotation(clients[data.id].rotation + 0.1);
-		}
-	});
-socket.on('upisDown', function (data) {
-		if(data.id != id && clients[data.id]){
-			clients[data.id].thrust(0.05);
-		}
-	});
-socket.on('tankMove', function (data) {
-		
-		if(! (data.id in clients)){
-			// тут создать танк игрока 2
-			clients[data.id] = new tank(scene, 200, 200, "tank");
-		}
-		
-		// Is the user drawing?
-		if(data.id != id && clients[data.id]){
-			clients[data.id].x = data.x;
-      clients[data.id].y = data.y;
-      clients[data.id].rotation = data.angle;
-		}
-		
-		// Saving the current client state
-		//clients[data.id] = data;
-		//clients[data.id].updated = $.now();
-	});
-socket.on('tankCreate', function (data) {
-		createTank(scene,data.id);
-	});
+
 function createTank (game,id) {
   log(id);
   if(! (id in clients)){
