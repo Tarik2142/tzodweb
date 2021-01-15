@@ -329,16 +329,22 @@ app.get("/dreams", (request, response) => {
 
 io.sockets.on('connection', function (socket) {
 	// Start listening for mouse move events
-	/*socket.on('tankMove', function (data) {
+	socket.on('tankMove', function (data) {
 		// This line sends the event (broadcasts it)
 		// to everyone except the originating client. upisDown
-		socket.broadcast.emit('tankMove', data);downisDown leftisDown rightisDown
-	});*/
+		socket.broadcast.emit('tankMove', data);
+	});
   socket.on('upisDown', function (data) {
-		// This line sends the event (broadcasts it)
-		// to everyone except the originating client. upisDown
 		socket.broadcast.emit('upisDown', data);
-    //player.thrust(0.05);
+	});
+    socket.on('downisDown', function (data) {
+		socket.broadcast.emit('downisDown', data);
+	});
+    socket.on('leftisDown', function (data) {
+		socket.broadcast.emit('leftisDown', data);
+	});
+    socket.on('rightisDown', function (data) {
+		socket.broadcast.emit('rightisDown', data);
 	});
   socket.on('tankCreate', function (data) {
 		socket.broadcast.emit('tankCreate', data);

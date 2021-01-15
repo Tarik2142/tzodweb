@@ -241,18 +241,7 @@ function update(time, delta) {
   handleMove()
   var cursors = scene.input.keyboard.createCursorKeys();
   var pointer = scene.input.activePointer;
-  if (cursors.left.isDown) {
-    socket.emit('leftisDown',{
-				'id': id
-			});
-    //player.setRotation(player.rotation - 0.1);
-  } else if (cursors.right.isDown) {
-    socket.emit('rightisDown',{
-				'id': id
-			});
-    //player.setRotation(player.rotation + 0.1);
-  }
-
+  
   if (pointer.isDown) {
     //var bomb = player.create(10, 16, 'tank');
     if (canFire) {
@@ -291,11 +280,22 @@ function update(time, delta) {
     //scoreText.x=pointer.x;
     //scoreText.y=pointer.y;
   }
-  if (cursors.up.isDown) {
+  else if (cursors.up.isDown) {
     socket.emit('upisDown',{
 				'id': id
 			});
     //player.thrust(0.05);
+  }
+  if (cursors.left.isDown) {
+    socket.emit('leftisDown',{
+				'id': id
+			});
+    //player.setRotation(player.rotation - 0.1);
+  } else if (cursors.right.isDown) {
+    socket.emit('rightisDown',{
+				'id': id
+			});
+    //player.setRotation(player.rotation + 0.1);
   }
 }
 socket.on('downisDown', function (data) {
