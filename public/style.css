@@ -1,3 +1,11 @@
-body{
-  background-image: 'https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fback01.png?v=1610821108096';
+
+.grid{
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-gap: 1em;
+  grid-auto-rows: auto;
+}
+
+body {
+  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fback01.png?v=1610821108096');
 }
