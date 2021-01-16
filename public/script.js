@@ -95,6 +95,8 @@ socket.on('tankMove', function (data) {
       timerId[data.id] = setTimeout(function() {
         clients[data.id].destroy();
         gun[data.id].destroy();
+        
+        
         }, 5000);
 		}
 	});
@@ -337,11 +339,11 @@ function update(time, delta) {
   //gun.rotation=Math.atan2(pointer.y - gun.y, pointer.x - gun.x)
   if (cursors.down.isDown) {
     //socket.emit('downisDown',{'id': id});
-    clients[id].thrustBack(0.05);
+    clients[id].thrustBack(0.03);
   }
   else if (cursors.up.isDown) {
     //socket.emit('upisDown',{'id': id});
-    clients[id].thrust(0.05);
+    clients[id].thrust(0.03);
   }
   if (cursors.left.isDown) {
     //socket.emit('leftisDown',{'id': id});
@@ -358,7 +360,7 @@ function createTank (game,id,x,y) {
 			// тут создать танк игрока 2
 			clients[id] = game.add.sprite(64, 64, "tank");
       gun[id] = game.add.image(0, 0, "gun");
-game.matter.add.gameObject(clients[id]);
+game.matter.add.gameObject(clients[id]).setScale(0.8,0.8);
 game.matter.add.gameObject(gun[id]);
 
   cat1 = game.matter.world.nextCategory();
