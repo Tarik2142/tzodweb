@@ -41,7 +41,7 @@ function log(text){
 class gunn extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame) {
     super(scene.matter.world, x, y, texture);
-    scene.add.existing(this);
+    scene.add.existing(this).setScale(0.8, 0.8);
   }
 }
 
@@ -50,7 +50,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
   armor;
   constructor(scene, x, y, texture, frame, walls) {
     super(scene.matter.world, x, y, texture);
-    scene.add.existing(this);
+    scene.add.existing(this).setScale(0.8, 0.8);
     log('tank = ');
     log(this);
   var cat1 = scene.matter.world.nextCategory();
@@ -64,9 +64,14 @@ class tank extends Phaser.Physics.Matter.Sprite {
   this.gun.setCollisionCategory(cat2);
   this.gun.setCollidesWith(cat2);
   this.gun.depth = 1;
-  scene.matter.add.constraint(this, this.gun, 0, 0);
+  this.joint = scene.matter.add.constraint(this, this.gun, 0, 0);
   }
   update() {}
+  kill(){
+    this.gun.destroy();
+    //kill joint
+    this = 
+  }
 }
 
 var id = Math.round(100*Math.random());
@@ -88,7 +93,6 @@ var movebackSpeed = 0;
 var lastFired = 0;
 var canFire = true;
 var scoreText;
-//var player,gun1,tank2;
 socket.on('downisDown', function (data) {
 		if(data.id != id && clients[data.id]){
 			clients[data.id].thrustBack(0.05);
@@ -115,13 +119,10 @@ socket.on('tankMove', function (data) {
 			clients[data.id].x = data.x;
       clients[data.id].y = data.y;
       clients[data.id].rotation = data.angle;
-      gun[data.id].rotation = data.gunangle;
+      clients[data.id].gun.rotation = data.gunangle;
       clearTimeout(timerId[data.id]);
       timerId[data.id] = setTimeout(function() {
         clients[data.id].destroy();
-        gun[data.id].destroy();
-        
-        
         }, 5000);
 		}
 	});
@@ -315,7 +316,7 @@ function handleMove(){
 				'x': clients[id].x,
 				'y': clients[id].y,
         'angle' : clients[id].rotation,
-        'gunangle':gun[id].rotation,
+        'gunangle':clients[id].gun.rotation,
 				'id': id
 			});
 }
@@ -348,12 +349,12 @@ function update(time, delta) {
       //fireBullet(this, gun);//player
     }
   }
-  var poz=gun[id].rotation-Math.atan2(pointer.y - gun[id].y, pointer.x - gun[id].x);
+  var poz=clients[id].gun.rotation-Math.atan2(pointer.y - clients[id].gun.y, pointer.x - clients[id].gun.x);
       if (poz>0.05&&poz<3.14||poz<-3.15){
         //console.log("-");
-        gun[id].rotation=gun[id].rotation-0.05;
+        clients[id].gun.rotation=clients[id].gun.rotation-0.05;
       }else if (poz<-0.05&&poz>-3.14||poz>3.15){
-      gun[id].rotation=gun[id].rotation+0.05;
+      clients[id].gun.rotation=clients[id].gun.rotation+0.05;
         //console.log("+");
       }
   
