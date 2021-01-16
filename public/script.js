@@ -129,8 +129,7 @@ function preload() {
     "https://cdn.glitch.com/772bc608-91dd-4577-857d-f1f6ed4d7332%2Fbooster.png"
   );
   //this.load.image("tiles", "https://www.mikewesthad.com/phaser-3-tilemap-blog-posts/post-1/assets/tilesets/tuxmon-sample-32px-extruded.png");
-  this.load.tilemapTiledJSON("map", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fmap1.json");
-  //https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Ftest.tsx?v=1610795755907
+  this.load.tilemapTiledJSON("map", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fmap1.json?v=1610796405745");
   this.load.image(
     "tiles",
     "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fwalls.png"
@@ -165,8 +164,8 @@ function create() {
   const layer = map.createStaticLayer(0, tiles, 0, 0);*/
   
   const map = this.make.tilemap({ key: "map" });
-  const tileset = map.addTilesetImage("test", "tiles");
-  const belowLayer = map.createStaticLayer("slot 1", tileset, 0, 0);
+  //const tileset = map.addTilesetImage("test", "tiles");
+  //const belowLayer = map.createStaticLayer("slot 1", tileset, 0, 0);
   //*/
 
   //console.log(this);
