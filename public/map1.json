@@ -512,6 +512,11 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"int",
+                         "value":0
                         }]
                 }, 
                 {
