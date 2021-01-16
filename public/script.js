@@ -129,7 +129,8 @@ function preload() {
     "https://cdn.glitch.com/772bc608-91dd-4577-857d-f1f6ed4d7332%2Fbooster.png"
   );
   //this.load.image("tiles", "https://www.mikewesthad.com/phaser-3-tilemap-blog-posts/post-1/assets/tilesets/tuxmon-sample-32px-extruded.png");
-  //this.load.tilemapTiledJSON("map", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Ftuxemon-town.json");
+  this.load.tilemapTiledJSON("map", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fmap1.json");
+  //https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Ftest.tsx?v=1610795755907
   this.load.image(
     "tiles",
     "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fwalls.png"
@@ -137,7 +138,7 @@ function preload() {
 }
 
 function create() {
-  const level = [
+  /*const level = [
     [  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0 ],
     [  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  0 ],
     [  20,  21,  22,  23,  24,  25,  26,  27,  28,  27,  29 ],
@@ -149,7 +150,7 @@ function create() {
     [  0,  0,  0,  0,  0,  0,  0,  0,  0, 15, 15 ],
     [ 32, 32, 32,  0,  0,  0,  0,  0, 15, 15, 15 ],
     [ 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 ]
-  ];
+  ];*/
   
   
   this.matter.world.drawDebug = true;
@@ -159,15 +160,14 @@ function create() {
   this.add.image(400, 300, "sky");
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
   
-  const map = this.make.tilemap({ data: level, tileWidth: 32, tileHeight: 32 });
+  /*const map = this.make.tilemap({ data: level, tileWidth: 32, tileHeight: 32 });
   const tiles = map.addTilesetImage("tiles");
-  const layer = map.createStaticLayer(0, tiles, 0, 0);
+  const layer = map.createStaticLayer(0, tiles, 0, 0);*/
   
-  /*const map = this.make.tilemap({ key: "map" });
-  const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
-  const belowLayer = map.createStaticLayer("Below Player", tileset, 0, 0);
-  const worldLayer = map.createStaticLayer("World", tileset, 0, 0);
-  const aboveLayer = map.createStaticLayer("Above Player", tileset, 0, 0);*/
+  const map = this.make.tilemap({ key: "map" });
+  const tileset = map.addTilesetImage("test", "tiles");
+  const belowLayer = map.createStaticLayer("slot 1", tileset, 0, 0);
+  //*/
 
   //console.log(this);
   createTank(this,id,posx,posy);
