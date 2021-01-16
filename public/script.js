@@ -139,7 +139,7 @@ function create() {
   this.matter.world.setBounds();
   this.add.image(400, 300, "sky");
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-  
+  const map = this.make.tilemap({ key: "map" });
   const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
   const belowLayer = map.createStaticLayer("Below Player", tileset, 0, 0);
   const worldLayer = map.createStaticLayer("World", tileset, 0, 0);
