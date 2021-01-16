@@ -113,7 +113,7 @@ function preload() {
   scene = game.scene.keys.default;
   this.load.image(
     "sky",
-    "https://cdn.glitch.com/772bc608-91dd-4577-857d-f1f6ed4d7332%2Fsky.png"
+    "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fback01.png?v=1610821108096"
   ); //?v=1610478780855
   this.load.image(
     "ground",
