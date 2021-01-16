@@ -165,7 +165,12 @@ function create() {
   
   const map = this.make.tilemap({ key: "map" });
   const tileset = map.addTilesetImage("test", "tiles");
+  
   belowLayer = map.createDynamicLayer("slot 1", tileset, 0, 0);
+  belowLayer.setCollisionByProperty({ collides: true });
+  const debugGraphics = this.add.graphics().setAlpha(0);
+  belowLayer.renderDebug(debugGraphics, {});
+  this.matter.world.convertTilemapLayer(belowLayer);
   
   //console.log(this);
   createTank(this,id,posx,posy);
@@ -175,15 +180,7 @@ function create() {
       'posy':posy
     });
   var is=2;
-for(var i=0;i<30;i=i+2){
   
-  belowLayer.putTileAt(i, is, 1);
-  belowLayer.putTileAt(i+1, is, 2);
-is++;}
-  belowLayer.setCollisionByProperty({ collides: true });
-  const debugGraphics = this.add.graphics().setAlpha(0);
-  belowLayer.renderDebug(debugGraphics, {});
- this.matter.world.convertTilemapLayer(belowLayer);
 
 }
 
@@ -296,9 +293,9 @@ function update(time, delta) {
 
   // Draw tiles (only within the groundLayer)
   if (this.input.manager.activePointer.isDown) {
-    //belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y);
-    const tile = belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y);
-  tile.setCollision(true);
+    belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y).setCollision(true);
+    /*const tile = belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y);
+  tile.setCollision(true);*/
     //belowLayer.setCollisionByProperty({ collides: true });
     //const debugGraphics = this.add.graphics().setAlpha(0);
     //belowLayer.renderDebug(debugGraphics, {});
