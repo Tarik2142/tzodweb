@@ -17,7 +17,7 @@ function closeForm() {
 const FPS = 30
 var config = {
   type: Phaser.AUTO,
-  width: 800,
+  width: 640,
   height: 640,
   audio: {
     disableWebAudio: true
@@ -78,7 +78,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
     delete this.gun;
     //kill joint
     //this.joint.destroy();
-scene.matter.composite.remove(scene.matter.world, this.joint, true);
+//scene.matter.composite.remove(scene.matter.world, this.joint, true);
     this.destroy();
     delete this;
   }
@@ -349,7 +349,7 @@ function update(time, delta) {
     this.matter.world.convertTilemapLayer(belowLayer);
     belowLayer.gidMap[1].tileProperties[16].hp=5
     log(belowLayer.gidMap[1].tileProperties[16].hp);
-    
+    log(belowLayer);
   }
   if (pointer.isDown) {
     //var bomb = player.create(10, 16, 'tank');
