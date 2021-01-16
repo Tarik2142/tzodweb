@@ -182,7 +182,7 @@ function create() {
       'posy':posy
     });
 
-  this.sys.animatedTiles.init(map);
+  this.animatedTiles.init(map);
 
   /*this.matter.add
     .gameObject(this.add.image(600, 400, "ground", 0))
