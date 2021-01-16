@@ -6,6 +6,15 @@
   grid-auto-rows: auto;
 }
 
+.btn{
+  font-size: 2rem;
+  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbrick.png?v=1610827003399');
+}
+
+.dmg{
+  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbrick_dmg.png?v=1610827010949');
+}
+
 body {
   background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fback01.png?v=1610821108096');
 }
