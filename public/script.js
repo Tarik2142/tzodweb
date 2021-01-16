@@ -128,22 +128,46 @@ function preload() {
     "crate2",
     "https://cdn.glitch.com/772bc608-91dd-4577-857d-f1f6ed4d7332%2Fbooster.png"
   );
-  this.load.image("tiles", "https://www.mikewesthad.com/phaser-3-tilemap-blog-posts/post-1/assets/tilesets/tuxmon-sample-32px-extruded.png");
-  this.load.tilemapTiledJSON("map", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Ftuxemon-town.json");
+  //this.load.image("tiles", "https://www.mikewesthad.com/phaser-3-tilemap-blog-posts/post-1/assets/tilesets/tuxmon-sample-32px-extruded.png");
+  //this.load.tilemapTiledJSON("map", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Ftuxemon-town.json");
+  this.load.image(
+    "tiles",
+    "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fwalls.png"
+  );
 }
 
 function create() {
+  const level = [
+    [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ],
+    [  0,  1,  2,  3,  0,  0,  0,  1,  2,  3,  0 ],
+    [  0,  5,  6,  7,  0,  0,  0,  5,  6,  7,  0 ],
+    [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ],
+    [  0,  0,  0, 14, 13, 14,  0,  0,  0,  0,  0 ],
+    [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ],
+    [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ],
+    [  0,  0, 14, 14, 14, 14, 14,  0,  0,  0, 15 ],
+    [  0,  0,  0,  0,  0,  0,  0,  0,  0, 15, 15 ],
+    [ 32, 32, 32,  0,  0,  0,  0,  0, 15, 15, 15 ],
+    [ 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 ]
+  ];
+  
+  
   this.matter.world.drawDebug = true;
   this.matter.world.debugGraphic.visible = true;
   this.matter.world.disableGravity();
   this.matter.world.setBounds();
   this.add.image(400, 300, "sky");
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-  const map = this.make.tilemap({ key: "map" });
+  
+  const map = this.make.tilemap({ data: level, tileWidth: 32, tileHeight: 32 });
+  const tiles = map.addTilesetImage("tiles");
+  const layer = map.createStaticLayer(0, tiles, 0, 0);
+  
+  /*const map = this.make.tilemap({ key: "map" });
   const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
   const belowLayer = map.createStaticLayer("Below Player", tileset, 0, 0);
   const worldLayer = map.createStaticLayer("World", tileset, 0, 0);
-  const aboveLayer = map.createStaticLayer("Above Player", tileset, 0, 0);
+  const aboveLayer = map.createStaticLayer("Above Player", tileset, 0, 0);*/
 
   //console.log(this);
   createTank(this,id,posx,posy);
