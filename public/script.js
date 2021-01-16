@@ -51,16 +51,16 @@ class tank extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame, walls) {
     super(scene.matter.world, x, y, texture);
     scene.add.existing(this).setScale(0.8, 0.8);
-    log('tank = ');
-    log(this);
+    //log('tank = ');
+    //log(this);
   var cat1 = scene.matter.world.nextCategory();
   var cat2 = scene.matter.world.nextCategory();
   this.setFrictionAir(0.5);
   this.setMass(5);
   this.setCollisionCategory(cat1);
   this.gun = new gunn(scene, x, y, 'gun', 0);
-    log('gun = ');
-    log(this.gun);
+    //log('gun = ');
+    //log(this.gun);
   this.gun.setCollisionCategory(cat2);
   this.gun.setCollidesWith(cat2);
   this.gun.depth = 1;
@@ -70,7 +70,10 @@ class tank extends Phaser.Physics.Matter.Sprite {
   kill(){
     this.gun.destroy();
     //kill joint
-    this = 
+    //this.joint.destroy();
+scene.matter.Composite.remove(scene.matter.world, this.joint, true);
+    this.destroy();
+    delete this;
   }
 }
 
@@ -122,7 +125,7 @@ socket.on('tankMove', function (data) {
       clients[data.id].gun.rotation = data.gunangle;
       clearTimeout(timerId[data.id]);
       timerId[data.id] = setTimeout(function() {
-        clients[data.id].destroy();
+        clients[data.id].kill();
         }, 5000);
 		}
 	});
@@ -330,7 +333,7 @@ function update(time, delta) {
 
   // Draw tiles (only within the groundLayer)
   if (this.input.manager.activePointer.isDown) {
-    belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y).setCollision(true);
+    belowLayer.putTileAtWorldXY(0, worldPoint.x, worldPoint.y).setCollision(false);
     /*const tile = belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y);
   tile.setCollision(true);*/
     //belowLayer.setCollisionByProperty({ collides: true });
