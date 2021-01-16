@@ -103,6 +103,7 @@ var movebackSpeed = 0;
 var lastFired = 0;
 var canFire = true;
 var scoreText;
+var ilemapLayer;
 socket.on('downisDown', function (data) {
 		if(data.id != id && clients[data.id]){
 			clients[data.id].thrustBack(0.05);
@@ -215,9 +216,9 @@ function create() {
   back = map.createDynamicLayer("back", tileset1, 0, 0);
   belowLayer = map.createDynamicLayer("slot 1", tileset, 0, 0);
   belowLayer.setCollisionByProperty({ collides: true });
-  const debugGraphics = this.add.graphics().setAlpha(0);
-  belowLayer.renderDebug(debugGraphics, {});
-  this.matter.world.convertTilemapLayer(belowLayer);
+  /*const debugGraphics = this.add.graphics().setAlpha(0);
+  belowLayer.renderDebug(debugGraphics, {});*/
+  //ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
   //console.log(this);
   createTank(this,id,posx,posy);
   socket.emit('tankCreate',{
@@ -340,16 +341,18 @@ function update(time, delta) {
 
   // Draw tiles (only within the groundLayer)
   if (this.input.manager.activePointer.isDown) {
+    log(belowLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y));
+    
     belowLayer.putTileAtWorldXY(0, worldPoint.x, worldPoint.y).setCollision(false);
     /*const tile = belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y);
   tile.setCollision(true);*/
     //belowLayer.setCollisionByProperty({ collides: true });
     //const debugGraphics = this.add.graphics().setAlpha(0);
     //belowLayer.renderDebug(debugGraphics, {});
-    this.matter.world.convertTilemapLayer(belowLayer);
-    belowLayer.gidMap[1].tileProperties[16].hp=5
+    ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
+    /*belowLayer.gidMap[1].tileProperties[16].hp=5
     log(belowLayer.gidMap[1].tileProperties[16].hp);
-    log(belowLayer);
+    log(belowLayer);*/
   }
   if (pointer.isDown) {
     //var bomb = player.create(10, 16, 'tank');
