@@ -51,7 +51,7 @@ var id = Math.round(100*Math.random());
 	// A flag for drawing activity
 	var drawing = false;
 	var clients = {};
-  var clients = {};
+  var gun = {};
 	var socket = io();
 
 var game = new Phaser.Game(config);
@@ -84,22 +84,13 @@ socket.on('upisDown', function (data) {
 		}
 	});
 socket.on('tankMove', function (data) {
-		
-		if(! (data.id in clients)){
-			// тут создать танк игрока 2
-			clients[data.id] = new tankew(scene, 200, 200, "tank");
-		}
-		
 		// Is the user drawing?
 		if(data.id != id && clients[data.id]){
 			clients[data.id].x = data.x;
       clients[data.id].y = data.y;
       clients[data.id].rotation = data.angle;
+      gun[data.id].rotation = data.gunangle;
 		}
-		
-		// Saving the current client state
-		//clients[data.id] = data;
-		//clients[data.id].updated = $.now();
 	});
 socket.on('tankCreate', function (data) {
   if(data.id != id && !clients[data.id]){
@@ -260,22 +251,19 @@ function fireCd(time) {
   }, time);
 }
 
-var lastEmit = $.now();
 
-/*function handleMove(){
-  
+function handleMove(){
 			socket.emit('tankMove',{
-				'x': player.x,
-				'y': player.y,
-        'angle' : player.rotation,
-				//'drawing': drawing,
+				'x': clients[id].x,
+				'y': clients[id].y,
+        'angle' : clients[id].rotation,
+        'gunangle':gun[id].rotation,
 				'id': id
 			});
-			lastEmit = $.now();
-}*/
+}
 
 function update(time, delta) {
-  //handleMove()
+  handleMove()
   
   var cursors = scene.input.keyboard.createCursorKeys();
   var pointer = scene.input.activePointer;
@@ -290,10 +278,7 @@ function update(time, delta) {
       //fireBullet(this, gun);//player
     }
   }
-  var mat=Math.atan2(pointer.y - gun[id].y, pointer.x - gun[id].x);
-  //scoreText.setText('Score: ' + mat);
-  var poz=gun[id].rotation-mat;
-  //scoreText.setText(poz+'Score: ' + mat);
+  var poz=gun[id].rotation-Math.atan2(pointer.y - gun[id].y, pointer.x - gun[id].x);
       if (poz>0.05&&poz<3.14||poz<-3.15){
         //console.log("-");
         gun[id].rotation=gun[id].rotation-0.05;
@@ -310,32 +295,19 @@ function update(time, delta) {
     }*/
   //gun.rotation=Math.atan2(pointer.y - gun.y, pointer.x - gun.x)
   if (cursors.down.isDown) {
-  
-    socket.emit('downisDown',{
-				'id': id
-			});
-    //player.thrustBack(0.05);
-    
-    //scoreText.x=pointer.x;
-    //scoreText.y=pointer.y;
+    //socket.emit('downisDown',{'id': id});
+    clients[id].thrustBack(0.05);
   }
   else if (cursors.up.isDown) {
-    
-    socket.emit('upisDown',{
-				'id': id
-			});
-    //player.thrust(0.05);
+    //socket.emit('upisDown',{'id': id});
+    clients[id].thrust(0.05);
   }
   if (cursors.left.isDown) {
-    socket.emit('leftisDown',{
-				'id': id
-			});
-    //player.setRotation(player.rotation - 0.1);
+    //socket.emit('leftisDown',{'id': id});
+    clients[id].setRotation(clients[id].rotation - 0.1);
   } else if (cursors.right.isDown) {
-    socket.emit('rightisDown',{
-				'id': id
-			});
-    //player.setRotation(player.rotation + 0.1);
+    //socket.emit('rightisDown',{'id': id});
+    clients[id].setRotation(clients[id].rotation + 0.1);
   }
 }
 

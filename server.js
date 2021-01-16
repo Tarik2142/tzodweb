@@ -9,7 +9,7 @@ var server = app.listen(process.env.PORT);
 var io = require('socket.io')(server);
 require('@geckos.io/phaser-on-nodejs')
 const Phaser = require('phaser')
-const jQuery = require('jQuery');
+
 //const io = require('socket.io');
 // set the fps you need
 const FPS = 30
