@@ -38,23 +38,35 @@ function log(text){
   console.log(text);
 }
 
-/*class gun extends Phaser.Physics.Matter.Sprite {
+class gunn extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame) {
     super(scene.matter.world, x, y, texture);
     scene.add.existing(this);
   }
-}*/
+}
 
-/*class tank extends Phaser.Physics.Matter.Sprite {
-  gun;
+class tank extends Phaser.Physics.Matter.Sprite {
+  gunn;
   speed;
   armor;
   constructor(scene, x, y, texture, frame, walls) {
     super(scene.matter.world, x, y, texture);
     scene.add.existing(this);
+    log('tank = ' + this);
+  cat1 = scene.matter.world.nextCategory();
+  cat2 = game.matter.world.nextCategory();
+  this.setFrictionAir(0.5);
+  this.setMass(5);
+  this.setCollisionCategory(cat1);
+  this.gun = new gun(scene, x, y, 'gun', 0);
+    log('gun = ' + this.gun);
+  this.gun.setCollisionCategory(cat2);
+  this.gun.setCollidesWith(cat2);
+  this.gun.depth = 1;
+  scene.matter.add.constraint(this, this.gun, 0, 0);
   }
   update() {}
-}*/
+}
 
 var id = Math.round(100*Math.random());
 	var posx = Math.round(500*Math.random());
@@ -65,7 +77,7 @@ var id = Math.round(100*Math.random());
   var gun = {};
   var timerId = {};
 	var socket = io();
-
+  //var tilemapplus=tilemap-plus();
 
 var game = new Phaser.Game(config);
 var scene;
@@ -157,6 +169,7 @@ function preload() {
 }
 
 function create() {
+  
   /*const level = [
     [  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0 ],
     [  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  0 ],
@@ -194,6 +207,7 @@ function create() {
   belowLayer.renderDebug(debugGraphics, {});
   this.matter.world.convertTilemapLayer(belowLayer);
   //console.log(this);
+  //new tank(this, 200, 200, 'tank', 0);
   createTank(this,id,posx,posy);
   socket.emit('tankCreate',{
       'id': id,
