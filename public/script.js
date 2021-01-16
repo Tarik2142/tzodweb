@@ -66,6 +66,7 @@ var id = Math.round(100*Math.random());
   var timerId = {};
 	var socket = io();
 
+
 var game = new Phaser.Game(config);
 var scene;
 //this.input.mouse.disableContextMenu()
