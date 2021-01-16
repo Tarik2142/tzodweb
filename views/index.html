@@ -12,7 +12,19 @@
 <body>
     <div class="modal" id="modal">
         <span class="close" onclick="closeForm()">&times;</span>
-        <p>Текст блеат!!!!</p>
+        <div class="modal-content">
+            <p><b>Type a nickname:</b><br>
+                <input type="text" size="40">
+            </p>
+            <button class="btn" id="" onclick="openForm()">
+                Start server
+            </button>
+            <button class="btn" id="" onclick="openForm()">
+                Connect to server
+            </button>
+          <br>
+            <br>
+        </div>
     </div>
     <div class="grid">
         <div id="tanks"></div>
@@ -26,8 +38,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="//code.jquery.com/jquery-1.8.0.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.24.0/dist/phaser.min.js"></script>
-    <!--<script src="/phaser-tilemap-plus/phaser-tilemap-plus.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="phaser-tilemap-plus/dist//phaser-tilemap-plus.js"></script>
     <script src="./script.js"></script>
 
 </body>

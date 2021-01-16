@@ -15,7 +15,13 @@
   background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fconcrite.png?v=1610827920741');
 }
 
+.modal-content{
+  margin: auto;
+  text-align: center;
+}
+
 .close{
+  padding-right: 0.5rem;
  float: right;
  font-weight: bold;
  color: black;
@@ -47,6 +53,16 @@
 }
 
 .btn:focus{
+  outline-width: 0;
+}
+
+input[type=text]{
+  font-size: 1rem;
+  color: #e4ddde;
+  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbrick.png?v=1610827003399');
+}
+
+input:focus{
   outline-width: 0;
 }
 
