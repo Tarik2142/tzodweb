@@ -46,20 +46,21 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 }
 
 class tank extends Phaser.Physics.Matter.Sprite {
-  gunn;
   speed;
   armor;
   constructor(scene, x, y, texture, frame, walls) {
     super(scene.matter.world, x, y, texture);
     scene.add.existing(this);
-    log('tank = ' + this);
-  cat1 = scene.matter.world.nextCategory();
-  cat2 = game.matter.world.nextCategory();
+    log('tank = ');
+    log(this);
+  var cat1 = scene.matter.world.nextCategory();
+  var cat2 = scene.matter.world.nextCategory();
   this.setFrictionAir(0.5);
   this.setMass(5);
   this.setCollisionCategory(cat1);
-  this.gun = new gun(scene, x, y, 'gun', 0);
-    log('gun = ' + this.gun);
+  this.gun = new gunn(scene, x, y, 'gun', 0);
+    log('gun = ');
+    log(this.gun);
   this.gun.setCollisionCategory(cat2);
   this.gun.setCollidesWith(cat2);
   this.gun.depth = 1;
@@ -207,7 +208,6 @@ function create() {
   belowLayer.renderDebug(debugGraphics, {});
   this.matter.world.convertTilemapLayer(belowLayer);
   //console.log(this);
-  //new tank(this, 200, 200, 'tank', 0);
   createTank(this,id,posx,posy);
   socket.emit('tankCreate',{
       'id': id,
@@ -382,11 +382,13 @@ function update(time, delta) {
 }
 
 function createTank (game,id,x,y) {
+  
   log(id);
   if(! (id in clients)){
+    clients[id] = new tank(game, x, y, 'tank', 0);
 			// тут создать танк игрока 2
-			clients[id] = game.add.sprite(64, 64, "tank");
-      gun[id] = game.add.image(0, 0, "gun");
+			//clients[id] = game.add.sprite(64, 64, "tank");
+      /*gun[id] = game.add.image(0, 0, "gun");
 game.matter.add.gameObject(clients[id]).setScale(0.8,0.8);
 game.matter.add.gameObject(gun[id]);
 
@@ -402,6 +404,6 @@ game.matter.add.gameObject(gun[id]);
   clients[id].setCollisionCategory(cat1);
   gun[id].setCollisionCategory(cat2);
   gun[id].setCollidesWith(cat2);
-  game.matter.add.constraint(clients[id], gun[id], 0, 0);
+  game.matter.add.constraint(clients[id], gun[id], 0, 0);*/
 		}
 }
