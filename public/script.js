@@ -182,8 +182,9 @@ function create() {
       'posx':posx,
       'posy':posy
     });
-
-  belowLayer.putTileAt(16, 3, 10);
+for(var i=0;i<30;i=i+2){
+  belowLayer.putTileAt(i, i+2, 1);
+  belowLayer.putTileAt(i+1, i+2, 2);}
 
   /*this.matter.add
     .gameObject(this.add.image(600, 400, "ground", 0))
