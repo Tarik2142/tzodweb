@@ -341,15 +341,15 @@ function update(time, delta) {
 
   // Draw tiles (only within the groundLayer)
   if (this.input.manager.activePointer.isDown) {
-    log(belowLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y));
-    
-    belowLayer.putTileAtWorldXY(0, worldPoint.x, worldPoint.y).setCollision(false);
+    //belowLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
+    ilemapLayer =null;
+    belowLayer.putTileAtWorldXY(1, worldPoint.x, worldPoint.y).setCollision(false);
     /*const tile = belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y);
   tile.setCollision(true);*/
-    //belowLayer.setCollisionByProperty({ collides: true });
+    belowLayer.setCollisionByProperty({ collides: false }, false);
     //const debugGraphics = this.add.graphics().setAlpha(0);
     //belowLayer.renderDebug(debugGraphics, {});
-    ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
+    ilemapLayer = this.matter.world.convertTiles(belowLayer);
     /*belowLayer.gidMap[1].tileProperties[16].hp=5
     log(belowLayer.gidMap[1].tileProperties[16].hp);
     log(belowLayer);*/
