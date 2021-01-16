@@ -167,6 +167,7 @@ function create() {
   const tileset = map.addTilesetImage("test", "tiles");
   const belowLayer = map.createStaticLayer("slot 1", tileset, 0, 0);
   belowLayer.setCollisionByProperty({ collides: true });
+  this.matter.world.convertTilemapLayer(belowLayer);
   const debugGraphics = this.add.graphics().setAlpha(0.75);
   belowLayer.renderDebug(debugGraphics, {
   tileColor: null, // Color of non-colliding tiles
