@@ -10,14 +10,15 @@
 </head>
 
 <body>
+    <div class="modal" id="modal">
+        <span class="close" onclick="closeForm()">&times;</span>
+        <p>Текст блеат!!!!</p>
+    </div>
     <div class="grid">
         <div id="tanks"></div>
         <div id="menu">
-            <button class="btn">
-                кирпич
-            </button>
-            <button class="btn btn-concrite">
-                бетон
+            <button class="btn" id="" onclick="openForm()">
+                открить вспливашку
             </button>
         </div>
     </div>
@@ -25,6 +26,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="//code.jquery.com/jquery-1.8.0.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.24.0/dist/phaser.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./script.js"></script>
 
 </body>

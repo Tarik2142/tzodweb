@@ -1,4 +1,10 @@
+function openForm() {
+  $("#modal").css('display', 'block');
+}
 
+function closeForm() {
+  $("#modal").css('display', 'none');
+}
 //console.log("hello world :o");
 //import Phaser from 'phaser';
 
@@ -179,6 +185,7 @@ function create() {
   const map = this.make.tilemap({ key: "map" });
   const tileset = map.addTilesetImage("test", "tiles");
   const tileset1 = map.addTilesetImage("back", "sky");
+  
   back = map.createDynamicLayer("back", tileset1, 0, 0);
   belowLayer = map.createDynamicLayer("slot 1", tileset, 0, 0);
   belowLayer.setCollisionByProperty({ collides: true });

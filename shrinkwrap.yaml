@@ -3,6 +3,7 @@ dependencies:
   express: 4.17.1
   jQuery: 1.7.4
   phaser: 3.52.0
+  phaser-tilemap-plus: 0.10.2
   socket.io: 3.0.5
 packages:
   /@geckos.io/phaser-on-nodejs/1.2.3:
@@ -1176,6 +1177,18 @@ packages:
     dev: false
     resolution:
       integrity: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
+  /phaser-ce/2.16.1:
+    dev: false
+    resolution:
+      integrity: sha512-OjlhFSsmmmIP5YjHTIWEeGK9VcSnjeQ6MYWTt4ECwDkdHRZEFo6fGiMv+ZxpsQ/7GYXVTUY6i1tjmEBurSJDeg==
+  /phaser-tilemap-plus/0.10.2:
+    dependencies:
+      lodash: 4.17.20
+      phaser-ce: 2.16.1
+      poly-decomp: 0.2.1
+    dev: false
+    resolution:
+      integrity: sha512-GKiEQBfq7oZTlxL4cXTHKSryGv4uumQCJ7at7HfHOU6mQl4Hihfe7pxDnVVDRUcyQK1/DiKb83/kjiMJ01IVQw==
   /phaser/3.52.0:
     dependencies:
       eventemitter3: 4.0.7
@@ -1185,6 +1198,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-oH39AUXR+cletB3GIvLnVO2J7/M6xs0D0LamVdCrbCDO3jckQOVBcqR6SJ2wam+4D5iJTCXv8K+FmxFzcTUWuA==
+  /poly-decomp/0.2.1:
+    dev: false
+    resolution:
+      integrity: sha1-pcxAiOnil0Bw+h7iPH4/L8W1Ftg=
   /prelude-ls/1.1.2:
     dev: false
     engines:
@@ -1763,4 +1780,5 @@ specifiers:
   express: ^4.17.1
   jQuery: ^1.7.4
   phaser: ^3.52.0
+  phaser-tilemap-plus: ^0.10.2
   socket.io: ^3.0.5
