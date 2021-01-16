@@ -114,6 +114,11 @@ socket.on('tankCreate', function (data) {
     });}
 	});
 function preload() {
+  this.load.scenePlugin({
+        key: 'BannerTextPlugin',
+        url: 'assets/loader-tests/BannerTextPlugin.js',
+        sceneKey: 'banner'
+    });
   scene = game.scene.keys.default;
   this.load.image(
     "sky",

@@ -8,11 +8,24 @@
 
 .btn{
   font-size: 2rem;
+  color: #e4ddde;
   background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbrick.png?v=1610827003399');
 }
 
-.dmg{
-  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbrick_dmg.png?v=1610827010949');
+.btn:focus{
+  outline-width: 0;
+}
+
+.btn:hover{
+background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbrick_dmg.png?v=1610827010949');
+}
+
+.btn-concrite{
+background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fconcrite.png?v=1610827920741');
+}
+
+.btn-concrite:hover{
+background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fconcrite_select.png?v=1610827925313');
 }
 
 body {
