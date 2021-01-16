@@ -52,6 +52,7 @@ var id = Math.round(100*Math.random());
 	var drawing = false;
 	var clients = {};
   var gun = {};
+  var timerId = {};
 	var socket = io();
 
 var game = new Phaser.Game(config);
@@ -90,11 +91,11 @@ socket.on('tankMove', function (data) {
       clients[data.id].y = data.y;
       clients[data.id].rotation = data.angle;
       gun[data.id].rotation = data.gunangle;
-      let timerId = setTimeout(function() {
-        bullet[i].destroy();
-        
+      clearTimeout(timerId[data.id]);
+      timerId[data.id] = setTimeout(function() {
+        clients[data.id].destroy();
+        gun[data.id].destroy();
         }, 5000);
-      clearTimeout(timerId);
 		}
 	});
 socket.on('tankCreate', function (data) {
