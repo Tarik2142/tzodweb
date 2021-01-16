@@ -181,7 +181,7 @@ function create() {
       'posy':posy
     });
   this.matter.add
-    .gameObject(belowLayer)
+    .gameObject(debugGraphics)
     .setStatic(true)
     .setName("platform");
   
