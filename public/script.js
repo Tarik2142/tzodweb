@@ -103,7 +103,6 @@ var movebackSpeed = 0;
 var lastFired = 0;
 var canFire = true;
 var scoreText;
-var ilemapLayer;
 socket.on('downisDown', function (data) {
 		if(data.id != id && clients[data.id]){
 			clients[data.id].thrustBack(0.05);
@@ -219,6 +218,7 @@ function create() {
   /*const debugGraphics = this.add.graphics().setAlpha(0);
   belowLayer.renderDebug(debugGraphics, {});*/
   //ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
+  this.matter.world.convertTiles(tileset);
   //console.log(this);
   createTank(this,id,posx,posy);
   socket.emit('tankCreate',{
@@ -341,15 +341,15 @@ function update(time, delta) {
 
   // Draw tiles (only within the groundLayer)
   if (this.input.manager.activePointer.isDown) {
-    //belowLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
-    ilemapLayer =null;
-    belowLayer.putTileAtWorldXY(1, worldPoint.x, worldPoint.y).setCollision(false);
+    belowLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y).setCollision(false, false, false, false, true);
+    //belowLayer.putTileAtWorldXY(1, worldPoint.x, worldPoint.y).setCollision(false);
     /*const tile = belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y);
   tile.setCollision(true);*/
-    belowLayer.setCollisionByProperty({ collides: false }, false);
+    belowLayer.setCollisionByProperty({ collides: false });
     //const debugGraphics = this.add.graphics().setAlpha(0);
     //belowLayer.renderDebug(debugGraphics, {});
-    ilemapLayer = this.matter.world.convertTiles(belowLayer);
+    this.physics.matterBody.destroy();
+    this.matter.world.convertTilemapLayer(belowLayer);
     /*belowLayer.gidMap[1].tileProperties[16].hp=5
     log(belowLayer.gidMap[1].tileProperties[16].hp);
     log(belowLayer);*/
