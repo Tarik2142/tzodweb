@@ -4,7 +4,7 @@
 var config = {
   type: Phaser.AUTO,
   width: 800,
-  height: 600,
+  height: 640,
   audio: {
     disableWebAudio: true
   },
@@ -164,10 +164,15 @@ function create() {
   const layer = map.createStaticLayer(0, tiles, 0, 0);*/
   
   const map = this.make.tilemap({ key: "map" });
-  //const tileset = map.addTilesetImage("test", "tiles");
-  //const belowLayer = map.createStaticLayer("slot 1", tileset, 0, 0);
-  //*/
-
+  const tileset = map.addTilesetImage("test", "tiles");
+  const belowLayer = map.createStaticLayer("slot 1", tileset, 0, 0);
+  belowLayer.setCollisionByProperty({ collides: true });
+  const debugGraphics = this.add.graphics().setAlpha(0.75);
+  belowLayer.renderDebug(debugGraphics, {
+  tileColor: null, // Color of non-colliding tiles
+  collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+  faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+});
   //console.log(this);
   createTank(this,id,posx,posy);
   socket.emit('tankCreate',{
@@ -175,10 +180,13 @@ function create() {
       'posx':posx,
       'posy':posy
     });
-  
+  this.matter.add
+    .gameObject(belowLayer)
+    .setStatic(true)
+    .setName("platform");
   
 
-  this.matter.add
+  /*this.matter.add
     .gameObject(this.add.image(600, 400, "ground", 0))
     .setStatic(true)
     .setName("platform");
@@ -189,7 +197,7 @@ function create() {
   this.matter.add
     .gameObject(this.add.image(750, 220, "ground", 0))
     .setStatic(true)
-    .setName("platform");
+    .setName("platform");*/
 }
 
 //-----TEST------
@@ -222,6 +230,7 @@ function fireBullet(game, player) {
 
   bullet[i].setOnCollide(pair => {
     if (pair.bodyA.gameObject !== null){// спс
+      
       if (pair.bodyA.gameObject.name == "platform") {
         //setTimeout(function() {
           if (bullet[i]) {
