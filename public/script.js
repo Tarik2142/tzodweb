@@ -165,7 +165,7 @@ function create() {
   
   const map = this.make.tilemap({ key: "map" });
   const tileset = map.addTilesetImage("test", "tiles");
-  const belowLayer = map.createStaticLayer("slot 1", tileset, 0, 0);
+  belowLayer = map.createDynamicLayer("slot 1", tileset, 0, 0);
   belowLayer.setCollisionByProperty({ collides: true });
   this.matter.world.convertTilemapLayer(belowLayer);
   const debugGraphics = this.add.graphics().setAlpha(0);
