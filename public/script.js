@@ -115,9 +115,9 @@ socket.on('tankCreate', function (data) {
 	});
 function preload() {
   this.load.scenePlugin({
-        key: 'BannerTextPlugin',
-        url: 'assets/loader-tests/BannerTextPlugin.js',
-        sceneKey: 'banner'
+        key: 'AnimatedTiles',
+        url: 'AnimatedTiles.min.js',
+        sceneKey: 'sys'
     });
   scene = game.scene.keys.default;
   this.load.image(
@@ -189,7 +189,7 @@ function create() {
   const debugGraphics = this.add.graphics().setAlpha(0);
   belowLayer.renderDebug(debugGraphics, {});
   this.matter.world.convertTilemapLayer(belowLayer);
-  
+  this.animatedTiles.init(belowLayer);
   //console.log(this);
   createTank(this,id,posx,posy);
   socket.emit('tankCreate',{
