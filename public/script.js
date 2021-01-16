@@ -165,6 +165,7 @@ function create() {
   
   const map = this.make.tilemap({ key: "map" });
   const tileset = map.addTilesetImage("test", "tiles");
+  
   belowLayer = map.createDynamicLayer("slot 1", tileset, 0, 0);
   belowLayer.setCollisionByProperty({ collides: true });
   this.matter.world.convertTilemapLayer(belowLayer);
@@ -182,7 +183,7 @@ function create() {
       'posy':posy
     });
 
-  this.animatedTiles.init(map);
+  belowLayer.putTileAt(16, 3, 10);
 
   /*this.matter.add
     .gameObject(this.add.image(600, 400, "ground", 0))
