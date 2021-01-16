@@ -1,6 +1,7 @@
 
 //console.log("hello world :o");
 //import Phaser from 'phaser';
+
 const FPS = 30
 var config = {
   type: Phaser.AUTO,
@@ -114,11 +115,6 @@ socket.on('tankCreate', function (data) {
     });}
 	});
 function preload() {
-  this.load.scenePlugin({
-        key: 'AnimatedTiles',
-        url: 'AnimatedTiles.min.js',
-        sceneKey: 'sys'
-    });
   scene = game.scene.keys.default;
   this.load.image(
     "sky",
@@ -189,7 +185,6 @@ function create() {
   const debugGraphics = this.add.graphics().setAlpha(0);
   belowLayer.renderDebug(debugGraphics, {});
   this.matter.world.convertTilemapLayer(belowLayer);
-  this.animatedTiles.init(belowLayer);
   //console.log(this);
   createTank(this,id,posx,posy);
   socket.emit('tankCreate',{
