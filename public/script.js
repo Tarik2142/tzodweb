@@ -69,9 +69,10 @@ class tank extends Phaser.Physics.Matter.Sprite {
   update() {}
   kill(){
     this.gun.destroy();
+    delete this.gun;
     //kill joint
     //this.joint.destroy();
-scene.matter.Composite.remove(scene.matter.world, this.joint, true);
+scene.matter.world.remove(scene.matter.world, this.joint, true);
     this.destroy();
     delete this;
   }
@@ -340,7 +341,7 @@ function update(time, delta) {
     //const debugGraphics = this.add.graphics().setAlpha(0);
     //belowLayer.renderDebug(debugGraphics, {});
     this.matter.world.convertTilemapLayer(belowLayer);
-    
+    //log(belowLayer.Phaser.Tilemaps.LayerData());
   }
   if (pointer.isDown) {
     //var bomb = player.create(10, 16, 'tank');
