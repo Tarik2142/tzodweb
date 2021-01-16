@@ -182,24 +182,9 @@ for(var i=0;i<30;i=i+2){
 is++;}
   belowLayer.setCollisionByProperty({ collides: true });
   const debugGraphics = this.add.graphics().setAlpha(0);
-  belowLayer.renderDebug(debugGraphics, {
-  tileColor: null, // Color of non-colliding tiles
-  //collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-  //faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-});
+  belowLayer.renderDebug(debugGraphics, {});
  this.matter.world.convertTilemapLayer(belowLayer);
-  /*this.matter.add
-    .gameObject(this.add.image(600, 400, "ground", 0))
-    .setStatic(true)
-    .setName("platform");
-  this.matter.add
-    .gameObject(this.add.image(50, 250, "ground", 0))
-    .setStatic(true)
-    .setName("platform");
-  this.matter.add
-    .gameObject(this.add.image(750, 220, "ground", 0))
-    .setStatic(true)
-    .setName("platform");*/
+
 }
 
 //-----TEST------
@@ -311,7 +296,14 @@ function update(time, delta) {
 
   // Draw tiles (only within the groundLayer)
   if (this.input.manager.activePointer.isDown) {
-    groundLayer.putTileAtWorldXY(353, worldPoint.x, worldPoint.y);
+    //belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y);
+    const tile = belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y);
+  tile.setCollision(true);
+    //belowLayer.setCollisionByProperty({ collides: true });
+    //const debugGraphics = this.add.graphics().setAlpha(0);
+    //belowLayer.renderDebug(debugGraphics, {});
+    this.matter.world.convertTilemapLayer(belowLayer);
+    
   }
   if (pointer.isDown) {
     //var bomb = player.create(10, 16, 'tank');
