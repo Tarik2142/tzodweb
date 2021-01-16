@@ -1,12 +1,16 @@
 
 //console.log("hello world :o");
 //import Phaser from 'phaser';
+const FPS = 30
 var config = {
   type: Phaser.AUTO,
   width: 800,
   height: 640,
   audio: {
     disableWebAudio: true
+  },
+  fps: {
+    target: FPS
   },
   physics: {
     default: "matter",

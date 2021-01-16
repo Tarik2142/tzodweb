@@ -7,7 +7,7 @@ var express = require('express');
 var app = express();
 var server = app.listen(process.env.PORT);
 var io = require('socket.io')(server);
-require('@geckos.io/phaser-on-nodejs')
+/*require('@geckos.io/phaser-on-nodejs')
 const Phaser = require('phaser')
 
 //const io = require('socket.io');
@@ -21,7 +21,7 @@ class MainScene extends Phaser.Scene {
   create() {
     console.log('it works!')
   }
-}
+}*/
 /*const config = {
   type: Phaser.HEADLESS,//Phaser.AUTO,
   width: 1024,
@@ -47,7 +47,7 @@ class MainScene extends Phaser.Scene {
   transparent: true,
   disableContextMenu: true
 }*/
-const config = {
+/*const config = {
   type: Phaser.HEADLESS,
   width: 1280,
   height: 720,
@@ -64,7 +64,7 @@ const config = {
     }
   }
 }
-new Phaser.Game(config)
+new Phaser.Game(config)*/
 function log(text){
   console.log(text);
 }
