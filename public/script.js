@@ -165,16 +165,8 @@ function create() {
   
   const map = this.make.tilemap({ key: "map" });
   const tileset = map.addTilesetImage("test", "tiles");
-  
   belowLayer = map.createDynamicLayer("slot 1", tileset, 0, 0);
-  belowLayer.setCollisionByProperty({ collides: true });
-  this.matter.world.convertTilemapLayer(belowLayer);
-  const debugGraphics = this.add.graphics().setAlpha(0);
-  belowLayer.renderDebug(debugGraphics, {
-  tileColor: null, // Color of non-colliding tiles
-  //collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-  //faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-});
+  
   //console.log(this);
   createTank(this,id,posx,posy);
   socket.emit('tankCreate',{
@@ -182,10 +174,20 @@ function create() {
       'posx':posx,
       'posy':posy
     });
+  var is=2;
 for(var i=0;i<30;i=i+2){
-  belowLayer.putTileAt(i, i+2, 1);
-  belowLayer.putTileAt(i+1, i+2, 2);}
-
+  
+  belowLayer.putTileAt(i, is, 1);
+  belowLayer.putTileAt(i+1, is, 2);
+is++;}
+  belowLayer.setCollisionByProperty({ collides: true });
+  const debugGraphics = this.add.graphics().setAlpha(0);
+  belowLayer.renderDebug(debugGraphics, {
+  tileColor: null, // Color of non-colliding tiles
+  //collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+  //faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+});
+ this.matter.world.convertTilemapLayer(belowLayer);
   /*this.matter.add
     .gameObject(this.add.image(600, 400, "ground", 0))
     .setStatic(true)
@@ -305,7 +307,12 @@ function update(time, delta) {
   
   var cursors = scene.input.keyboard.createCursorKeys();
   var pointer = scene.input.activePointer;
-  
+  const worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
+
+  // Draw tiles (only within the groundLayer)
+  if (this.input.manager.activePointer.isDown) {
+    groundLayer.putTileAtWorldXY(353, worldPoint.x, worldPoint.y);
+  }
   if (pointer.isDown) {
     //var bomb = player.create(10, 16, 'tank');
     if (canFire) {
