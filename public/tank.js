@@ -115,24 +115,23 @@ class tank extends Phaser.Physics.Matter.Sprite {
     this.gun.setCollidesWith(cat2);
     this.gun.depth = 1;
     this.joint = scene.matter.add.constraint(this, this.gun, 0, 0);
-    log(scene);
     this.nickname = scene.add.text(16, 16, 'player' + id, {
         fontSize: '14px',
-        padding: { x: 20, y: 10 },
+        padding: { x: 0, y: 0 },
         //backgroundColor: '#000000'
         //fill: '#ffffff'
     });
     this.nickname.setScrollFactor(0);
+    log(this.nickname);
     var that = this;
     this.updater = scene.matter.world.on('beforeupdate', function(time, delta){//ник за игроком
-      that.nickname.x = that.x - 50;
-    that.nickname.y = that.y - 60;
+      that.nickname.x = that.x - 25;
+    that.nickname.y = that.y - 50;
     }, this);
-    log(this.nickname);
   }
   
   setNick(text){
-    
+    this.nickname.text = text;
   }
 
   fire() {

@@ -246,18 +246,19 @@ function update(time, delta) {
     //belowLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y).setCollision(false, false, false, false, true);
     //belowLayer.putTileAtWorldXY(1, worldPoint.x, worldPoint.y).setCollision(false);
     //belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y).setCollision(false);
-    belowLayer.setCollisionByProperty({ collides: false });
+    //belowLayer.setCollisionByProperty({ collides: false });
     //const debugGraphics = this.add.graphics().setAlpha(0);
     //belowLayer.renderDebug(debugGraphics, {});
     //log(Phaser.Physics.Matter.TileBody.destroy());
     //this.Physics.Matter.TileBody.destroy()
-    this.matter.world.convertTilemapLayer(belowLayer);
+    //this.matter.world.convertTilemapLayer(belowLayer);
     /*belowLayer.gidMap[1].tileProperties[16].hp=5
     log(belowLayer.gidMap[1].tileProperties[16].hp);
     log(belowLayer);*/
   }
   if (pointer.isDown) {
     clients[id].fire();
+    clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
   }
   var poz =
     clients[id].gun.rotation -
