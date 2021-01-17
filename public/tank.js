@@ -50,7 +50,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       this.bullet[i].rotation = angle;
       this.bullet[i].setMass(0.00001);
       this.bullet[i].setFriction(0, 0, 0);
-      this.bullet[i].label="heavi"
+      this.bullet[i].setName("heavi");
       // bullet[i].setOnCollide(function(){
       //   setTimeout(function(){
       //     if (bullet[i]){

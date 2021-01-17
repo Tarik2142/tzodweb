@@ -196,7 +196,7 @@ function create() {
             var tile = tileWrapper.tile;
             if (tile.properties.hp!=0) {
               
-              for(var damag=36;damag>0;){
+              for(var damag=101;damag>0;){
                 var hp= tile.properties.hp
                 //log("hp "+hp);
                 //log("dam "+damag);
