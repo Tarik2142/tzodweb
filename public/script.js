@@ -157,6 +157,45 @@ function create() {
     });
   var is=2;
   
+   this.matter.world.on('collisionstart', function (event) {
+        for (var i = 0; i < event.pairs.length; i++)
+        {
+            var bodyA = event.pairs[i].bodyA;
+            var bodyB = event.pairs[i].bodyB;
+          log();
+
+//             if ((bodyA === playerBody && bodyB.label === 'disappearingPlatform') ||
+//                 (bodyB === playerBody && bodyA.label === 'disappearingPlatform'))
+//             {
+//                 var tileBody = bodyA.label === 'disappearingPlatform' ? bodyA : bodyB;
+
+//                 // Matter Body instances have a reference to their associated game object. Here,
+//                 // that's the Phaser.Physics.Matter.TileBody, which has a reference to the
+//                 // Phaser.GameObjects.Tile.
+//                 var tileWrapper = tileBody.gameObject;
+//                 var tile = tileWrapper.tile;
+
+//                 // Only destroy a tile once
+//                 if (tile.properties.isBeingDestroyed)
+//                 {
+//                     continue;
+//                 }
+//                 tile.properties.isBeingDestroyed = true;
+
+//                 // Since we are using ES5 here, the local tile variable isn't scoped to this block -
+//                 // bind to the rescue.
+//                 this.tweens.add({
+//                     targets: tile,
+//                     alpha: { value: 0, duration: 500, ease: 'Power1' },
+//                     onComplete: destroyTile.bind(this, tile)
+//                 });
+            }
+
+            // Note: the tile bodies in this level are all simple rectangle bodies, so checking the
+            // label is easy. See matter detect collision with tile for how to handle when the tile
+            // bodies are compound shapes or concave polygons.
+        }
+    }, this);
 
 }
 
