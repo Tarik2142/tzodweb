@@ -111,10 +111,11 @@ function preload() {
     "crate",
     "https://cdn.glitch.com/16cdd3f6-e40c-4947-903e-79981081614a%2Fbullet.png"
   );
-  this.load.image(
+  this.load.atlas("tank", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fblue.png", "plane.json");
+  /*this.load.image(
     "tank",
     "https://cdn.glitch.com/772bc608-91dd-4577-857d-f1f6ed4d7332%2Ftank1.png"
-  );
+  );*/
   this.load.image(
     "gun",
     "https://cdn.glitch.com/772bc608-91dd-4577-857d-f1f6ed4d7332%2Fturret2.png"
