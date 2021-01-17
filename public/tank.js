@@ -63,6 +63,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
         if (pair.bodyA.gameObject) {
           // спс
           if (pair.bodyA.gameObject.name != 'tank' + id) {
+            //log(pair.bodyA.gameObject.name);
             //setTimeout(function() {
             if (this.bullet[i]) {
               //this.bullet[i].setVelocity(0, 0);

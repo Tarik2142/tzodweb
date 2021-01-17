@@ -181,14 +181,24 @@ function create() {
       for (var i = 0; i < event.pairs.length; i++) {
         var bodyA = event.pairs[i].bodyA;
         var bodyB = event.pairs[i].bodyB;
+        if(bodyA.gameObject){
+          if(bodyA.gameObject.name){
+            
+          }
+        }else if(bodyB.gameObject){
+          if(){
+            
+          }
+        }
         var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
         log("a=");
         log(bodyA.velocity);
         log(bodyA.label);
+        //gameObject.name
         log(bodyA);
         log("b=");
         log(bodyB.velocity);
-        log(bodyA.label);
+        log(bodyB.label);
         log(bodyB);
         if (tileBody.gameObject) {
           var tileWrapper = tileBody.gameObject;
