@@ -307,7 +307,7 @@ function update(time, delta) {
 function createTank(game, id, x, y) {
   log(id);
   if (!(id in clients)) {
-    clients[id] = new tank(game, x, y, "tank", 0);
+    clients[id] = new tank(game, x, y, "tank", guns.heavy);
     // тут создать танк игрока 2
     //clients[id] = game.add.sprite(64, 64, "tank");
     /*gun[id] = game.add.image(0, 0, "gun");

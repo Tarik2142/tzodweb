@@ -1,36 +1,34 @@
 const scale = 0.8;
 
 var guns = {
-  heavy: {
+  heavy: {//башена пушка
     texture: 'gun',
     frame: 0,
     name: 'heavy Gun',
     dmg: 50,
-    reload: 1500,
-    speed: 40,
-    offset: 50
+    reload: 1500, //скорость перезарядки
+    speed: 40,//скорость снаряда
+    gunRotationSpd: 20,//скорость поворота башні
+    baseRotationSpd: 20,//скорость поворота танка
+    offset: 50,//отступ от танка при вистреле
+    baseSpeed: 20,//скорость танка
+    armor: 60//бронька
   }
 }
 
 class gunn extends Phaser.Physics.Matter.Sprite {
   canFire;
-  fireTimeout;
   bullet;
-  bulletSpeed;
   scene;
-  playerDist;
   gunType;
 
   constructor(scene, x, y, type) {
     super(scene.matter.world, x, y, type.texture);
     
     
-    this.gunType = type
-    this.fireTimeout = type.reload;
+    this.gunType = type;
     this.canFire = true;
-    this.bulletSpeed = type.speed;
     this.bullet = new Array();
-    this.playerDist = type.offset;
     this.scene = scene;
 
     scene.add.existing(this).setScale(scale, scale).setName('tank' + id);
@@ -46,8 +44,8 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       var angle = this.rotation;
       this.bullet.push();
       this.bullet[i] = this.scene.matter.add.sprite(
-        this.x + this.playerDist * Math.cos(angle),
-        this.y + this.playerDist * Math.sin(angle), 'crate'
+        this.x + this.gunType.offset * Math.cos(angle),
+        this.y + this.gunType.offset * Math.sin(angle), 'crate'
       );
       //log(game.matter.add.gameObject(bullet[i]));
       this.bullet[i].rotation = angle;
@@ -96,8 +94,8 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       //this.scene.matter.world.add(this.scene.matter.world, this.bullet[i]);
 
       this.bullet[i].setVelocity(
-        this.body.velocity.x + this.bulletSpeed * Math.cos(angle),
-        this.body.velocity.y + this.bulletSpeed * Math.sin(angle)
+        this.body.velocity.x + this.gunType.speed * Math.cos(angle),
+        this.body.velocity.y + this.gunType.speed  * Math.sin(angle)
       );
     }
   }
@@ -107,7 +105,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
     var that = this;
     setTimeout(function() {
       that.canFire = true;
-    }, that.fireTimeout);
+    }, that.gunType.reload);
   }
 }
 
