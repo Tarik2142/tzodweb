@@ -116,6 +116,9 @@ io.sockets.on('connection', function (socket) {
     socket.on('rightisDown', function (data) {
 		socket.broadcast.emit('rightisDown', data);
 	});
+  socket.on('fire', function (data) {
+		socket.broadcast.emit('fire', data);
+	});
   socket.on('tankCreate', function (data) {
 		socket.broadcast.emit('tankCreate', data);
     log(data);

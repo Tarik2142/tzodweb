@@ -81,6 +81,11 @@ socket.on("tankMove", function(data) {
     }, 5000);
   }
 });
+socket.on("fire", function(data) {
+  if (data.id != id && clients[data.id]) {
+    clients[data.id].fire();
+  }
+});
 socket.on("tankCreate", function(data) {
   if (data.id != id && !clients[data.id]) {
     createTank(scene, data.id, data.posx, data.posy);
@@ -260,6 +265,9 @@ function update(time, delta) {
   //}
   if (pointer.isDown) {
     clients[id].fire();
+    socket.emit("fire", {
+    id: id,
+    });
     clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
   }
   var poz =
