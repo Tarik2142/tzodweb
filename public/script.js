@@ -160,20 +160,6 @@ function create() {
 
 }
 
-//-----TEST------
-
-function bulletEndCycle() {
-  for (var i = 0; i < bullet.length; i++) {
-    if (bullet[i].endCycle < game.cycle) {
-      Matter.World.remove(engine.world, bullet[i]);
-      bullet.splice(i, 1);
-    }
-  }
-}
-
-//--------------
-
-
 function handleMove(){
 			socket.emit('tankMove',{
 				'x': clients[id].x,
@@ -207,14 +193,7 @@ function update(time, delta) {
     log(belowLayer);*/
   }
   if (pointer.isDown) {
-    //var bomb = player.create(10, 16, 'tank');
-    if (canFire) {
-      //
-      //console.log(Math.atan2(pointer.y - gun.y, pointer.x - gun.x));
-      //gun.rotation=Math.atan2(pointer.y - gun.y, pointer.x - gun.x)
-      fireCd(200);
-      //fireBullet(this, gun);//player
-    }
+    
   }
   var poz=clients[id].gun.rotation-Math.atan2(pointer.y - clients[id].gun.y, pointer.x - clients[id].gun.x);
       if (poz>0.05&&poz<3.14||poz<-3.15){
