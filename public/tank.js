@@ -7,10 +7,10 @@ var guns = {
     name: 'heavy Gun',
     dmg: 51,
     reload: 1000, //скорость перезарядки
-    speed: 1,//скорость снаряда
+    speed: 10,//скорость снаряда
     gunRotationSpd: 20,//скорость поворота башні
     baseRotationSpd: 20,//скорость поворота танка
-    offset: 50,//отступ от танка при вистреле
+    offset: 60,//отступ от танка при вистреле
     baseSpeed: 20,//скорость танка
     armor: 60//бронька
   }
@@ -41,14 +41,14 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       var i = this.bullet.length;
       log("bullet mass len = " + i);
       var angle = this.rotation;
-      this.bullet.push();
+      //this.bullet.push();
       this.bullet[i] = this.scene.matter.add.sprite(
         this.x + this.gunType.offset * Math.cos(angle),
         this.y + this.gunType.offset * Math.sin(angle), 'crate'
       );
       //log(game.matter.add.gameObject(bullet[i]));
       this.bullet[i].rotation = angle;
-      this.bullet[i].setMass(0.01);
+      this.bullet[i].setMass(0.00001);
       this.bullet[i].setFriction(0, 0, 0);
       // bullet[i].setOnCollide(function(){
       //   setTimeout(function(){
