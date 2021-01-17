@@ -188,13 +188,16 @@ function create() {
           if (tileWrapper.tile) {
             var tile = tileWrapper.tile;
             if (tile) {
-              log(tile.properties.hp);
+              //log(tile.properties);
               if (tile.properties.hp>0){tile.properties.hp=tile.properties.hp-11;}
               if (tile.properties.hp<0){
                 if (tile.properties.nextlauer==0){
                   destroyTile(tile);
                 }else{
-                  //belowLayer.putTileAtWorldXY(tile.properties.nextlauer, tileWrapper.x, tileWrapper.y).setCollision(true);
+                  //destroyTile(tile);
+                  //log("x "+tile.x+"y "+tile.y);
+                  belowLayer.putTileAtWorldXY(tile.properties.nextlauer, tile.x*32, tile.y*32).setCollision(true);
+                  
                 }
                 
               }
