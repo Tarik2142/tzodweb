@@ -6,8 +6,8 @@ var guns = {
     frame: 0,
     name: 'heavy Gun',
     dmg: 51,
-    reload: 1500, //скорость перезарядки
-    speed: 30,//скорость снаряда
+    reload: 1000, //скорость перезарядки
+    speed: 1,//скорость снаряда
     gunRotationSpd: 20,//скорость поворота башні
     baseRotationSpd: 20,//скорость поворота танка
     offset: 50,//отступ от танка при вистреле
@@ -76,15 +76,15 @@ class gunn extends Phaser.Physics.Matter.Sprite {
         // pair.bodyA
         // pair.bodyB
       });
-      var that = this;
-      setTimeout(function() {
-        //log(that.bullet);
-        if (that.bullet[i]) {
-          //bullet[i].setVisible(false);
-          that.bullet[i].destroy();
-          //that.bullet.splice(i, 1);//почистить
-        }
-      }, 1000);
+      // var that = this;
+      // setTimeout(function() {
+      //   //log(that.bullet);
+      //   if (that.bullet[i]) {
+      //     //bullet[i].setVisible(false);
+      //     that.bullet[i].destroy();
+      //     //that.bullet.splice(i, 1);//почистить
+      //   }
+      // }, 1000);
       // game.matter.setVelocity(bullet[i], {
       //   x: player.body.velocity.x + speed,
       //  y: player.body.velocity.y + speed
