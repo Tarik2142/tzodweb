@@ -1,4 +1,4 @@
-const scale = 0.8;
+const scale = 1;
 
 var guns = {
   heavy: {//башена пушка
