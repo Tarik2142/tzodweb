@@ -153,7 +153,7 @@ function create() {
   // });
   var shapes = this.cache.json.get('shapes');
   
-  this.matter.add.sprite(200, 50, 'sheet', 'crate', {shape: shapes.tank});
+  this.matter.add.sprite(200, 50, 'tank',{shape: shapes.blue});
   /*const map = this.make.tilemap({ data: level, tileWidth: 32, tileHeight: 32 });
   const tiles = map.addTilesetImage("tiles");
   const layer = map.createStaticLayer(0, tiles, 0, 0);*/
