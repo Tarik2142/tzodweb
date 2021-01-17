@@ -173,15 +173,6 @@ function bulletEndCycle() {
 
 //--------------
 
-var canFire = true;
-
-function fireCd(time) {
-  canFire = false;
-  setTimeout(function() {
-    canFire = true;
-  }, time);
-}
-
 
 function handleMove(){
 			socket.emit('tankMove',{
