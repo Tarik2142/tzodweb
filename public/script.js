@@ -325,7 +325,8 @@ function handleMove() {
 
 function update(time, delta) {
   handleMove();
-  var cursors = scene.input.keyboard.createCursorKeys();
+  //var cursors = scene.input.keyboard.createCursorKeys();
+  var cursors = this.input.keyboard.addKeys('W,S,A,D');
   var pointer = scene.input.activePointer;
   /*const worldPoint = this.input.activePointer.positionToCamera(
     this.cameras.main
@@ -371,17 +372,17 @@ function update(time, delta) {
       
     }*/
   //gun.rotation=Math.atan2(pointer.y - gun.y, pointer.x - gun.x)
-  if (cursors.down.isDown) {
+  if (cursors.S.isDown) {
     //socket.emit('downisDown',{'id': id});
     clients[id].thrustBack(0.03);
-  } else if (cursors.up.isDown) {
+  } else if (cursors.W.isDown) {
     //socket.emit('upisDown',{'id': id});
     clients[id].thrust(0.03);
   }
-  if (cursors.left.isDown) {
+  if (cursors.A.isDown) {
     //socket.emit('leftisDown',{'id': id});
     clients[id].setRotation(clients[id].rotation - 0.1);
-  } else if (cursors.right.isDown) {
+  } else if (cursors.D.isDown) {
     //socket.emit('rightisDown',{'id': id});
     clients[id].setRotation(clients[id].rotation + 0.1);
   }
