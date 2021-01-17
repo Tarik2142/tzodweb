@@ -1,4 +1,4 @@
-const scale = 1;
+const scale = 1.2;
 
 var guns = {
   heavy: {//башена пушка
@@ -116,7 +116,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
   nickname;
   updater;
 
-  constructor(scene, x, y, texture, startGun, shape) {
+  constructor(scene, x, y, texture, shape, startGun) {
     super(scene.matter.world, x, y, texture, null, {shape: shape});
 
     scene.add.existing(this).setScale(scale, scale).setName('tank' + id);

@@ -90,7 +90,7 @@ socket.on("fire", function(data) {
 socket.on("tankCreate", function(data) {
   if (data.id != id && !clients[data.id]) {
     //createTank(scene, data.id, data.posx, data.posy,shapes.blue);
-    clients[data.id] = new tank(scene, data.posx, data.posy,shapes.blue);//scene, x, y, texture, startGun, shape
+    clients[data.id] = new tank(scene, data.posx, data.posy,"tank",shapes.blue, guns.heavy);//scene, x, y, texture, startGun, shape
     socket.emit("tankCreate", {
       id: id,
       posx: posx,
@@ -177,6 +177,7 @@ function create() {
   //this.matter.world.convertTiles(tileset);
   //console.log(this);
   //;
+  clients[id] = new tank(this, posx, posy,"tank",shapes.blue, guns.heavy);//scene, x, y, texture, startGun, shape
   socket.emit("tankCreate", {
     id: id,
     posx: posx,
@@ -353,7 +354,7 @@ function update(time, delta) {
   }
 }
 
-function createTank(game, id, x, y) {
+/*function createTank(game, id, x, y) {
   log(id);
   if (!(id in clients)) {
     
@@ -376,5 +377,5 @@ game.matter.add.gameObject(gun[id]);
   gun[id].setCollisionCategory(cat2);
   gun[id].setCollidesWith(cat2);
   game.matter.add.constraint(clients[id], gun[id], 0, 0);*/
-  }
-}
+  //}*/
+//}
