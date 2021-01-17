@@ -162,7 +162,10 @@ function create() {
         {
             var bodyA = event.pairs[i].bodyA;
             var bodyB = event.pairs[i].bodyB;
-          log();
+          var tileBody = bodyA.label === 'disappearingPlatform' ? bodyA : bodyB;
+           var tileWrapper = tileBody.gameObject;
+                var tile = tileWrapper.tile;
+          log(tile.properties);
 
 //             if ((bodyA === playerBody && bodyB.label === 'disappearingPlatform') ||
 //                 (bodyB === playerBody && bodyA.label === 'disappearingPlatform'))
@@ -194,7 +197,6 @@ function create() {
             // Note: the tile bodies in this level are all simple rectangle bodies, so checking the
             // label is easy. See matter detect collision with tile for how to handle when the tile
             // bodies are compound shapes or concave polygons.
-        }
     }, this);
 
 }
