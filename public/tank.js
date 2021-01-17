@@ -7,7 +7,7 @@ var guns = {
     name: 'heavy Gun',
     dmg: 50,
     reload: 1500, //скорость перезарядки
-    speed: 40,//скорость снаряда
+    speed: 30,//скорость снаряда
     gunRotationSpd: 20,//скорость поворота башні
     baseRotationSpd: 20,//скорость поворота танка
     offset: 50,//отступ от танка при вистреле
@@ -24,7 +24,6 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 
   constructor(scene, x, y, type) {
     super(scene.matter.world, x, y, type.texture);
-    
     
     this.gunType = type;
     this.canFire = true;
@@ -115,7 +114,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
   nickname;
   updater;
 
-  constructor(scene, x, y, texture, frame, walls) {
+  constructor(scene, x, y, texture, startGun) {
     super(scene.matter.world, x, y, texture);
 
     scene.add.existing(this).setScale(scale, scale).setName('tank' + id);
@@ -124,11 +123,13 @@ class tank extends Phaser.Physics.Matter.Sprite {
     this.setFrictionAir(0.5);
     this.setMass(5);
     this.setCollisionCategory(cat1);
-    this.gun = new gunn(scene, x, y, "gun", 0);
-    this.gun.setCollisionCategory(cat2);
-    this.gun.setCollidesWith(cat2);
-    this.gun.depth = 1;
-    this.joint = scene.matter.add.constraint(this, this.gun, 0, 0);
+    if (startGun){
+      this.gun = new gunn(scene, x, y, startGun);
+      this.gun.setCollisionCategory(cat2);
+      this.gun.setCollidesWith(cat2);
+      this.gun.depth = 1;
+      this.joint = scene.matter.add.constraint(this, this.gun, 0, 0);
+    }
     this.nickname = scene.add.text(16, 16, 'player' + id, {
         fontSize: '14px',
         padding: { x: 0, y: 0 },
