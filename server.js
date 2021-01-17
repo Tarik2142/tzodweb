@@ -8,7 +8,20 @@ function log(text){
   console.log(text);
 }
 
-var p
+var guns = {
+  0: {
+    name: 'heay Gun',
+    dmg: 50,
+    reload: 1500,
+    speed: 100
+  }
+}
+
+var player = {
+  id: '0',
+  nick: 'player',
+  gun: 0
+}
 
 class room {
   owner;
