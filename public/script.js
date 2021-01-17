@@ -182,27 +182,31 @@ function create() {
         var bodyA = event.pairs[i].bodyA;
         var bodyB = event.pairs[i].bodyB;
         var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
-        log("a=");
+        /*log("a=");
         log(bodyA.velocity);
         log(bodyA.label);
         log(bodyA);
         log("b=");
         log(bodyB.velocity);
         log(bodyA.label);
-        log(bodyB);
+        log(bodyB);*/
         if (tileBody.gameObject) {
           var tileWrapper = tileBody.gameObject;
           if (tileWrapper.tile) {
             var tile = tileWrapper.tile;
             if (tile) {
               
-              for(var damag=51;damag>0;){
-                
-                if (tile.properties.hp>0){tile.properties.hp=tile.properties.hp-damag;
-                                         damag=damag-tile.properties.hp}
-                if (tile.properties.hp<0){
+              for(var damag=51;damag>0;damag--){
+                var hp= tile.properties.hp
+                log(hp)
+                if (tile.properties.hp>0){
+                  tile.properties.hp=tile.properties.hp-51;
+                 // damag=damag-hp
+                }else if (tile.properties.hp==0){damag=-1;}
+                else if (tile.properties.hp<0){
                   if (tile.properties.nextlauer<1){
                     destroyTile(tile);
+                    damag=-1;
                   }else{
                     //destroyTile(tile);
                     //log("x "+tile.x+"y "+tile.y);
