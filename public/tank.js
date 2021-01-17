@@ -99,6 +99,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
   speed;
   armor;
   nickname;
+  updater;
 
   constructor(scene, x, y, texture, frame, walls) {
     super(scene.matter.world, x, y, texture);
@@ -114,13 +115,18 @@ class tank extends Phaser.Physics.Matter.Sprite {
     this.gun.setCollidesWith(cat2);
     this.gun.depth = 1;
     this.joint = scene.matter.add.constraint(this, this.gun, 0, 0);
-    this.nickname = scene.matter.add.text(16, 16, 'player' + id, {
-        fontSize: '20px',
+    log(scene);
+    this.nickname = scene.add.text(16, 16, 'player' + id, {
+        fontSize: '14px',
         padding: { x: 20, y: 10 },
-        backgroundColor: '#000000',
-        fill: '#ffffff'
+        //backgroundColor: '#000000'
+        //fill: '#ffffff'
     });
-    text.setScrollFactor(0);
+    this.nickname.setScrollFactor(0);
+    this.updter = scene.matter.world.on('step', function(time, delta){
+      this.nickname.x = this.x + 20;
+    this.nickname.y = this.y + 20;
+    });
     log(this.nickname);
   }
   

@@ -138,7 +138,6 @@ function create() {
   this.matter.world.debugGraphic.visible = true;
   this.matter.world.disableGravity();
   this.matter.world.setBounds();
-  log(this);
   //this.add.image(400, 300, "sky");
   // scoreText = this.add.text(16, 16, "score: 0", {
   //   fontSize: "32px",
