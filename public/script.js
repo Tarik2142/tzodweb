@@ -47,6 +47,7 @@ var movebackSpeed = 0;
 var lastFired = 0;
 var canFire = true;
 var scoreText;
+var shapes;
 socket.on("downisDown", function(data) {
   if (data.id != id && clients[data.id]) {
     clients[data.id].thrustBack(0.05);
@@ -88,7 +89,8 @@ socket.on("fire", function(data) {
 });
 socket.on("tankCreate", function(data) {
   if (data.id != id && !clients[data.id]) {
-    createTank(scene, data.id, data.posx, data.posy);
+    //createTank(scene, data.id, data.posx, data.posy,shapes.blue);
+    clients[data.id] = new tank(scene, data.posx, data.posy,shapes.blue);//scene, x, y, texture, startGun, shape
     socket.emit("tankCreate", {
       id: id,
       posx: posx,
@@ -153,8 +155,7 @@ function create() {
   //   fill: "#000"
   // });
   
-  /*var shapes = this.cache.json.get('shapes');
-  obstacle = this.matter.add.sprite( 64, 64,"tank2", null, {shape: shapes.blue});//*/
+  //obstacle = this.matter.add.sprite( 64, 64,"tank2", null, {shape: shapes.blue});//*/
   /*const map = this.make.tilemap({ data: level, tileWidth: 32, tileHeight: 32 });
   const tiles = map.addTilesetImage("tiles");
   const layer = map.createStaticLayer(0, tiles, 0, 0);*/
@@ -171,11 +172,11 @@ function create() {
   //ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
   this.matter.world.convertTilemapLayer(belowLayer);
   
-  var shapes = this.cache.json.get('shapes');
+  shapes = this.cache.json.get('shapes');
   //obstacle = this.matter.add.sprite( 64, 64,"tank", null, {shape: shapes.blue});//
   //this.matter.world.convertTiles(tileset);
   //console.log(this);
-  createTank(this, id, posx, posy);
+  //;
   socket.emit("tankCreate", {
     id: id,
     posx: posx,
@@ -355,7 +356,7 @@ function update(time, delta) {
 function createTank(game, id, x, y) {
   log(id);
   if (!(id in clients)) {
-    clients[id] = new tank(game, x, y, "tank", guns.heavy);
+    
     // тут создать танк игрока 2
     //clients[id] = game.add.sprite(64, 64, "tank");
     /*gun[id] = game.add.image(0, 0, "gun");
