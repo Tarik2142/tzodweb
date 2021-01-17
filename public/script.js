@@ -182,14 +182,14 @@ function create() {
         var bodyA = event.pairs[i].bodyA;
         var bodyB = event.pairs[i].bodyB;
         var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
-        /*log("a=");
+        log("a=");
         log(bodyA.velocity);
         log(bodyA.label);
         log(bodyA);
         log("b=");
         log(bodyB.velocity);
         log(bodyA.label);
-        log(bodyB);*/
+        log(bodyB);
         if (tileBody.gameObject) {
           var tileWrapper = tileBody.gameObject;
           if (tileWrapper.tile) {
@@ -198,13 +198,13 @@ function create() {
               
               for(var damag=36;damag>0;){
                 var hp= tile.properties.hp
-                log("hp "+hp);
-                log("dam "+damag);
+                //log("hp "+hp);
+                //log("dam "+damag);
                 if (tile.properties.hp>0){
                   tile.properties.hp=tile.properties.hp-damag;
                   damag=damag-hp
-                }else if (tile.properties.hp==0){damag=-1;}
-                else if (tile.properties.hp<0){
+                }//else if (tile.properties.hp==0){damag=-1;}
+                else if (tile.properties.hp<=0){
                   if (tile.properties.nextlauer<1){
                     destroyTile(tile);
                     damag=-1;
@@ -216,7 +216,8 @@ function create() {
                     tile.properties.nextlauer=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].nextlauer;
                   }
                 }
-              log("last "+tile.properties.hp);
+              //log("last "+tile.properties.hp);
+                //log("last "+tile.properties.nextlauer);
               }
               
               
