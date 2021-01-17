@@ -188,8 +188,9 @@ function create() {
           if (tileWrapper.tile) {
             var tile = tileWrapper.tile;
             if (tile) {
-              log(tile.properties);
-              destroyTile(tile);
+              log(tile.properties.hp);
+              if (tile.properties.nextlauer==0){
+              destroyTile(tile);}
               
             }
           }
