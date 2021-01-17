@@ -278,6 +278,39 @@ function create() {
     },
     this
   );
+  
+  scene.input.keyboard.on('keydown-W', function(){
+    clients[id].thrust(0.03);
+  });
+  
+  scene.input.keyboard.on('keydown-A', function(){
+    clients[id].setRotation(clients[id].rotation - 0.1);
+  });
+  
+  scene.input.keyboard.on('keydown-S', function(){
+    clients[id].thrustBack(0.03);
+  });
+  
+  scene.input.keyboard.on('keydown-D', function(){
+    clients[id].setRotation(clients[id].rotation + 0.1);
+  });
+  
+  /*this.input.keyboard.on('keydown', function(params){
+    if (params.key=='s') {
+    //socket.emit('downisDown',{'id': id});
+    clients[id].thrustBack(0.03);
+  } else if (params.key=='w') {
+    //socket.emit('upisDown',{'id': id});
+    clients[id].thrust(0.03);
+  }
+  if (params.key=='a') {
+    //socket.emit('leftisDown',{'id': id});
+    clients[id].setRotation(clients[id].rotation - 0.1);
+  } else if (params.key=='d') {
+    //socket.emit('rightisDown',{'id': id});
+    clients[id].setRotation(clients[id].rotation + 0.1);
+  }
+  });*/
 }
 
 function handleMove() {
@@ -318,7 +351,7 @@ function update(time, delta) {
     socket.emit("fire", {
     id: id,
     });
-    clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
+    //clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
   }
   var poz =
     clients[id].gun.rotation -
