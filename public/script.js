@@ -77,7 +77,7 @@ socket.on("tankMove", function(data) {
     clearTimeout(timerId[data.id]);
     timerId[data.id] = setTimeout(function() {
       clients[data.id].kill();
-      clients.splice(data.id, 1); //почистить масив
+      //clients.splice(data.id, 1); //почистить масив
     }, 5000);
   }
 });
@@ -183,11 +183,11 @@ function create() {
         var bodyB = event.pairs[i].bodyB;
         if(bodyA.gameObject){
           if(bodyA.gameObject.name){
-            
+            log('BODY A' + bodyA.gameObject.name);
           }
         }else if(bodyB.gameObject){
-          if(){
-            
+          if(bodyB.gameObject.name){
+            log('BODY B' + bodyB.gameObject.name);
           }
         }
         var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
