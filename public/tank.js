@@ -1,5 +1,17 @@
 const scale = 0.8;
 
+var guns = {
+  heavy: {
+    texture: 'gun',
+    frame: 0,
+    name: 'heavy Gun',
+    dmg: 50,
+    reload: 1500,
+    speed: 40,
+    offset: 50
+  }
+}
+
 class gunn extends Phaser.Physics.Matter.Sprite {
   canFire;
   fireTimeout;
@@ -7,15 +19,18 @@ class gunn extends Phaser.Physics.Matter.Sprite {
   bulletSpeed;
   scene;
   playerDist;
+  gunType;
 
-  constructor(scene, x, y, texture, frame) {
-    super(scene.matter.world, x, y, texture);
-
-    this.fireTimeout = 500;
+  constructor(scene, x, y, type) {
+    super(scene.matter.world, x, y, type.texture);
+    
+    
+    this.gunType = type
+    this.fireTimeout = type.reload;
     this.canFire = true;
-    this.bulletSpeed = 50;
+    this.bulletSpeed = type.speed;
     this.bullet = new Array();
-    this.playerDist = 50;
+    this.playerDist = type.offset;
     this.scene = scene;
 
     scene.add.existing(this).setScale(scale, scale).setName('tank' + id);
