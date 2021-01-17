@@ -132,6 +132,7 @@ function preload() {
     "tiles",
     "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fwalls.png"
   );
+  this.load.atlas("tank2", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fblue.png", "atlas.json");
 }
 
 function destroyTile (tile)
@@ -151,9 +152,9 @@ function create() {
   //   fontSize: "32px",
   //   fill: "#000"
   // });
-  var shapes = this.cache.json.get('shapes');
   
-  player = this.add.sprite(64, 64,'tank');//,'tank',{shape: shapes.blue});
+  /*var shapes = this.cache.json.get('shapes');
+  obstacle = this.matter.add.sprite( 64, 64,"tank2", null, {shape: shapes.blue});//*/
   /*const map = this.make.tilemap({ data: level, tileWidth: 32, tileHeight: 32 });
   const tiles = map.addTilesetImage("tiles");
   const layer = map.createStaticLayer(0, tiles, 0, 0);*/
@@ -170,6 +171,8 @@ function create() {
   //ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
   this.matter.world.convertTilemapLayer(belowLayer);
   
+  var shapes = this.cache.json.get('shapes');
+  //obstacle = this.matter.add.sprite( 64, 64,"tank", null, {shape: shapes.blue});//
   //this.matter.world.convertTiles(tileset);
   //console.log(this);
   createTank(this, id, posx, posy);

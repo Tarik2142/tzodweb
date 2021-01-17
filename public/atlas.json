@@ -1,0 +1,42 @@
+{
+	"textures": [
+		{
+			"image": "blue.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 64,
+				"h": 64
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "explosion3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 64,
+						"h": 64
+					}
+				}
+				
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:9bc35b33755aa6de51d526bdecf4175b:e0a7c340a08a8c7f50ff5075026df8e3:e7d815c4455bdad6de6ff1a8b57e9b20$"
+	}
+}

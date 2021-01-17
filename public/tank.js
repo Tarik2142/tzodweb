@@ -116,8 +116,8 @@ class tank extends Phaser.Physics.Matter.Sprite {
   nickname;
   updater;
 
-  constructor(scene, x, y, texture, startGun) {
-    super(scene.matter.world, x, y, texture);
+  constructor(scene, x, y, texture, startGun, shape) {
+    super(scene.matter.world, x, y, texture, null, {shape: shape});
 
     scene.add.existing(this).setScale(scale, scale).setName('tank' + id);
     var cat1 = scene.matter.world.nextCategory();
