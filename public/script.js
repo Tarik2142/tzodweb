@@ -194,14 +194,15 @@ function create() {
           var tileWrapper = tileBody.gameObject;
           if (tileWrapper.tile) {
             var tile = tileWrapper.tile;
-            if (tile) {
+            if (tile.properties.hp!=0) {
               
-              for(var damag=51;damag>0;damag--){
+              for(var damag=36;damag>0;){
                 var hp= tile.properties.hp
-                log(hp)
+                log("hp "+hp);
+                log("dam "+damag);
                 if (tile.properties.hp>0){
-                  tile.properties.hp=tile.properties.hp-51;
-                 // damag=damag-hp
+                  tile.properties.hp=tile.properties.hp-damag;
+                  damag=damag-hp
                 }else if (tile.properties.hp==0){damag=-1;}
                 else if (tile.properties.hp<0){
                   if (tile.properties.nextlauer<1){
@@ -215,7 +216,7 @@ function create() {
                     tile.properties.nextlauer=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].nextlauer;
                   }
                 }
-              //log(tile.properties);
+              log("last "+tile.properties.hp);
               }
               
               
