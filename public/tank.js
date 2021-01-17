@@ -6,6 +6,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 }
 
 class tank extends Phaser.Physics.Matter.Sprite {
+  bullet = [];
   speed;
   armor;
   constructor(scene, x, y, texture, frame, walls) {
@@ -36,4 +37,70 @@ class tank extends Phaser.Physics.Matter.Sprite {
     this.destroy();
     delete this;
   }
+  function fireBullet(game, player) {
+  //addMass(x, y, r, sides, Vx, Vy)
+  var i = bullet.length;
+  log('bullet mass len = ' + i);
+  var angle = player.rotation;
+  var speed = 50;
+  var playerDist = 25;
+  bullet.push();
+  bullet[i] = game.matter.bodies.circle(
+    player.x + playerDist * Math.cos(angle),
+    player.y + playerDist * Math.sin(angle),
+    20
+  );
+  //log(game.matter.add.gameObject(bullet[i]));
+  bullet[i].body.rotation = angle;
+  bullet[i].setMass(0.01);
+  bullet[i].setFriction(0, 0, 0);
+  // bullet[i].setOnCollide(function(){
+  //   setTimeout(function(){
+  //     if (bullet[i]){
+  //       bullet[i].destroy();
+  //     }
+  //   }, 10);
+  // });
+
+  bullet[i].setOnCollide(pair => {
+    if (pair.bodyA.gameObject !== null){// спс
+      
+      if (pair.bodyA.gameObject.name == "platform") {
+        //setTimeout(function() {
+          if (bullet[i]) {
+            bullet[i].setVelocity(0, 0);
+            //bullet[i].setVisible(false);
+            pair.bodyB.destroy();
+          }
+        //}, 5);
+      }
+    }
+    
+
+    // pair.bodyA
+    // pair.bodyB
+  });
+  setTimeout(function() {
+    if (bullet[i]) {
+      
+      //bullet[i].setVisible(false);
+      bullet[i].destroy();
+    }
+  }, 2000);
+  // game.matter.setVelocity(bullet[i], {
+  //   x: player.body.velocity.x + speed,
+  //  y: player.body.velocity.y + speed
+  // });
+
+  //game.matter.setAngularVelocity(bullet[i], (Math.random() - 0.5) * 1);
+  game.matter.world.add(game.matter.world, bullet[i]);
+  
+  bullet[i].setVelocity(
+    player.body.velocity.x + speed * Math.cos(angle),
+    player.body.velocity.y + speed * Math.sin(angle)
+  );
+  //console.log(bullet);
+  //bullet[i].setCollisionCategory(cat3);
+  //bullet[i].setCollidesWith(cat3);
+}
 }

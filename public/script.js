@@ -1,6 +1,28 @@
-
-//console.log("hello world :o");
-//import Phaser from 'phaser';
+const FPS = 30
+var config = {
+  type: Phaser.AUTO,
+  width: 640,
+  height: 640,
+  audio: {
+    disableWebAudio: true
+  },
+  fps: {
+    target: FPS
+  },
+  physics: {
+    default: "matter",
+    matter: {
+      gravity: { y: 0, x: 0 },
+      debug: true
+    }
+  },
+  parent: "tanks",
+  scene: {
+    preload: preload,
+    create: create,
+    update: update
+  }
+};
 
 function log(text){
   console.log(text);
@@ -55,6 +77,7 @@ socket.on('tankMove', function (data) {
       clearTimeout(timerId[data.id]);
       timerId[data.id] = setTimeout(function() {
         clients[data.id].kill();
+        clients.splice(data.id, 1);//почистить масив
         }, 5000);
 		}
 	});
@@ -103,22 +126,6 @@ function preload() {
 }
 
 function create() {
-  
-  /*const level = [
-    [  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0 ],
-    [  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  0 ],
-    [  20,  21,  22,  23,  24,  25,  26,  27,  28,  27,  29 ],
-    [  30,  31,  32,  33,  34,  5,  6,  7,  8,  0,  0 ],
-    [  0,  0,  0, 14, 13, 14,  0,  0,  0,  0,  0 ],
-    [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ],
-    [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ],
-    [  0,  0, 14, 14, 14, 14, 14,  0,  0,  0, 15 ],
-    [  0,  0,  0,  0,  0,  0,  0,  0,  0, 15, 15 ],
-    [ 32, 32, 32,  0,  0,  0,  0,  0, 15, 15, 15 ],
-    [ 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 ]
-  ];*/
-  
-  
   this.matter.world.drawDebug = true;
   this.matter.world.debugGraphic.visible = true;
   this.matter.world.disableGravity();
@@ -130,9 +137,9 @@ function create() {
   const tiles = map.addTilesetImage("tiles");
   const layer = map.createStaticLayer(0, tiles, 0, 0);*/
   
-  const map = this.make.tilemap({ key: "map" });
-  const tileset = map.addTilesetImage("test", "tiles");
-  const tileset1 = map.addTilesetImage("back", "sky");
+ map = this.make.tilemap({ key: "map" });
+ tileset = map.addTilesetImage("test", "tiles");
+ tileset1 = map.addTilesetImage("back", "sky");
   
   back = map.createDynamicLayer("back", tileset1, 0, 0);
   belowLayer = map.createDynamicLayer("slot 1", tileset, 0, 0);
@@ -154,74 +161,6 @@ function create() {
 }
 
 //-----TEST------
-var bullet = [];
-
-function fireBullet(game, player) {
-  //addMass(x, y, r, sides, Vx, Vy)
-  var i = bullet.length;
-  log('bullet mass len = ' + i);
-  var angle = player.rotation;
-  var speed = 50;
-  var playerDist = 25;
-  bullet.push();
-  bullet[i] = game.matter.bodies.circle(
-    player.x + playerDist * Math.cos(angle),
-    player.y + playerDist * Math.sin(angle),
-    20
-  );
-  //log(game.matter.add.gameObject(bullet[i]));
-  bullet[i].body.rotation = angle;
-  bullet[i].setMass(0.01);
-  bullet[i].setFriction(0, 0, 0);
-  // bullet[i].setOnCollide(function(){
-  //   setTimeout(function(){
-  //     if (bullet[i]){
-  //       bullet[i].destroy();
-  //     }
-  //   }, 10);
-  // });
-
-  bullet[i].setOnCollide(pair => {
-    if (pair.bodyA.gameObject !== null){// спс
-      
-      if (pair.bodyA.gameObject.name == "platform") {
-        //setTimeout(function() {
-          if (bullet[i]) {
-            bullet[i].setVelocity(0, 0);
-            //bullet[i].setVisible(false);
-            pair.bodyB.destroy();
-          }
-        //}, 5);
-      }
-    }
-    
-
-    // pair.bodyA
-    // pair.bodyB
-  });
-  setTimeout(function() {
-    if (bullet[i]) {
-      
-      //bullet[i].setVisible(false);
-      bullet[i].destroy();
-    }
-  }, 2000);
-  // game.matter.setVelocity(bullet[i], {
-  //   x: player.body.velocity.x + speed,
-  //  y: player.body.velocity.y + speed
-  // });
-
-  //game.matter.setAngularVelocity(bullet[i], (Math.random() - 0.5) * 1);
-  game.matter.world.add(game.matter.world, bullet[i]);
-  
-  bullet[i].setVelocity(
-    player.body.velocity.x + speed * Math.cos(angle),
-    player.body.velocity.y + speed * Math.sin(angle)
-  );
-  //console.log(bullet);
-  //bullet[i].setCollisionCategory(cat3);
-  //bullet[i].setCollidesWith(cat3);
-}
 
 function bulletEndCycle() {
   for (var i = 0; i < bullet.length; i++) {
