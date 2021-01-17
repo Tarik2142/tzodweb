@@ -123,10 +123,11 @@ class tank extends Phaser.Physics.Matter.Sprite {
         //fill: '#ffffff'
     });
     this.nickname.setScrollFactor(0);
-    this.updter = scene.matter.world.on('step', function(time, delta){
-      this.nickname.x = this.x + 20;
-    this.nickname.y = this.y + 20;
-    });
+    var that = this;
+    this.updater = scene.matter.world.on('beforeupdate', function(time, delta){//ник за игроком
+      that.nickname.x = that.x - 50;
+    that.nickname.y = that.y - 60;
+    }, this);
     log(this.nickname);
   }
   
