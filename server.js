@@ -8,6 +8,16 @@ function log(text){
   console.log(text);
 }
 
+class room {
+  owner;
+  roomname;
+  password;
+  players;
+  
+  constructor(owner, roomname, password){
+    
+  }
+}
 
 
 app.use(express.static("public"));
