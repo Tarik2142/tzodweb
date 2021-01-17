@@ -98,6 +98,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 class tank extends Phaser.Physics.Matter.Sprite {
   speed;
   armor;
+  nickname;
 
   constructor(scene, x, y, texture, frame, walls) {
     super(scene.matter.world, x, y, texture);
@@ -113,6 +114,18 @@ class tank extends Phaser.Physics.Matter.Sprite {
     this.gun.setCollidesWith(cat2);
     this.gun.depth = 1;
     this.joint = scene.matter.add.constraint(this, this.gun, 0, 0);
+    this.nickname = scene.matter.add.text(16, 16, 'player' + id, {
+        fontSize: '20px',
+        padding: { x: 20, y: 10 },
+        backgroundColor: '#000000',
+        fill: '#ffffff'
+    });
+    text.setScrollFactor(0);
+    log(this.nickname);
+  }
+  
+  setNick(text){
+    
   }
 
   fire() {
@@ -122,7 +135,9 @@ class tank extends Phaser.Physics.Matter.Sprite {
     }
   }
 
-  update() {}
+  update() {
+    
+  }
 
   kill() {
     this.gun.destroy();
