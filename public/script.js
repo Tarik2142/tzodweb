@@ -113,6 +113,7 @@ function preload() {
   );
   //this.load.atlas("tank", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fblue.png", "blue.json");
   this.load.image("tank", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fblue.png");
+  this.load.json('shapes', 'blue.json');
   /*this.load.image(
     "tank",
     "https://cdn.glitch.com/772bc608-91dd-4577-857d-f1f6ed4d7332%2Ftank1.png"
@@ -150,7 +151,9 @@ function create() {
   //   fontSize: "32px",
   //   fill: "#000"
   // });
-
+  var shapes = this.cache.json.get('shapes');
+  
+  this.matter.add.sprite(200, 50, 'sheet', 'crate', {shape: shapes.tank});
   /*const map = this.make.tilemap({ data: level, tileWidth: 32, tileHeight: 32 });
   const tiles = map.addTilesetImage("tiles");
   const layer = map.createStaticLayer(0, tiles, 0, 0);*/
