@@ -5,7 +5,7 @@ var guns = {
     texture: 'gun',
     frame: 0,
     name: 'heavy Gun',
-    dmg: 50,
+    dmg: 51,
     reload: 1500, //скорость перезарядки
     speed: 30,//скорость снаряда
     gunRotationSpd: 20,//скорость поворота башні

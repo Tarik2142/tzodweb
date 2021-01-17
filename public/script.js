@@ -191,13 +191,14 @@ function create() {
               //log(tile.properties);
               if (tile.properties.hp>0){tile.properties.hp=tile.properties.hp-11;}
               if (tile.properties.hp<0){
-                if (tile.properties.nextlauer==0){
+                if (tile.properties.nextlauer<1){
                   destroyTile(tile);
                 }else{
                   //destroyTile(tile);
                   //log("x "+tile.x+"y "+tile.y);
                   belowLayer.putTileAtWorldXY(tile.properties.nextlauer, tile.x*32, tile.y*32).setCollision(true);
-                  
+                  tile.properties.hp=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].hp;
+                  tile.properties.nextlauer=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].nextlauer;
                 }
                 
               }
