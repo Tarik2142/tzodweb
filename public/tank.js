@@ -6,7 +6,8 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 }
 
 class tank extends Phaser.Physics.Matter.Sprite {
-  bullet = [];
+  //bullet = [];
+  //playerDist = 25;
   speed;
   armor;
   constructor(scene, x, y, texture, frame, walls) {
@@ -64,7 +65,6 @@ class tank extends Phaser.Physics.Matter.Sprite {
 
   bullet[i].setOnCollide(pair => {
     if (pair.bodyA.gameObject !== null){// спс
-      
       if (pair.bodyA.gameObject.name == "platform") {
         //setTimeout(function() {
           if (bullet[i]) {
@@ -92,15 +92,11 @@ class tank extends Phaser.Physics.Matter.Sprite {
   //  y: player.body.velocity.y + speed
   // });
 
-  //game.matter.setAngularVelocity(bullet[i], (Math.random() - 0.5) * 1);
   game.matter.world.add(game.matter.world, bullet[i]);
   
   bullet[i].setVelocity(
     player.body.velocity.x + speed * Math.cos(angle),
     player.body.velocity.y + speed * Math.sin(angle)
   );
-  //console.log(bullet);
-  //bullet[i].setCollisionCategory(cat3);
-  //bullet[i].setCollidesWith(cat3);
-}
+  }
 }
