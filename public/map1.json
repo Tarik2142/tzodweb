@@ -10,7 +10,7 @@
  "infinite":false,
  "layers":[
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0],
+         "data":[33, 34, 35, 36, 37, 38, 39, 40, 33, 34, 35, 36, 37, 38, 39, 40, 33, 34, 35, 36, 41, 42, 43, 44, 45, 46, 47, 48, 41, 42, 43, 44, 45, 46, 47, 48, 41, 42, 43, 44, 49, 50, 51, 52, 53, 54, 55, 56, 49, 50, 51, 52, 53, 54, 55, 56, 49, 50, 51, 52, 57, 58, 59, 60, 61, 62, 63, 64, 57, 58, 59, 60, 61, 62, 63, 64, 57, 58, 59, 60, 65, 66, 67, 68, 69, 70, 71, 72, 65, 66, 67, 68, 69, 70, 71, 72, 65, 66, 67, 68, 73, 74, 75, 76, 77, 78, 79, 80, 73, 74, 75, 76, 77, 78, 79, 80, 73, 74, 75, 76, 81, 82, 83, 84, 85, 86, 87, 88, 81, 82, 83, 84, 85, 86, 87, 88, 81, 82, 83, 84, 89, 90, 91, 92, 93, 94, 95, 96, 89, 90, 91, 92, 93, 94, 95, 96, 89, 90, 91, 92, 33, 34, 35, 36, 37, 38, 39, 40, 33, 34, 35, 36, 37, 38, 39, 40, 33, 34, 35, 36, 41, 42, 43, 44, 45, 46, 47, 48, 41, 42, 43, 44, 45, 46, 47, 48, 41, 42, 43, 44, 49, 50, 51, 52, 53, 54, 55, 56, 49, 50, 51, 52, 53, 54, 55, 56, 49, 50, 51, 52, 57, 58, 59, 60, 61, 62, 63, 64, 57, 58, 59, 60, 61, 62, 63, 64, 57, 58, 59, 60, 65, 66, 67, 68, 69, 70, 71, 72, 65, 66, 67, 68, 69, 70, 71, 72, 65, 66, 67, 68, 73, 74, 75, 76, 77, 78, 79, 80, 73, 74, 75, 76, 77, 78, 79, 80, 73, 74, 75, 76, 81, 82, 83, 84, 85, 86, 87, 88, 81, 82, 83, 84, 85, 86, 87, 88, 81, 82, 83, 84, 89, 90, 91, 92, 93, 94, 95, 96, 89, 90, 91, 92, 93, 94, 95, 96, 89, 90, 91, 92, 33, 34, 35, 36, 37, 38, 39, 40, 33, 34, 35, 36, 37, 38, 39, 40, 33, 34, 35, 36, 41, 42, 43, 44, 45, 46, 47, 48, 41, 42, 43, 44, 45, 46, 47, 48, 41, 42, 43, 44, 49, 50, 51, 52, 53, 54, 55, 56, 49, 50, 51, 52, 53, 54, 55, 56, 49, 50, 51, 52, 57, 58, 59, 60, 61, 62, 63, 64, 57, 58, 59, 60, 61, 62, 63, 64, 57, 58, 59, 60],
          "height":20,
          "id":3,
          "name":"back",
@@ -53,45 +53,22 @@
          "tileheight":32,
          "tiles":[
                 {
-                 "animation":[
-                        {
-                         "duration":100,
-                         "tileid":0
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":1
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":2
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":3
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":8
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":9
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":10
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":11
-                        }],
                  "id":0,
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":2
                         }]
                 }, 
                 {
@@ -101,6 +78,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":3
                         }]
                 }, 
                 {
@@ -110,6 +97,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":4
                         }]
                 }, 
                 {
@@ -119,26 +116,19 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":9
                         }]
                 }, 
                 {
-                 "animation":[
-                        {
-                         "duration":100,
-                         "tileid":4
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":12
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":20
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":28
-                        }],
                  "id":4,
                  "objectgroup":
                     {
@@ -188,26 +178,19 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":13
                         }]
                 }, 
                 {
-                 "animation":[
-                        {
-                         "duration":100,
-                         "tileid":5
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":13
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":21
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":29
-                        }],
                  "id":5,
                  "objectgroup":
                     {
@@ -257,26 +240,19 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":14
                         }]
                 }, 
                 {
-                 "animation":[
-                        {
-                         "duration":100,
-                         "tileid":6
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":14
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":22
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":30
-                        }],
                  "id":6,
                  "objectgroup":
                     {
@@ -326,26 +302,19 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":15
                         }]
                 }, 
                 {
-                 "animation":[
-                        {
-                         "duration":100,
-                         "tileid":7
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":15
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":23
-                        }, 
-                        {
-                         "duration":100,
-                         "tileid":31
-                        }],
                  "id":7,
                  "objectgroup":
                     {
@@ -395,6 +364,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":16
                         }]
                 }, 
                 {
@@ -404,6 +383,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":10
                         }]
                 }, 
                 {
@@ -413,6 +402,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":11
                         }]
                 }, 
                 {
@@ -422,6 +421,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":12
                         }]
                 }, 
                 {
@@ -431,6 +440,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":0
                         }]
                 }, 
                 {
@@ -438,7 +457,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
@@ -476,33 +494,202 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":21
                         }]
                 }, 
                 {
                  "id":13,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":29.0909,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":0.0909091,
+                                     "y":2.72727
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":22
                         }]
                 }, 
                 {
                  "id":14,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":-32
+                                    }, 
+                                    {
+                                     "x":29,
+                                     "y":-32
+                                    }, 
+                                    {
+                                     "x":0.0909091,
+                                     "y":-3
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":32
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":23
                         }]
                 }, 
                 {
                  "id":15,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":0,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":32.0909,
+                                     "y":28.8182
+                                    }, 
+                                    {
+                                     "x":2.90909,
+                                     "y":0
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":24
                         }]
                 }, 
                 {
@@ -515,8 +702,13 @@
                         }, 
                         {
                          "name":"hp",
+                         "type":"string",
+                         "value":"0"
+                        }, 
+                        {
+                         "name":"nextlauer",
                          "type":"int",
-                         "value":0
+                         "value":17
                         }]
                 }, 
                 {
@@ -526,6 +718,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"0"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":0
                         }]
                 }, 
                 {
@@ -535,6 +737,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"0"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":0
                         }]
                 }, 
                 {
@@ -544,6 +756,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"0"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":0
                         }]
                 }, 
                 {
@@ -551,7 +773,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
@@ -589,33 +810,202 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":29
                         }]
                 }, 
                 {
                  "id":21,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":29.0909,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":0.0909091,
+                                     "y":2.72727
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":30
                         }]
                 }, 
                 {
                  "id":22,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":-32
+                                    }, 
+                                    {
+                                     "x":29,
+                                     "y":-32
+                                    }, 
+                                    {
+                                     "x":0.0909091,
+                                     "y":-3
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":32
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":31
                         }]
                 }, 
                 {
                  "id":23,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":0,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":32.0909,
+                                     "y":28.8182
+                                    }, 
+                                    {
+                                     "x":2.90909,
+                                     "y":0
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":32
                         }]
                 }, 
                 {
@@ -668,6 +1058,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"0"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":25
                         }]
                 }, 
                 {
@@ -720,6 +1120,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"0"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":26
                         }]
                 }, 
                 {
@@ -772,6 +1182,16 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"0"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":27
                         }]
                 }, 
                 {
@@ -824,48 +1244,262 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"0"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":28
                         }]
                 }, 
                 {
                  "id":28,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":0,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":0
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":0
                         }]
                 }, 
                 {
                  "id":29,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":29.0909,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":0.0909091,
+                                     "y":2.72727
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":0
                         }]
                 }, 
                 {
                  "id":30,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":-32
+                                    }, 
+                                    {
+                                     "x":29,
+                                     "y":-32
+                                    }, 
+                                    {
+                                     "x":0.0909091,
+                                     "y":-3
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":32
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":0
                         }]
                 }, 
                 {
                  "id":31,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":0,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":32,
+                                     "y":32
+                                    }, 
+                                    {
+                                     "x":32.0909,
+                                     "y":28.8182
+                                    }, 
+                                    {
+                                     "x":2.90909,
+                                     "y":0
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"hp",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"nextlauer",
+                         "type":"int",
+                         "value":0
                         }]
                 }],
          "tilewidth":32
         }, 
         {
-         "columns":1,
+         "columns":8,
          "firstgid":33,
          "image":"back01.png",
          "imageheight":256,
@@ -873,9 +1507,9 @@
          "margin":0,
          "name":"back",
          "spacing":0,
-         "tilecount":1,
-         "tileheight":256,
-         "tilewidth":256
+         "tilecount":64,
+         "tileheight":32,
+         "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",
