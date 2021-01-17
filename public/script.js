@@ -159,7 +159,8 @@ function create() {
   belowLayer.renderDebug(debugGraphics, {});*/
   //ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
   this.matter.world.convertTilemapLayer(belowLayer);
-  this.matter.world.convertTiles(tileset);
+  
+  //this.matter.world.convertTiles(tileset);
   //console.log(this);
   createTank(this, id, posx, posy);
   socket.emit("tankCreate", {
@@ -184,6 +185,7 @@ function create() {
             if (tile) {
               log(tile.properties);
               destroyTile(tile);
+              
             }
           }
         }
@@ -235,15 +237,14 @@ function handleMove() {
 
 function update(time, delta) {
   handleMove();
-
   var cursors = scene.input.keyboard.createCursorKeys();
   var pointer = scene.input.activePointer;
   const worldPoint = this.input.activePointer.positionToCamera(
     this.cameras.main
   );
-
+  this.matter.world.convertTilemapLayer(belowLayer);
   // Draw tiles (only within the groundLayer)
-  if (pointer.isDown) {
+  /*if (pointer.isDown) {
     //belowLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y).setCollision(false, false, false, false, true);
     //belowLayer.putTileAtWorldXY(1, worldPoint.x, worldPoint.y).setCollision(false);
     //belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y).setCollision(false);
@@ -252,11 +253,11 @@ function update(time, delta) {
     //belowLayer.renderDebug(debugGraphics, {});
     //log(Phaser.Physics.Matter.TileBody.destroy());
     //this.Physics.Matter.TileBody.destroy()
-    this.matter.world.convertTilemapLayer(belowLayer);
+    //this.matter.world.convertTilemapLayer(belowLayer);
     /*belowLayer.gidMap[1].tileProperties[16].hp=5
     log(belowLayer.gidMap[1].tileProperties[16].hp);
     log(belowLayer);*/
-  }
+  //}
   if (pointer.isDown) {
     clients[id].fire();
     clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);

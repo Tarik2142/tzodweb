@@ -55,6 +55,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
               //this.bullet[i].setVelocity(0, 0);
               //bullet[i].setVisible(false);
               this.bullet[i].destroy();
+              
             }
             //}, 5);
           }
