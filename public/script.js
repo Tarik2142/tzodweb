@@ -126,6 +126,13 @@ function preload() {
   );
 }
 
+function destroyTile (tile)
+{
+    var layer = tile.tilemapLayer;
+    layer.removeTileAt(tile.x, tile.y);
+    tile.physics.matterBody.destroy();
+}
+
 function create() {
   this.matter.world.drawDebug = true;
   this.matter.world.debugGraphic.visible = true;
@@ -167,7 +174,7 @@ function create() {
       for (var i = 0; i < event.pairs.length; i++) {
         var bodyA = event.pairs[i].bodyA;
         var bodyB = event.pairs[i].bodyB;
-        var tileBody = bodyA.label === "disappearingPlatform" ? bodyA : bodyB;
+        var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
 
         if (tileBody.gameObject) {
           var tileWrapper = tileBody.gameObject;
@@ -175,6 +182,7 @@ function create() {
             var tile = tileWrapper.tile;
             if (tile) {
               //log(tile.properties);
+              destroyTile(tile);
             }
           }
         }
