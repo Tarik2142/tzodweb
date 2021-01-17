@@ -14,7 +14,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
     this.fireTimeout = 1000;
     this.canFire = true;
     this.bulletSpeed = 50;
-    this.bullet = [];
+    this.bullet = new Array();
     this.playerDist = 25;
     this.scene = scene;
 
@@ -28,7 +28,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       var i = this.bullet.length;
       log("bullet mass len = " + i);
       var angle = this.rotation;
-      this.bullet.push();
+      //this.bullet.push();
       this.bullet[i] = this.scene.matter.add.sprite(
         this.x + this.playerDist * Math.cos(angle),
         this.y + this.playerDist * Math.sin(angle), 'crate'
@@ -62,12 +62,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
         // pair.bodyA
         // pair.bodyB
       });
-      setTimeout(function() {
-        if (this.bullet[i] !== null) {
-          //bullet[i].setVisible(false);
-          this.bullet[i].destroy();
-        }
-      }, 2000);
+      setTimeout(this.killBullet.bind(this, i), 1000);
       // game.matter.setVelocity(bullet[i], {
       //   x: player.body.velocity.x + speed,
       //  y: player.body.velocity.y + speed
@@ -80,6 +75,13 @@ class gunn extends Phaser.Physics.Matter.Sprite {
         this.body.velocity.y + this.bulletSpeed * Math.sin(angle)
       );
     }
+  }
+  
+  killBullet(game, i){
+    if (game.bullet[i]) {
+          //bullet[i].setVisible(false);
+          game.bullet[i].destroy();
+        }
   }
 
   fireCd() {
