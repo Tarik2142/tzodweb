@@ -6,23 +6,23 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 }
 
 class tank extends Phaser.Physics.Matter.Sprite {
-  //bullet = [];
-  //playerDist = 25;
+  bullet;
+  bulletSpeed;
+  playerDist;
   speed;
   armor;
   constructor(scene, x, y, texture, frame, walls) {
+    this.bulletSpeed = 50;
+    this.bullet = [];
+    this.playerDist = 25;
     super(scene.matter.world, x, y, texture);
     scene.add.existing(this).setScale(0.8, 0.8);
-    //log('tank = ');
-    //log(this);
   var cat1 = scene.matter.world.nextCategory();
   var cat2 = scene.matter.world.nextCategory();
   this.setFrictionAir(0.5);
   this.setMass(5);
   this.setCollisionCategory(cat1);
   this.gun = new gunn(scene, x, y, 'gun', 0);
-    //log('gun = ');
-    //log(this.gun);
   this.gun.setCollisionCategory(cat2);
   this.gun.setCollidesWith(cat2);
   this.gun.depth = 1;
@@ -32,29 +32,25 @@ class tank extends Phaser.Physics.Matter.Sprite {
   kill(){
     this.gun.destroy();
     delete this.gun;
-    //kill joint
-    //this.joint.destroy();
 //scene.matter.composite.remove(scene.matter.world, this.joint, true);
     this.destroy();
     delete this;
   }
   function fireBullet(game, player) {
   //addMass(x, y, r, sides, Vx, Vy)
-  var i = bullet.length;
+  var i = this.bullet.length;
   log('bullet mass len = ' + i);
-  var angle = player.rotation;
-  var speed = 50;
-  var playerDist = 25;
-  bullet.push();
-  bullet[i] = game.matter.bodies.circle(
-    player.x + playerDist * Math.cos(angle),
-    player.y + playerDist * Math.sin(angle),
+  var angle = this.rotation;
+  this.bullet.push();
+  this.bullet[i] = game.matter.bodies.circle(
+    this.x + this.playerDist * Math.cos(angle),
+    this.y + this.playerDist * Math.sin(angle),
     20
   );
   //log(game.matter.add.gameObject(bullet[i]));
-  bullet[i].body.rotation = angle;
-  bullet[i].setMass(0.01);
-  bullet[i].setFriction(0, 0, 0);
+  this.bullet[i].body.rotation = angle;
+  this.bullet[i].setMass(0.01);
+  this.bullet[i].setFriction(0, 0, 0);
   // bullet[i].setOnCollide(function(){
   //   setTimeout(function(){
   //     if (bullet[i]){
@@ -63,12 +59,12 @@ class tank extends Phaser.Physics.Matter.Sprite {
   //   }, 10);
   // });
 
-  bullet[i].setOnCollide(pair => {
+  this.bullet[i].setOnCollide(pair => {
     if (pair.bodyA.gameObject !== null){// спс
       if (pair.bodyA.gameObject.name == "platform") {
         //setTimeout(function() {
-          if (bullet[i]) {
-            bullet[i].setVelocity(0, 0);
+          if (this.bullet[i]) {
+            this.bullet[i].setVelocity(0, 0);
             //bullet[i].setVisible(false);
             pair.bodyB.destroy();
           }
@@ -81,10 +77,10 @@ class tank extends Phaser.Physics.Matter.Sprite {
     // pair.bodyB
   });
   setTimeout(function() {
-    if (bullet[i]) {
+    if (this.bullet[i]) {
       
       //bullet[i].setVisible(false);
-      bullet[i].destroy();
+      this.bullet[i].destroy();
     }
   }, 2000);
   // game.matter.setVelocity(bullet[i], {
@@ -92,11 +88,11 @@ class tank extends Phaser.Physics.Matter.Sprite {
   //  y: player.body.velocity.y + speed
   // });
 
-  game.matter.world.add(game.matter.world, bullet[i]);
+  game.matter.world.add(game.matter.world, this.bullet[i]);
   
-  bullet[i].setVelocity(
-    player.body.velocity.x + speed * Math.cos(angle),
-    player.body.velocity.y + speed * Math.sin(angle)
+  this.bullet[i].setVelocity(
+    this.body.velocity.x + this.bulletSpeed * Math.cos(angle),
+    this.body.velocity.y + this.bulletSpeed * Math.sin(angle)
   );
   }
 }
