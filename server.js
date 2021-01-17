@@ -8,15 +8,27 @@ function log(text){
   console.log(text);
 }
 
+var p
+
 class room {
   owner;
   roomname;
   password;
   players;
+  map;
   
-  constructor(owner, roomname, password){
-    
+  constructor(owner, roomname, password, map){
+    this.owner = owner;
+    this.roomname = roomname;
+    this.password = password;
+    this.map = map;
+    this.players = [owner];
   }
+  
+  join(player){
+    this.players.push(player);
+  }
+  
 }
 
 
