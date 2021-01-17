@@ -77,7 +77,7 @@ socket.on("tankMove", function(data) {
     clearTimeout(timerId[data.id]);
     timerId[data.id] = setTimeout(function() {
       clients[data.id].kill();
-      clients.splice(data.id, 1); //почистить масив
+      //clients.splice(data.id, 1); //почистить масив
     }, 5000);
   }
 });
@@ -244,9 +244,9 @@ function update(time, delta) {
   handleMove();
   var cursors = scene.input.keyboard.createCursorKeys();
   var pointer = scene.input.activePointer;
-  const worldPoint = this.input.activePointer.positionToCamera(
+  /*const worldPoint = this.input.activePointer.positionToCamera(
     this.cameras.main
-  );
+  );*/
   this.matter.world.convertTilemapLayer(belowLayer);
   // Draw tiles (only within the groundLayer)
   /*if (pointer.isDown) {
