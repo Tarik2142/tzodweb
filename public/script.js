@@ -77,7 +77,7 @@ socket.on("tankMove", function(data) {
     clearTimeout(timerId[data.id]);
     timerId[data.id] = setTimeout(function() {
       clients[data.id].kill();
-      //clients.splice(data.id, 1); //почистить масив
+      clients.splice(data.id, 1); //почистить масив
     }, 5000);
   }
 });
