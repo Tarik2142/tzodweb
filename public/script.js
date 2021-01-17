@@ -158,6 +158,7 @@ function create() {
   /*const debugGraphics = this.add.graphics().setAlpha(0);
   belowLayer.renderDebug(debugGraphics, {});*/
   //ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
+  this.matter.world.convertTilemapLayer(belowLayer);
   this.matter.world.convertTiles(tileset);
   //console.log(this);
   createTank(this, id, posx, posy);
@@ -181,7 +182,7 @@ function create() {
           if (tileWrapper.tile) {
             var tile = tileWrapper.tile;
             if (tile) {
-              //log(tile.properties);
+              log(tile.properties);
               destroyTile(tile);
             }
           }
@@ -242,7 +243,7 @@ function update(time, delta) {
   );
 
   // Draw tiles (only within the groundLayer)
-  if (this.input.manager.activePointer.isDown) {
+  if (pointer.isDown) {
     //belowLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y).setCollision(false, false, false, false, true);
     //belowLayer.putTileAtWorldXY(1, worldPoint.x, worldPoint.y).setCollision(false);
     //belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y).setCollision(false);
@@ -251,7 +252,7 @@ function update(time, delta) {
     //belowLayer.renderDebug(debugGraphics, {});
     //log(Phaser.Physics.Matter.TileBody.destroy());
     //this.Physics.Matter.TileBody.destroy()
-    //this.matter.world.convertTilemapLayer(belowLayer);
+    this.matter.world.convertTilemapLayer(belowLayer);
     /*belowLayer.gidMap[1].tileProperties[16].hp=5
     log(belowLayer.gidMap[1].tileProperties[16].hp);
     log(belowLayer);*/
