@@ -11,7 +11,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame) {
     super(scene.matter.world, x, y, texture);
 
-    this.fireTimeout = 200;
+    this.fireTimeout = 1000;
     this.canFire = true;
     this.bulletSpeed = 50;
     this.bullet = [];
@@ -23,18 +23,18 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 
   fireBullet() {
     if (this.canFire) {
+      this.fireCd();
       //addMass(x, y, r, sides, Vx, Vy)
       var i = this.bullet.length;
       log("bullet mass len = " + i);
       var angle = this.rotation;
       this.bullet.push();
-      this.bullet[i] = this.scene.matter.bodies.circle(
+      this.bullet[i] = this.scene.matter.add.sprite(
         this.x + this.playerDist * Math.cos(angle),
-        this.y + this.playerDist * Math.sin(angle),
-        20
+        this.y + this.playerDist * Math.sin(angle), 'crate'
       );
       //log(game.matter.add.gameObject(bullet[i]));
-      this.bullet[i].body.rotation = angle;
+      this.bullet[i].rotation = angle;
       this.bullet[i].setMass(0.01);
       this.bullet[i].setFriction(0, 0, 0);
       // bullet[i].setOnCollide(function(){
@@ -63,7 +63,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
         // pair.bodyB
       });
       setTimeout(function() {
-        if (this.bullet[i]) {
+        if (this.bullet[i] !== null) {
           //bullet[i].setVisible(false);
           this.bullet[i].destroy();
         }
@@ -73,7 +73,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       //  y: player.body.velocity.y + speed
       // });
 
-      this.scene.matter.world.add(this.scene.matter.world, this.bullet[i]);
+      //this.scene.matter.world.add(this.scene.matter.world, this.bullet[i]);
 
       this.bullet[i].setVelocity(
         this.body.velocity.x + this.bulletSpeed * Math.cos(angle),

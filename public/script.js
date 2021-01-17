@@ -165,7 +165,10 @@ function create() {
           var tileBody = bodyA.label === 'disappearingPlatform' ? bodyA : bodyB;
            var tileWrapper = tileBody.gameObject;
                 var tile = tileWrapper.tile;
-          log(tile.properties);
+          if (tile){
+            //log(tile.properties);
+          }
+          
 
 //             if ((bodyA === playerBody && bodyB.label === 'disappearingPlatform') ||
 //                 (bodyB === playerBody && bodyA.label === 'disappearingPlatform'))
@@ -234,7 +237,7 @@ function update(time, delta) {
     log(belowLayer);*/
   }
   if (pointer.isDown) {
-    
+    clients[id].fire();
   }
   var poz=clients[id].gun.rotation-Math.atan2(pointer.y - clients[id].gun.y, pointer.x - clients[id].gun.x);
       if (poz>0.05&&poz<3.14||poz<-3.15){
