@@ -18,7 +18,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
     this.playerDist = 50;
     this.scene = scene;
 
-    scene.add.existing(this).setScale(scale, scale);
+    scene.add.existing(this).setScale(scale, scale).setName('tank' + id);
   }
 
   fireBullet() {
@@ -47,14 +47,14 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       // });
 
       this.bullet[i].setOnCollide(pair => {
-        if (pair.bodyA.gameObject !== null) {
+        if (pair.bodyA.gameObject) {
           // спс
-          if (pair.bodyA.gameObject.name != "platform") {
+          if (pair.bodyA.gameObject.name != 'tank' + id) {
             //setTimeout(function() {
             if (this.bullet[i]) {
-              this.bullet[i].setVelocity(0, 0);
+              //this.bullet[i].setVelocity(0, 0);
               //bullet[i].setVisible(false);
-              pair.bodyB.destroy();
+              this.bullet[i].destroy();
             }
             //}, 5);
           }
@@ -71,7 +71,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
           that.bullet[i].destroy();
           //that.bullet.splice(i, 1);//почистить
         }
-      }, 1);
+      }, 1000);
       // game.matter.setVelocity(bullet[i], {
       //   x: player.body.velocity.x + speed,
       //  y: player.body.velocity.y + speed
@@ -102,7 +102,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame, walls) {
     super(scene.matter.world, x, y, texture);
 
-    scene.add.existing(this).setScale(scale, scale);
+    scene.add.existing(this).setScale(scale, scale).setName('tank' + id);
     var cat1 = scene.matter.world.nextCategory();
     var cat2 = scene.matter.world.nextCategory();
     this.setFrictionAir(0.5);
