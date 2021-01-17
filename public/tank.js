@@ -11,24 +11,25 @@ class gunn extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame) {
     super(scene.matter.world, x, y, texture);
 
-    this.fireTimeout = 1000;
+    this.fireTimeout = 500;
     this.canFire = true;
     this.bulletSpeed = 50;
     this.bullet = new Array();
-    this.playerDist = 25;
+    this.playerDist = 50;
     this.scene = scene;
 
     scene.add.existing(this).setScale(scale, scale);
   }
 
   fireBullet() {
+    //log(this.canFire);
     if (this.canFire) {
       this.fireCd();
       //addMass(x, y, r, sides, Vx, Vy)
       var i = this.bullet.length;
       log("bullet mass len = " + i);
       var angle = this.rotation;
-      //this.bullet.push();
+      this.bullet.push();
       this.bullet[i] = this.scene.matter.add.sprite(
         this.x + this.playerDist * Math.cos(angle),
         this.y + this.playerDist * Math.sin(angle), 'crate'
@@ -48,7 +49,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       this.bullet[i].setOnCollide(pair => {
         if (pair.bodyA.gameObject !== null) {
           // спс
-          if (pair.bodyA.gameObject.name == "platform") {
+          if (pair.bodyA.gameObject.name != "platform") {
             //setTimeout(function() {
             if (this.bullet[i]) {
               this.bullet[i].setVelocity(0, 0);
@@ -62,7 +63,15 @@ class gunn extends Phaser.Physics.Matter.Sprite {
         // pair.bodyA
         // pair.bodyB
       });
-      setTimeout(this.killBullet.bind(this, i), 1000);
+      var that = this;
+      setTimeout(function() {
+        //log(that.bullet);
+        if (that.bullet[i]) {
+          //bullet[i].setVisible(false);
+          that.bullet[i].destroy();
+          //that.bullet.splice(i, 1);//почистить
+        }
+      }, 1);
       // game.matter.setVelocity(bullet[i], {
       //   x: player.body.velocity.x + speed,
       //  y: player.body.velocity.y + speed
@@ -76,19 +85,13 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       );
     }
   }
-  
-  killBullet(game, i){
-    if (game.bullet[i]) {
-          //bullet[i].setVisible(false);
-          game.bullet[i].destroy();
-        }
-  }
 
   fireCd() {
     this.canFire = false;
+    var that = this;
     setTimeout(function() {
-      this.canFire = true;
-    }, this.fireTimeout);
+      that.canFire = true;
+    }, that.fireTimeout);
   }
 }
 

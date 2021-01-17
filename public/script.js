@@ -225,7 +225,7 @@ function update(time, delta) {
   if (this.input.manager.activePointer.isDown) {
     //belowLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y).setCollision(false, false, false, false, true);
     //belowLayer.putTileAtWorldXY(1, worldPoint.x, worldPoint.y).setCollision(false);
-    belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y).setCollision(false);
+    //belowLayer.putTileAtWorldXY(17, worldPoint.x, worldPoint.y).setCollision(false);
     belowLayer.setCollisionByProperty({ collides: false });
     //const debugGraphics = this.add.graphics().setAlpha(0);
     //belowLayer.renderDebug(debugGraphics, {});
