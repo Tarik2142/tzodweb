@@ -181,11 +181,14 @@ function create() {
     posx: posx,
     posy: posy
   });
+  
   var is = 2;
 
+  
   this.matter.world.on(
     "collisionstart",
     function(event) {
+      tzodCollision.player(event);
       log(event);
       for (var i = 0; i < event.pairs.length; i++) {
         var bodyA = event.pairs[i].bodyA;
