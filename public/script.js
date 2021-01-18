@@ -186,28 +186,29 @@ function create() {
   this.matter.world.on(
     "collisionstart",
     function(event) {
+      log(event);
       for (var i = 0; i < event.pairs.length; i++) {
         var bodyA = event.pairs[i].bodyA;
         var bodyB = event.pairs[i].bodyB;
         if(bodyA.gameObject){
           if(bodyA.gameObject.name){
-            log('BODY A' + bodyA.gameObject.name);
+           // log('BODY A' + bodyA.gameObject.name);
           }
         }else if(bodyB.gameObject){
           if(bodyB.gameObject.name){
-            log('BODY B' + bodyB.gameObject.name);
+            //log('BODY B' + bodyB.gameObject.name);
           }
         }
         var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
-        log("a=");
-        log(bodyA.velocity);
-        log(bodyA.label);
+        //log("a=");
+        //log(bodyA.velocity);
+        //log(bodyA.label);
         //gameObject.name
-        log(bodyA);
-        log("b=");
-        log(bodyB.velocity);
-        log(bodyB.label);
-        log(bodyB);
+        //log(bodyA);
+        //log("b=");
+        //log(bodyB.velocity);
+        //log(bodyB.label);
+        //log(bodyB);
         if (tileBody.gameObject) {
           var tileWrapper = tileBody.gameObject;
           if (tileWrapper.tile) {
