@@ -30,7 +30,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
     this.bullet = new Array();
     this.scene = scene;
 
-    scene.add.existing(this).setScale(scale, scale).setName('tank' + id);
+    scene.add.existing(this).setScale(scale - 0.2, scale - 0.2).setName('tank' + id);
   }
 
   fireBullet() {
