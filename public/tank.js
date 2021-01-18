@@ -10,7 +10,7 @@ var guns = {
     speed: 10,//скорость снаряда
     gunRotationSpd: 20,//скорость поворота башні
     baseRotationSpd: 20,//скорость поворота танка
-    offset: 80,//отступ от танка при вистреле
+    offset: 70,//отступ от танка при вистреле
     baseSpeed: 20,//скорость танка
     armor: 60//бронька
   }
@@ -24,14 +24,14 @@ class gunn extends Phaser.Physics.Matter.Sprite {
   gunType;
 
   constructor(scene, x, y, type) {
-    super(scene.matter.world, x, y, type.texture);
+    super(scene.matter.world, x, y, type.texture, 0, {label: 'gun', shape: 'circle', radius: 1});
     
     this.gunType = type;
     this.canFire = true;
     this.bullet = new Array();
     this.scene = scene;
 
-    scene.add.existing(this).setScale(scale - 0.2, scale - 0.2).setName('tank' + id);
+    scene.add.existing(this).setScale(scale - 0.3, scale - 0.3).setName('tank' + id);
   }
 
   fireBullet() {
