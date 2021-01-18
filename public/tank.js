@@ -45,7 +45,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       this.bullet[i] = this.scene.matter.add.sprite(
         this.x + this.gunType.offset * Math.cos(angle),
         this.y + this.gunType.offset * Math.sin(angle), 'crate'
-      );
+      ).setName("bullet");
       //log(game.matter.add.gameObject(bullet[i]));
       this.bullet[i].rotation = angle;
       this.bullet[i].setMass(0.00001);

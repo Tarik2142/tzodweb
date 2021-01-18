@@ -189,7 +189,7 @@ function create() {
     "collisionstart",
     function(event) {
       tzodCollision.player(event);
-      log(event);
+      //log(event);
       for (var i = 0; i < event.pairs.length; i++) {
         var bodyA = event.pairs[i].bodyA;
         var bodyB = event.pairs[i].bodyB;
