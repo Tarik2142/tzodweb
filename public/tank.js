@@ -129,10 +129,10 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 
       //this.scene.matter.world.add(this.scene.matter.world, this.bullet[i]);
 
-      // this.bullet[i].setVelocity(
-      //   this.body.velocity.x + this.gunType.speed * Math.cos(angle),
-      //   this.body.velocity.y + this.gunType.speed  * Math.sin(angle)
-      // );
+      this.bullet[i].setVelocity(
+        this.body.velocity.x + this.gunType.speed * Math.cos(angle),
+        this.body.velocity.y + this.gunType.speed  * Math.sin(angle)
+      );
     }
   }
 
