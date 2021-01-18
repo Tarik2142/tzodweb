@@ -16,7 +16,29 @@ var guns = {
   }
 }
 
-var config = {
+
+class gunn extends Phaser.Physics.Matter.Sprite {
+  canFire;
+  bullet;
+  scene;
+  gunType;
+
+  constructor(scene, x, y, type) {
+    super(scene.matter.world, x, y, type.texture);
+    
+    this.gunType = type;
+    this.canFire = true;
+    this.bullet = new Array();
+    this.scene = scene;
+
+    scene.add.existing(this).setScale(scale - 0.2, scale - 0.2).setName('tank' + id);
+  }
+
+  fireBullet() {
+    //log(this.canFire);
+    if (this.canFire) {
+      this.fireCd();
+      var config = {
     label: 'TEST',
     shape: 'rectangle',
     chamfer: null,
@@ -27,7 +49,7 @@ var config = {
     ignoreGravity: false,
     ignorePointer: false,
 
-    sleepThreshold: 60,
+    sleepThreshold: 0,
     density: 0.001,
     restitution: 0,
     friction: 0.1,
@@ -57,27 +79,6 @@ var config = {
     timeScale: 1,
 }
 
-class gunn extends Phaser.Physics.Matter.Sprite {
-  canFire;
-  bullet;
-  scene;
-  gunType;
-
-  constructor(scene, x, y, type) {
-    super(scene.matter.world, x, y, type.texture);
-    
-    this.gunType = type;
-    this.canFire = true;
-    this.bullet = new Array();
-    this.scene = scene;
-
-    scene.add.existing(this).setScale(scale - 0.2, scale - 0.2).setName('tank' + id);
-  }
-
-  fireBullet() {
-    //log(this.canFire);
-    if (this.canFire) {
-      this.fireCd();
       //addMass(x, y, r, sides, Vx, Vy)
       var i = this.bullet.length;
       log("bullet mass len = " + i);
@@ -91,7 +92,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       this.bullet[i].rotation = angle;
       this.bullet[i].setMass(0.00001);
       this.bullet[i].setFriction(0, 0, 0);
-      this.bullet[i].setName("heavi");
+      //this.bullet[i].setName("heavi");
       // bullet[i].setOnCollide(function(){
       //   setTimeout(function(){
       //     if (bullet[i]){
