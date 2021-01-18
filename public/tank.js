@@ -16,6 +16,47 @@ var guns = {
   }
 }
 
+var config = {
+    label: 'TEST',
+    shape: 'rectangle',
+    chamfer: null,
+
+    isStatic: false,
+    isSensor: false,
+    isSleeping: false,
+    ignoreGravity: false,
+    ignorePointer: false,
+
+    sleepThreshold: 60,
+    density: 0.001,
+    restitution: 0,
+    friction: 0.1,
+    frictionStatic: 0.5,
+    frictionAir: 0.01,
+
+    force: { x: 0, y: 0 },
+    angle: 0,
+    torque: 0,
+
+    collisionFilter: {
+        group: 0,
+        category: 0x0001,
+        mask: 0xFFFFFFFF,
+    },
+
+    parts: [],
+
+    // plugin: {
+    //     attractors: [
+    //         (function(bodyA, bodyB) { return {x, y}}),
+    //     ]
+    // },
+
+    slop: 0.05,
+
+    timeScale: 1,
+}
+
 class gunn extends Phaser.Physics.Matter.Sprite {
   canFire;
   bullet;
@@ -44,7 +85,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       //this.bullet.push();
       this.bullet[i] = this.scene.matter.add.sprite(
         this.x + this.gunType.offset * Math.cos(angle),
-        this.y + this.gunType.offset * Math.sin(angle), 'crate'
+        this.y + this.gunType.offset * Math.sin(angle), 'crate', 0, config
       );
       //log(game.matter.add.gameObject(bullet[i]));
       this.bullet[i].rotation = angle;
@@ -58,51 +99,6 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       //     }
       //   }, 10);
       // });
-      
-      var config = {
-    label: 'TEST',
-    shape: 'rectangle',
-    chamfer: null,
-
-    isStatic: false,
-    isSensor: false,
-    isSleeping: false,
-    ignoreGravity: false,
-    ignorePointer: false,
-
-    sleepThreshold: 60,
-    density: 0.001,
-    restitution: 0,
-    friction: 0.1,
-    frictionStatic: 0.5,
-    frictionAir: 0.01,
-
-    force: { x: 10, y: 10 },
-    angle: 0,
-    torque: 0,
-
-    collisionFilter: {
-        group: 0,
-        category: 0x0001,
-        mask: 0xFFFFFFFF,
-    },
-
-    // parts: [],
-
-    // plugin: {
-    //     attractors: [
-    //         (function(bodyA, bodyB) { return {x, y}}),
-    //     ]
-    // },
-
-    slop: 0.05,
-
-    timeScale: 1,
-}
-      this.scene.matter.add.sprite(
-        this.x + this.gunType.offset * Math.cos(angle),
-        this.y + this.gunType.offset * Math.sin(angle), 'crate'
-      , 0, config);
 
       this.bullet[i].setOnCollide(pair => {
         if (pair.bodyA.gameObject) {
