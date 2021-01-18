@@ -41,7 +41,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       var config = {
     label: 'TEST',
     shape: 'rectangle',
-    chamfer: null,
+    chamfer: 2,
 
     isStatic: false,
     isSensor: false,
@@ -49,15 +49,15 @@ class gunn extends Phaser.Physics.Matter.Sprite {
     ignoreGravity: false,
     ignorePointer: false,
 
-    sleepThreshold: 0,
+    sleepThreshold: 60,
     density: 0.001,
     restitution: 0,
-    friction: 0.1,
-    frictionStatic: 0.5,
-    frictionAir: 0.01,
+    friction: 0,
+    frictionStatic: 0,
+    frictionAir: 0,
 
-    force: { x: 0, y: 0 },
-    angle: 0,
+    //force: { x: this.body.velocity.x + this.gunType.speed * Math.cos(angle), y: this.body.velocity.y + this.gunType.speed  * Math.sin(angle) },
+    angle: this.rotation,
     torque: 0,
 
     collisionFilter: {
@@ -89,17 +89,10 @@ class gunn extends Phaser.Physics.Matter.Sprite {
         this.y + this.gunType.offset * Math.sin(angle), 'crate', 0, config
       );
       //log(game.matter.add.gameObject(bullet[i]));
-      this.bullet[i].rotation = angle;
-      this.bullet[i].setMass(0.00001);
-      this.bullet[i].setFriction(0, 0, 0);
+      //this.bullet[i].rotation = angle;
+      //this.bullet[i].setMass(0.00001);
+      //this.bullet[i].setFriction(0, 0, 0);
       //this.bullet[i].setName("heavi");
-      // bullet[i].setOnCollide(function(){
-      //   setTimeout(function(){
-      //     if (bullet[i]){
-      //       bullet[i].destroy();
-      //     }
-      //   }, 10);
-      // });
 
       this.bullet[i].setOnCollide(pair => {
         if (pair.bodyA.gameObject) {
@@ -136,10 +129,10 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 
       //this.scene.matter.world.add(this.scene.matter.world, this.bullet[i]);
 
-      this.bullet[i].setVelocity(
-        this.body.velocity.x + this.gunType.speed * Math.cos(angle),
-        this.body.velocity.y + this.gunType.speed  * Math.sin(angle)
-      );
+      // this.bullet[i].setVelocity(
+      //   this.body.velocity.x + this.gunType.speed * Math.cos(angle),
+      //   this.body.velocity.y + this.gunType.speed  * Math.sin(angle)
+      // );
     }
   }
 
