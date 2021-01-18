@@ -32,9 +32,7 @@ var id = Math.round(100 * Math.random());
 var posx = Math.round(500 * Math.random());
 var posy = Math.round(500 * Math.random());
 // A flag for drawing activity
-var drawing = false;
 var clients = {};
-var gun = {};
 var timerId = {};
 var socket = io();
 //var tilemapplus=tilemap-plus();
