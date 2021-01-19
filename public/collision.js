@@ -16,7 +16,9 @@ var tzodCollision = {
       var bodyB = event.bodyB;
       if (isBullet(bodyA) && isBullet(bodyB)){ //2 пули
         log(bodyA);
-        log(bodyB);
+        //bodyA.destroy();
+        bodyA ;
+        bodyB.destroy();
       }else{
         
       }
@@ -39,7 +41,7 @@ var tzodCollision = {
     function isBullet(body){
       if (body){
         if(body.label){
-          log(body.label);
+          //log(body.label);
           if (body.label.indexOf('Bullet') != -1){
             return true;
           }
