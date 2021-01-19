@@ -188,7 +188,7 @@ function create() {
   this.matter.world.on(
     "collisionstart",
     function(event) {
-      //tzodCollision.player(event);
+      tzodCollision.update(event);
       //log(event);
       for (var i = 0; i < event.pairs.length; i++) {
         var bodyA = event.pairs[i].bodyA;

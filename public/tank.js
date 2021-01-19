@@ -26,7 +26,8 @@ class gunn extends Phaser.Physics.Matter.Sprite {
   id;
   
   constructor(scene, x, y, type, id) {
-    super(scene.matter.world, x, y, type.texture, 0, {label: 'gun' + id, shape: 'circle', radius: 1});
+    var label = 'tank' + id;
+    super(scene.matter.world, x, y, type.texture, 0, {label: label, shape: 'circle', radius: 1});
     
     this.gunType = type;
     this.canFire = true;
@@ -34,7 +35,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
     this.scene = scene;
     this.id = id;
 
-    scene.add.existing(this).setScale(scale - 0.3, scale - 0.3).setName('tank' + id);
+    scene.add.existing(this).setScale(scale - 0.3, scale - 0.3);
   }
 
   fireBullet() {
@@ -98,26 +99,26 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       //this.bullet[i].setFriction(0, 0, 0);
       //this.bullet[i].setName("heavi");
 
-      this.bullet[i].setOnCollide(pair => {
-        if (pair.bodyA) {
-          // спс
-          if (pair.bodyA.label != 'tank' + id) {
-            log(pair.bodyA);
-            //log(pair.bodyA.gameObject.name);
-            //setTimeout(function() {
-//             if (this.bullet[i]) {
-//               //this.bullet[i].setVelocity(0, 0);
-//               //bullet[i].setVisible(false);
-//               this.bullet[i].destroy();
+//       this.bullet[i].setOnCollide(pair => {
+//         if (pair.bodyA) {
+//           // спс
+//           if (pair.bodyA.label != 'tank' + id) {
+//             log(pair.bodyA);
+//             //log(pair.bodyA.gameObject.name);
+//             //setTimeout(function() {
+// //             if (this.bullet[i]) {
+// //               //this.bullet[i].setVelocity(0, 0);
+// //               //bullet[i].setVisible(false);
+// //               this.bullet[i].destroy();
               
-//             }
-            //}, 5);
-          }
-        }
+// //             }
+//             //}, 5);
+//           }
+//         }
 
-        // pair.bodyA
-        // pair.bodyB
-      });
+//         // pair.bodyA
+//         // pair.bodyB
+//       });
       // var that = this;
       // setTimeout(function() {
       //   //log(that.bullet);
@@ -159,7 +160,8 @@ class tank extends Phaser.Physics.Matter.Sprite {
   id;
 
   constructor(scene, x, y, texture, shape, startGun, id) {//добавить id в качестве параметра создания
-    super(scene.matter.world, x, y, texture, null, {label: 'tank' + id, shape: shape});
+    var label = 'tank' + id;
+    super(scene.matter.world, x, y, texture, null, {label: label, shape: shape});
     
     this.id = id;
     log(this.id);
