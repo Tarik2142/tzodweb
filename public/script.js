@@ -194,17 +194,18 @@ function create() {
         var bodyA = event.pairs[i].bodyA;
         var bodyB = event.pairs[i].bodyB;
         var damagg=11;
-        if(bodyA.gameObject){
+        //log(event.pairs[i].bodyA.label);
+        if (event.pairs[i].bodyA.label=="heavyBullet"){damagg=101;}
+        /*if(bodyA.gameObject){
           if(bodyA.gameObject.name){
           log('BODY A' + bodyA.gameObject.name);
-            if (bodyA.gameObject.label=="heavyBullet"){damagg=101;
-                                                     log("dd");}
+            
           }
         }else if(bodyB.gameObject){
           if(bodyB.gameObject.name){
             log('BODY B' + bodyB.gameObject.name);
           }
-        }
+        }*/
         var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
         //log("a=");
         //log(bodyA.velocity);
