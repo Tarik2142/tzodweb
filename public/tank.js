@@ -48,7 +48,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
     chamfer: 2,
 
     isStatic: false,
-    isSensor: false,
+    isSensor: true,
     isSleeping: false,
     ignoreGravity: false,
     ignorePointer: false,

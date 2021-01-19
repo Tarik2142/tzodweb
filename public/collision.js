@@ -24,10 +24,21 @@ var tzodCollision = {
         if (getGO(bodyB)) bodyB.gameObject.destroy(true);
       }else{//1 пуля
         
+//         if (isBa){//убить пулю
+//             if (getGO(bodyA)) bodyA.gameObject.destroy(true);
+          
+//         }else if (isBb){//убить пулю
+//             if (getGO(bodyB)) bodyB.gameObject.destroy(true);
+//         }
+        
         var damagg=11;
-        if (bodyA.label=="heavyBullet"){damagg=101;}
+        if (isBa){
+          damagg=101;
+          if (getGO(bodyA)) bodyA.gameObject.destroy(true);
+        }
         var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
         if (tileBody.gameObject) {
+          
           var tileWrapper = tileBody.gameObject;
           if (tileWrapper.tile) {
             var tile = tileWrapper.tile;
@@ -46,16 +57,13 @@ var tzodCollision = {
                     tile.properties.hp=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].hp;
                     tile.properties.nextlauer=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].nextlauer;
                   }
-                }
-                if (isBa){//убить пулю
-            if (getGO(bodyA)) bodyA.gameObject.destroy(true);
-          
-        }else if (isBb){//убить пулю
-            if (getGO(bodyB)) bodyB.gameObject.destroy(true);
-        }
-              }     
+                } 
+              }
+              
             }
+            
           }
+        
         }
       } 
     }
