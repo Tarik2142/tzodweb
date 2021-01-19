@@ -10,7 +10,7 @@ var guns = {
     speed: 10,//скорость снаряда
     gunRotationSpd: 20,//скорость поворота башні
     baseRotationSpd: 20,//скорость поворота танка
-    offset: 50,//отступ от танка при вистреле
+    offset: 30,//отступ от танка при вистреле
     baseSpeed: 20,//скорость танка
     armor: 60,//бронька
     bulletLabel: 'heavyBullet'
@@ -35,7 +35,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
     this.scene = scene;
     this.id = id;
 
-    scene.add.existing(this).setScale(scale - 0.3, scale - 0.3);
+    scene.add.existing(this).setScale(scale, scale);
   }
 
   fireBullet() {
@@ -45,7 +45,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       var config = {
     label: guns.heavy.bulletLabel,
     shape: 'rectangle',
-    chamfer: 2,
+    //chamfer: 2,
 
     isStatic: false,
     isSensor: true,
