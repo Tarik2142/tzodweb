@@ -7,11 +7,7 @@ var wallTypes = {
 var tzodCollision = {
   update: function(event){
     
-    function handleLabelCollisions(bodyA, bodyB){
-      
-    }
-    
-    function handleBullets(bodyA, bodyB){
+    function handleCollisions(bodyA, bodyB){
       
       function getGO(body){
         if (body.gameObject){
@@ -27,12 +23,6 @@ var tzodCollision = {
         if (getGO(bodyA)) bodyA.gameObject.destroy(true);
         if (getGO(bodyB)) bodyB.gameObject.destroy(true);
       }else{//1 пуля
-        if (isBa){//убить пулю
-            if (getGO(bodyA)) bodyA.gameObject.destroy(true);
-          
-        }else if (isBb){//убить пулю
-            if (getGO(bodyB)) bodyB.gameObject.destroy(true);
-        }
         
         var damagg=11;
         if (bodyA.label=="heavyBullet"){damagg=101;}
@@ -56,7 +46,13 @@ var tzodCollision = {
                     tile.properties.hp=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].hp;
                     tile.properties.nextlauer=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].nextlauer;
                   }
-                } 
+                }
+                if (isBa){//убить пулю
+            if (getGO(bodyA)) bodyA.gameObject.destroy(true);
+          
+        }else if (isBb){//убить пулю
+            if (getGO(bodyB)) bodyB.gameObject.destroy(true);
+        }
               }     
             }
           }
@@ -85,7 +81,7 @@ var tzodCollision = {
         }
     }
       event.pairs.forEach(({ bodyA, bodyB }) => {
-        handleBullets(bodyA, bodyB);  
+        handleCollisions(bodyA, bodyB);  
   }); 
   }
 }
