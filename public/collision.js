@@ -15,8 +15,8 @@ var tzodCollision = {
       if (isBullet(bodyA) && isBullet(bodyB)){ //2 пули
         log(bodyA);
         //bodyA.destroy();
-        scene.matter.world.remove(scene.matter.world, bodyA);
-        bodyB.destroy();
+        scene.matter.world.remove(scene.matter.world.localWorld, bodyA);
+        bodyB.gameObject.body.destroy(true);
       }else{
         
       }
