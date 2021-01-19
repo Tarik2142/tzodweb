@@ -188,18 +188,21 @@ function create() {
   this.matter.world.on(
     "collisionstart",
     function(event) {
-      tzodCollision.player(event);
+      //tzodCollision.player(event);
       //log(event);
       for (var i = 0; i < event.pairs.length; i++) {
         var bodyA = event.pairs[i].bodyA;
         var bodyB = event.pairs[i].bodyB;
+        var damagg=11;
         if(bodyA.gameObject){
           if(bodyA.gameObject.name){
-           // log('BODY A' + bodyA.gameObject.name);
+          log('BODY A' + bodyA.gameObject.name);
+            if (bodyA.gameObject.label=="heavyBullet"){damagg=101;
+                                                     log("dd");}
           }
         }else if(bodyB.gameObject){
           if(bodyB.gameObject.name){
-            //log('BODY B' + bodyB.gameObject.name);
+            log('BODY B' + bodyB.gameObject.name);
           }
         }
         var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
@@ -217,8 +220,8 @@ function create() {
           if (tileWrapper.tile) {
             var tile = tileWrapper.tile;
             if (tile.properties.hp!=0) {
-              
-              for(var damag=101;damag>0;){
+              //if 
+              for(var damag=damagg;damag>0;){
                 var hp= tile.properties.hp
                 //log("hp "+hp);
                 //log("dam "+damag);
