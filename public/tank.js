@@ -83,7 +83,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       //addMass(x, y, r, sides, Vx, Vy)
       var i = this.bullet.length;
       //log("bullet mass len = " + i);
-      if (i>5){this.bullet = new Array();i=0}
+      //if (i>5){this.bullet = new Array();i=0}
       var angle = this.rotation;
       //this.bullet.push();
       this.bullet[i] = this.scene.matter.add.sprite(
