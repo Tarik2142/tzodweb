@@ -24,8 +24,8 @@ class gunn extends Phaser.Physics.Matter.Sprite {
   scene;
   gunType;
 
-  constructor(scene, x, y, type) {
-    super(scene.matter.world, x, y, type.texture, 0, {label: 'gun', shape: 'circle', radius: 1});
+  constructor(scene, x, y, type, id) {
+    super(scene.matter.world, x, y, type.texture, 0, {label: 'gun' + id, shape: 'circle', radius: 1});
     
     this.gunType = type;
     this.canFire = true;
@@ -77,7 +77,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 
     slop: 0.05,
 
-    timeScale: 1,
+    timeScale: 1
 }
 
       //addMass(x, y, r, sides, Vx, Vy)
@@ -97,7 +97,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       //this.bullet[i].setName("heavi");
 
       this.bullet[i].setOnCollide(pair => {
-        if (pair.bodyA.gameObject) {
+        if (pair.bodyA) {
           // спс
           if (pair.bodyA.gameObject.name != 'tank' + id) {
             //log(pair.bodyA.gameObject.name);
@@ -153,11 +153,13 @@ class tank extends Phaser.Physics.Matter.Sprite {
   armor;
   nickname;
   updater;
+  id;
 
-  constructor(scene, x, y, texture, shape, startGun) {//добавить id в качестве параметра создания
-    super(scene.matter.world, x, y, texture, null, {label: 'tank', shape: shape});
-
-    scene.add.existing(this).setScale(scale, scale).setName('tank' + id);
+  constructor(scene, x, y, texture, shape, id, startGun) {//добавить id в качестве параметра создания
+    super(scene.matter.world, x, y, texture, null, {label: 'tank' + id, shape: shape});
+    
+    this.id = id;
+    scene.add.existing(this).setScale(scale, scale);
     var cat1 = scene.matter.world.nextCategory();
     var cat2 = scene.matter.world.nextCategory();
     this.setFrictionAir(0.5);
