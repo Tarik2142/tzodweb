@@ -12,7 +12,8 @@ var guns = {
     baseRotationSpd: 20,//скорость поворота танка
     offset: 70,//отступ от танка при вистреле
     baseSpeed: 20,//скорость танка
-    armor: 60//бронька
+    armor: 60,//бронька
+    bulletLabel: 'heavyBullet'
   }
 }
 
@@ -39,7 +40,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
     if (this.canFire) {
       this.fireCd();
       var config = {
-    label: 'TEST',
+    label: guns.heavy.bulletLabel,
     shape: 'rectangle',
     chamfer: 2,
 
@@ -151,8 +152,8 @@ class tank extends Phaser.Physics.Matter.Sprite {
   nickname;
   updater;
 
-  constructor(scene, x, y, texture, shape, startGun) {
-    super(scene.matter.world, x, y, texture, null, {shape: shape});
+  constructor(scene, x, y, texture, shape, startGun) {//добавить 
+    super(scene.matter.world, x, y, texture, null, {label: 'tank', shape: shape});
 
     scene.add.existing(this).setScale(scale, scale).setName('tank' + id);
     var cat1 = scene.matter.world.nextCategory();
