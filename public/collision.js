@@ -12,14 +12,19 @@ var tzodCollision = {
     }
     
     function handleBullets(bodyA, bodyB){
-      if (isBullet(bodyA) && isBullet(bodyB)){ //2 пули
-        log(bodyA);
-        //bodyA.destroy();
-        scene.matter.world.remove(scene.matter.world.localWorld, bodyA);
-        bodyB.gameObject.body.destroy(true);
-      }else{
-        
+      var isBa = isBullet(bodyA);
+      var isBb = isBullet(bodyB);
+      if (isBa && isBb){ //2 пули убить обе
+        bodyA.gameObject.destroy(true);
+        bodyB.gameObject.destroy(true);
+      }else{//1 пуля
+        if (isBa){//убить пулю
+          bodyA.gameObject.destroy(true);
+        }else if (isBb){//убить пулю
+          bodyB.gameObject.destroy(true);
+        }
       }
+      
     }
     
     function isWall(body){
