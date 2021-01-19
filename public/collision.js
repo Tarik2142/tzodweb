@@ -47,33 +47,24 @@ var tzodCollision = {
                 if (tile.properties.hp>0){
                   tile.properties.hp=tile.properties.hp-damag;
                   damag=damag-hp
-                }//else if (tile.properties.hp==0){damag=-1;}
-                else if (tile.properties.hp<=0){
+                }else if (tile.properties.hp<=0){
                   if (tile.properties.nextlauer<1){
                     destroyTile(tile);
                     damag=-1;
                   }else{
-                    //destroyTile(tile);
-                    //log("x "+tile.x+"y "+tile.y);
                     belowLayer.putTileAtWorldXY(tile.properties.nextlauer, tile.x*32, tile.y*32).setCollision(true);
                     tile.properties.hp=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].hp;
                     tile.properties.nextlauer=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].nextlauer;
                   }
-                }
-              
-              }
-              
-              
+                } 
+              }     
             }
           }
         }
-
-      }
-      
+      } 
     }
     
     function isWall(body){
-      if (body){
         if(body.label){
           if (body.label.indexOf('Rectangle Body') != -1){
             return true;
@@ -81,13 +72,9 @@ var tzodCollision = {
         }else{
           return false;
         }
-      }else{
-        return false;
-      }
     }
     
     function isBullet(body){
-      if (body){
         if(body.label){
           //log(body.label);
           if (body.label.indexOf('Bullet') != -1){
@@ -96,19 +83,9 @@ var tzodCollision = {
         }else{
           return false;
         }
-      }else{
-        return false;
-      }
     }
       event.pairs.forEach(({ bodyA, bodyB }) => {
-      //   if (bodyA.label && bodyB.label){
-      //  handleLabelCollisions(bodyA, bodyB);
-      // }
-        handleBullets(bodyA, bodyB);
-     
-  });
-      // console.log("event:");
-      // console.log(pair);
-    
+        handleBullets(bodyA, bodyB);  
+  }); 
   }
 }
