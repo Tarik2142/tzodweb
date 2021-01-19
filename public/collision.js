@@ -7,17 +7,15 @@ var wallTypes = {
 var tzodCollision = {
   update: function(event){
     
-    function handleLabelCollisions(evnt){
-      handleBullet(evnt);
+    function handleLabelCollisions(bodyA, bodyB){
+      
     }
     
-    function handleBullet(event){
-      var bodyA = event.bodyA;
-      var bodyB = event.bodyB;
+    function handleBullets(bodyA, bodyB){
       if (isBullet(bodyA) && isBullet(bodyB)){ //2 пули
         log(bodyA);
         //bodyA.destroy();
-        bodyA ;
+        scene.matter.world.remove(scene.matter.world, bodyA);
         bodyB.destroy();
       }else{
         
@@ -52,21 +50,15 @@ var tzodCollision = {
         return false;
       }
     }
-    
-    for (var i = 0; i < event.pairs.length; i++){
-      var pair = event.pairs[i]
+      event.pairs.forEach(({ bodyA, bodyB }) => {
+      //   if (bodyA.label && bodyB.label){
+      //  handleLabelCollisions(bodyA, bodyB);
+      // }
+        handleBullets(bodyA, bodyB);
+     
+  });
       // console.log("event:");
       // console.log(pair);
-      if (pair.bodyA.label){
-       handleLabelCollisions(pair);
-      }
-      if (pair.bodyB.label){
-        handleLabelCollisions(pair);
-      }
-    }
-  },
-  
-  bullet: function(){
     
   }
 }
