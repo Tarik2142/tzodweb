@@ -285,7 +285,7 @@ function create() {
     this
   );
   
-  scene.input.keyboard.on('keydown-W', function(){
+  /*scene.input.keyboard.on('keydown-W', function(){
     clients[id].thrust(0.03);
   });
   
@@ -299,7 +299,7 @@ function create() {
   
   scene.input.keyboard.on('keydown-D', function(){
     clients[id].setRotation(clients[id].rotation + 0.1);
-  });
+  });*/
   
   /*this.input.keyboard.on('keydown', function(params){
     if (params.key=='s') {
