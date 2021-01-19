@@ -5,7 +5,7 @@ var tzodCollision = {
     function isBullet(body){
       if (body){
         if(body.label){
-          if (body.label == bullet){
+          if (body.label == 'bullet'){
             return true;
           }
         }else{
@@ -16,10 +16,12 @@ var tzodCollision = {
       }
     }
     
-    function killBullet(bullet){
-      if (isBullet(bullet)){
-        bullet.destroy();
-      }
+    function handleBullet(body){
+      
+    }
+    
+    function handleLabelCollisions(evnt){
+      
     }
     
     for (var i = 0; i < event.pairs.length; i++){
@@ -27,10 +29,10 @@ var tzodCollision = {
       // console.log("event:");
       // console.log(pairs[i]);
       if (pairs.bodyA.label){
-        killBullet(pairs.bodyA);
+       handleLabelCollisions();
       }
       if (pairs.bodyB.label){
-        killBullet(pairs.bodyA);
+        handleLabelCollisions();
       }
     }
   },
