@@ -23,7 +23,8 @@ class gunn extends Phaser.Physics.Matter.Sprite {
   bullet;
   scene;
   gunType;
-
+  id;
+  
   constructor(scene, x, y, type, id) {
     super(scene.matter.world, x, y, type.texture, 0, {label: 'gun' + id, shape: 'circle', radius: 1});
     
@@ -31,6 +32,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
     this.canFire = true;
     this.bullet = new Array();
     this.scene = scene;
+    this.id = id;
 
     scene.add.existing(this).setScale(scale - 0.3, scale - 0.3).setName('tank' + id);
   }
@@ -99,15 +101,16 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       this.bullet[i].setOnCollide(pair => {
         if (pair.bodyA) {
           // спс
-          if (pair.bodyA.gameObject.name != 'tank' + id) {
+          if (pair.bodyA.label != 'tank' + id) {
+            log(pair.bodyA);
             //log(pair.bodyA.gameObject.name);
             //setTimeout(function() {
-            if (this.bullet[i]) {
-              //this.bullet[i].setVelocity(0, 0);
-              //bullet[i].setVisible(false);
-              this.bullet[i].destroy();
+//             if (this.bullet[i]) {
+//               //this.bullet[i].setVelocity(0, 0);
+//               //bullet[i].setVisible(false);
+//               this.bullet[i].destroy();
               
-            }
+//             }
             //}, 5);
           }
         }
@@ -155,10 +158,11 @@ class tank extends Phaser.Physics.Matter.Sprite {
   updater;
   id;
 
-  constructor(scene, x, y, texture, shape, id, startGun) {//добавить id в качестве параметра создания
+  constructor(scene, x, y, texture, shape, startGun, id) {//добавить id в качестве параметра создания
     super(scene.matter.world, x, y, texture, null, {label: 'tank' + id, shape: shape});
     
     this.id = id;
+    log(this.id);
     scene.add.existing(this).setScale(scale, scale);
     var cat1 = scene.matter.world.nextCategory();
     var cat2 = scene.matter.world.nextCategory();
@@ -166,7 +170,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
     this.setMass(5);
     this.setCollisionCategory(cat1);
     if (startGun){
-      this.gun = new gunn(scene, x, y, startGun);
+      this.gun = new gunn(scene, x, y, startGun, id);
       this.gun.setCollisionCategory(cat2);
       this.gun.setCollidesWith(cat2);
       this.gun.depth = 1;
