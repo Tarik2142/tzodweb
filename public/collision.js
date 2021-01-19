@@ -1,6 +1,33 @@
+var wallTypes = {
+  cement: "Rectangle Body",
+  bricks: "Rectangle Body"
+}
+
 
 var tzodCollision = {
   update: function(event){
+    
+    function handleLabelCollisions(evnt){
+      
+    }
+    
+    function handleBullet(body){
+      
+    }
+    
+    function isWall(body){
+      f (body){
+        if(body.label){
+          if (body.label == 'Rectangle Body'){
+            return true;
+          }
+        }else{
+          return false;
+        }
+      }else{
+        return false;
+      }
+    }
     
     function isBullet(body){
       if (body){
@@ -16,23 +43,15 @@ var tzodCollision = {
       }
     }
     
-    function handleBullet(body){
-      
-    }
-    
-    function handleLabelCollisions(evnt){
-      
-    }
-    
     for (var i = 0; i < event.pairs.length; i++){
-      var pairs = event.pairs[i]
-      // console.log("event:");
-      // console.log(pairs[i]);
-      if (pairs.bodyA.label){
-       handleLabelCollisions();
+      var pair = event.pairs[i]
+      console.log("event:");
+      console.log(pairs);
+      if (pair.bodyA.label){
+       handleLabelCollisions(pairs);
       }
-      if (pairs.bodyB.label){
-        handleLabelCollisions();
+      if (pair.bodyB.label){
+        handleLabelCollisions(pairs);
       }
     }
   },
