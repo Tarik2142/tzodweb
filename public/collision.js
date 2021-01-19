@@ -12,17 +12,62 @@ var tzodCollision = {
     }
     
     function handleBullets(bodyA, bodyB){
+      
+      function getGO(body){
+        if (body.gameObject){
+          return true;
+        }else{
+          return false;
+        }
+      }
+      
       var isBa = isBullet(bodyA);
       var isBb = isBullet(bodyB);
       if (isBa && isBb){ //2 пули убить обе
-        bodyA.gameObject.destroy(true);
-        bodyB.gameObject.destroy(true);
+        if (getGO(bodyA)) bodyA.gameObject.destroy(true);
+        if (getGO(bodyB)) bodyB.gameObject.destroy(true);
       }else{//1 пуля
         if (isBa){//убить пулю
-          bodyA.gameObject.destroy(true);
+            if (getGO(bodyA)) bodyA.gameObject.destroy(true);
+          
         }else if (isBb){//убить пулю
-          bodyB.gameObject.destroy(true);
+            if (getGO(bodyB)) bodyB.gameObject.destroy(true);
         }
+        
+        var damagg=11;
+        if (bodyA.label=="heavyBullet"){damagg=101;}
+        var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
+        if (tileBody.gameObject) {
+          var tileWrapper = tileBody.gameObject;
+          if (tileWrapper.tile) {
+            var tile = tileWrapper.tile;
+            if (tile.properties.hp!=0) { 
+              for(var damag=damagg;damag>0;){
+                var hp= tile.properties.hp
+                if (tile.properties.hp>0){
+                  tile.properties.hp=tile.properties.hp-damag;
+                  damag=damag-hp
+                }//else if (tile.properties.hp==0){damag=-1;}
+                else if (tile.properties.hp<=0){
+                  if (tile.properties.nextlauer<1){
+                    destroyTile(tile);
+                    damag=-1;
+                  }else{
+                    //destroyTile(tile);
+                    //log("x "+tile.x+"y "+tile.y);
+                    belowLayer.putTileAtWorldXY(tile.properties.nextlauer, tile.x*32, tile.y*32).setCollision(true);
+                    tile.properties.hp=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].hp;
+                    tile.properties.nextlauer=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].nextlauer;
+                  }
+                }
+              
+              }
+              
+              
+            }
+          }
+        }
+
       }
       
     }

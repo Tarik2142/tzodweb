@@ -77,7 +77,7 @@ socket.on("tankMove", function(data) {
     timerId[data.id] = setTimeout(function() {
       clients[data.id].kill();
       //clients.splice(data.id, 1); //почистить масив
-    }, 5000);
+    }, 20000);
   }
 });
 socket.on("fire", function(data) {
@@ -190,93 +190,93 @@ function create() {
     function(event) {
       tzodCollision.update(event);
       //log(event);
-      for (var i = 0; i < event.pairs.length; i++) {
-        var bodyA = event.pairs[i].bodyA;
-        var bodyB = event.pairs[i].bodyB;
-        var damagg=11;
-        //log(event.pairs[i].bodyA.label);
-        if (event.pairs[i].bodyA.label=="heavyBullet"){damagg=101;}
-        /*if(bodyA.gameObject){
-          if(bodyA.gameObject.name){
-          log('BODY A' + bodyA.gameObject.name);
+//       for (var i = 0; i < event.pairs.length; i++) {
+//         var bodyA = event.pairs[i].bodyA;
+//         var bodyB = event.pairs[i].bodyB;
+//         var damagg=11;
+//         //log(event.pairs[i].bodyA.label);
+//         if (event.pairs[i].bodyA.label=="heavyBullet"){damagg=101;}
+//         /*if(bodyA.gameObject){
+//           if(bodyA.gameObject.name){
+//           log('BODY A' + bodyA.gameObject.name);
             
-          }
-        }else if(bodyB.gameObject){
-          if(bodyB.gameObject.name){
-            log('BODY B' + bodyB.gameObject.name);
-          }
-        }*/
-        var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
-        //log("a=");
-        //log(bodyA.velocity);
-        //log(bodyA.label);
-        //gameObject.name
-        //log(bodyA);
-        //log("b=");
-        //log(bodyB.velocity);
-        //log(bodyB.label);
-        //log(bodyB);
-        if (tileBody.gameObject) {
-          var tileWrapper = tileBody.gameObject;
-          if (tileWrapper.tile) {
-            var tile = tileWrapper.tile;
-            if (tile.properties.hp!=0) {
-              //if 
-              for(var damag=damagg;damag>0;){
-                var hp= tile.properties.hp
-                //log("hp "+hp);
-                //log("dam "+damag);
-                if (tile.properties.hp>0){
-                  tile.properties.hp=tile.properties.hp-damag;
-                  damag=damag-hp
-                }//else if (tile.properties.hp==0){damag=-1;}
-                else if (tile.properties.hp<=0){
-                  if (tile.properties.nextlauer<1){
-                    destroyTile(tile);
-                    damag=-1;
-                  }else{
-                    //destroyTile(tile);
-                    //log("x "+tile.x+"y "+tile.y);
-                    belowLayer.putTileAtWorldXY(tile.properties.nextlauer, tile.x*32, tile.y*32).setCollision(true);
-                    tile.properties.hp=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].hp;
-                    tile.properties.nextlauer=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].nextlauer;
-                  }
-                }
-              //log("last "+tile.properties.hp);
-                //log("last "+tile.properties.nextlauer);
-              }
+//           }
+//         }else if(bodyB.gameObject){
+//           if(bodyB.gameObject.name){
+//             log('BODY B' + bodyB.gameObject.name);
+//           }
+//         }*/
+//         var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
+//         //log("a=");
+//         //log(bodyA.velocity);
+//         //log(bodyA.label);
+//         //gameObject.name
+//         //log(bodyA);
+//         //log("b=");
+//         //log(bodyB.velocity);
+//         //log(bodyB.label);
+//         //log(bodyB);
+//         if (tileBody.gameObject) {
+//           var tileWrapper = tileBody.gameObject;
+//           if (tileWrapper.tile) {
+//             var tile = tileWrapper.tile;
+//             if (tile.properties.hp!=0) {
+//               //if 
+//               for(var damag=damagg;damag>0;){
+//                 var hp= tile.properties.hp
+//                 //log("hp "+hp);
+//                 //log("dam "+damag);
+//                 if (tile.properties.hp>0){
+//                   tile.properties.hp=tile.properties.hp-damag;
+//                   damag=damag-hp
+//                 }//else if (tile.properties.hp==0){damag=-1;}
+//                 else if (tile.properties.hp<=0){
+//                   if (tile.properties.nextlauer<1){
+//                     destroyTile(tile);
+//                     damag=-1;
+//                   }else{
+//                     //destroyTile(tile);
+//                     //log("x "+tile.x+"y "+tile.y);
+//                     belowLayer.putTileAtWorldXY(tile.properties.nextlauer, tile.x*32, tile.y*32).setCollision(true);
+//                     tile.properties.hp=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].hp;
+//                     tile.properties.nextlauer=belowLayer.gidMap[1].tileProperties[tile.properties.nextlauer-1].nextlauer;
+//                   }
+//                 }
+//               //log("last "+tile.properties.hp);
+//                 //log("last "+tile.properties.nextlauer);
+//               }
               
               
-            }
-          }
-        }
+//             }
+//           }
+//         }
 
-        //             if ((bodyA === playerBody && bodyB.label === 'disappearingPlatform') ||
-        //                 (bodyB === playerBody && bodyA.label === 'disappearingPlatform'))
-        //             {
-        //                 var tileBody = bodyA.label === 'disappearingPlatform' ? bodyA : bodyB;
+//         //             if ((bodyA === playerBody && bodyB.label === 'disappearingPlatform') ||
+//         //                 (bodyB === playerBody && bodyA.label === 'disappearingPlatform'))
+//         //             {
+//         //                 var tileBody = bodyA.label === 'disappearingPlatform' ? bodyA : bodyB;
 
-        //                 // Matter Body instances have a reference to their associated game object. Here,
-        //                 // that's the Phaser.Physics.Matter.TileBody, which has a reference to the
-        //                 // Phaser.GameObjects.Tile.
-        //                 var tileWrapper = tileBody.gameObject;
-        //                 var tile = tileWrapper.tile;
+//         //                 // Matter Body instances have a reference to their associated game object. Here,
+//         //                 // that's the Phaser.Physics.Matter.TileBody, which has a reference to the
+//         //                 // Phaser.GameObjects.Tile.
+//         //                 var tileWrapper = tileBody.gameObject;
+//         //                 var tile = tileWrapper.tile;
 
-        //                 // Only destroy a tile once
-        //                 if (tile.properties.isBeingDestroyed)
-        //                 {
-        //                     continue;
-        //                 }
-        //                 tile.properties.isBeingDestroyed = true;
+//         //                 // Only destroy a tile once
+//         //                 if (tile.properties.isBeingDestroyed)
+//         //                 {
+//         //                     continue;
+//         //                 }
+//         //                 tile.properties.isBeingDestroyed = true;
 
-        //                 // Since we are using ES5 here, the local tile variable isn't scoped to this block -
-        //                 // bind to the rescue.
-        //                 this.tweens.add({
-        //                     targets: tile,
-        //                     alpha: { value: 0, duration: 500, ease: 'Power1' },
-        //                     onComplete: destroyTile.bind(this, tile)
-        //                 });
-      }
+//         //                 // Since we are using ES5 here, the local tile variable isn't scoped to this block -
+//         //                 // bind to the rescue.
+//         //                 this.tweens.add({
+//         //                     targets: tile,
+//         //                     alpha: { value: 0, duration: 500, ease: 'Power1' },
+//         //                     onComplete: destroyTile.bind(this, tile)
+//         //                 });
+//       }
 
       // Note: the tile bodies in this level are all simple rectangle bodies, so checking the
       // label is easy. See matter detect collision with tile for how to handle when the tile

@@ -10,7 +10,7 @@ var guns = {
     speed: 10,//скорость снаряда
     gunRotationSpd: 20,//скорость поворота башні
     baseRotationSpd: 20,//скорость поворота танка
-    offset: 70,//отступ от танка при вистреле
+    offset: 50,//отступ от танка при вистреле
     baseSpeed: 20,//скорость танка
     armor: 60,//бронька
     bulletLabel: 'heavyBullet'
