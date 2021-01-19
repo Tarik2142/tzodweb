@@ -14,7 +14,10 @@ var tzodCollision = {
     function handleBullet(event){
       var bodyA = event.bodyA;
       var bodyB = event.bodyB;
-      if (isBullet(bodyA) && isBullet(bodyB)){
+      if (isBullet(bodyA) && isBullet(bodyB)){ //2 пули
+        log(bodyA);
+        log(bodyB);
+      }else{
         
       }
     }
@@ -22,7 +25,7 @@ var tzodCollision = {
     function isWall(body){
       if (body){
         if(body.label){
-          if (body.label == 'Rectangle Body'){
+          if (body.label.indexOf('Rectangle Body') != -1){
             return true;
           }
         }else{
@@ -36,7 +39,8 @@ var tzodCollision = {
     function isBullet(body){
       if (body){
         if(body.label){
-          if (body.label == 'bullet'){
+          log(body.label);
+          if (body.label.indexOf('Bullet') != -1){
             return true;
           }
         }else{
