@@ -170,6 +170,9 @@ function create() {
   //this.matter.world.convertTiles(tileset);
   //console.log(this);
   //;
+  
+  log('socket id = ' + socket.id);
+  
   clients[id] = new tank(this, posx, posy,"tank",shapes.blue, guns.heavy, id);//scene, x, y, texture, startGun, shape
   socket.emit("tankCreate", {
     id: id,

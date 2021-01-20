@@ -21,7 +21,8 @@ app.get("/", (request, response) => {
   console.log("Your app is listening on port " + listener.address().port);
 });*/
 
-function roomObj(socketId, owner, map, password) {
+function roomObj(roomId, socketId, owner, map, password) {
+  this.roomId = roomId;
   this.socketId = socketId;
   this.owner = owner;
   this.map = map;
@@ -33,8 +34,12 @@ var roomList = [];
 io.sockets.on('connection', function (socket) {
   
   socket.on('newRoom', function (data) {
-    roomList.push(new roomObj(data.socketId, data.owner, data.map, data.password));
+    const roomId = roomList.length;
+    roomList.push(new roomObj(, data.socketId, data.owner, data.map, data.password));
 		socket.join(data.owner + data.socketId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
+    socket.on('disconnect', () => {
+    // socket.rooms.size === 0
+  });
 	});
   
 	// // Start listening for mouse move events
