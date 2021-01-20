@@ -171,13 +171,20 @@ function create() {
   //console.log(this);
   //;
   
-  log('socket id = ' + socket.id);
+  //log('socket id = ' + socket.id);
   
   clients[id] = new tank(this, posx, posy,"tank",shapes.blue, guns.heavy, id);//scene, x, y, texture, startGun, shape
   socket.emit("tankCreate", {
     id: id,
     posx: posx,
     posy: posy
+  });
+  
+  socket.emit("newRoom", {
+    socketId: socket.id, 
+    owner: 'tarik2142', 
+    map: 'map1', 
+    password: ''
   });
   
   var is = 2;

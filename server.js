@@ -3,9 +3,16 @@ var express = require('express');
 var app = express();
 var server = app.listen(process.env.PORT);
 var io = require('socket.io')(server);
+const divider = '----------';
 
 function log(text){
   console.log(text);
+}
+
+function logObj(text, obj){
+  log(text);
+  log(obj);
+  log(divider);
 }
 
 app.use(express.static("public"));
@@ -27,6 +34,7 @@ function roomObj(roomId, socketId, owner, map, password) {
   this.owner = owner;
   this.map = map;
   this.password = password;
+  logObj('new room created!', this);
 }
 
 var roomList = [];
@@ -35,10 +43,12 @@ io.sockets.on('connection', function (socket) {
   
   socket.on('newRoom', function (data) {
     const roomId = roomList.length;
-    roomList.push(new roomObj(, data.socketId, data.owner, data.map, data.password));
+    roomList.push(new roomObj(roomId, data.socketId, data.owner, data.map, data.password));
+    logObj('roomList:', roomList);
 		socket.join(data.owner + data.socketId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
     socket.on('disconnect', () => {
-    // socket.rooms.size === 0
+    roomList.splice(roomId, 1);
+    logObj('roomList splice', roomList);
   });
 	});
   
