@@ -8,14 +8,6 @@ function log(text){
   console.log(text);
 }
 
-var guns = {
-  0: {
-    name: 'heay Gun',
-    dmg: 50,
-    reload: 1500,
-    speed: 100
-  }
-}
 
 var player = {
   id: '0',
