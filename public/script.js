@@ -201,7 +201,7 @@ function handleMove() {
 }
 
 function update(time, delta) {
-  handleMove();
+  //handleMove();
   //var cursors = scene.input.keyboard.createCursorKeys();
   var cursors = this.input.keyboard.addKeys('W,S,A,D');
   var pointer = scene.input.activePointer;
