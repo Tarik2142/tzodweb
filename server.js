@@ -21,6 +21,12 @@ app.get("/", (request, response) => {
   console.log("Your app is listening on port " + listener.address().port);
 });*/
 
+var roomObj = {
+  
+}
+
+var roomList = [];
+
 io.sockets.on('connection', function (socket) {
   
   socket.on('newRoom', function (data) {
