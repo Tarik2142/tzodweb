@@ -45,11 +45,17 @@ io.sockets.on('connection', function (socket) {
     const roomId = roomList.length;
     roomList.push(new roomObj(roomId, data.socketId, data.owner, data.map, data.password));
     logObj('roomList:', roomList);
-		socket.join(data.owner + data.socketId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
+		socket.join(data.owner + roomId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
     socket.on('disconnect', () => {
     roomList.splice(roomId, 1);
     logObj('roomList splice', roomList);
+      socket.broadcast.emit('GG');
   });
+    
+    socket.on('joinRoom', function (data) {//roomId, playerNickname, password
+		
+	});
+    
 	});
   
 	// // Start listening for mouse move events

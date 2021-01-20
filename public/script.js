@@ -96,6 +96,11 @@ socket.on("tankCreate", function(data) {
     });
   }
 });
+
+socket.on("GG", function() {
+  log('GG');
+});
+
 function preload() {
   scene = game.scene.keys.default;
   this.load.image(
