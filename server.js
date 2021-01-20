@@ -8,35 +8,6 @@ function log(text){
   console.log(text);
 }
 
-
-var player = {
-  id: '0',
-  nick: 'player',
-  gun: 0
-}
-
-class room {
-  owner;
-  roomname;
-  password;
-  players;
-  map;
-  
-  constructor(owner, roomname, password, map){
-    this.owner = owner;
-    this.roomname = roomname;
-    this.password = password;
-    this.map = map;
-    this.players = [owner];
-  }
-  
-  join(player){
-    this.players.push(player);
-  }
-  
-}
-
-
 app.use(express.static("public"));
 
 // https://expressjs.com/en/starter/basic-routing.html
@@ -52,10 +23,10 @@ app.get("/", (request, response) => {
 
 io.sockets.on('connection', function (socket) {
   
-  socket.on('tankMove', function (data) {
+  socket.on('newRoom', function (data) {
 		// This line sends the event (broadcasts it)
 		// to everyone except the originating client. upisDown
-		socket.broadcast.emit('tankMove', data);
+		socket.broadcast.emit('newRoom', data);
 	});
   
 	// // Start listening for mouse move events
