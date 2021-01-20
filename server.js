@@ -21,8 +21,11 @@ app.get("/", (request, response) => {
   console.log("Your app is listening on port " + listener.address().port);
 });*/
 
-var roomObj = {
-  
+function roomObj(socketId, owner, map, password) {
+  this.socketId = socketId;
+  this.owner = owner;
+  this.map = map;
+  this.password = password;
 }
 
 var roomList = [];
@@ -30,9 +33,8 @@ var roomList = [];
 io.sockets.on('connection', function (socket) {
   
   socket.on('newRoom', function (data) {
-		// This line sends the event (broadcasts it)
-		// to everyone except the originating client. upisDown
-		socket.broadcast.emit('newRoom', data);
+    roomList.push(new roomObj(data.socketId, data.owner, data.map, data.password));
+		socket.join(data.owner + data.socketId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
 	});
   
 	// // Start listening for mouse move events
