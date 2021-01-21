@@ -1,3 +1,16 @@
+function startGame(){
+  game = new Phaser.Game(config);
+}
+
+function startServer(){
+  socket.emit("newRoom", {
+    socketId: socket.id, 
+    owner: 'tarik2142', 
+    map: 'map1', 
+    password: ''
+  });
+}
+
 const FPS = 30;
 var config = {
   type: Phaser.AUTO,
@@ -37,7 +50,7 @@ var timerId = {};
 var socket = io();
 //var tilemapplus=tilemap-plus();
 
-var game = new Phaser.Game(config);
+var game;
 var scene;
 //this.input.mouse.disableContextMenu()
 var currentSpeed = 0;
@@ -46,6 +59,7 @@ var lastFired = 0;
 var canFire = true;
 var scoreText;
 var shapes;
+
 socket.on("downisDown", function(data) {
   if (data.id != id && clients[data.id]) {
     clients[data.id].thrustBack(0.05);
@@ -183,13 +197,6 @@ function create() {
     id: id,
     posx: posx,
     posy: posy
-  });
-  
-  socket.emit("newRoom", {
-    socketId: socket.id, 
-    owner: 'tarik2142', 
-    map: 'map1', 
-    password: ''
   });
   
   var is = 2;
