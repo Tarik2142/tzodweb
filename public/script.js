@@ -32,13 +32,16 @@ class room {
 function startServer(){
   socket.emit("newRoom", {
     socketId: socket.id, 
-    owner: 'tarik2142', 
-    map: 'map1', 
-    password: ''
+    owner: playerName, 
+    map: $('#mapSelector').val(), 
+    password: $('#password').val()
   });
+  closeForm();
+  startGame();
 }
 
 const FPS = 30;
+var playerName;
 var config = {
   type: Phaser.AUTO,
   width: 640,

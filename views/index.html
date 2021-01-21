@@ -11,18 +11,18 @@
 
 <body>
     <div class="modal" id="modal">
-        <span class="close" onclick="closeForm()">&times;</span>
-        <div class="modal-content">
+        <!-- <span class="close" onclick="closeForm()">&times;</span> -->
+        <div class="modal-content" id="modalContent">
             <p><b>Type a nickname:</b><br>
-                <input type="text" size="40">
+                <input type="text" size="40" id="nickName">
             </p>
-            <button class="btn" id="" onclick="openForm()">
+            <button class="btn" id="" onclick="serverCfg()">
                 Start server
             </button>
-            <button class="btn" id="" onclick="openForm()">
+            <button class="btn" id="" onclick="connectCfg()">
                 Connect to server
             </button>
-          <br>
+            <br>
             <br>
         </div>
     </div>
@@ -40,10 +40,10 @@
     <script src="//cdn.jsdelivr.net/npm/phaser@3.24.0/dist/phaser.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!--<script src="phaser-tilemap-plus/dist/phaser-tilemap-plus.js"></script>-->
-  
-  <script src="./collision.js"></script>
-  <script src="./htmlFunc.js"></script>
-  <script src="./tank.js"></script>
+    
+    <script src="./collision.js"></script>
+    <script src="./htmlFunc.js"></script>
+    <script src="./tank.js"></script>
     <script src="./script.js"></script>
 
 </body>
