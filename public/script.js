@@ -222,7 +222,7 @@ function create() {
   
   //log('socket id = ' + socket.id);
   
-  clients[id] = new tank(this, posx, posy,"tank",shapes.blue, guns.heavy, id);//scene, x, y, texture, startGun, shape
+  clients[id] = new tank(this, posx, posy,"tank",shapes.blue, guns.heavy, playerName);//scene, x, y, texture, startGun, shape
   socket.emit("tankCreate", {
     id: id,
     posx: posx,

@@ -178,7 +178,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
       this.gun.depth = 1;
       this.joint = scene.matter.add.constraint(this, this.gun, 0, 0);
     }
-    this.nickname = scene.add.text(16, 16, 'player' + id, {
+    this.nickname = scene.add.text(16, 16, id, {
         fontSize: '14px',
         padding: { x: 0, y: 0 },
         //backgroundColor: '#000000'

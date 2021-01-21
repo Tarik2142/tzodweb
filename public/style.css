@@ -21,10 +21,10 @@
 }
 
 .close{
-  padding-right: 0.5rem;
  float: right;
  font-weight: bold;
  color: black;
+ padding-right: 0.5rem;
 }
 
 .close:hover,
@@ -57,6 +57,12 @@
 }
 
 input[type=text]{
+  font-size: 1rem;
+  color: #e4ddde;
+  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbrick.png?v=1610827003399');
+}
+
+select{
   font-size: 1rem;
   color: #e4ddde;
   background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbrick.png?v=1610827003399');
