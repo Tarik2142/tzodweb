@@ -2,6 +2,33 @@ function startGame(){
   game = new Phaser.Game(config);
 }
 
+var playerPrototype = {
+  id: '0',
+  nick: 'player',
+  gun: 0
+}
+
+class room {
+  owner;
+  roomname;
+  password;
+  players;
+  map;
+  
+  constructor(owner, roomname, password, map){
+    this.owner = owner;
+    this.roomname = roomname;
+    this.password = password;
+    this.map = map;
+    this.players = [owner];
+  }
+  
+  join(player){
+    this.players.push(player);
+  }
+  
+}
+
 function startServer(){
   socket.emit("newRoom", {
     socketId: socket.id, 
@@ -264,31 +291,4 @@ function update(time, delta) {
     //socket.emit('rightisDown',{'id': id});
     clients[id].setRotation(clients[id].rotation + 0.1);
   }
-}
-
-var playerPrototype = {
-  id: '0',
-  nick: 'player',
-  gun: 0
-}
-
-class room {
-  owner;
-  roomname;
-  password;
-  players;
-  map;
-  
-  constructor(owner, roomname, password, map){
-    this.owner = owner;
-    this.roomname = roomname;
-    this.password = password;
-    this.map = map;
-    this.players = [owner];
-  }
-  
-  join(player){
-    this.players.push(player);
-  }
-  
 }
