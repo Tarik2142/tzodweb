@@ -2,7 +2,8 @@ const scale = 1.2;
 
 var guns = {
   heavy: {//башена пушка
-    texture: 'gun',
+    texture: 'heavy_gun',
+    bulletTexture: 'heavy_gun_bullet',
     frame: 0,
     name: 'heavy Gun',
     dmg: 51,
@@ -13,7 +14,7 @@ var guns = {
     offset: 30,//отступ от танка при вистреле
     baseSpeed: 20,//скорость танка
     armor: 60,//бронька
-    bulletLabel: 'heavyBullet'
+    bulletLabel: this.bulletTexture
   }
 }
 
@@ -91,7 +92,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
       //this.bullet.push();
       this.bullet[i] = this.scene.matter.add.sprite(
         this.x + this.gunType.offset * Math.cos(angle),
-        this.y + this.gunType.offset * Math.sin(angle), 'crate', 0, config
+        this.y + this.gunType.offset * Math.sin(angle), guns.heavy.bulletTexture, 0, config
       );
       //log(game.matter.add.gameObject(bullet[i]));
       //this.bullet[i].rotation = angle;
@@ -213,6 +214,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
     delete this.gun;
     //scene.matter.composite.remove(scene.matter.world, this.joint, true);
     this.destroy();
+    this = null
     delete this;
   }
 }

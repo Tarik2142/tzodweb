@@ -157,14 +157,14 @@ function preload() {
   ); //?v=1610478781254
   //this.load.image('star', 'assets/star.png');
   this.load.image(
-    "crate",
+    "heavy_gun_bullet",
     "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fprojectile_cannon.png?"
   );
   //this.load.atlas("tank", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fblue.png", "blue.json");
   this.load.image("tank", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fblue.png");
   this.load.json('shapes', 'blue.json');
   this.load.image(
-    "gun",
+    "heavy_gun",
     "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fweap_cannon.png?"
   );
   this.load.image(
