@@ -223,6 +223,7 @@ function create() {
   //log('socket id = ' + socket.id);
   
   clients[id] = new tank(this, posx, posy,"tank",shapes.blue, guns.heavy, playerName);//scene, x, y, texture, startGun, shape
+  clients[id + 1] = new tank(this, posx, posy,"tank",shapes.blue, guns.heavy, playerName + 'tester');
   socket.emit("tankCreate", {
     id: id,
     posx: posx,
@@ -263,6 +264,7 @@ function update(time, delta) {
   this.matter.world.convertTilemapLayer(belowLayer);
 
   if (pointer.isDown) {
+    clients[id + 1].kill();
     clients[id].fire();
     socket.emit("fire", {
     id: id,

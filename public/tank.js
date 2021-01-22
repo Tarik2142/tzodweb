@@ -210,11 +210,11 @@ class tank extends Phaser.Physics.Matter.Sprite {
   }
 
   kill() {
+    log(this.joint);
     this.gun.destroy();
     delete this.gun;
     //scene.matter.composite.remove(scene.matter.world, this.joint, true);
     this.destroy();
-    this = null
     delete this;
   }
 }
