@@ -61,9 +61,16 @@ function startServer(){
   var dataToClient = {
     player: {
       tank: {
-        
+        position: {//кординати
+          x: 0,
+          y: 0
+        },
+        rotation: 0//угол поворота
       },
-      gun:
+      gun: {
+        type: 0,//тип пушки
+        rotation: 0//поворот
+      }
     }
   }
   
