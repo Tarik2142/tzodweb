@@ -39,22 +39,37 @@ function startServer(){
   closeForm();
   startGame();
   
-  var dataToServer = {
-    control: {
-      w: 'move:w',
-      a: 'move:a',
-      s: 'move:s',
-      d: 'move:d',
-      lmb: false,
-      rmb: ''
+  var dataToServer = { //прототип пакета даних від клієнта
+    control: {//клавіатура + мишка
+      w: 'control:w',
+      a: 'control:a',
+      s: 'control:s',
+      d: 'control:d',
+      lmb: 'control:lmb',
+      rmb: 'control:rmb'
+    },
+    player: {//спрайт ігрока
+      tank: {
+        rotation: 0
+      },
+      gun: {
+        rotation: 0
+      }
+    }
+  }
+  
+  var dataToClient = {
+    player: {
+      tank: {
+        
+      },
+      gun:
     }
   }
   
   //-----network
   ocket.on("update", function(data) {
-  if (data.id != id && clients[data.id]) {
-    clients[data.id].thrustBack(0.05);
-  }
+  
 });
   //------------
 }
