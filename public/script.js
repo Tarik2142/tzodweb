@@ -38,6 +38,25 @@ function startServer(){
   });
   closeForm();
   startGame();
+  
+  var dataToServer = {
+    control: {
+      w: 'move:w',
+      a: 'move:a',
+      s: 'move:s',
+      d: 'move:d',
+      lmb: false,
+      rmb: ''
+    }
+  }
+  
+  //-----network
+  ocket.on("update", function(data) {
+  if (data.id != id && clients[data.id]) {
+    clients[data.id].thrustBack(0.05);
+  }
+});
+  //------------
 }
 
 const FPS = 30;
