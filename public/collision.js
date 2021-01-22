@@ -1,5 +1,5 @@
 var wallTypes = {
-  cement: "Rectangle Body",
+  concrite: "Rectangle Body",
   bricks: "Rectangle Body"
 }
 
