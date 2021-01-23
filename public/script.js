@@ -1,7 +1,10 @@
 function startClient(){
   clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
  socket.on("update", function(data) {
-  
+   if (data.command){
+     
+   }
+  socket.emit('control', control);
 }); 
 }
 
@@ -116,6 +119,14 @@ var lastFired = 0;
 var canFire = true;
 var scoreText;
 var shapes;
+var control = {
+    w: false,
+    a: false,
+    s: false,
+    d: false,
+    lmb: false,
+    rmb: false
+  }
 
 // socket.on("downisDown", function(data) {
 //   if (data.id != id && clients[data.id]) {
@@ -256,9 +267,6 @@ function create() {
   //   posy: posy
   // });
   
-  var is = 2;
-
-  
   this.matter.world.on(
     "collisionstart",
     function(event) {
@@ -293,14 +301,6 @@ function dataToServer(control, tankRotation, gunRotation){ //прототип п
 
 function update(time, delta) {
   
-  var control = {
-    w: false,
-    a: false,
-    s: false,
-    d: false,
-    lmb: false,
-    rmb: false
-  }
   //handleMove();
   //var cursors = scene.input.keyboard.createCursorKeys();
   var cursors = this.input.keyboard.addKeys('W,S,A,D');
@@ -359,5 +359,4 @@ function update(time, delta) {
   }else{
     control.d = false;
   }
-  socket.
 }
