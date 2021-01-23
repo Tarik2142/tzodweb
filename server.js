@@ -51,12 +51,12 @@ io.sockets.on('connection', function (socket) {
       socket.broadcast.emit('GG');
   });
     
-    var updateTmr = setTimeout(function (){
+    var updateTmr = setTimeout(function (socket){
       socket.broadcast.emit('update', {});
     }, 1000);
     
     socket.on('control', function (data) {//roomId, playerNickname, password
-		
+		logObj(data);
 	});
     
 	});
@@ -64,7 +64,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('join', function (data) {//roomId, playerNickname, password
     log('join');
     logObj(data.name);
-		socket.join(data.name);
+		socket.join(data.room);
     socket.broadcast.emit('update', {
       command: 'newPlayer',
       playerName: data.name

@@ -1,8 +1,11 @@
 function startClient(){
   closeForm();
   startGame();
+  log('playerName');
+  log(playerName);
   socket.emit('join', {
-    name: playerName
+    name: playerName,
+    room: 'tarik21420'
   });
 
  socket.on("update", function(data) {
