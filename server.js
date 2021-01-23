@@ -52,8 +52,20 @@ io.sockets.on('connection', function (socket) {
       socket.broadcast.emit('GG');
   });
     
-    socket.on('joinRoom', function (data) {//roomId, playerNickname, password
-		
+    var updateTmr = setTimeout(function (){
+      socket.broadcast.emit('update');
+    }, 50);
+    
+    socket.on('join', function (data) {//roomId, playerNickname, password
+		socket.broadcast.emit('update', {
+      command: 'newPlayer'
+    });
+	});
+    
+    socket.on('join', function (data) {//roomId, playerNickname, password
+		socket.broadcast.emit('update', {
+      command: 'newPlayer'
+    });
 	});
     
 	});

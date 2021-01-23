@@ -1,4 +1,7 @@
 function startClient(){
+  socket.emit('join', {
+    name: playerName
+  });
   clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
  socket.on("update", function(data) {
    if (data.command){
@@ -64,6 +67,9 @@ function startServer(){
   
   socket.on("join", function(data) {
   clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
+    socket.emit('update', {
+      command: 'newPlayer'
+    });
 });
   
   //-----network
