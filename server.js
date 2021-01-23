@@ -51,7 +51,7 @@ io.sockets.on('connection', function (socket) {
       socket.broadcast.emit('GG');
   });
     
-    var updateTmr = setTimeout(function (socket){
+    var updateTmr = setTimeout(function (){
       socket.broadcast.emit('update', {});
     }, 1000);
     
@@ -65,7 +65,7 @@ io.sockets.on('connection', function (socket) {
     log('join');
     logObj(data.name);
 		socket.join(data.room);
-    socket.broadcast.emit('update', {
+     io.sockets.in(data.room).emit('update', {
       command: 'newPlayer',
       playerName: data.name
     });
