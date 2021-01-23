@@ -1,23 +1,5 @@
 function startClient(){
-  function dataToServer(w, a, s, d, lmb, rmb, tankRotation, gunRotation){ //прототип пакета даних від клієнта
-    this.control = function(){//клавіатура + мишка
-      this.w = w;
-      this.a = a;
-      this.s = s;
-      this.d = d;
-      this.lmb = lmb;
-      this.rmb = rmb;
-    }
-    this.player = function(){
-      this.tank = function(){
-        this.rotation = tankRotation
-      }
-      this.gun = function(){
-        this.rotation = gunRotation
-      }
-    }
-  }
-  
+  clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
  socket.on("update", function(data) {
   
 }); 
@@ -287,28 +269,39 @@ function create() {
   
 }
 
-function handleMove() {
-  socket.emit("tankMove", {
-    x: clients[id].x,
-    y: clients[id].y,
-    angle: clients[id].rotation,
-    gunangle: clients[id].gun.rotation,
-    id: id
-  });
-}
+// function handleMove() {
+//   socket.emit("tankMove", {
+//     x: clients[id].x,
+//     y: clients[id].y,
+//     angle: clients[id].rotation,
+//     gunangle: clients[id].gun.rotation,
+//     id: id
+//   });
+// }
+
+function dataToServer(w, a, s, d, lmb, rmb, tankRotation, gunRotation){ //прототип пакета даних від клієнта
+    this.control = function(){//клавіатура + мишка
+      this.w = w;
+      this.a = a;
+      this.s = s;
+      this.d = d;
+      this.lmb = lmb;
+      this.rmb = rmb;
+    }
+    this.player = function(){
+      this.tank = function(){
+        this.rotation = tankRotation
+      }
+      this.gun = function(){
+        this.rotation = gunRotation
+      }
+    }
+  }
+
+
 
 function update(time, delta) {
   
-  var control = {
-    w: false,
-    a: false,
-    s: false,
-    d: false,
-    lmb: false,
-    rmb: false
-  }
-  //handleMove();
-  //var cursors = scene.input.keyboard.createCursorKeys();
   var cursors = this.input.keyboard.addKeys('W,S,A,D');
   var pointer = scene.input.activePointer;
   /*const worldPoint = this.input.activePointer.positionToCamera(
