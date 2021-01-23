@@ -2,12 +2,6 @@ function startGame(){
   game = new Phaser.Game(config);
 }
 
-var playerInfo = {
-  id: '0',
-  nick: 'player',
-  gun: 0
-}
-
 class room {
   owner;
   roomname;
@@ -31,6 +25,7 @@ class room {
 
 function startServer(){
   socket.emit("newRoom", {
+    playerId: playerName + id,
     socketId: socket.id, 
     owner: playerName, 
     map: $('#mapSelector').val(), 
@@ -39,21 +34,21 @@ function startServer(){
   closeForm();
   startGame();
   
-  var dataToServer = { //прототип пакета даних від клієнта
-    control: {//клавіатура + мишка
-      w: 'control:w',
-      a: 'control:a',
-      s: 'control:s',
-      d: 'control:d',
-      lmb: 'control:lmb',
-      rmb: 'control:rmb'
+  function dataToServer(){ //прототип пакета даних від клієнта
+    this.control: {//клавіатура + мишка
+      this.w: false,
+      this.a: false,
+      this.s: false,
+      this.d: false,
+      this.lmb: false,
+      this.rmb: false
     },
-    player: {
-      tank: {
-        rotation: 0
+    this.player: {
+      this.tank: {
+        this.rotation: 0
       },
-      gun: {
-        rotation: 0
+      this.gun: {
+        this.rotation: 0
       }
     }
   }
