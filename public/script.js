@@ -45,6 +45,22 @@ function clients(owner){
 }
 
 function startServer(){
+  function dataToClient(x, y, tankRotation, gunRotation, gunType) {
+    this.player = function() {
+      this.tank = function() {
+        this.position = function() {//кординати
+          this.x = x;
+          this.y = y;
+        },
+        this.rotation = tankRotation;//угол поворота
+      },
+      this.gun = function() {
+        this.type = gunType;//тип пушки
+        this.rotation = gunRotation;//поворот
+      }
+    }
+  }
+  
   socket.emit("newRoom", {
     playerId: playerName + id,
     socketId: socket.id, 
@@ -61,22 +77,6 @@ function startServer(){
   socket.on("join", function(data) {
   clientList.add();
 });
-  
-  function dataToClient(x, y, tankRotation, gunRotation, gunType) {
-    this.player = function() {
-      this.tank = function() {
-        this.position = function() {//кординати
-          this.x = x;
-          this.y = y;
-        },
-        this.rotation = tankRotation;//угол поворота
-      },
-      this.gun = function() {
-        this.type = gunType;//тип пушки
-        this.rotation = gunRotation;//поворот
-      }
-    }
-  }
   
   //-----network
   socket.on("update", function(data) {
@@ -267,12 +267,12 @@ function create() {
   
   //log('socket id = ' + socket.id);
   
-  clients[id] = new tank(this, posx, posy,"tank",shapes.blue, guns.heavy, playerName);//scene, x, y, texture, startGun, shape
-  socket.emit("tankCreate", {
-    id: id,
-    posx: posx,
-    posy: posy
-  });
+  //clients[id] = new tank(this, posx, posy,"tank",shapes.blue, guns.heavy, playerName);//scene, x, y, texture, startGun, shape
+  // socket.emit("tankCreate", {
+  //   id: id,
+  //   posx: posx,
+  //   posy: posy
+  // });
   
   var is = 2;
 
