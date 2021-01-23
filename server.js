@@ -3,7 +3,6 @@ var express = require('express');
 var app = express();
 var server = app.listen(process.env.PORT);
 var io = require('socket.io')(server);
-const divider = '----------';
 
 function log(text){
   console.log(text);
@@ -12,7 +11,7 @@ function log(text){
 function logObj(text, obj){
   log(text);
   log(obj);
-  log(divider);
+  log('----------');
 }
 
 app.use(express.static("public"));
@@ -54,7 +53,7 @@ io.sockets.on('connection', function (socket) {
     
     var updateTmr = setTimeout(function (){
       socket.broadcast.emit('update', {});
-    }, 50);
+    }, 1000);
     
     socket.on('control', function (data) {//roomId, playerNickname, password
 		
