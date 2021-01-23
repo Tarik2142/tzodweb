@@ -56,16 +56,20 @@ io.sockets.on('connection', function (socket) {
       socket.broadcast.emit('update');
     }, 50);
     
-    socket.on('join', function (data) {//roomId, playerNickname, password
-		socket.broadcast.emit('update', {
-      command: 'newPlayer'
-    });
-	});
-    
     socket.on('control', function (data) {//roomId, playerNickname, password
 		
 	});
     
+	});
+  
+  function addPlayer(){
+    socket.broadcast.emit('update', {
+      command: 'newPlayer'
+    });
+  }
+  
+  socket.on('join', function (data) {//roomId, playerNickname, password
+		
 	});
   
 	// // Start listening for mouse move events

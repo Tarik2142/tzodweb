@@ -1,8 +1,10 @@
 function startClient(){
+  closeForm();
+  startGame();
   socket.emit('join', {
     name: playerName
   });
-  clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
+
  socket.on("update", function(data) {
    if (data.command){
      switch(data.command){
@@ -63,7 +65,7 @@ function startServer(){
   closeForm();
   startGame();
   
-  clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
+  //clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
   
   socket.on("join", function(data) {
   clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
@@ -261,7 +263,6 @@ function create() {
   //ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
   this.matter.world.convertTilemapLayer(belowLayer);
   
-  shapes = this.cache.json.get('shapes');
   //obstacle = this.matter.add.sprite( 64, 64,"tank", null, {shape: shapes.blue});//
   //this.matter.world.convertTiles(tileset);
   //console.log(this);
@@ -283,6 +284,9 @@ function create() {
     },
     this
   );
+  
+  shapes = this.cache.json.get('shapes');
+  clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
   
 }
 
