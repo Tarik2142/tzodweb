@@ -8,9 +8,10 @@ function clients(owner){
   this.add = function(player){
     this.clientArr.push(player)
   }
-  this.remove = function(){
-    
+  this.remove = function(index){
+    this.clientArr.splice(index, 1);
   }
+  this.get
 }
 
 class room {
@@ -42,6 +43,7 @@ function startServer(){
     map: $('#mapSelector').val(), 
     password: $('#password').val()
   });
+  
   closeForm();
   startGame();
   
@@ -122,7 +124,7 @@ var id = Math.round(100 * Math.random());
 var posx = Math.round(500 * Math.random());
 var posy = Math.round(500 * Math.random());
 // A flag for drawing activity
-var clients = {};
+var clients;
 var timerId = {};
 var socket = io();
 //var tilemapplus=tilemap-plus();
@@ -137,56 +139,56 @@ var canFire = true;
 var scoreText;
 var shapes;
 
-socket.on("downisDown", function(data) {
-  if (data.id != id && clients[data.id]) {
-    clients[data.id].thrustBack(0.05);
-  }
-});
-socket.on("leftisDown", function(data) {
-  if (data.id != id && clients[data.id]) {
-    clients[data.id].setRotation(clients[data.id].rotation - 0.1);
-  }
-});
-socket.on("rightisDown", function(data) {
-  if (data.id != id && clients[data.id]) {
-    clients[data.id].setRotation(clients[data.id].rotation + 0.1);
-  }
-});
-socket.on("upisDown", function(data) {
-  if (data.id != id && clients[data.id]) {
-    clients[data.id].thrust(0.05);
-  }
-});
-socket.on("tankMove", function(data) {
-  // Is the user drawing?
-  if (data.id != id && clients[data.id]) {
-    clients[data.id].x = data.x;
-    clients[data.id].y = data.y;
-    clients[data.id].rotation = data.angle;
-    clients[data.id].gun.rotation = data.gunangle;
-    clearTimeout(timerId[data.id]);
-    timerId[data.id] = setTimeout(function() {
-      clients[data.id].kill();
-      //clients.splice(data.id, 1); //почистить масив
-    }, 20000);
-  }
-});
-socket.on("fire", function(data) {
-  if (data.id != id && clients[data.id]) {
-    clients[data.id].fire();
-  }
-});
-socket.on("tankCreate", function(data) {
-  if (data.id != id && !clients[data.id]) {
-    //createTank(scene, data.id, data.posx, data.posy,shapes.blue);
-    clients[data.id] = new tank(scene, data.posx, data.posy,"tank",shapes.blue, guns.heavy, id);//scene, x, y, texture, startGun, shape
-    socket.emit("tankCreate", {
-      id: id,
-      posx: posx,
-      posy: posy
-    });
-  }
-});
+// socket.on("downisDown", function(data) {
+//   if (data.id != id && clients[data.id]) {
+//     clients[data.id].thrustBack(0.05);
+//   }
+// });
+// socket.on("leftisDown", function(data) {
+//   if (data.id != id && clients[data.id]) {
+//     clients[data.id].setRotation(clients[data.id].rotation - 0.1);
+//   }
+// });
+// socket.on("rightisDown", function(data) {
+//   if (data.id != id && clients[data.id]) {
+//     clients[data.id].setRotation(clients[data.id].rotation + 0.1);
+//   }
+// });
+// socket.on("upisDown", function(data) {
+//   if (data.id != id && clients[data.id]) {
+//     clients[data.id].thrust(0.05);
+//   }
+// });
+// socket.on("tankMove", function(data) {
+//   // Is the user drawing?
+//   if (data.id != id && clients[data.id]) {
+//     clients[data.id].x = data.x;
+//     clients[data.id].y = data.y;
+//     clients[data.id].rotation = data.angle;
+//     clients[data.id].gun.rotation = data.gunangle;
+//     clearTimeout(timerId[data.id]);
+//     timerId[data.id] = setTimeout(function() {
+//       clients[data.id].kill();
+//       //clients.splice(data.id, 1); //почистить масив
+//     }, 20000);
+//   }
+// });
+// socket.on("fire", function(data) {
+//   if (data.id != id && clients[data.id]) {
+//     clients[data.id].fire();
+//   }
+// });
+// socket.on("tankCreate", function(data) {
+//   if (data.id != id && !clients[data.id]) {
+//     //createTank(scene, data.id, data.posx, data.posy,shapes.blue);
+//     clients[data.id] = new tank(scene, data.posx, data.posy,"tank",shapes.blue, guns.heavy, id);//scene, x, y, texture, startGun, shape
+//     socket.emit("tankCreate", {
+//       id: id,
+//       posx: posx,
+//       posy: posy
+//     });
+//   }
+// });
 
 socket.on("GG", function() {
   log('GG');
