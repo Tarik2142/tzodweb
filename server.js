@@ -52,7 +52,7 @@ io.sockets.on('connection', function (socket) {
   });
     
     var updateTmr = setTimeout(function (){
-      socket.broadcast.emit('update', {});
+      io.sockets.in(roomId).emit('update', {});
     }, 1000);
     
     socket.on('control', function (data) {//roomId, playerNickname, password
