@@ -2,7 +2,7 @@ function startGame(){
   game = new Phaser.Game(config);
 }
 
-var playerPrototype = {
+var playerInfo = {
   id: '0',
   nick: 'player',
   gun: 0
