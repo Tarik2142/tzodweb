@@ -1,3 +1,28 @@
+function startClient(){
+  function dataToServer(w, a, s, d, lmb, rmb, tankRotation, gunRotation){ //прототип пакета даних від клієнта
+    this.control = function(){//клавіатура + мишка
+      this.w = w;
+      this.a = a;
+      this.s = s;
+      this.d = d;
+      this.lmb = lmb;
+      this.rmb = rmb;
+    }
+    this.player = function(){
+      this.tank = function(){
+        this.rotation = tankRotation
+      }
+      this.gun = function(){
+        this.rotation = gunRotation
+      }
+    }
+  }
+  
+ socket.on("update", function(data) {
+  
+}); 
+}
+
 function startGame(){
   game = new Phaser.Game(config);
 }
@@ -38,17 +63,17 @@ function startServer(){
 });
   
   function dataToClient(x, y, tankRotation, gunRotation, gunType) {
-    player: {
-      tank: {
-        position: {//кординати
-          x: 0,
-          y: 0
+    this.player = function() {
+      this.tank = function() {
+        this.position = function() {//кординати
+          this.x = x;
+          this.y = y;
         },
-        rotation: 0//угол поворота
+        this.rotation = tankRotation;//угол поворота
       },
-      gun: {
-        type: 0,//тип пушки
-        rotation: 0//поворот
+      this.gun = function() {
+        this.type = gunType;//тип пушки
+        this.rotation = gunRotation;//поворот
       }
     }
   }
@@ -59,25 +84,6 @@ function startServer(){
 });
   //------------
 }
-
-function dataToServer(w, a, s, d, lmb, rmb, tankRotation, gunRotation){ //прототип пакета даних від клієнта
-    this.control = function(){//клавіатура + мишка
-      this.w = w;
-      this.a = a;
-      this.s = s;
-      this.d = d;
-      this.lmb = lmb;
-      this.rmb = rmb;
-    }
-    this.player = function(){
-      this.tank = function(){
-        this.rotation = tankRotation
-      }
-      this.gun = function(){
-        this.rotation = gunRotation
-      }
-    }
-  }
 
 const FPS = 30;
 var playerName;
