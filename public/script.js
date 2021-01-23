@@ -7,9 +7,12 @@ function startClient(){
 
  socket.on("update", function(data) {
    if (data.command){
+     log('command');
+     log(data.command);
      switch(data.command){
        case 'newPlayer':
          clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
+         break;
      }
    }
   socket.emit('control', control);

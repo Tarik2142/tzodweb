@@ -71,7 +71,8 @@ io.sockets.on('connection', function (socket) {
   
   socket.on('join', function (data) {//roomId, playerNickname, password
     log('join');
-		socket.join(data);
+    logObj(data.name);
+		socket.join(data.name);
     addPlayer(data.name)
 	});
   
