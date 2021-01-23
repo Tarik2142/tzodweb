@@ -34,25 +34,6 @@ function startServer(){
   closeForm();
   startGame();
   
-  function dataToServer(){ //прототип пакета даних від клієнта
-    this.control: {//клавіатура + мишка
-      this.w: false,
-      this.a: false,
-      this.s: false,
-      this.d: false,
-      this.lmb: false,
-      this.rmb: false
-    },
-    this.player: {
-      this.tank: {
-        this.rotation: 0
-      },
-      this.gun: {
-        this.rotation: 0
-      }
-    }
-  }
-  
   var dataToClient = {
     player: {
       tank: {
@@ -75,6 +56,25 @@ function startServer(){
 });
   //------------
 }
+
+function dataToServer(w, a, s, d, lmb, rmb, tankRotation, gunRotation){ //прототип пакета даних від клієнта
+    this.control: {//клавіатура + мишка
+      this.w: w,
+      this.a: a,
+      this.s: s,
+      this.d: d,
+      this.lmb: lmb,
+      this.rmb: rmb
+    },
+    this.player: {
+      this.tank: {
+        this.rotation: tankRotation
+      },
+      this.gun: {
+        this.rotation: gunRotation
+      }
+    }
+  }
 
 const FPS = 30;
 var playerName;
@@ -289,6 +289,15 @@ function handleMove() {
 }
 
 function update(time, delta) {
+  
+  var control = {
+    w: false,
+    a: false,
+    s: false,
+    d: false,
+    lmb: false,
+    rmb: false
+  }
   //handleMove();
   //var cursors = scene.input.keyboard.createCursorKeys();
   var cursors = this.input.keyboard.addKeys('W,S,A,D');
@@ -299,10 +308,11 @@ function update(time, delta) {
   this.matter.world.convertTilemapLayer(belowLayer);
 
   if (pointer.isDown) {
-    clients[id].fire();
-    socket.emit("fire", {
-    id: id,
-    });
+    control.lmb = true;
+    // clients[id].fire();
+    // socket.emit("fire", {
+    // id: id,
+    // });
     //clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
   }
   var poz =
