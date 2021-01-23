@@ -11,28 +11,12 @@ function clients(owner){
   this.remove = function(index){
     this.clientArr.splice(index, 1);
   }
-  this.get
-}
-
-class room {
-  owner;
-  roomname;
-  password;
-  players;
-  map;
-  
-  constructor(owner, roomname, password, map){
-    this.owner = owner;
-    this.roomname = roomname;
-    this.password = password;
-    this.map = map;
-    this.players = [owner];
+  this.getClient = function(id){
+    return this.clientArr[id];
   }
-  
-  join(player){
-    this.players.push(player);
+  this.getOwner = function(){
+    return this.clientArr[0];
   }
-  
 }
 
 function startServer(){
@@ -46,6 +30,12 @@ function startServer(){
   
   closeForm();
   startGame();
+  
+  clientList = new clients(playerName);
+  
+  socket.on("join", function(data) {
+  clientList.add();
+});
   
   var dataToClient = {
     player: {
@@ -64,7 +54,7 @@ function startServer(){
   }
   
   //-----network
-  ocket.on("update", function(data) {
+  socket.on("update", function(data) {
   
 });
   //------------
@@ -124,7 +114,7 @@ var id = Math.round(100 * Math.random());
 var posx = Math.round(500 * Math.random());
 var posy = Math.round(500 * Math.random());
 // A flag for drawing activity
-var clients;
+var clientList;
 var timerId = {};
 var socket = io();
 //var tilemapplus=tilemap-plus();
