@@ -69,7 +69,8 @@ io.sockets.on('connection', function (socket) {
   }
   
   socket.on('join', function (data) {//roomId, playerNickname, password
-		
+    log('join');
+		socket.join('tarik21420');
 	});
   
 	// // Start listening for mouse move events
