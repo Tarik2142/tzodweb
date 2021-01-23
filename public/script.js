@@ -37,7 +37,7 @@ function startServer(){
   clientList.add();
 });
   
-  var dataToClient = {
+  function dataToClient(x, y, tankRotation, gunRotation, gunType) {
     player: {
       tank: {
         position: {//кординати
@@ -61,20 +61,20 @@ function startServer(){
 }
 
 function dataToServer(w, a, s, d, lmb, rmb, tankRotation, gunRotation){ //прототип пакета даних від клієнта
-    this.control: {//клавіатура + мишка
-      this.w: w,
-      this.a: a,
-      this.s: s,
-      this.d: d,
-      this.lmb: lmb,
-      this.rmb: rmb
-    },
-    this.player: {
-      this.tank: {
-        this.rotation: tankRotation
-      },
-      this.gun: {
-        this.rotation: gunRotation
+    this.control = function(){//клавіатура + мишка
+      this.w = w;
+      this.a = a;
+      this.s = s;
+      this.d = d;
+      this.lmb = lmb;
+      this.rmb = rmb;
+    }
+    this.player = function(){
+      this.tank = function(){
+        this.rotation = tankRotation
+      }
+      this.gun = function(){
+        this.rotation = gunRotation
       }
     }
   }
