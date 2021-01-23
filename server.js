@@ -62,18 +62,14 @@ io.sockets.on('connection', function (socket) {
     
 	});
   
-  function addPlayer(name){
-    socket.broadcast.emit('update', {
-      command: 'newPlayer',
-      playerName: name
-    });
-  }
-  
   socket.on('join', function (data) {//roomId, playerNickname, password
     log('join');
     logObj(data.name);
 		socket.join(data.name);
-    addPlayer(data.name)
+    socket.broadcast.emit('update', {
+      command: 'newPlayer',
+      playerName: data.name
+    });
 	});
   
 	// // Start listening for mouse move events
