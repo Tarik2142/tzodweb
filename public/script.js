@@ -279,15 +279,8 @@ function create() {
 //   });
 // }
 
-function dataToServer(w, a, s, d, lmb, rmb, tankRotation, gunRotation){ //прототип пакета даних від клієнта
-    this.control = function(){//клавіатура + мишка
-      this.w = w;
-      this.a = a;
-      this.s = s;
-      this.d = d;
-      this.lmb = lmb;
-      this.rmb = rmb;
-    }
+function dataToServer(control, tankRotation, gunRotation){ //прототип пакета даних від клієнта
+    this.control = control;
     this.player = function(){
       this.tank = function(){
         this.rotation = tankRotation
@@ -298,10 +291,18 @@ function dataToServer(w, a, s, d, lmb, rmb, tankRotation, gunRotation){ //про
     }
   }
 
-
-
 function update(time, delta) {
   
+  var control = {
+    w: false,
+    a: false,
+    s: false,
+    d: false,
+    lmb: false,
+    rmb: false
+  }
+  //handleMove();
+  //var cursors = scene.input.keyboard.createCursorKeys();
   var cursors = this.input.keyboard.addKeys('W,S,A,D');
   var pointer = scene.input.activePointer;
   /*const worldPoint = this.input.activePointer.positionToCamera(
@@ -316,30 +317,47 @@ function update(time, delta) {
     // id: id,
     // });
     //clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
+  }else{
+    control.lmb = false;
   }
   var poz =
-    clients[id].gun.rotation -
-    Math.atan2(pointer.y - clients[id].gun.y, pointer.x - clients[id].gun.x);
+    clientList.getOwner().gun.rotation -
+    Math.atan2(pointer.y - clientList.getOwner().gun.y, pointer.x - clientList.getOwner().gun.x);
   if ((poz > 0.05 && poz < 3.14) || poz < -3.15) {
     //console.log("-");
-    clients[id].gun.rotation = clients[id].gun.rotation - 0.05;
+    clientList.getOwner().gun.rotation = clientList.getOwner().gun.rotation - 0.05;
   } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
-    clients[id].gun.rotation = clients[id].gun.rotation + 0.05;
+    clientList.getOwner().gun.rotation = clientList.getOwner().gun.rotation + 0.05;
     //console.log("+");
   }
 
   if (cursors.S.isDown) {
+    control.s = true;
     //socket.emit('downisDown',{'id': id});
-    clients[id].thrustBack(0.03);
-  } else if (cursors.W.isDown) {
+    //clients[id].thrustBack(0.03);
+  } else {
+    control.s = false;
+  }
+  if (cursors.W.isDown) {
+    control.w = true;
     //socket.emit('upisDown',{'id': id});
-    clients[id].thrust(0.03);
+    //clients[id].thrust(0.03);
+  }else{
+    control.w = false;
   }
   if (cursors.A.isDown) {
+    control.a = true;
     //socket.emit('leftisDown',{'id': id});
-    clients[id].setRotation(clients[id].rotation - 0.1);
-  } else if (cursors.D.isDown) {
-    //socket.emit('rightisDown',{'id': id});
-    clients[id].setRotation(clients[id].rotation + 0.1);
+    //clients[id].setRotation(clients[id].rotation - 0.1);
+  } else {
+    control.a = false;
   }
+  if (cursors.D.isDown) {
+    control.d = true;
+    //socket.emit('rightisDown',{'id': id});
+    //clients[id].setRotation(clients[id].rotation + 0.1);
+  }else{
+    control.d = false;
+  }
+  socket.
 }
