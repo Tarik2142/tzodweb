@@ -53,7 +53,7 @@ io.sockets.on('connection', function (socket) {
   });
     
     var updateTmr = setTimeout(function (){
-      socket.broadcast.emit('update');
+      socket.broadcast.emit('update', {});
     }, 50);
     
     socket.on('control', function (data) {//roomId, playerNickname, password
@@ -62,15 +62,17 @@ io.sockets.on('connection', function (socket) {
     
 	});
   
-  function addPlayer(){
+  function addPlayer(name){
     socket.broadcast.emit('update', {
-      command: 'newPlayer'
+      command: 'newPlayer',
+      playerName: name
     });
   }
   
   socket.on('join', function (data) {//roomId, playerNickname, password
     log('join');
-		socket.join('tarik21420');
+		socket.join(data);
+    addPlayer(data.name)
 	});
   
 	// // Start listening for mouse move events
