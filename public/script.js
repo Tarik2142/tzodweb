@@ -2,7 +2,10 @@ function startClient(){
   clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
  socket.on("update", function(data) {
    if (data.command){
-     
+     switch(data.command){
+       case 'newPlayer':
+         clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
+     }
    }
   socket.emit('control', control);
 }); 
@@ -57,10 +60,10 @@ function startServer(){
   closeForm();
   startGame();
   
-  clientList = new clients(playerName);
+  clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
   
   socket.on("join", function(data) {
-  clientList.add();
+  clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
 });
   
   //-----network
