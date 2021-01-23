@@ -2,6 +2,17 @@ function startGame(){
   game = new Phaser.Game(config);
 }
 
+function clients(owner){
+  this.clientArr = new Array();
+  this.clientArr[0] = owner;
+  this.add = function(player){
+    this.clientArr.push(player)
+  }
+  this.remove = function(){
+    
+  }
+}
+
 class room {
   owner;
   roomname;
