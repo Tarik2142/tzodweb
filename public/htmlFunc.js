@@ -106,4 +106,5 @@ function serverCfg() {
 
 function connectCfg() {
   if (!setNickname()) return;
+  startClient();
 }

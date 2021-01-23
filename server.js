@@ -62,10 +62,8 @@ io.sockets.on('connection', function (socket) {
     });
 	});
     
-    socket.on('join', function (data) {//roomId, playerNickname, password
-		socket.broadcast.emit('update', {
-      command: 'newPlayer'
-    });
+    socket.on('control', function (data) {//roomId, playerNickname, password
+		
 	});
     
 	});
