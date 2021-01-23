@@ -48,7 +48,7 @@ function startServer(){
       lmb: 'control:lmb',
       rmb: 'control:rmb'
     },
-    player: {//спрайт ігрока
+    player: {
       tank: {
         rotation: 0
       },
