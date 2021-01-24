@@ -44,6 +44,14 @@ io.sockets.on('connection', function (socket) {
   var isServer = false;
   var roomId;
   
+  function isServer(){
+    if (roomId){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
   connections.push(socket);
   
   socket.on('disconnect', function (data) {
