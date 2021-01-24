@@ -106,5 +106,31 @@ function serverCfg() {
 
 function connectCfg() {
   if (!setNickname()) return;
+  $('#modalContent').html('<br>');
+  $('<label>', {
+    for: 'roomId',
+    id: 'roomIdLabel',
+    text: 'Enter room id: '
+  }).appendTo($('#modalContent'));
+  $('<input>', {
+    type: 'text',
+    id: 'roomId',
+    name: 'roomId',
+  }).appendTo($('#modalContent'));
+
+  insertBr('#modalContent');
+  
+  $('<button>', {
+    class: 'btn',
+    text: 'Connect',
+    click: function () {
+      socket.emit('join', {
+    name: playerName,
+    room: 'tarik21420'
+  });
+    }
+  }).appendTo($('#modalContent'));
+  insertBr('#modalContent');
+  insertBr('#modalContent');
   startClient();
 }
