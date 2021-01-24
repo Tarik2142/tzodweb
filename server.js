@@ -42,9 +42,9 @@ function roomObj(roomId, socketId, owner, map, password, ownerSocket) {
     this.players.splice(playerId, 1);
     logObj('player removed!', this);
   }
-  this.addPlayer = function(socket){
+  this.addPlayer = function(socket, player){
     this.connections.push(socket);
-    const id = this.players.push(socket);
+    const id = this.players.push(player);
     logObj('player add!', this);
     return id;
   }
@@ -116,7 +116,7 @@ io.sockets.on('connection', function (socket) {
       if (room.chanelId == joinTo){//якшо така есть
         joined = true;
         roomId = room.roomId;
-        playerId = roomList[roomId].addPlayer(socket);
+        playerId = roomList[roomId].addPlayer(socket, player);
         log('Joined to ' + joinTo + '!');
         socket.join(data.room);//зайти
         toClients('event', {//оповістить

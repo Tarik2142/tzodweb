@@ -19,7 +19,7 @@ function startClient(){
   
 }); 
   setInterval(function(){//
-    socket.emit('control', control);
+    //socket.emit('control', control);
   }, 1000);
 }
 
