@@ -53,6 +53,10 @@ io.sockets.on('connection', function (socket) {
       roomList.splice(roomId, 1);//убрать ковнату
       logObj('roomList splice', roomList);
       socket.emit('GG');//сервер вийшов в окошко
+    }else{
+      io.to(roomList[roomId].socketId).emit('event', {
+        event: 'playerDis'
+      });//переслать на серв
     }
   });
   
@@ -67,11 +71,11 @@ io.sockets.on('connection', function (socket) {
       socket.emit('update');
     }, 1000);
     
-    socket.on('control', function (data) {//roomId, playerNickname, password
-		  log('control recieved');
-      io.to(roomList[roomId].socketId).emit('control', data);//переслать на серв
 	});
-    
+  
+  socket.on('control', function (data) {//roomId, playerNickname, password
+        log('control recieved');
+      io.to(roomList[roomId].socketId).emit('control', data);//переслать на серв
 	});
   
   socket.on('join', function (data) {//клієнт

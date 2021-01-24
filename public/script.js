@@ -15,10 +15,11 @@ function startClient(){
          break;
      }
    }
+  
+}); 
   setInterval(function(){//
     socket.emit('control', control);
   }, 1000);
-}); 
 }
 
 function startGame(){
@@ -95,7 +96,7 @@ function startServer(){
   
   //-----network
   socket.on("control", function(data) {
-  log()
+  logObj('control received', data);
 });
   //------------
 }
@@ -126,6 +127,12 @@ var config = {
     update: update
   }
 };
+
+function logObj(text, obj){
+  log(text);
+  log(obj);
+  log('----------');
+}
 
 function log(text) {
   console.log(text);
