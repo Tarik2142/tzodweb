@@ -72,27 +72,31 @@ io.sockets.on('connection', function (socket) {
 		logObj(data);
 	});
     
+    socket.on('control', function (data) {//roomId, playerNickname, password
+		logObj(data);
+	});
+    
 	});
   
-  socket.on('join', function (data) {//roomId, playerNickname, password
+  socket.on('join', function (data) {//клієнт
     const joinTo = data.room;//
     var joined = false;
     log('Join to ' + joinTo);
-    roomList.forEach(function(room){//
-      if (room.chanelId == joinTo){
+    roomList.forEach(function(room){//перебрать всі ковнати
+      if (room.chanelId == joinTo){//якшо така есть
         joined = true;
         log('Joined to ' + joinTo + '!');
-        socket.join(data.room);
-        io.sockets.in(data.room).emit('update', {
+        socket.join(data.room);//зайти
+        io.sockets.in(data.room).emit('update', {//оповістить остальних
           command: 'newPlayer',
           playerName: data.name
         });
-        socket.emit('joinResult', {result: true})
+        socket.emit('joinResult', {result: true});//оповістить клієнта
       }
     });
     
     if (!joined){
-      socket.emit('joinResult', {result: false, text: 'Room not found!'});
+      socket.emit('joinResult', {result: false, text: 'Room not found!'});//лох
     }
 		
 	});

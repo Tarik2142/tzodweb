@@ -131,7 +131,7 @@ function connectCfg() {
     }
   }).appendTo($('#modalContent'));
   insertBr('#modalContent');
-  socket.on('joinInfo', function(data){
+  socket.on('joinResult', function(data){
     if (data.result){
       startClient();
     }else{
