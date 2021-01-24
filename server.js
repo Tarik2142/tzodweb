@@ -27,18 +27,19 @@ app.get("/", (request, response) => {
   console.log("Your app is listening on port " + listener.address().port);
 });*/
 
-function roomObj(roomId, socketId, owner, map, password) {
+function roomObj(roomId, socketId, owner, map, password, ownerSocket) {
   this.roomId = roomId;
   this.socketId = socketId;
   this.owner = owner;
   this.map = map;
   this.password = password;
   this.chanelId = this.owner + '_room_' + this.roomId + '_' + Math.round(200 * Math.random());//максимум рандома
+  this.players = [owner];
+  this.removePlayer(socket)
   logObj('new room created!', this);
 }
 
 var roomList = [];
-var connections = [];
 
 io.sockets.on('connection', function (socket) {
   var roomId;
@@ -55,14 +56,14 @@ io.sockets.on('connection', function (socket) {
     }
   }
   
-  function toClients(){
-    
+  function toClients(event, data){
+    io.to(roomList[roomId].chanelId).emit(event, data);
   }
   
   connections.push(socket);
   
   socket.on('disconnect', function (data) {
-    connections.splice(connections.indexOf(socket), 1);//убрать подключение
+    roomList[roomId].connections.splice(roomList[roomId].connections.indexOf(socket), 1);//убрать подключение
     if (isServer){
       roomList.splice(roomId, 1);//убрать ковнату
       logObj('roomList splice', roomList);
@@ -79,7 +80,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('newRoom', function (data) {
     isServer = true;
     roomId = roomList.length;
-    roomList.push(new roomObj(roomId, data.socketId, data.owner, data.map, data.password));
+    roomList.push(new roomObj(roomId, data.socketId, data.owner, data.map, data.password, socket));
     logObj('roomList:', roomList);
 		socket.join(roomList[roomId].chanelId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
     
@@ -89,7 +90,7 @@ io.sockets.on('connection', function (socket) {
     
 	});
   
-  socket.on('control', function (data) {//roomId, playerNickname, password
+  socket.on('control', function (data) {
         //log('control recieved');
     toServer('control', data);
 	});
@@ -105,7 +106,7 @@ io.sockets.on('connection', function (socket) {
         roomId = room.roomId;
         log('Joined to ' + joinTo + '!');
         socket.join(data.room);//зайти
-        io.sockets.in(data.room).emit('event', {//оповістить остальних
+        toServer('event', {//оповістить
           event: 'newPlayer',
           playerName: player
         });
