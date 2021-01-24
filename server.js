@@ -40,10 +40,13 @@ function roomObj(roomId, socketId, owner, map, password, ownerSocket) {
     const playerId = this.connections.indexOf(socket);
     this.connections.splice(playerId, 1);
     this.players.splice(playerId, 1);
+    logObj('player removed!', this);
   }
   this.addPlayer = function(socket){
     this.connections.push(socket);
-    return this.players.push(socket);
+    const id = this.players.push(socket);
+    logObj('player add!', this);
+    return id;
   }
   logObj('new room created!', this);
 }
@@ -73,14 +76,15 @@ io.sockets.on('connection', function (socket) {
   socket.on('disconnect', function (data) {
     roomList[roomId].removePlayer(socket);//убрать дибіла
     if (isServer){
+      toClients('event', 'GG');//сервер вийшов в окошко
       roomList.splice(roomId, 1);//убрать ковнату
       logObj('roomList splice', roomList);
-      toClients('event', 'GG');//сервер вийшов в окошко
     }else{
       if (!roomList[roomId].socketId) return;
       toClients('event', {
         event: 'playerDisconnect',
-        player: player
+        player: player,
+        id: playerId
       });//переслать на серв
     }
   });

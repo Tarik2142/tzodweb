@@ -9,8 +9,10 @@ function startClient(){
      logObj('event: ', data);
      switch(data.event){
        case 'newPlayer':
-         
          if (data.playerName != playerName) clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
+         break;
+       case 'playerDisconnect':
+         clientList.remove(data.id);
          break;
      }
    }
@@ -32,6 +34,7 @@ function clients(owner){
     this.clientArr.push(player)
   }
   this.remove = function(index){
+    this.clientArr[index].kill();
     this.clientArr.splice(index, 1);
   }
   this.getClient = function(id){
@@ -79,6 +82,10 @@ function startServer(){
        case 'newPlayer':
          
          if (data.playerName != playerName) clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
+         break;
+         
+         case 'playerDisconnect':
+         clientList.remove(data.id);
          break;
      }
    }
