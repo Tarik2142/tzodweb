@@ -42,6 +42,7 @@ var connections = [];
 
 io.sockets.on('connection', function (socket) {
   var roomId;
+  var updateTmr;
   
   function isServer(){
     if (roomId){
@@ -67,6 +68,10 @@ io.sockets.on('connection', function (socket) {
     roomList.push(new roomObj(roomId, data.socketId, data.owner, data.map, data.password));
     logObj('roomList:', roomList);
 		socket.join(roomList[roomId].chanelId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
+    
+    updateTmr = setInterval(function(){
+      socket.emit('update');
+    }, 1000);
     
     socket.on('control', function (data) {//roomId, playerNickname, password
 		logObj(data);
