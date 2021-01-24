@@ -37,8 +37,13 @@ function roomObj(roomId, socketId, owner, map, password) {
 }
 
 var roomList = [];
+var connections = [];
 
 io.sockets.on('connection', function (socket) {
+  
+  socket.on('disconnect', function (data) {
+    connections.splice(connections.indexOf(socket), 1);
+  });
   
   socket.on('newRoom', function (data) {
     const roomId = roomList.length;
