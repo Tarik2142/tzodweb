@@ -12,7 +12,7 @@ function startClient(){
          if (data.playerName != playerName) clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
          break;
        case 'playerDisconnect':
-         clientList.remove(data.id);
+         clientList.remove(data.playerName);
          break;
      }
    }
@@ -33,9 +33,16 @@ function clients(owner){
   this.add = function(player){
     this.clientArr.push(player)
   }
-  this.remove = function(index){
-    this.clientArr[index].kill();
-    this.clientArr.splice(index, 1);
+  this.remove = function(player){
+    var counter = 0;
+    this.clientArr.forEach(function(client){
+      if (client.nickname == client){
+        this.clientArr[counter].kill();
+        return;
+      }
+      counter++;
+    });
+    this.clientArr.splice(counter, 1);
   }
   this.getClient = function(id){
     return this.clientArr[id];
@@ -85,7 +92,7 @@ function startServer(){
          break;
          
          case 'playerDisconnect':
-         clientList.remove(data.id);
+         clientList.remove(data.playerName);
          break;
      }
    }
