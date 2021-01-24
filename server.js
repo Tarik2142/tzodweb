@@ -64,6 +64,7 @@ io.sockets.on('connection', function (socket) {
       logObj('roomList splice', roomList);
       socket.emit('GG');//сервер вийшов в окошко
     }else{
+      if (!roomList[roomId].socketId) return;
       io.to(roomList[roomId].socketId).emit('event', {
         event: 'playerDisconnect',
         player: player

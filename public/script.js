@@ -4,6 +4,11 @@ function startClient(){
   log('playerName');
   log(playerName);
 
+  
+  socket.on("event", function(data) {
+      logObj('event: ', data);
+    });
+  
  socket.on("update", function(data) {
    if (data.command){
      log('command');
@@ -77,6 +82,10 @@ function startServer(){
   clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
     socket.emit('update', {
       command: 'newPlayer'
+    });
+    
+    socket.on("event", function(data) {
+      logObj('event: ', data);
     });
     
     socket.on("update", function(data) {
