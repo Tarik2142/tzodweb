@@ -43,20 +43,13 @@ var connections = [];
 io.sockets.on('connection', function (socket) {
   var roomId;
   var updateTmr;
-  
-  function isServer(){
-    if (roomId){
-      return true;
-    }else{
-      return false;
-    }
-  }
+  var isServer = false;
   
   connections.push(socket);
   
   socket.on('disconnect', function (data) {
     connections.splice(connections.indexOf(socket), 1);//убрать подключение
-    if (isServer()){
+    if (isServer){
       roomList.splice(roomId, 1);//убрать ковнату
       logObj('roomList splice', roomList);
       socket.emit('GG');//сервер вийшов в окошко
@@ -64,6 +57,7 @@ io.sockets.on('connection', function (socket) {
   });
   
   socket.on('newRoom', function (data) {
+    isServer = true;
     roomId = roomList.length;
     roomList.push(new roomObj(roomId, data.socketId, data.owner, data.map, data.password));
     logObj('roomList:', roomList);
@@ -74,11 +68,8 @@ io.sockets.on('connection', function (socket) {
     }, 1000);
     
     socket.on('control', function (data) {//roomId, playerNickname, password
-		logObj(data);
-	});
-    
-    socket.on('control', function (data) {//roomId, playerNickname, password
-		logObj(data);
+		  log('control recieved');
+      io.to(roomList[roomId].socketId).emit('control', data);//переслать на серв
 	});
     
 	});
@@ -90,6 +81,7 @@ io.sockets.on('connection', function (socket) {
     roomList.forEach(function(room){//перебрать всі ковнати
       if (room.chanelId == joinTo){//якшо така есть
         joined = true;
+        roomId = room.roomId;
         log('Joined to ' + joinTo + '!');
         socket.join(data.room);//зайти
         io.sockets.in(data.room).emit('update', {//оповістить остальних

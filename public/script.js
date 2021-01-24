@@ -15,7 +15,9 @@ function startClient(){
          break;
      }
    }
-  socket.emit('control', control);
+  setInterval(function(){//
+    socket.emit('control', control);
+  }, 1000);
 }); 
 }
 
@@ -92,8 +94,8 @@ function startServer(){
 });
   
   //-----network
-  socket.on("update", function(data) {
-  
+  socket.on("control", function(data) {
+  log()
 });
   //------------
 }
