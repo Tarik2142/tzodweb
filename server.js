@@ -74,6 +74,7 @@ io.sockets.on('connection', function (socket) {
   }
   
   socket.on('disconnect', function (data) {
+    if (!roomList[roomId]) return; //ковнати боль ше нет
     roomList[roomId].removePlayer(socket);//убрать дибіла
     if (isServer){
       toClients('event', 'GG');//сервер вийшов в окошко

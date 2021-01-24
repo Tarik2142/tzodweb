@@ -14,7 +14,7 @@ var guns = {
     offset: 30,//отступ от танка при вистреле
     baseSpeed: 20,//скорость танка
     armor: 60,//бронька
-    bulletLabel: this.bulletTexture
+    bulletLabel: 'type_bullet'
   }
 }
 

@@ -81,7 +81,7 @@ var tzodCollision = {
     function isBullet(body){
         if(body.label){
           //log(body.label);
-          if (body.label.indexOf('Bullet') != -1 || body.label.indexOf('bullet') != -1){
+          if (body.label.indexOf('type_bullet') != -1){
             return true;
           }
         }else{
