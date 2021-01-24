@@ -33,7 +33,7 @@ function roomObj(roomId, socketId, owner, map, password) {
   this.owner = owner;
   this.map = map;
   this.password = password;
-  this.chanelId = this.owner + '_room_' + this.roomId;
+  this.chanelId = this.owner + '_room_' + this.roomId + '_' + Math.round(200 * Math.random());//максимум рандома
   logObj('new room created!', this);
 }
 
@@ -75,12 +75,21 @@ io.sockets.on('connection', function (socket) {
 	});
   
   socket.on('join', function (data) {//roomId, playerNickname, password
-    log('join');
-    logObj(data.name);
-		socket.join(data.room);
-     io.sockets.in(data.room).emit('update', {
-      command: 'newPlayer',
-      playerName: data.name
+    const joinTo = data.room;//
+    var joined = false;
+    log('Join to ' + joinTo);
+    roomList.forEach(function(room){//
+      if (room.chanelId == joinTo){
+        joined = true;
+        log('Joined to ' + joinTo + '!');
+        socket.join(data.room);
+        io.sockets.in(data.room).emit('update', {
+          command: 'newPlayer',
+          playerName: data.name
+        });
+      }
     });
+    
+		
 	});
 });
