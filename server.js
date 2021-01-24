@@ -35,7 +35,12 @@ function roomObj(roomId, socketId, owner, map, password, ownerSocket) {
   this.password = password;
   this.chanelId = this.owner + '_room_' + this.roomId + '_' + Math.round(200 * Math.random());//максимум рандома
   this.players = [owner];
-  this.removePlayer(socket)
+  this.connections = [ownerSocket];
+  this.removePlayer = function(socket){
+    const playerId = this.connections.indexOf(socket);
+    this.connections.splice(playerId, 1);
+    this.players.splice(playerId, 1);
+  }
   logObj('new room created!', this);
 }
 
@@ -60,17 +65,15 @@ io.sockets.on('connection', function (socket) {
     io.to(roomList[roomId].chanelId).emit(event, data);
   }
   
-  connections.push(socket);
-  
   socket.on('disconnect', function (data) {
-    roomList[roomId].connections.splice(roomList[roomId].connections.indexOf(socket), 1);//убрать подключение
+    roomList[roomId].removePlayer(socket);//убрать дибіла
     if (isServer){
       roomList.splice(roomId, 1);//убрать ковнату
       logObj('roomList splice', roomList);
-      socket.emit('GG');//сервер вийшов в окошко
+      toClients('event', 'GG');//сервер вийшов в окошко
     }else{
       if (!roomList[roomId].socketId) return;
-      io.to(roomList[roomId].socketId).emit('event', {
+      toClients('event', {
         event: 'playerDisconnect',
         player: player
       });//переслать на серв
