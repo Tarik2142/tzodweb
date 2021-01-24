@@ -41,7 +41,6 @@ var roomList = [];
 var connections = [];
 
 io.sockets.on('connection', function (socket) {
-  var isServer = false;
   var roomId;
   
   function isServer(){
@@ -56,20 +55,18 @@ io.sockets.on('connection', function (socket) {
   
   socket.on('disconnect', function (data) {
     connections.splice(connections.indexOf(socket), 1);//убрать подключение
-    roomList.splice(roomId, 1);//убрать ковнату
-    logObj('roomList splice', roomList);
-      socket.broadcast.emit('GG');
+    if (isServer()){
+      roomList.splice(roomId, 1);//убрать ковнату
+      logObj('roomList splice', roomList);
+      socket.emit('GG');//сервер вийшов в окошко
+    }
   });
   
   socket.on('newRoom', function (data) {
-    isServer = true;
     roomId = roomList.length;
     roomList.push(new roomObj(roomId, data.socketId, data.owner, data.map, data.password));
     logObj('roomList:', roomList);
 		socket.join(roomList[roomId].chanelId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
-    socket.on('disconnect', () => {
-    
-  });
     
     socket.on('control', function (data) {//roomId, playerNickname, password
 		logObj(data);
@@ -86,30 +83,4 @@ io.sockets.on('connection', function (socket) {
       playerName: data.name
     });
 	});
-  
-	// // Start listening for mouse move events
-	// socket.on('tankMove', function (data) {
-	// 	// This line sends the event (broadcasts it)
-	// 	// to everyone except the originating client. upisDown
-	// 	socket.broadcast.emit('tankMove', data);
-	// });
-	// socket.on('upisDown', function (data) {
-	// 	socket.broadcast.emit('upisDown', data);
-	// });
-	// socket.on('downisDown', function (data) {
-	// 	socket.broadcast.emit('downisDown', data);
-	// });
-	// socket.on('leftisDown', function (data) {
-	// 	socket.broadcast.emit('leftisDown', data);
-	// });
-	// socket.on('rightisDown', function (data) {
-	// 	socket.broadcast.emit('rightisDown', data);
-	// });
-	// socket.on('fire', function (data) {
-	// 	socket.broadcast.emit('fire', data);
-	// });
-	// socket.on('tankCreate', function (data) {
-	// 	socket.broadcast.emit('tankCreate', data);
-	// log(data);
-	// });
 });
