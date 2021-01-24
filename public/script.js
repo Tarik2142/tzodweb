@@ -3,11 +3,6 @@ function startClient(){
   startGame();
   log('playerName');
   log(playerName);
-
-  
-  socket.on("event", function(data) {
-      logObj('event: ', data);
-    });
   
  socket.on("event", function(data) {
    if (data.event){
@@ -77,29 +72,17 @@ function startServer(){
   
   //clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
   
-  socket.on("join", function(data) {
-  clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
-    socket.emit('update', {
-      command: 'newPlayer'
-    });
-    
-    socket.on("event", function(data) {
-      logObj('event: ', data);
-    });
-    
-    socket.on("update", function(data) {
-   if (data.command){
-     log('command');
-     log(data.command);
-     switch(data.command){
+  socket.on("event", function(data) {
+    if (data.event){
+     logObj('event: ', data);
+     switch(data.event){
        case 'newPlayer':
-         log(clientList);
+         
          if (data.playerName != playerName) clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
          break;
      }
    }
-  
-}); 
+    
 });
   
   //-----network

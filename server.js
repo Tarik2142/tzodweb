@@ -41,6 +41,10 @@ function roomObj(roomId, socketId, owner, map, password, ownerSocket) {
     this.connections.splice(playerId, 1);
     this.players.splice(playerId, 1);
   }
+  this.addPlayer = function(socket){
+    this.connections.push(socket);
+    return this.players.push(socket);
+  }
   logObj('new room created!', this);
 }
 
@@ -51,6 +55,7 @@ io.sockets.on('connection', function (socket) {
   var updateTmr;
   var isServer = false;
   var player;
+  var playerId;
   
   function toServer(event, data){
     if (roomList[roomId].socketId){
@@ -107,9 +112,10 @@ io.sockets.on('connection', function (socket) {
       if (room.chanelId == joinTo){//якшо така есть
         joined = true;
         roomId = room.roomId;
+        playerId = roomList[roomId].addPlayer(socket);
         log('Joined to ' + joinTo + '!');
         socket.join(data.room);//зайти
-        toServer('event', {//оповістить
+        toClients('event', {//оповістить
           event: 'newPlayer',
           playerName: player
         });
