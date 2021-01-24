@@ -36,6 +36,10 @@ function roomObj(roomId, socketId, owner, map, password) {
   logObj('new room created!', this);
 }
 
+function newConnection(){
+  
+}
+
 var roomList = [];
 var connections = [];
 
