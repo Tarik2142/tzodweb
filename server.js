@@ -87,11 +87,12 @@ io.sockets.on('connection', function (socket) {
           command: 'newPlayer',
           playerName: data.name
         });
+        socket.emit('joinResult', {result: true})
       }
     });
     
     if (!joined){
-      socket.emit('error', {msg: 'Room not found!'})
+      socket.emit('joinResult', {result: false, text: 'Room not found!'});
     }
 		
 	});

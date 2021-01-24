@@ -3,10 +3,6 @@ function startClient(){
   startGame();
   log('playerName');
   log(playerName);
-  socket.emit('join', {
-    name: playerName,
-    room: 'tarik21420'
-  });
 
  socket.on("update", function(data) {
    if (data.command){

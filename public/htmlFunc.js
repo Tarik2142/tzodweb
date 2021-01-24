@@ -125,12 +125,17 @@ function connectCfg() {
     text: 'Connect',
     click: function () {
       socket.emit('join', {
-    name: playerName,
-    room: 'tarik21420'
+        name: playerName,
+        room: $('#roomId').val()
   });
     }
   }).appendTo($('#modalContent'));
   insertBr('#modalContent');
-  insertBr('#modalContent');
-  startClient();
+  socket.on('joinInfo', function(data){
+    if (data.result){
+      startClient();
+    }else{
+      alert(data.text);
+    }
+  });
 }
