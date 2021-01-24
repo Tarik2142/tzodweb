@@ -36,14 +36,12 @@ function roomObj(roomId, socketId, owner, map, password) {
   logObj('new room created!', this);
 }
 
-function newConnection(){
-  
-}
-
 var roomList = [];
 var connections = [];
 
 io.sockets.on('connection', function (socket) {
+  
+  connections.push(socket);
   
   socket.on('disconnect', function (data) {
     connections.splice(connections.indexOf(socket), 1);
