@@ -40,6 +40,8 @@ var roomList = [];
 var connections = [];
 
 io.sockets.on('connection', function (socket) {
+  var isServer = false;
+  var roomId;
   
   connections.push(socket);
   
@@ -48,7 +50,8 @@ io.sockets.on('connection', function (socket) {
   });
   
   socket.on('newRoom', function (data) {
-    const roomId = roomList.length;
+    isServer = true;
+    roomId = roomList.length;
     roomList.push(new roomObj(roomId, data.socketId, data.owner, data.map, data.password));
     logObj('roomList:', roomList);
 		socket.join(data.owner + roomId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
