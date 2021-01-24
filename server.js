@@ -44,6 +44,16 @@ io.sockets.on('connection', function (socket) {
   var roomId;
   var updateTmr;
   var isServer = false;
+  var player;
+  
+  function toServer(data){
+    if (roomList[roomId].socketId){
+      
+     io.to(roomList[roomId].socketId).emit('control', data);//переслать на серв 
+    }else{
+      log('not connected to server room');
+    }
+  }
   
   connections.push(socket);
   
@@ -55,7 +65,8 @@ io.sockets.on('connection', function (socket) {
       socket.emit('GG');//сервер вийшов в окошко
     }else{
       io.to(roomList[roomId].socketId).emit('event', {
-        event: 'playerDis'
+        event: 'playerDisconnect',
+        player: player
       });//переслать на серв
     }
   });
@@ -79,6 +90,7 @@ io.sockets.on('connection', function (socket) {
 	});
   
   socket.on('join', function (data) {//клієнт
+    player = data.name;
     const joinTo = data.room;//
     var joined = false;
     log('Join to ' + joinTo);
@@ -90,7 +102,7 @@ io.sockets.on('connection', function (socket) {
         socket.join(data.room);//зайти
         io.sockets.in(data.room).emit('update', {//оповістить остальних
           command: 'newPlayer',
-          playerName: data.name
+          playerName: player
         });
         socket.emit('joinResult', {result: true});//оповістить клієнта
       }
