@@ -356,8 +356,8 @@ function update(time, delta) {
   /*const worldPoint = this.input.activePointer.positionToCamera(
     this.cameras.main
   );*/
-  //this.matter.world.convertTilemapLayer(belowLayer);
-  if (serverMode){
+  this.matter.world.convertTilemapLayer(belowLayer);
+  if (!serverMode){
     if (pointer.isDown) {
     control.lmb = true;
     // clients[id].fire();
@@ -409,14 +409,7 @@ function update(time, delta) {
   }
   }else{
     if (pointer.isDown) {
-    control.lmb = true;
-    // clients[id].fire();
-    // socket.emit("fire", {
-    // id: id,
-    // });
-    //clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
-  }else{
-    control.lmb = false;
+    clientList.getOwner().fire();
   }
   var poz =
     clientList.getOwner().gun.rotation -
@@ -430,32 +423,16 @@ function update(time, delta) {
   }
 
   if (cursors.S.isDown) {
-    control.s = true;
-    //socket.emit('downisDown',{'id': id});
-    //clients[id].thrustBack(0.03);
-  } else {
-    control.s = false;
+    clientList.getOwner().thrustBack(0.03);
   }
   if (cursors.W.isDown) {
-    control.w = true;
-    //socket.emit('upisDown',{'id': id});
-    //clients[id].thrust(0.03);
-  }else{
-    control.w = false;
+    clientList.getOwner().thrust(0.03);
   }
   if (cursors.A.isDown) {
-    control.a = true;
-    //socket.emit('leftisDown',{'id': id});
-    //clients[id].setRotation(clients[id].rotation - 0.1);
-  } else {
-    control.a = false;
+    clientList.getOwner().setRotation(clientList.getOwner().rotation - 0.1);
   }
   if (cursors.D.isDown) {
-    control.d = true;
-    //socket.emit('rightisDown',{'id': id});
-    //clients[id].setRotation(clients[id].rotation + 0.1);
-  }else{
-    control.d = false;
+    clientList.getOwner().setRotation(clientList.getOwner().rotation + 0.1);
   }
   }
   
