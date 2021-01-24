@@ -35,9 +35,11 @@ function clients(owner){
   }
   this.remove = function(player){
     var counter = 0;
+    //var that = this;
     this.clientArr.forEach(function(client){
+      logObj('client:', client.nickname);
       if (client.nickname == client){
-        this.clientArr[counter].kill();
+        client.kill();
         return;
       }
       counter++;

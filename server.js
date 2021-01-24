@@ -83,8 +83,7 @@ io.sockets.on('connection', function (socket) {
       if (!roomList[roomId].socketId) return;
       toClients('event', {
         event: 'playerDisconnect',
-        playerName: player,
-        id: playerId
+        playerName: player
       });//переслать на серв
     }
   });
