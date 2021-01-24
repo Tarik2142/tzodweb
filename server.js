@@ -46,13 +46,17 @@ io.sockets.on('connection', function (socket) {
   var isServer = false;
   var player;
   
-  function toServer(data){
+  function toServer(event, data){
     if (roomList[roomId].socketId){
       
-     io.to(roomList[roomId].socketId).emit('control', data);//переслать на серв 
+     io.to(roomList[roomId].socketId).emit(event, data);//переслать на серв 
     }else{
       log('not connected to server room');
     }
+  }
+  
+  function toClients(){
+    
   }
   
   connections.push(socket);
@@ -79,15 +83,15 @@ io.sockets.on('connection', function (socket) {
     logObj('roomList:', roomList);
 		socket.join(roomList[roomId].chanelId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
     
-    updateTmr = setInterval(function(){
-      socket.emit('update');
-    }, 1000);
+    // updateTmr = setInterval(function(){
+    //   socket.emit('update');
+    // }, 1000);
     
 	});
   
   socket.on('control', function (data) {//roomId, playerNickname, password
-        log('control recieved');
-      io.to(roomList[roomId].socketId).emit('control', data);//переслать на серв
+        //log('control recieved');
+    toServer('control', data);
 	});
   
   socket.on('join', function (data) {//клієнт
@@ -101,8 +105,8 @@ io.sockets.on('connection', function (socket) {
         roomId = room.roomId;
         log('Joined to ' + joinTo + '!');
         socket.join(data.room);//зайти
-        io.sockets.in(data.room).emit('update', {//оповістить остальних
-          command: 'newPlayer',
+        io.sockets.in(data.room).emit('event', {//оповістить остальних
+          event: 'newPlayer',
           playerName: player
         });
         socket.emit('joinResult', {result: true});//оповістить клієнта
