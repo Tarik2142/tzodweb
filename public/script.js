@@ -37,8 +37,8 @@ function clients(owner){
     var counter = 0;
     //var that = this;
     this.clientArr.forEach(function(client){
-      logObj('client:', client.nickname);
-      if (client.nickname == client){
+      //logObj('client:', client.id;
+      if (client.id == player){
         client.kill();
         return;
       }
@@ -55,6 +55,7 @@ function clients(owner){
 }
 
 function startServer(){
+  serverMode = true;
   function dataToClient(x, y, tankRotation, gunRotation, gunType) {
     this.player = function() {
       this.tank = function() {
@@ -109,6 +110,7 @@ function startServer(){
 }
 
 const FPS = 30;
+var serverMode = false;
 var playerName;
 var config = {
   type: Phaser.AUTO,
@@ -354,9 +356,9 @@ function update(time, delta) {
   /*const worldPoint = this.input.activePointer.positionToCamera(
     this.cameras.main
   );*/
-  this.matter.world.convertTilemapLayer(belowLayer);
-
-  if (pointer.isDown) {
+  //this.matter.world.convertTilemapLayer(belowLayer);
+  if (serverMode){
+    if (pointer.isDown) {
     control.lmb = true;
     // clients[id].fire();
     // socket.emit("fire", {
@@ -405,4 +407,56 @@ function update(time, delta) {
   }else{
     control.d = false;
   }
+  }else{
+    if (pointer.isDown) {
+    control.lmb = true;
+    // clients[id].fire();
+    // socket.emit("fire", {
+    // id: id,
+    // });
+    //clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
+  }else{
+    control.lmb = false;
+  }
+  var poz =
+    clientList.getOwner().gun.rotation -
+    Math.atan2(pointer.y - clientList.getOwner().gun.y, pointer.x - clientList.getOwner().gun.x);
+  if ((poz > 0.05 && poz < 3.14) || poz < -3.15) {
+    //console.log("-");
+    clientList.getOwner().gun.rotation = clientList.getOwner().gun.rotation - 0.05;
+  } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
+    clientList.getOwner().gun.rotation = clientList.getOwner().gun.rotation + 0.05;
+    //console.log("+");
+  }
+
+  if (cursors.S.isDown) {
+    control.s = true;
+    //socket.emit('downisDown',{'id': id});
+    //clients[id].thrustBack(0.03);
+  } else {
+    control.s = false;
+  }
+  if (cursors.W.isDown) {
+    control.w = true;
+    //socket.emit('upisDown',{'id': id});
+    //clients[id].thrust(0.03);
+  }else{
+    control.w = false;
+  }
+  if (cursors.A.isDown) {
+    control.a = true;
+    //socket.emit('leftisDown',{'id': id});
+    //clients[id].setRotation(clients[id].rotation - 0.1);
+  } else {
+    control.a = false;
+  }
+  if (cursors.D.isDown) {
+    control.d = true;
+    //socket.emit('rightisDown',{'id': id});
+    //clients[id].setRotation(clients[id].rotation + 0.1);
+  }else{
+    control.d = false;
+  }
+  }
+  
 }
