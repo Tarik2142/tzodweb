@@ -33,6 +33,7 @@ function roomObj(roomId, socketId, owner, map, password) {
   this.owner = owner;
   this.map = map;
   this.password = password;
+  this.chanelId = this.owner + '_room_' + this.roomId;
   logObj('new room created!', this);
 }
 
@@ -46,7 +47,10 @@ io.sockets.on('connection', function (socket) {
   connections.push(socket);
   
   socket.on('disconnect', function (data) {
-    connections.splice(connections.indexOf(socket), 1);
+    connections.splice(connections.indexOf(socket), 1);//убрать подключение
+    roomList.splice(roomId, 1);//убрать ковнату
+    logObj('roomList splice', roomList);
+      socket.broadcast.emit('GG');
   });
   
   socket.on('newRoom', function (data) {
@@ -54,16 +58,10 @@ io.sockets.on('connection', function (socket) {
     roomId = roomList.length;
     roomList.push(new roomObj(roomId, data.socketId, data.owner, data.map, data.password));
     logObj('roomList:', roomList);
-		socket.join(data.owner + roomId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
+		socket.join(roomList[roomId].chanelId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
     socket.on('disconnect', () => {
-    roomList.splice(roomId, 1);
-    logObj('roomList splice', roomList);
-      socket.broadcast.emit('GG');
-  });
     
-    var updateTmr = setTimeout(function (){
-      io.sockets.in(roomId).emit('update', {});
-    }, 1000);
+  });
     
     socket.on('control', function (data) {//roomId, playerNickname, password
 		logObj(data);
