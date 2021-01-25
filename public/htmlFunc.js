@@ -120,16 +120,32 @@ function connectCfg() {
 
   insertBr('#modalContent');
   
+  $('#modalContent').html('<br>');
+  $('<label>', {
+    for: 'roomPassword',
+    id: 'roomPasswordLabel',
+    text: 'Enter room password (for private room): '
+  }).appendTo($('#modalContent'));
+  $('<input>', {
+    type: 'text',
+    id: 'roomPassword',
+    name: 'roomPassword',
+  }).appendTo($('#modalContent'));
+  
+  insertBr('#modalContent');
+  
   $('<button>', {
     class: 'btn',
     text: 'Connect',
     click: function () {
       socket.emit('join', {
         name: playerName,
-        room: $('#roomId').val()
+        room: $('#roomId').val(),
+        password: $('#roomPassword').val()
   });
     }
   }).appendTo($('#modalContent'));
+  insertBr('#modalContent');
   insertBr('#modalContent');
   socket.on('joinResult', function(data){
     if (data.result){

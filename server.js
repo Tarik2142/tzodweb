@@ -114,6 +114,17 @@ io.sockets.on('connection', function (socket) {
     log('Join to ' + joinTo);
     roomList.forEach(function(room){//перебрать всі ковнати
       if (room.chanelId == joinTo){//якшо така есть
+        if (room.password){//
+          if (!data.password){//
+            socket.emit('joinResult', {result: false, text: 'Enter room password!'});//оповістить клієнта
+            return;
+          }else{
+            if (!data.password == room.password){
+              socket.emit('joinResult', {result: false, text: 'Wrong room password!'});//оповістить клієнта
+              return;
+            }
+          }
+        }
         joined = true;
         roomId = room.roomId;
         playerId = roomList[roomId].addPlayer(socket, player);
