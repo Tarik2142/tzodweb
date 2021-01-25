@@ -48,6 +48,9 @@ function roomObj(roomId, socketId, owner, map, password, ownerSocket) {
     logObj('player add!', this);
     return id;
   }
+  this.getPlayerId = function(socket){
+    return this.connections.indexOf(socket);
+  }
   logObj('new room created!', this);
 }
 
@@ -62,7 +65,6 @@ io.sockets.on('connection', function (socket) {
   
   function toServer(event, data){
     if (roomList[roomId].socketId){
-      
      io.to(roomList[roomId].socketId).emit(event, data);//переслать на серв 
     }else{
       log('not connected to server room');
@@ -103,8 +105,9 @@ io.sockets.on('connection', function (socket) {
 	});
   
   socket.on('control', function (data) {
+    const from = roomList[roomList.getPlayerId(socket)];//ник от кого
         //log('control recieved');
-    toServer('control', data);
+    toServer('control', {from: from, data: data});
 	});
   
   socket.on('join', function (data) {//клієнт
