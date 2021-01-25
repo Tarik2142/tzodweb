@@ -117,10 +117,12 @@ io.sockets.on('connection', function (socket) {
         if (room.password){//
           if (!data.password){//
             socket.emit('joinResult', {result: false, text: 'Enter room password!'});//оповістить клієнта
+            log('Empty password!');
             return;
           }else{
             if (!data.password == room.password){
               socket.emit('joinResult', {result: false, text: 'Wrong room password!'});//оповістить клієнта
+              log('Wrong password!');
               return;
             }
           }

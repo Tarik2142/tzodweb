@@ -120,7 +120,7 @@ function connectCfg() {
 
   insertBr('#modalContent');
   
-  $('#modalContent').html('<br>');
+  //$('#modalContent').html('<br>');
   $('<label>', {
     for: 'roomPassword',
     id: 'roomPasswordLabel',
