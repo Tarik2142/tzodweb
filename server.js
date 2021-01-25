@@ -97,7 +97,10 @@ io.sockets.on('connection', function (socket) {
     roomList.push(new roomObj(roomId, data.socketId, data.owner, data.map, data.password, socket));
     logObj('roomList:', roomList);
 		socket.join(roomList[roomId].chanelId);//socket.to(anotherSocketId).emit("private message", socket.id, msg);
-    
+    socket.emit('event', {//ід обратно на серв
+      event: 'room_created',
+      roomId: roomList[roomId].chanelId
+    });
     // updateTmr = setInterval(function(){
     //   socket.emit('update');
     // }, 1000);
