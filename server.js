@@ -39,13 +39,13 @@ function roomObj(roomId, socketId, owner, map, password, ownerSocket) {
   this.removePlayer = function(socket){
     const playerId = this.connections.indexOf(socket);
     this.connections.splice(playerId, 1);
+    log('player removed! ID=' + playerId + ' | name=' + this.players[playerId]);
     this.players.splice(playerId, 1);
-    logObj('player removed!', this);
   }
   this.addPlayer = function(socket, player){
     this.connections.push(socket);
     const id = this.players.push(player);
-    logObj('player add!', this);
+    logObj('add player ' + player + ' | ID=' + id , this);
     return id;
   }
   this.getPlayerId = function(socket){
