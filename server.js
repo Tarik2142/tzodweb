@@ -124,13 +124,17 @@ io.sockets.on('connection', function (socket) {
      }
      
      var responseRoomlist = [];
+     var counter = 0;
      
      roomList.forEach(function(room){//перебор
        var password = false;
        if (room.password){
          password = true;
        }
-       responseRoomlist.push(new responseRoomObj());
+       responseRoomlist.push(new responseRoomObj(room.roomId, room.players, room.map, password));//добавить поддержку кастомних имен ковнат!!!!!
+       if (counter < roomList.length){
+         
+       }
      });
    });
   
