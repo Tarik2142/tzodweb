@@ -133,7 +133,7 @@ io.sockets.on('connection', function (socket) {
        }
        responseRoomlist.push(new responseRoomObj(room.roomId, room.players, room.map, password));//добавить поддержку кастомних имен ковнат!!!!!
        if (counter >= roomList.length){
-         socket.emit('roomList', responseRoomlist);
+         socket.emit('roomList', responseRoomlist);//отправить список
        }else{
          counter++;
        }
