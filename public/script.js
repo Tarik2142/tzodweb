@@ -55,6 +55,7 @@ function clients(owner){
 }
 
 function startServer(){
+  map = $('#mapSelector').val();
   serverMode = true;
   function dataToClient(x, y, tankRotation, gunRotation, gunType) {
     this.player = function() {
@@ -76,7 +77,7 @@ function startServer(){
     playerId: playerName + id,
     socketId: socket.id, 
     owner: playerName, 
-    map: $('#mapSelector').val(), 
+    map: map, 
     password: $('#password').val()
   });
   
@@ -112,6 +113,7 @@ function startServer(){
 const FPS = 30;
 var serverMode = false;
 var playerName;
+var map;
 var config = {
   type: Phaser.AUTO,
   width: 640,
@@ -256,7 +258,7 @@ function preload() {
     "https://cdn.glitch.com/772bc608-91dd-4577-857d-f1f6ed4d7332%2Fbooster.png"
   );
   //this.load.image("tiles", "https://www.mikewesthad.com/phaser-3-tilemap-blog-posts/post-1/assets/tilesets/tuxmon-sample-32px-extruded.png");
-  this.load.tilemapTiledJSON("map", "map1.json");
+  this.load.tilemapTiledJSON("map", map);
   this.load.image(
     "tiles",
     "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fwalls.png"

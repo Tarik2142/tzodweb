@@ -45,7 +45,12 @@ function serverCfg() {
     name: 'mapSelector',
   }).appendTo($('#modalContent'));
   
-  for (var maps)
+  for (var maps = 0; maps < mapList.length; maps++){
+    $('<option>', {
+      value: mapList[maps].file,
+      text: mapList[maps].desc
+    }).appendTo($('#mapSelector'));
+  }
 
   insertBr('#modalContent');
 

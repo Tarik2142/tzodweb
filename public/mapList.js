@@ -1,6 +1,10 @@
-const mapList = [
+const mapList = [//список карт
   {
-    desc: 'map1',
-    file: 'map1.json'
+    desc: 'map1',//назва
+    file: 'map1.json'//файл
+  },
+  {
+    desc: 'map2',
+    file: 'map2.json'
   }
 ];
