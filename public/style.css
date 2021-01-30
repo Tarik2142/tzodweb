@@ -88,4 +88,12 @@ body {
 
 *{
   cursor: url(https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor.png?v=1612037791532), auto;
+  animation: cursor 400ms infinite;
+}
+
+@keyframes cursor {
+  0% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor.png?v=1612037791532'), auto;}
+  40% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor1.png?v=1612038724825'), auto;}
+  60% {cursor: url(frame4.png), auto;}
+  100% {cursor: url(frame6.png), auto;}
 }
