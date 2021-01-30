@@ -45,7 +45,7 @@ function serverCfg() {
     name: 'mapSelector',
   }).appendTo($('#modalContent'));
   
-  for (var maps = 0; maps < mapList.length; maps++){
+  for (var maps = 0; maps < mapList.length; maps++){//подстановка карт в вибор карт
     $('<option>', {
       value: mapList[maps].file,
       text: mapList[maps].desc
