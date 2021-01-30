@@ -49,24 +49,29 @@
 .btn{
   font-size: 2rem;
   color: #e4ddde;
-  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbutton.png?v=1612035713271');
-  border: 1px solid green;
+  background-color: #8f9471;
+  border: 1px solid #D4D7D6;
 }
 
 .btn:focus{
   outline-width: 0;
 }
 
+.text{
+  color: #e4ddde;
+}
+
 input[type=text]{
   font-size: 1rem;
   color: #e4ddde;
-  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbutton.png?v=1612035105689');
+  background-color: #8f9471;
+  border: 1px solid #D4D7D6;
 }
 
 select{
   font-size: 1rem;
   color: #e4ddde;
-  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbrick.png?v=1610827003399');
+  background-color: #8f9471;
 }
 
 input:focus{
@@ -74,15 +79,7 @@ input:focus{
 }
 
 .btn:hover{
-background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbrick_dmg.png?v=1610827010949');
-}
-
-.btn-concrite{
-background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fconcrite.png?v=1610827920741');
-}
-
-.btn-concrite:hover{
-background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fconcrite_select.png?v=1610827925313');
+background-color: #8f94717a;
 }
 
 body {
