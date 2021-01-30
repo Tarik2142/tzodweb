@@ -1,3 +1,19 @@
+*{
+  cursor: url(https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor.png?v=1612037791532), auto;
+  animation: cursor 700ms infinite;
+}
+
+@keyframes cursor {
+  0% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor.png?v=1612037791532'), auto;}
+  10% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor1.png?v=1612038724825'), auto;}
+  20% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor2.png?v=1612038724824'), auto;}
+  30% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor3.png?v=1612038724825'), auto;}
+  45% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor4.png?v=1612039183074'), auto;}
+  60% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor5.png?v=1612039183075'), auto;}
+  80% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor6.png?v=1612039183075'), auto;}
+  100% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor7.png?v=1612039183221'), auto;}
+}
+
 .modal{
   font-size: 2rem;
   color: #f3eaec;
@@ -10,8 +26,7 @@
   border: 1px solid #888;
   width: 50%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  animation-name: animatetop;
-  animation-duration: 0.4s;
+  animation: animatetop 0.4s !important;
   background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fwindow.png?v=1612034911465');
 }
 
@@ -84,16 +99,4 @@ background-color: #8f94717a;
 
 body {
   background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fback01.png?v=1610821108096');
-}
-
-*{
-  cursor: url(https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor.png?v=1612037791532), auto;
-  animation: cursor 400ms infinite;
-}
-
-@keyframes cursor {
-  0% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor.png?v=1612037791532'), auto;}
-  40% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor1.png?v=1612038724825'), auto;}
-  60% {cursor: url(frame4.png), auto;}
-  100% {cursor: url(frame6.png), auto;}
 }
