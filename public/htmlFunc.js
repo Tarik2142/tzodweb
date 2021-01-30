@@ -43,11 +43,9 @@ function serverCfg() {
   $('<select>', {
     id: 'mapSelector',
     name: 'mapSelector',
-    append: $('<option>', {
-      value: 'map1',
-      text: 'map1'
-    })
   }).appendTo($('#modalContent'));
+  
+  for (var maps)
 
   insertBr('#modalContent');
 

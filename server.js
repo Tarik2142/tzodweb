@@ -116,7 +116,7 @@ io.sockets.on('connection', function (socket) {
 	});
   
    socket.on('listRooms', function(){//список ковнат
-     log('Li')
+     //log('List rooms->');
      function responseRoomObj(name, players, map, password) {
        this.name = name;
        this.players = players;
@@ -132,7 +132,7 @@ io.sockets.on('connection', function (socket) {
        if (room.password){
          password = true;
        }
-       responseRoomlist.push(new responseRoomObj(room.roomId, room.players, room.map, password));//добавить поддержку кастомних имен ковнат!!!!!
+       responseRoomlist.push(new responseRoomObj(room.chanelId, room.players, room.map, password));//добавить поддержку кастомних имен ковнат!!!!!
        counter++;
        if (counter >= roomList.length){
          socket.emit('roomList', responseRoomlist);//отправить список
