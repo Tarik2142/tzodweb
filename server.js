@@ -132,8 +132,10 @@ io.sockets.on('connection', function (socket) {
          password = true;
        }
        responseRoomlist.push(new responseRoomObj(room.roomId, room.players, room.map, password));//добавить поддержку кастомних имен ковнат!!!!!
-       if (counter < roomList.length){
-         
+       if (counter >= roomList.length){
+         socket.emit('roomList', responseRoomlist);
+       }else{
+         counter++;
        }
      });
    });
