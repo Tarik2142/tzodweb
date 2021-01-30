@@ -5,12 +5,12 @@
 
 @keyframes cursor {
   0% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor.png?v=1612037791532'), auto;}
-  10% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor1.png?v=1612038724825'), auto;}
-  20% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor2.png?v=1612038724824'), auto;}
-  30% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor3.png?v=1612038724825'), auto;}
-  45% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor4.png?v=1612039183074'), auto;}
-  60% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor5.png?v=1612039183075'), auto;}
-  80% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor6.png?v=1612039183075'), auto;}
+  5% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor1.png?v=1612038724825'), auto;}
+  10% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor2.png?v=1612038724824'), auto;}
+  15% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor3.png?v=1612038724825'), auto;}
+  20% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor4.png?v=1612039183074'), auto;}
+  50% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor5.png?v=1612039183075'), auto;}
+  70% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor6.png?v=1612039183075'), auto;}
   100% {cursor: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fcursor7.png?v=1612039183221'), auto;}
 }
 
