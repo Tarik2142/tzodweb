@@ -105,6 +105,10 @@ function serverCfg() {
 }
 
 function connectCfg() {
+  socket.emit('listRooms');
+  socket.on('roomList', function(data){
+    logObj('rooms:', data);
+  });
   if (!setNickname()) return;
   $('#modalContent').html('<br>');
   $('<label>', {
