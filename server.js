@@ -116,11 +116,21 @@ io.sockets.on('connection', function (socket) {
 	});
   
    socket.on('listRooms', function(){//список ковнат
-     function responseRoomObj() {
-       
+     function responseRoomObj(name, players, map, password) {
+       this.name = name;
+       this.players = players;
+       this.map = map;
+       this.password = password;
      }
+     
+     var responseRoomlist = [];
+     
      roomList.forEach(function(room){//перебор
-       
+       var password = false;
+       if (room.password){
+         password = true;
+       }
+       responseRoomlist.push(new responseRoomObj());
      });
    });
   
