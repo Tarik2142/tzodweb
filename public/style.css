@@ -49,7 +49,8 @@
 .btn{
   font-size: 2rem;
   color: #e4ddde;
-  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbutton.png?v=1612035105689');
+  background-image: url('https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fbutton.png?v=1612035713271');
+  border: 1px solid green;
 }
 
 .btn:focus{
