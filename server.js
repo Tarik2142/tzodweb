@@ -115,6 +115,15 @@ io.sockets.on('connection', function (socket) {
     toServer('control', {from: from, data: data});
 	});
   
+   socket.on('listRooms', function(){//список ковнат
+     function responseRoomObj() {
+       
+     }
+     roomList.forEach(function(room){//перебор
+       
+     });
+   });
+  
   socket.on('join', function (data) {//клієнт
     player = data.name;
     const joinTo = data.room;//
