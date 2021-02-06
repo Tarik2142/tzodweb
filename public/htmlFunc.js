@@ -118,8 +118,7 @@ function connectCfg() {
     logObj('rooms:', rooms);
     $('<div>', {
     id: 'serverList',
-    class: 'serverList',
-      html: '<div><span>Server name</span></div><div><span>Players</span></div><div><span>Map</span></div><div><span>Password</span></div>'
+    class: 'serverList'
   }).appendTo($('#modalContent'));
   //   $('<div>', {
   //   id: 'serverListItemHeader',
@@ -133,6 +132,20 @@ function connectCfg() {
     class: 'serverListItem',
     append: $('<span>', {
       text: data[counter].name
+    }) 
+  }).appendTo($('#serverList'));//<span class="material-icons">https</span>
+      $('<div>', {
+    id: 'serverListItem'+ counter,
+    class: 'serverListItem',
+    append: $('<span>', {
+      text: data[counter].map
+    }) 
+  }).appendTo($('#serverList'));
+      $('<div>', {
+    id: 'serverListItem'+ counter,
+    class: 'serverListItem',
+    append: $('<span>', {
+      text: data[counter].map
     }) 
   }).appendTo($('#serverList'));
     }
