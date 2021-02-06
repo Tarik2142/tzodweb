@@ -62,7 +62,7 @@
 }
 
 .serverList{
-  width: 50%;
+  width: auto;
   border: 1px solid #888;
   display: grid;
   grid-template-columns: 30% 40% 25% 5%;
