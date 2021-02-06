@@ -61,6 +61,16 @@
   grid-auto-rows: auto;
 }
 
+.serverListItem{
+  width: 50%;
+  top: 30vh;
+  left: 50vh;
+  display: grid;
+  grid-template-columns: 30% 40% 25% 5%;
+  grid-gap: 1em;
+  grid-auto-rows: auto;
+}
+
 .btn{
   font-size: 2rem;
   color: #e4ddde;
