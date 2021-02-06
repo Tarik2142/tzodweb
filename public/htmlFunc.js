@@ -141,11 +141,26 @@ function connectCfg() {
       text: data[counter].map
     }) 
   }).appendTo($('#serverList'));
+      var pass;
+      if (rooms[counter].password){
+        pass = '<span class="material-icons">https</span>';
+      }else{
+        pass = '<span class="material-icons">no_encryption_gmailerrorred</span>';
+      }
+      $('<div>', {
+    id: 'serverListItem'+ counter,
+    class: 'serverListItem',
+    html: pass
+  }).appendTo($('#serverList'));
       $('<div>', {
     id: 'serverListItem'+ counter,
     class: 'serverListItem',
     append: $('<span>', {
-      text: data[counter].map
+      class: 'material-icons',
+      text: 'play_arrow',
+      click: function(){
+        log(this);
+      }
     }) 
   }).appendTo($('#serverList'));
     }

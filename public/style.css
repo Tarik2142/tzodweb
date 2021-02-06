@@ -65,8 +65,7 @@
   width: auto;
   border: 1px solid #888;
   display: grid;
-  grid-template-columns: 20% 20% 15% 10%;
-  max-width: 200px;
+  grid-template-columns: 50% 25% 8% 8%;
   margin: 0 auto;
   padding-left: 4%;
   padding-right: 4%;
