@@ -157,7 +157,7 @@ io.sockets.on('connection', function (socket) {
             return;
           }else{
             if (!data.password == room.password){
-              socket.emit('joinResult', {result: false, text: 'Wrong room password!'});//оповістить клієнта
+              socket.emit('joinResult', {result: false, text: 'Wrong password!'});//оповістить клієнта
               log('Wrong password!');
               return;
             }
