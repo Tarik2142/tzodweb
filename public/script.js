@@ -4,12 +4,12 @@ function startClient(){
   log('playerName');
   log(playerName);
   
- socket.on("event", function(data) {
+ socket.on("control", function(data) {
    if (data.event){
      logObj('event: ', data);
      switch(data.event){
        case 'newPlayer':
-         if (data.playerName != playerName) clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
+         if (data.playerName != playerName) clientList.add(new tank(scene, data.pos.x, data.pos.y, "tank", shapes.blue, guns.heavy, data.playerName));
          break;
        case 'playerDisconnect':
          clientList.remove(data.playerName);
@@ -62,21 +62,6 @@ function startServer(){
   
   map = $('#mapSelector').val();
   serverMode = true;
-  function dataToClient(x, y, tankRotation, gunRotation, gunType) {
-    this.player = function() {
-      this.tank = function() {
-        this.position = function() {//кординати
-          this.x = x;
-          this.y = y;
-        },
-        this.rotation = tankRotation;//угол поворота
-      },
-      this.gun = function() {
-        this.type = gunType;//тип пушки
-        this.rotation = gunRotation;//поворот
-      }
-    }
-  }
   
   socket.emit("newRoom", {
     playerId: playerName + id,
@@ -99,7 +84,14 @@ function startServer(){
          
          if (data.playerName != playerName){
            clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
-           
+           sendControl({
+             event: 'newPlayer',
+             playerName: data.playerName,
+             pos: {
+               x: posx,
+               y: posy
+             }
+           });
          }
          
          break;
@@ -345,18 +337,6 @@ function create() {
 //     id: id
 //   });
 // }
-
-function dataToServer(control, tankRotation, gunRotation){ //прототип пакета даних від клієнта
-    this.control = control;
-    this.player = function(){
-      this.tank = function(){
-        this.rotation = tankRotation
-      }
-      this.gun = function(){
-        this.rotation = gunRotation
-      }
-    }
-  }
 
 function update(time, delta) {
   

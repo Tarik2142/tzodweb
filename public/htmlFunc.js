@@ -156,6 +156,7 @@ function connectCfg() {
   insertBr('#modalContent');
   socket.on('joinResult', function(data){
     if (data.result){
+      map = data.map;
       startClient();
     }else{
       alert(data.text);

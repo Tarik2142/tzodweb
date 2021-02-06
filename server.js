@@ -172,7 +172,7 @@ io.sockets.on('connection', function (socket) {
           event: 'newPlayer',
           playerName: player
         });
-        socket.emit('joinResult', {result: true});//оповістить клієнта
+        socket.emit('joinResult', {result: true, map: roomList[roomId].map});//оповістить клієнта
       }
     });
     
