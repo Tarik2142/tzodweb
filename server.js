@@ -154,17 +154,24 @@ io.sockets.on('connection', function (socket) {
           if (!data.password){//
             socket.emit('joinResult', {result: false, text: 'Enter room password!'});//оповістить клієнта
             log('Empty password!');
-            return;
+            joined = false;
           }else{
-            if (!data.password === room.password){
-              log('data.password: ' + data.password + 'room.password: ' + room.password);
+            if (!data.password == room.password){
               socket.emit('joinResult', {result: false, text: 'Wrong password!'});//оповістить клієнта
               log('Wrong password!');
-              return;
+              joined = false;
+            }else{
+              joined = true;
             }
           }
         }
-        joined = true;
+        
+        if (!joined){
+      socket.emit('joinResult', {result: false, text: 'Room not found!'});//лох
+        }
+        
+        function join(){
+        log('data.password: ' + data.password + 'room.password: ' + room.password);
         roomId = room.roomId;//індекс найденой ковнати
         playerId = roomList[roomId].addPlayer(socket, player);
         log('Joined to ' + joinTo + '!');
@@ -174,12 +181,7 @@ io.sockets.on('connection', function (socket) {
           playerName: player
         });
         socket.emit('joinResult', {result: true, map: roomList[roomId].map});//оповістить клієнта
-      }
-    });
-    
-    if (!joined){
-      socket.emit('joinResult', {result: false, text: 'Room not found!'});//лох
-    }
+        }
 		
 	});
 });
