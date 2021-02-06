@@ -116,10 +116,10 @@ function connectCfg() {
   socket.on('roomList', function(data){
     rooms = data;
     logObj('rooms:', rooms);
-    $('<div>', {
-    id: 'serverList',
-    class: 'serverList'
-  }).appendTo($('#modalContent'));
+  //   $('<div>', {
+  //   id: 'serverList',
+  //   class: 'serverList'
+  // }).appendTo($('#modalContent'));
     $('<div>', {
     id: 'serverListItemHeader',
     class: 'serverListItem',
@@ -179,11 +179,6 @@ function connectCfg() {
 //     }
 //   }).appendTo($('#modalContent'));
   
-  
-  
-  
-  insertBr('#modalContent');
-  insertBr('#modalContent');
   socket.on('joinResult', function(data){
     if (data.result){
       map = data.map;
