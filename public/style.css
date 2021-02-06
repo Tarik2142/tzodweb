@@ -62,6 +62,7 @@
 }
 
 .serverList{
+  width: 50%;
   border: 1px solid #888;
   display: grid;
   grid-template-columns: 30% 40% 25% 5%;
@@ -71,7 +72,6 @@
 
 .serverListItem{
   font-size: 1.2rem;
-  width: 50%;
   border: 1px solid #888;
   margin-bottom: 5px;
   margin-top: 5px;

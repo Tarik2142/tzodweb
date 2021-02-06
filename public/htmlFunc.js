@@ -118,13 +118,14 @@ function connectCfg() {
     logObj('rooms:', rooms);
     $('<div>', {
     id: 'serverList',
-    class: 'serverList'
+    class: 'serverList',
+      html: '<div>Server name</div><div>Players</div><div>Map</div><div>Password</div>'
   }).appendTo($('#modalContent'));
-    $('<div>', {
-    id: 'serverListItemHeader',
-    class: 'serverListItem serverListItemHeader',
-    html: '<div>Server name</div><div>Players</div><div>Map</div><div>Password</div>'
-  }).appendTo($('#serverList'));
+  //   $('<div>', {
+  //   id: 'serverListItemHeader',
+  //   class: 'serverListItem serverListItemHeader',
+  //   html: ''
+  // }).appendTo($('#serverList'));
   if(rooms.length > 0){
     for(var counter = 0; counter < rooms.length; counter++){
       $('<div>', {
