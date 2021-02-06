@@ -54,7 +54,12 @@ function clients(owner){
   }
 }
 
+function sendControl(data){
+    socket.emit('control', data);
+  }
+
 function startServer(){
+  
   map = $('#mapSelector').val();
   serverMode = true;
   function dataToClient(x, y, tankRotation, gunRotation, gunType) {
@@ -92,7 +97,11 @@ function startServer(){
      switch(data.event){
        case 'newPlayer':
          
-         if (data.playerName != playerName) clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
+         if (data.playerName != playerName){
+           clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
+           
+         }
+         
          break;
          
          case 'playerDisconnect':

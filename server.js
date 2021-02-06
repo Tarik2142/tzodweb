@@ -86,7 +86,7 @@ io.sockets.on('connection', function (socket) {
       logObj('roomList splice', roomList);
     }else{
       if (!roomList[roomId].socketId) return;//якшо такий есть
-      socket.emit('event', {
+      toServer('event', {
         event: 'playerDisconnect',
         playerName: player
       });//переслать на серв
@@ -109,10 +109,13 @@ io.sockets.on('connection', function (socket) {
     
 	});
   
-  socket.on('control', function (data) {
-    const from = roomList[roomList.getPlayerId(socket)];//ник от кого
-        //log('control recieved');
-    toServer('control', {from: from, data: data});
+  socket.on('control', function (data) {//пересилка управляющих команд
+    if (isServer){
+      toClients('control', data);
+    }else{
+      const from = roomList[roomList.getPlayerId(socket)];//ник от кого
+      toServer('control', {from: from, data: data});
+    }
 	});
   
    socket.on('listRooms', function(){//список ковнат
@@ -165,7 +168,7 @@ io.sockets.on('connection', function (socket) {
         playerId = roomList[roomId].addPlayer(socket, player);
         log('Joined to ' + joinTo + '!');
         socket.join(data.room);//зайти
-        toClients('event', {//оповістить
+        toServer('event', {//оповістить
           event: 'newPlayer',
           playerName: player
         });
