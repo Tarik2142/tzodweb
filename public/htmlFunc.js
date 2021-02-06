@@ -119,7 +119,7 @@ function connectCfg() {
     $('<div>', {
     id: 'serverList',
     class: 'serverList',
-      html: '<div><a>Server name</a></div><div>Players</div><div>Map</div><div>Password</div>'
+      html: '<div><span>Server name</span></div><div><span>Players</span></div><div><span>Map</span></div><div><span>Password</span></div>'
   }).appendTo($('#modalContent'));
   //   $('<div>', {
   //   id: 'serverListItemHeader',
@@ -131,7 +131,9 @@ function connectCfg() {
       $('<div>', {
     id: 'serverListItem'+ counter,
     class: 'serverListItem',
-    text: data[counter].name
+    append: $('<span>', {
+      text: data[counter].name
+    }) 
   }).appendTo($('#serverList'));
     }
   }else{
