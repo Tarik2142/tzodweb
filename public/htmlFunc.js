@@ -111,7 +111,7 @@ function connectCfg() {
   var rooms;
   var selectedRoom = '';
   if (!setNickname()) return;
-  $('#modalContent').html('');
+  $('#modalContent').html('<span>Server list:</span>');
   socket.emit('listRooms');
   socket.on('roomList', function(data){
     rooms = data;
@@ -131,14 +131,14 @@ function connectCfg() {
     id: 'serverListItem'+ counter,
     class: 'serverListItem',
     append: $('<span>', {
-      text: data[counter].name
+      text: rooms[counter].name
     }) 
   }).appendTo($('#serverList'));//<span class="material-icons">https</span>
       $('<div>', {
     id: 'serverListItem'+ counter,
     class: 'serverListItem',
     append: $('<span>', {
-      text: data[counter].map
+      text: rooms[counter].map
     }) 
   }).appendTo($('#serverList'));
       var pass;
@@ -158,8 +158,9 @@ function connectCfg() {
     append: $('<span>', {
       class: 'material-icons',
       text: 'play_arrow',
-      click: function(){
-        log(this);
+      id: data[counter].name,
+      click: function(rooms){
+        connect(rooms[counter].name, rooms[counter].map, rooms[counter].password)
       }
     }) 
   }).appendTo($('#serverList'));
@@ -168,47 +169,43 @@ function connectCfg() {
     
   }
   });
+    
+  function connect(room, map, pass){
+    map = map;
+  $('#modalContent').html('<br>');
+  if(pass){
+    $('<label>', {
+    for: 'roomPassword',
+    id: 'roomPasswordLabel',
+    text: 'Enter room password (for private room): '
+  }).appendTo($('#modalContent'));
+  $('<input>', {
+    type: 'text',
+    id: 'roomPassword',
+    name: 'roomPassword',
+  }).appendTo($('#modalContent'));
   
+  insertBr('#modalContent');
   
-  
-//   $('<label>', {
-//     for: 'roomId',
-//     id: 'roomIdLabel',
-//     text: 'Enter room id: '
-//   }).appendTo($('#modalContent'));
-//   $('<input>', {
-//     type: 'text',
-//     id: 'roomId',
-//     name: 'roomId',
-//   }).appendTo($('#modalContent'));
-
-//   insertBr('#modalContent');
-  
-//   //$('#modalContent').html('<br>');
-//   $('<label>', {
-//     for: 'roomPassword',
-//     id: 'roomPasswordLabel',
-//     text: 'Enter room password (for private room): '
-//   }).appendTo($('#modalContent'));
-//   $('<input>', {
-//     type: 'text',
-//     id: 'roomPassword',
-//     name: 'roomPassword',
-//   }).appendTo($('#modalContent'));
-  
-//   insertBr('#modalContent');
-  
-//   $('<button>', {
-//     class: 'btn',
-//     text: 'Connect',
-//     click: function () {
-//       socket.emit('join', {
-//         name: playerName,
-//         room: $('#roomId').val(),
-//         password: $('#roomPassword').val()
-//   });
-//     }
-//   }).appendTo($('#modalContent'));
+  $('<button>', {
+    class: 'btn',
+    text: 'Connect',
+    click: function () {
+      socket.emit('join', {
+        name: playerName,
+        room: room,
+        password: $('#roomPassword').val()
+  });
+    }
+  }).appendTo($('#modalContent'));
+  }else{
+    socket.emit('join', {
+        name: playerName,
+        room: room,
+        password: ''
+  });
+  }
+  }
   
   socket.on('joinResult', function(data){
     if (data.result){
