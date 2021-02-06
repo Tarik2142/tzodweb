@@ -85,8 +85,8 @@ io.sockets.on('connection', function (socket) {
       roomList.splice(roomId, 1);//убрать ковнату
       logObj('roomList splice', roomList);
     }else{
-      if (!roomList[roomId].socketId) return;
-      toClients('event', {
+      if (!roomList[roomId].socketId) return;//якшо такий есть
+      socket.emit('event', {
         event: 'playerDisconnect',
         playerName: player
       });//переслать на серв
@@ -161,7 +161,7 @@ io.sockets.on('connection', function (socket) {
           }
         }
         joined = true;
-        roomId = room.roomId;
+        roomId = room.roomId;//індекс найденой ковнати
         playerId = roomList[roomId].addPlayer(socket, player);
         log('Joined to ' + joinTo + '!');
         socket.join(data.room);//зайти
