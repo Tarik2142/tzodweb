@@ -191,7 +191,7 @@ function connectCfg() {
       $('<div>', {
     class: 'serverListItem',
     append: $('<span>', {
-      class: 'material-icons',
+      class: 'material-icons connectBtn',
       text: 'play_arrow',
       click: function(){
         connect(counter);

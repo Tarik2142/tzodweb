@@ -35,18 +35,8 @@
   text-align: center;
 }
 
-.close{
- float: right;
- font-weight: bold;
- color: black;
- padding-right: 0.5rem;
-}
-
-.close:hover,
-.close:focus {
-  color: red;
-  text-decoration: none;
-  cursor: pointer;
+.connectBtn:hover{
+  color: green;
 }
 
 @keyframes animatetop {
