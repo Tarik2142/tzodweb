@@ -119,7 +119,7 @@ function connectCfg() {
     $('<div>', {
     id: 'serverList',
     class: 'serverList',
-      html: '<div>Server name</div><div>Players</div><div>Map</div><div>Password</div>'
+      html: '<div><a>Server name</a></div><div>Players</div><div>Map</div><div>Password</div>'
   }).appendTo($('#modalContent'));
   //   $('<div>', {
   //   id: 'serverListItemHeader',

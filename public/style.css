@@ -65,9 +65,12 @@
   width: auto;
   border: 1px solid #888;
   display: grid;
-  grid-template-columns: 20% 20% 15% 5%;
-  grid-gap: 1em;
-  grid-auto-rows: auto;
+  grid-template-columns: 20% 20% 15% 10%;
+  max-width: 990px;
+  margin: 0 auto;
+  padding-left: 4%;
+  padding-right: 4%;
+  grid-template-rows: auto;
 }
 
 .serverListItem{
