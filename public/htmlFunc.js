@@ -149,15 +149,17 @@ function connectCfg() {
     click: function () {
       socket.emit('join', {
         name: playerName,
-        room: rooms[counter].room,
+        room: rooms[counter].name,
         password: $('#roomPassword').val()
   });
     }
   }).appendTo($('#modalContent'));
   }else{
+    log('counter: ' + counter);
+    logObj('rooms', rooms);
     socket.emit('join', {
         name: playerName,
-        room: rooms[counter].room,
+        room: rooms[counter].name,
         password: ''
   });
   }

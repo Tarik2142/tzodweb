@@ -156,7 +156,8 @@ io.sockets.on('connection', function (socket) {
             log('Empty password!');
             return;
           }else{
-            if (!data.password == room.password){
+            if (!data.password === room.password){
+              log('data.password: ' + data.password + 'room.password: ' + room.password);
               socket.emit('joinResult', {result: false, text: 'Wrong password!'});//оповістить клієнта
               log('Wrong password!');
               return;

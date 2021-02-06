@@ -60,6 +60,7 @@ function sendControl(data){
 
 function startServer(){
   
+  map = $('#mapSelector').val();
   serverMode = true;
   
   socket.emit("newRoom", {
