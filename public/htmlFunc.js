@@ -116,22 +116,22 @@ function connectCfg() {
   socket.on('roomList', function(data){
     rooms = data;
     logObj('rooms:', rooms);
-  //   $('<div>', {
-  //   id: 'serverList',
-  //   class: 'serverList'
-  // }).appendTo($('#modalContent'));
+    $('<div>', {
+    id: 'serverList',
+    class: 'serverList'
+  }).appendTo($('#modalContent'));
     $('<div>', {
     id: 'serverListItemHeader',
     class: 'serverListItem serverListItemHeader',
     html: '<div>Server name</div><div>Players</div><div>Map</div><div>Password</div>'
-  }).appendTo($('#modalContent'));
+  }).appendTo($('#serverList'));
   if(rooms.length > 0){
     for(var counter = 0; counter < rooms.length; counter++){
       $('<div>', {
     id: 'serverListItem'+ counter,
     class: 'serverListItem',
     text: data[counter].name
-  }).appendTo($('#modalContent'));
+  }).appendTo($('#serverList'));
     }
   }else{
     
