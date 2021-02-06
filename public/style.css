@@ -61,10 +61,13 @@
   grid-auto-rows: auto;
 }
 
+.serverList{
+  padding-top: 0;
+  border: 1px solid #888;
+}
+
 .serverListItem{
   width: 50%;
-  top: 30vh;
-  left: 50vh;
   display: grid;
   grid-template-columns: 30% 40% 25% 5%;
   grid-gap: 1em;

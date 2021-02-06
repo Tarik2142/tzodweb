@@ -111,6 +111,7 @@ function connectCfg() {
   var rooms;
   var selectedRoom = '';
   if (!setNickname()) return;
+  $('#modalContent').html('');
   socket.emit('listRooms');
   socket.on('roomList', function(data){
     rooms = data;
@@ -137,7 +138,7 @@ function connectCfg() {
   }
   });
   
-  $('#modalContent').html('<br>');
+  
   
 //   $('<label>', {
 //     for: 'roomId',
