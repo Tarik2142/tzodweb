@@ -115,15 +115,16 @@ function connectCfg() {
   socket.on('roomList', function(data){
     rooms = data;
     logObj('rooms:', rooms);
-    $('<ul>', {
+    $('<div>', {
     id: 'serverList',
     class: 'serverList'
   }).appendTo($('#modalContent'));
   if(rooms.length > 0){
     for(var counter = 0; counter < rooms.length; counter++){
-      $('<li>', {
+      $('<div>', {
     id: 'serverListItem'+ counter,
-    class: 'serverListItem'
+    class: 'serverListItem',
+    text: data[counter].name
   }).appendTo($('#modalContent'));
     }
   }else{
