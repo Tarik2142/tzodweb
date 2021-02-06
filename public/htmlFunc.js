@@ -108,16 +108,31 @@ function serverCfg() {
 }
 
 function connectCfg() {
+  var rooms;
+  var selectedRoom = '';
   if (!setNickname()) return;
   socket.emit('listRooms');
   socket.on('roomList', function(data){
-    logObj('rooms:', data);
+    rooms = data;
+    logObj('rooms:', rooms);
+    $('<ul>', {
+    id: 'serverList',
+    class: 'serverList'
+  }).appendTo($('#modalContent'));
+  if(rooms.length > 0){
+    for(var counter = 0; counter < rooms.length; counter++){
+      $('<li>', {
+    id: 'serverListItem'+ counter,
+    class: 'serverListItem'
+  }).appendTo($('#modalContent'));
+    }
+  }else{
+    
+  }
   });
   
   $('#modalContent').html('<br>');
-  $('<div>', {
-    id: 'serverList'
-  })
+  
 //   $('<label>', {
 //     for: 'roomId',
 //     id: 'roomIdLabel',
