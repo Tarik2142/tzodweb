@@ -122,7 +122,7 @@ function connectCfg() {
   // }).appendTo($('#modalContent'));
     $('<div>', {
     id: 'serverListItemHeader',
-    class: 'serverListItem',
+    class: 'serverListItem serverListItemHeader',
     html: '<div>Server name</div><div>Players</div><div>Map</div><div>Password</div>'
   }).appendTo($('#modalContent'));
   if(rooms.length > 0){

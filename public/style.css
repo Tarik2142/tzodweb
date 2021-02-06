@@ -67,11 +67,16 @@
 }
 
 .serverListItem{
-  width: 50%;
+  font-size: 1.2rem;
   display: grid;
-  grid-template-columns: 30% 40% 25% 5%;
+  grid-template-columns: 30% 40% 25% 2%;
   grid-gap: 1em;
   grid-auto-rows: auto;
+}
+
+.serverListItemHeader{
+  margin-bottom: 25px;
+  border-bottom: 1px solid #D4D7D6;
 }
 
 .btn{
