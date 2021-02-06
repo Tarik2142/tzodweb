@@ -178,15 +178,13 @@ io.sockets.on("connection", function(socket) {
               text: "Enter room password!"
             }); //оповістить клієнта
             log("Empty password!");
-            socket.emit("joinResult", { result: false, text: "Empty password!" });
           } else {
-            if (!data.password == room.password) {
+            if (parseInt(data.password) != parseInt(room.password)) {
               socket.emit("joinResult", {
                 result: false,
                 text: "Wrong password!"
               }); //оповістить клієнта
               log("Wrong password!");
-              socket.emit("joinResult", { result: false, text: "Wrong password!" });
             } else {
               log(
                 "data.password: " +
