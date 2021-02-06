@@ -127,6 +127,7 @@ function connectCfg() {
   if(rooms.length > 0){
     
     function connect(counter){
+      var counter = counter-1;
   $('#modalContent').html('<br>');
   if(rooms[counter].password){
     $('<label>', {
@@ -190,9 +191,8 @@ function connectCfg() {
     append: $('<span>', {
       class: 'material-icons',
       text: 'play_arrow',
-      id: counter,
       click: function(){
-        connect(this.id);
+        connect(counter);
       }
     }) 
   }).appendTo($('#serverList'));
