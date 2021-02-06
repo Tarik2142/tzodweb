@@ -108,12 +108,16 @@ function serverCfg() {
 }
 
 function connectCfg() {
+  if (!setNickname()) return;
   socket.emit('listRooms');
   socket.on('roomList', function(data){
     logObj('rooms:', data);
   });
-  if (!setNickname()) return;
-//   $('#modalContent').html('<br>');
+  
+  $('#modalContent').html('<br>');
+  $('<div>', {
+    id: 'serverList'
+  })
 //   $('<label>', {
 //     for: 'roomId',
 //     id: 'roomIdLabel',
