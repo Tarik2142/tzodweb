@@ -132,7 +132,7 @@ function connectCfg() {
     $('<label>', {
     for: 'roomPassword',
     id: 'roomPasswordLabel',
-    text: 'Enter room password (for private room): '
+    text: 'Room password: '
   }).appendTo($('#modalContent'));
   $('<input>', {
     type: 'text',
@@ -190,8 +190,9 @@ function connectCfg() {
     append: $('<span>', {
       class: 'material-icons',
       text: 'play_arrow',
+      id: counter,
       click: function(){
-        connect(counter);
+        connect(this.id);
       }
     }) 
   }).appendTo($('#serverList'));
