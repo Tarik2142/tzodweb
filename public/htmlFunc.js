@@ -109,7 +109,6 @@ function serverCfg() {
 
 function connectCfg() {
   var rooms;
-  var selectedRoom = '';
   if (!setNickname()) return;
   $('#modalContent').html('<span>Server list:</span>');
   socket.emit('listRooms');
@@ -126,54 +125,10 @@ function connectCfg() {
   //   html: ''
   // }).appendTo($('#serverList'));
   if(rooms.length > 0){
-    for(var counter = 0; counter < rooms.length; counter++){
-      $('<div>', {
-    id: 'serverListItem'+ counter,
-    class: 'serverListItem',
-    append: $('<span>', {
-      text: rooms[counter].name
-    }) 
-  }).appendTo($('#serverList'));//<span class="material-icons">https</span>
-      $('<div>', {
-    id: 'serverListItem'+ counter,
-    class: 'serverListItem',
-    append: $('<span>', {
-      text: rooms[counter].map
-    }) 
-  }).appendTo($('#serverList'));
-      var pass;
-      if (rooms[counter].password){
-        pass = '<span class="material-icons">https</span>';
-      }else{
-        pass = '<span class="material-icons">no_encryption_gmailerrorred</span>';
-      }
-      $('<div>', {
-    id: 'serverListItem'+ counter,
-    class: 'serverListItem',
-    html: pass
-  }).appendTo($('#serverList'));
-      $('<div>', {
-    id: 'serverListItem'+ counter,
-    class: 'serverListItem',
-    append: $('<span>', {
-      class: 'material-icons',
-      text: 'play_arrow',
-      id: data[counter].name,
-      click: function(rooms){
-        connect(rooms[counter].name, rooms[counter].map, rooms[counter].password)
-      }
-    }) 
-  }).appendTo($('#serverList'));
-    }
-  }else{
     
-  }
-  });
-    
-  function connect(room, map, pass){
-    map = map;
+    function connect(counter){
   $('#modalContent').html('<br>');
-  if(pass){
+  if(rooms[counter].password){
     $('<label>', {
     for: 'roomPassword',
     id: 'roomPasswordLabel',
@@ -193,7 +148,7 @@ function connectCfg() {
     click: function () {
       socket.emit('join', {
         name: playerName,
-        room: room,
+        room: rooms[counter].room,
         password: $('#roomPassword').val()
   });
     }
@@ -201,11 +156,51 @@ function connectCfg() {
   }else{
     socket.emit('join', {
         name: playerName,
-        room: room,
+        room: rooms[counter].room,
         password: ''
   });
   }
   }
+    
+    for(var counter = 0; counter < rooms.length; counter++){
+      $('<div>', {
+    class: 'serverListItem',
+    append: $('<span>', {
+      text: rooms[counter].name
+    }) 
+  }).appendTo($('#serverList'));//<span class="material-icons">https</span>
+      $('<div>', {
+    class: 'serverListItem',
+    append: $('<span>', {
+      text: rooms[counter].map
+    }) 
+  }).appendTo($('#serverList'));
+      var pass;
+      if (rooms[counter].password){
+        pass = '<span class="material-icons">https</span>';
+      }else{
+        pass = '<span class="material-icons">no_encryption_gmailerrorred</span>';
+      }
+      $('<div>', {
+    class: 'serverListItem',
+    html: pass
+  }).appendTo($('#serverList'));
+      $('<div>', {
+    class: 'serverListItem',
+    append: $('<span>', {
+      class: 'material-icons',
+      text: 'play_arrow',
+      click: function(){
+        connect(counter);
+      }
+    }) 
+  }).appendTo($('#serverList'));
+    }
+  }else{
+    
+  }
+  });
+    
   
   socket.on('joinResult', function(data){
     if (data.result){
