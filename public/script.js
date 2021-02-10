@@ -162,11 +162,6 @@ var socket = io();
 var game;
 var scene;
 //this.input.mouse.disableContextMenu()
-var currentSpeed = 0;
-var movebackSpeed = 0;
-var lastFired = 0;
-var canFire = true;
-var scoreText;
 var shapes;
 var control = {
     w: false,
@@ -347,7 +342,7 @@ function update(time, delta) {
   /*const worldPoint = this.input.activePointer.positionToCamera(
     this.cameras.main
   );*/
-  this.matter.world.convertTilemapLayer(belowLayer);
+  //this.matter.world.convertTilemapLayer(belowLayer);
   if (!serverMode){
     if (pointer.isDown) {
     control.lmb = true;
