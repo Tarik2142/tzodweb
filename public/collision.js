@@ -61,10 +61,8 @@ var tzodCollision = {
               }
               
             }
-            //event.source.world.convertTilemapLayer(belowLayer);
-            
-          }
-        game.matter.world.convertTilemapLayer(belowLayer);
+          } 
+        scene.matter.world.convertTilemapLayer(belowLayer);
         }
       } 
     }
