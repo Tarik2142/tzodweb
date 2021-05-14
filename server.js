@@ -169,24 +169,8 @@ io.sockets.on("connection", function(socket) {
       if (room.chanelId == joinTo) {
         //якшо така есть
         room = room;
-        if (room.password) {
-          //
-          if (!data.password) {
-            //
-            socket.emit("joinResult", {
-              result: false,
-              text: "Enter room password!"
-            }); //оповістить клієнта
-            log("Empty password!");
-          } else {
-            if (parseInt(data.password) != parseInt(room.password)) {
-              socket.emit("joinResult", {
-                result: false,
-                text: "Wrong password!"
-              }); //оповістить клієнта
-              log("Wrong password!");
-            } else {
-              log(
+        if (checkroompas(data,room)) {
+          log(
                 "data.password: " +
                   data.password +
                   "room.password: " +
@@ -206,9 +190,28 @@ io.sockets.on("connection", function(socket) {
                 map: roomList[roomId].map
               }); //оповістить клієнта
             }
-          }
-        }
+          //
+
+        
       }
     });
   });
+  function checkroompas(data,room) {
+    if (!data.password) {
+            //
+            socket.emit("joinResult", {
+              result: false,
+              text: "Enter room password!"
+            }); //оповістить клієнта
+            log("Empty password!");
+          } 
+    else if (parseInt(data.password) != parseInt(room.password)) {
+              socket.emit("joinResult", {
+                result: false,
+                text: "Wrong password!"
+              }); //оповістить клієнта
+              log("Wrong password!");
+            }
+    else{return true}
+  }
 });
