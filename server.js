@@ -169,13 +169,14 @@ io.sockets.on("connection", function(socket) {
       if (room.chanelId == joinTo) {
         //якшо така есть
         room = room;
-        if (checkroompas(data,room)) {
-          log(
+        log(
                 "data.password: " +
                   data.password +
                   "room.password: " +
                   room.password
               );
+        if (checkroompas(data,room)) {
+          
               roomId = room.roomId; //індекс найденой ковнати
               playerId = roomList[roomId].addPlayer(socket, player);
               log("Joined to " + joinTo + "!");
@@ -199,6 +200,7 @@ io.sockets.on("connection", function(socket) {
   function checkroompas(data,room) {
     if (!data.password) {
             //
+      if (!room.password) {return true}
             socket.emit("joinResult", {
               result: false,
               text: "Enter room password!"
