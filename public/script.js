@@ -1,113 +1,131 @@
-function startClient(){
+function startClient() {
   closeForm();
   startGame();
-  log('playerName');
+  log("playerName");
   log(playerName);
-  
- socket.on("control", function(data) {
-   if (data.event){
-     logObj('event: ', data);
-     switch(data.event){
-       case 'newPlayer':
-         if (data.playerName != playerName) clientList.add(new tank(scene, data.pos.x, data.pos.y, "tank", shapes.blue, guns.heavy, data.playerName));
-         break;
-       case 'playerDisconnect':
-         clientList.remove(data.playerName);
-         break;
-     }
-   }
-  
-}); 
-  setInterval(function(){//
+
+  socket.on("control", function(data) {
+    if (data.event) {
+      logObj("event: ", data);
+      switch (data.event) {
+        case "newPlayer":
+          if (data.playerName != playerName)
+            clientList.add(
+              new tank(
+                scene,
+                data.pos.x,
+                data.pos.y,
+                "tank",
+                shapes.blue,
+                guns.heavy,
+                data.playerName
+              )
+            );
+          break;
+        case "playerDisconnect":
+          clientList.remove(data.playerName);
+          break;
+      }
+    }
+  });
+  setInterval(function() {
+    //
     //socket.emit('control', control);
   }, 1000);
 }
 
-function startGame(){
+function startGame() {
   game = new Phaser.Game(config);
 }
 
-function clients(owner){
+function clients(owner) {
   this.clientArr = new Array();
   this.clientArr[0] = owner;
-  this.add = function(player){
-    this.clientArr.push(player)
-  }
-  this.remove = function(player){
+  this.add = function(player) {
+    this.clientArr.push(player);
+  };
+  this.remove = function(player) {
     var counter = 0;
     //var that = this;
-    this.clientArr.forEach(function(client){
+    this.clientArr.forEach(function(client) {
       //logObj('client:', client.id;
-      if (client.id == player){
+      if (client.id == player) {
         client.kill();
         return;
       }
       counter++;
     });
     this.clientArr.splice(counter, 1);
-  }
-  this.getClient = function(id){
+  };
+  this.getClient = function(id) {
     return this.clientArr[id];
-  }
-  this.getOwner = function(){
+  };
+  this.getOwner = function() {
     return this.clientArr[0];
-  }
+  };
 }
 
-function sendControl(data){
-    socket.emit('control', data);
-  }
+function sendControl(data) {
+  socket.emit("control", data);
+}
 
-function startServer(){
-  
-  map = $('#mapSelector').val();
+function startServer() {
+  map = $("#mapSelector").val();
   serverMode = true;
-  
+
   socket.emit("newRoom", {
     playerId: playerName + id,
-    socketId: socket.id, 
-    owner: playerName, 
-    map: map, 
-    password: $('#password').val()
+    socketId: socket.id,
+    owner: playerName,
+    map: map,
+    password: $("#password").val()
   });
-  
+
   closeForm();
   startGame();
-  
+
   //clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
-  
+
   socket.on("event", function(data) {
-    if (data.event){
-     logObj('event: ', data);
-     switch(data.event){
-       case 'newPlayer':
-         
-         if (data.playerName != playerName){
-           clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, data.playerName));
-           sendControl({
-             event: 'newPlayer',
-             playerName: data.playerName,
-             pos: {
-               x: posx,
-               y: posy
-             }
-           });
-         }
-         
-         break;
-         
-         case 'playerDisconnect':
-         clientList.remove(data.playerName);
-         break;
-     }
-   }
-    
-});
-  
+    if (data.event) {
+      logObj("event: ", data);
+      switch (data.event) {
+        case "newPlayer":
+          if (data.playerName != playerName) {
+            clientList.add(
+              new tank(
+                scene,
+                posx,
+                posy,
+                "tank",
+                shapes.blue,
+                guns.heavy,
+                data.playerName
+              )
+            );
+            sendControl({
+              event: "newPlayer",
+              playerName: data.playerName,
+              pos: {
+                x: posx,
+                y: posy
+              }
+            });
+          }
+
+          break;
+
+        case "playerDisconnect":
+          clientList.remove(data.playerName);
+          break;
+      }
+    }
+  });
+
   //-----network
   socket.on("control", function(data) {
-  logObj('control received', data);
-});
+    logObj("control received", data);
+  });
   //------------
 }
 
@@ -140,10 +158,10 @@ var config = {
   }
 };
 
-function logObj(text, obj){
+function logObj(text, obj) {
   log(text);
   log(obj);
-  log('----------');
+  log("----------");
 }
 
 function log(text) {
@@ -164,13 +182,13 @@ var scene;
 //this.input.mouse.disableContextMenu()
 var shapes;
 var control = {
-    w: false,
-    a: false,
-    s: false,
-    d: false,
-    lmb: false,
-    rmb: false
-  }
+  w: false,
+  a: false,
+  s: false,
+  d: false,
+  lmb: false,
+  rmb: false
+};
 
 // socket.on("downisDown", function(data) {
 //   if (data.id != id && clients[data.id]) {
@@ -224,7 +242,7 @@ var control = {
 // });
 
 socket.on("GG", function() {
-  log('GG');
+  log("GG");
 });
 
 function preload() {
@@ -243,8 +261,11 @@ function preload() {
     "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fprojectile_cannon.png?"
   );
   //this.load.atlas("tank", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fblue.png", "blue.json");
-  this.load.image("tank", "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fblue.png");
-  this.load.json('shapes', 'blue.json');
+  this.load.image(
+    "tank",
+    "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fblue.png"
+  );
+  this.load.json("shapes", "blue.json");
   this.load.image(
     "heavy_gun",
     "https://cdn.glitch.com/4fc97b97-fbe3-4d16-be05-c0b4fb6814b8%2Fweap_cannon.png?"
@@ -261,11 +282,10 @@ function preload() {
   );
 }
 
-function destroyTile (tile)
-{
-    var layer = tile.tilemapLayer;
-    layer.removeTileAt(tile.x, tile.y);
-    tile.physics.matterBody.destroy();
+function destroyTile(tile) {
+  var layer = tile.tilemapLayer;
+  layer.removeTileAt(tile.x, tile.y);
+  tile.physics.matterBody.destroy();
 }
 
 function create() {
@@ -278,7 +298,7 @@ function create() {
   //   fontSize: "32px",
   //   fill: "#000"
   // });
-  
+
   //obstacle = this.matter.add.sprite( 64, 64,"tank2", null, {shape: shapes.blue});//*/
   /*const map = this.make.tilemap({ data: level, tileWidth: 32, tileHeight: 32 });
   const tiles = map.addTilesetImage("tiles");
@@ -295,21 +315,21 @@ function create() {
   belowLayer.renderDebug(debugGraphics, {});*/
   //ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
   this.matter.world.convertTilemapLayer(belowLayer);
-  
+
   //obstacle = this.matter.add.sprite( 64, 64,"tank", null, {shape: shapes.blue});//
   //this.matter.world.convertTiles(tileset);
   //console.log(this);
   //;
-  
+
   //log('socket id = ' + socket.id);
-  
+
   //clients[id] = new tank(this, posx, posy,"tank",shapes.blue, guns.heavy, playerName);//scene, x, y, texture, startGun, shape
   // socket.emit("tankCreate", {
   //   id: id,
   //   posx: posx,
   //   posy: posy
   // });
-  
+
   this.matter.world.on(
     "collisionstart",
     function(event) {
@@ -317,10 +337,11 @@ function create() {
     },
     this
   );
-  
-  shapes = this.cache.json.get('shapes');
-  clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
-  
+
+  shapes = this.cache.json.get("shapes");
+  clientList = new clients(
+    new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName)
+  );
 }
 
 // function handleMove() {
@@ -334,92 +355,100 @@ function create() {
 // }
 
 function update(time, delta) {
-  
   //handleMove();
   //var cursors = scene.input.keyboard.createCursorKeys();
-  var cursors = this.input.keyboard.addKeys('W,S,A,D');
+  var cursors = this.input.keyboard.addKeys("W,S,A,D");
   var pointer = scene.input.activePointer;
   /*const worldPoint = this.input.activePointer.positionToCamera(
     this.cameras.main
   );*/
   //this.matter.world.convertTilemapLayer(belowLayer);
-  if (!serverMode){
+  if (!serverMode) {
     if (pointer.isDown) {
-    control.lmb = true;
-    // clients[id].fire();
-    // socket.emit("fire", {
-    // id: id,
-    // });
-    //clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
-  }else{
-    control.lmb = false;
-  }
-  var poz =
-    clientList.getOwner().gun.rotation -
-    Math.atan2(pointer.y - clientList.getOwner().gun.y, pointer.x - clientList.getOwner().gun.x);
-  if ((poz > 0.05 && poz < 3.14) || poz < -3.15) {
-    //console.log("-");
-    clientList.getOwner().gun.rotation = clientList.getOwner().gun.rotation - 0.05;
-  } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
-    clientList.getOwner().gun.rotation = clientList.getOwner().gun.rotation + 0.05;
-    //console.log("+");
-  }
+      control.lmb = true;
+      // clients[id].fire();
+      // socket.emit("fire", {
+      // id: id,
+      // });
+      //clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
+    } else {
+      control.lmb = false;
+    }
+    var poz =
+      clientList.getOwner().gun.rotation -
+      Math.atan2(
+        pointer.y - clientList.getOwner().gun.y,
+        pointer.x - clientList.getOwner().gun.x
+      );
+    if ((poz > 0.05 && poz < 3.14) || poz < -3.15) {
+      //console.log("-");
+      clientList.getOwner().gun.rotation =
+        clientList.getOwner().gun.rotation - 0.05;
+    } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
+      clientList.getOwner().gun.rotation =
+        clientList.getOwner().gun.rotation + 0.05;
+      //console.log("+");
+    }
 
-  if (cursors.S.isDown) {
-    control.s = true;
-    //socket.emit('downisDown',{'id': id});
-    //clients[id].thrustBack(0.03);
+    if (cursors.S.isDown) {
+      control.s = true;
+      //socket.emit('downisDown',{'id': id});
+      //clients[id].thrustBack(0.03);
+    } else {
+      control.s = false;
+    }
+    if (cursors.W.isDown) {
+      control.w = true;
+      //socket.emit('upisDown',{'id': id});
+      //clients[id].thrust(0.03);
+    } else {
+      control.w = false;
+    }
+    if (cursors.A.isDown) {
+      control.a = true;
+      //socket.emit('leftisDown',{'id': id});
+      //clients[id].setRotation(clients[id].rotation - 0.1);
+    } else {
+      control.a = false;
+    }
+    if (cursors.D.isDown) {
+      control.d = true;
+      //socket.emit('rightisDown',{'id': id});
+      //clients[id].setRotation(clients[id].rotation + 0.1);
+    } else {
+      control.d = false;
+    }
   } else {
-    control.s = false;
-  }
-  if (cursors.W.isDown) {
-    control.w = true;
-    //socket.emit('upisDown',{'id': id});
-    //clients[id].thrust(0.03);
-  }else{
-    control.w = false;
-  }
-  if (cursors.A.isDown) {
-    control.a = true;
-    //socket.emit('leftisDown',{'id': id});
-    //clients[id].setRotation(clients[id].rotation - 0.1);
-  } else {
-    control.a = false;
-  }
-  if (cursors.D.isDown) {
-    control.d = true;
-    //socket.emit('rightisDown',{'id': id});
-    //clients[id].setRotation(clients[id].rotation + 0.1);
-  }else{
-    control.d = false;
-  }
-  }else{
     if (pointer.isDown) {
-    clientList.getOwner().fire();
-  }
-  var poz =
-    clientList.getOwner().gun.rotation -
-    Math.atan2(pointer.y - clientList.getOwner().gun.y, pointer.x - clientList.getOwner().gun.x);
-  if ((poz > 0.05 && poz < 3.14) || poz < -3.15) {
-    //console.log("-");
-    clientList.getOwner().gun.rotation = clientList.getOwner().gun.rotation - 0.05;
-  } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
-    clientList.getOwner().gun.rotation = clientList.getOwner().gun.rotation + 0.05;
-    //console.log("+");
-  }
+      clientList.getOwner().fire();
+    }
+    var poz =
+      clientList.getOwner().gun.rotation -
+      Math.atan2(
+        pointer.y - clientList.getOwner().gun.y,
+        pointer.x - clientList.getOwner().gun.x
+      );
+    if ((poz > 0.05 && poz < 3.14) || poz < -3.15) {
+      //console.log("-");
+      clientList.getOwner().gun.rotation =
+        clientList.getOwner().gun.rotation - 0.05;
+    } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
+      clientList.getOwner().gun.rotation =
+        clientList.getOwner().gun.rotation + 0.05;
+      //console.log("+");
+    }
 
-  if (cursors.S.isDown) {
-    clientList.getOwner().thrustBack(0.03);
+    if (cursors.S.isDown) {
+      clientList.getOwner().thrustBack(0.03);
+    }
+    if (cursors.W.isDown) {
+      clientList.getOwner().thrust(0.03);
+    }
+    if (cursors.A.isDown) {
+      clientList.getOwner().setRotation(clientList.getOwner().rotation - 0.1);
+    }
+    if (cursors.D.isDown) {
+      clientList.getOwner().setRotation(clientList.getOwner().rotation + 0.1);
+    }
   }
-  if (cursors.W.isDown) {
-    clientList.getOwner().thrust(0.03);
-  }
-  if (cursors.A.isDown) {
-    clientList.getOwner().setRotation(clientList.getOwner().rotation - 0.1);
-  }
-  if (cursors.D.isDown) {
-    clientList.getOwner().setRotation(clientList.getOwner().rotation + 0.1);
-  }
-  }
-  
 }
