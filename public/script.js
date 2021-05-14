@@ -387,7 +387,7 @@ function update(time, delta) {
     } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation + 0.05;
-      //console.log("+");
+      console.log("+");
     }
 
     if (cursors.S.isDown) {
