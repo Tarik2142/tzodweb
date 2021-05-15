@@ -4,6 +4,25 @@ function startClient() {
   startGame();
   log("playerName");
   log(playerName);
+  document.body.addEventListener("keydown", function(e) {
+  sendControl({
+        event: "control",
+        data: {
+          key: e.keyCode,
+          val: true
+        }
+  });
+});
+  
+document.body.addEventListener("keyup", function(e) {
+  sendControl({
+        event: "control",
+        data: {
+          key: e.keyCode,
+          val: false
+        }
+  });
+});
 
   socket.on("control", function(data) {
     if (data.event) {
@@ -357,24 +376,6 @@ function create() {
 //     id: id
 //   });
 // }
-
-document.body.addEventListener("keydown", function(e) {
-  sendControl({
-        event: "control",
-        data: {
-          key: e.keyCode,
-          val: true
-        }
-});
-  
-document.body.addEventListener("keyup", function(e) {
-  ksendControl({
-        event: "control",
-        data: {
-          key: e.keyCode,
-          val: false
-        }
-});
 
 function update(time, delta) {
   //handleMove();
