@@ -19,8 +19,8 @@ function startGame() {
             clientList.add(
               new tank(
                 scene,
-                data.pos.x,
-                data.pos.y,
+                data.data.pos.x,
+                data.data.pos.y,
                 "tank",
                 shapes.blue,
                 guns.heavy,

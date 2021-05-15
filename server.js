@@ -185,7 +185,13 @@ io.sockets.on("connection", function(socket) {
               toServer("control", {
                 //оповістить
                 event: "newPlayer",
-                playerName: player
+                playerName: player,
+                data: {
+                  pos: {
+                    x: 100,
+                    y: 100
+                  }
+                }
               });
               socket.emit("joinResult", {
                 result: true,
