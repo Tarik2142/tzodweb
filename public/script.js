@@ -156,7 +156,14 @@ var game;
 var scene;
 //this.input.mouse.disableContextMenu()
 var shapes;
-var controlold;
+var controlold= {
+  w: false,
+  a: false,
+  s: false,
+  d: false,
+  lmb: false,
+  rmb: false
+};
 var control = {
   w: false,
   a: false,
@@ -288,7 +295,7 @@ function update(time, delta) {
     this.cameras.main
   );*/
   //this.matter.world.convertTilemapLayer(belowLayer);
-  if (!serverMode) {
+  if (true) {
     /*if (pointer.isDown) {
       control.lmb = pointer.isDown;
       // clients[id].fire();
@@ -370,16 +377,18 @@ function update(time, delta) {
     control.w = cursors.W.isDown;
     control.a = cursors.A.isDown;
     control.d = cursors.D.isDown;
-    if (control != controlold){
+    if (cursors.D.isDown){log(controlold);}
+    if (cursors.A.isDown){controlold = control;}
+    /*if (control != controlold){
+      log("aaa!");
+      
       controlold = control;
       sendControl({
         event: "control",
         key: "control",
-        data: control
-        
-        
+        data: control  
       });
-    }
+    }//*/
     
     
     //*/
