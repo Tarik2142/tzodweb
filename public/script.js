@@ -34,7 +34,7 @@ function startClient() {
   });
   setInterval(function() {
     
-    socket.emit('control', control);
+    //socket.emit('control', control);
   }, 1000);
 }
 
@@ -358,6 +358,24 @@ function create() {
 //   });
 // }
 
+document.body.addEventListener("keydown", function(e) {
+  sendControl({
+        event: "control",
+        data: {
+          key: e.keyCode,
+          val: true
+        }
+});
+  
+document.body.addEventListener("keyup", function(e) {
+  ksendControl({
+        event: "control",
+        data: {
+          key: e.keyCode,
+          val: false
+        }
+});
+
 function update(time, delta) {
   //handleMove();
   //var cursors = scene.input.keyboard.createCursorKeys();
@@ -391,13 +409,20 @@ function update(time, delta) {
     } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation + 0.05;
-      console.log("+");
+      //console.log("+");
     } else {
-      console.log("0");
+      //console.log("0");
     }
 
     if (cursors.S.isDown) {
       control.s = cursors.S.isDown;
+      sendControl({
+        event: "control",
+        data: {
+          key: "S",
+          val: cursors.S.isDown
+        }
+      });
       //socket.emit('downisDown',{'id': id});
       //clients[id].thrustBack(0.03);
     } else {
