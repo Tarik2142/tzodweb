@@ -24,7 +24,7 @@ function startClient() {
             );
           break;
         case "control":
-            logObj("");
+            logObj("control->data", data.data);
           break;
         case "playerDisconnect":
           clientList.remove(data.playerName);
@@ -33,8 +33,8 @@ function startClient() {
     }
   });
   setInterval(function() {
-    //
-    //socket.emit('control', control);
+    
+    socket.emit('control', control);
   }, 1000);
 }
 
@@ -392,10 +392,12 @@ function update(time, delta) {
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation + 0.05;
       console.log("+");
+    } else {
+      console.log("0");
     }
 
     if (cursors.S.isDown) {
-      control.s = true;
+      control.s = cursors.S.isDown;
       //socket.emit('downisDown',{'id': id});
       //clients[id].thrustBack(0.03);
     } else {

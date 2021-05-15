@@ -122,7 +122,7 @@ io.sockets.on("connection", function(socket) {
     if (isServer) {
       toClients("control", data);
     } else {
-      const from = roomList[roomList.getPlayerId(socket)]; //ник от кого
+      const from = roomList[roomId].getPlayerId(socket); //ник от кого
       toServer("control", { event: "control", from: from, data: data });
     }
   });
