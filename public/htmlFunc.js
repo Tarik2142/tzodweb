@@ -100,7 +100,7 @@ function serverCfg() {
     class: 'btn',
     text: 'Start server',
     click: function () {
-      startServer();
+      startClient();
     }
   }).appendTo($('#modalContent'));
   insertBr('#modalContent');

@@ -4,26 +4,7 @@ function startClient() {
   startGame();
   log("playerName");
   log(playerName);
-  document.body.addEventListener("keydown", function(e) {
-  sendControl({
-        event: "control",
-        data: {
-          key: e.keyCode,
-          val: true
-        }
-  });
-});
   
-document.body.addEventListener("keyup", function(e) {
-  sendControl({
-        event: "control",
-        data: {
-          key: e.keyCode,
-          val: false
-        }
-  });
-});
-
   socket.on("control", function(data) {
     if (data.event) {
       logObj("event: ", data);
@@ -51,11 +32,7 @@ document.body.addEventListener("keyup", function(e) {
       }
     }
   });
-  setInterval(function() {
-    
-    //socket.emit('control', control);
-  }, 1000);
-}
+  };
 
 function startGame() {
   game = new Phaser.Game(config);
@@ -144,12 +121,6 @@ function startServer() {
       }
     }
   });
-
-  //-----network
-  socket.on("control", function(data) {
-    logObj("control received", data);
-  });
-  //------------
 }
 
 const FPS = 30;
@@ -204,6 +175,7 @@ var game;
 var scene;
 //this.input.mouse.disableContextMenu()
 var shapes;
+var controlold;
 var control = {
   w: false,
   a: false,
@@ -212,57 +184,6 @@ var control = {
   lmb: false,
   rmb: false
 };
-
-// socket.on("downisDown", function(data) {
-//   if (data.id != id && clients[data.id]) {
-//     clients[data.id].thrustBack(0.05);
-//   }
-// });
-// socket.on("leftisDown", function(data) {
-//   if (data.id != id && clients[data.id]) {
-//     clients[data.id].setRotation(clients[data.id].rotation - 0.1);
-//   }
-// });
-// socket.on("rightisDown", function(data) {
-//   if (data.id != id && clients[data.id]) {
-//     clients[data.id].setRotation(clients[data.id].rotation + 0.1);
-//   }
-// });
-// socket.on("upisDown", function(data) {
-//   if (data.id != id && clients[data.id]) {
-//     clients[data.id].thrust(0.05);
-//   }
-// });
-// socket.on("tankMove", function(data) {
-//   // Is the user drawing?
-//   if (data.id != id && clients[data.id]) {
-//     clients[data.id].x = data.x;
-//     clients[data.id].y = data.y;
-//     clients[data.id].rotation = data.angle;
-//     clients[data.id].gun.rotation = data.gunangle;
-//     clearTimeout(timerId[data.id]);
-//     timerId[data.id] = setTimeout(function() {
-//       clients[data.id].kill();
-//       //clients.splice(data.id, 1); //почистить масив
-//     }, 20000);
-//   }
-// });
-// socket.on("fire", function(data) {
-//   if (data.id != id && clients[data.id]) {
-//     clients[data.id].fire();
-//   }
-// });
-// socket.on("tankCreate", function(data) {
-//   if (data.id != id && !clients[data.id]) {
-//     //createTank(scene, data.id, data.posx, data.posy,shapes.blue);
-//     clients[data.id] = new tank(scene, data.posx, data.posy,"tank",shapes.blue, guns.heavy, id);//scene, x, y, texture, startGun, shape
-//     socket.emit("tankCreate", {
-//       id: id,
-//       posx: posx,
-//       posy: posy
-//     });
-//   }
-// });
 
 socket.on("GG", function() {
   log("GG");
@@ -387,8 +308,8 @@ function update(time, delta) {
   );*/
   //this.matter.world.convertTilemapLayer(belowLayer);
   if (!serverMode) {
-    if (pointer.isDown) {
-      control.lmb = true;
+    /*if (pointer.isDown) {
+      control.lmb = pointer.isDown;
       // clients[id].fire();
       // socket.emit("fire", {
       // id: id,
@@ -396,7 +317,7 @@ function update(time, delta) {
       //clients[id].setNick(['я твой дом кирпич шатал', 'и бетон тоже']);
     } else {
       control.lmb = false;
-    }
+    }//*/
     var poz =
       clientList.getOwner().gun.rotation -
       Math.atan2(
@@ -407,14 +328,29 @@ function update(time, delta) {
       //console.log("-");
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation - 0.05;
+      sendControl({
+        event: "control",
+        data: {
+          key: "gun.rotation",
+          val: clientList.getOwner().gun.rotation
+        }
+      });
     } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation + 0.05;
+      sendControl({
+        event: "control",
+        data: {
+          key: "gun.rotation",
+          val: clientList.getOwner().gun.rotation
+        }
+      });
       //console.log("+");
     } else {
       //console.log("0");
     }
 
+    /*
     if (cursors.S.isDown) {
       control.s = cursors.S.isDown;
       sendControl({
@@ -430,26 +366,43 @@ function update(time, delta) {
       control.s = false;
     }
     if (cursors.W.isDown) {
-      control.w = true;
+      control.w = cursors.W.isDown;
       //socket.emit('upisDown',{'id': id});
       //clients[id].thrust(0.03);
     } else {
       control.w = false;
     }
     if (cursors.A.isDown) {
-      control.a = true;
+      control.a = cursors.A.isDown;
       //socket.emit('leftisDown',{'id': id});
       //clients[id].setRotation(clients[id].rotation - 0.1);
     } else {
       control.a = false;
     }
     if (cursors.D.isDown) {
-      control.d = true;
+      control.d = cursors.D.isDown;
       //socket.emit('rightisDown',{'id': id});
       //clients[id].setRotation(clients[id].rotation + 0.1);
     } else {
       control.d = false;
     }
+    //*/
+    
+    control.lmb = pointer.isDown;
+    control.s = cursors.S.isDown;
+    control.w = cursors.W.isDown;
+    control.a = cursors.A.isDown;
+    control.d = cursors.D.isDown;
+    if (control != controlold){
+      controlold = control;
+      sendControl({
+        event: "control",
+        data: control
+      });
+    }
+    
+    
+    //*/
   } else {
     if (pointer.isDown) {
       clientList.getOwner().fire();
