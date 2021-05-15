@@ -29,8 +29,7 @@ function startGame() {
             );
           break;
         case "control":
-            logObj("control->data", data.data);
-          if(data.data.key == "control"){
+          if(data.key == "control"){
             if (data.data.lbm) {
               clientList.getClient(data.from).fire();
             }
@@ -38,15 +37,15 @@ function startGame() {
       clientList.getClient(data.from).thrustBack(0.03);
     }
     if (data.data.w) {
-      clientList.getOwner().thrust(0.03);
+      clientList.getClient(data.from).thrust(0.03);
     }
     if (data.data.a) {
-      clientList.getOwner().setRotation(clientList.getOwner().rotation - 0.1);
+      clientList.getClient(data.from).setRotation(clientList.getClient(data.from).rotation - 0.1);
     }
     if (data.data.d) {
-      clientList.getOwner().setRotation(clientList.getOwner().rotation + 0.1);
+      clientList.getClient(data.from).setRotation(clientList.getClient(data.from).rotation + 0.1);
     }
-          }else if(data.data.key == "gun.rotation"){
+          }else if(data.key == "gun.rotation"){
             clientList.getClient(data.from).gun.rotation = data.data.val
           }
           break;
@@ -310,23 +309,19 @@ function update(time, delta) {
       //console.log("-");
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation - 0.05;
-      sendControl({
+      /*sendControl({
         event: "control",
-        data: {
-          key: "gun.rotation",
-          val: clientList.getOwner().gun.rotation
-        }
-      });
+        key: "gun.rotation",
+        val: clientList.getOwner().gun.rotation
+      });//*/
     } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation + 0.05;
-      sendControl({
+      /*sendControl({
         event: "control",
-        data: {
-          key: "gun.rotation",
-          val: clientList.getOwner().gun.rotation
-        }
-      });
+        key: "gun.rotation",
+        val: clientList.getOwner().gun.rotation
+      });//*/
       //console.log("+");
     } else {
       //console.log("0");
@@ -379,10 +374,9 @@ function update(time, delta) {
       controlold = control;
       sendControl({
         event: "control",
-        data: {
-          key: "control",
-          data: control
-        }
+        key: "control",
+        data: control
+        
         
       });
     }
