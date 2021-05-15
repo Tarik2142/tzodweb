@@ -78,14 +78,14 @@ io.sockets.on("connection", function(socket) {
     if (!roomList[roomId]) return; //ковнати боль ше нет
     roomList[roomId].removePlayer(socket); //убрать дибіла
     if (isServer) {
-      toClients("event", {
+      toClients("control", {
         event: "serverClose"
       }); //сервер вийшов в окошко
       roomList.splice(roomId, 1); //убрать ковнату
       logObj("roomList splice", roomList);
     } else {
       if (!roomList[roomId].socketId) return; //якшо такий есть
-      toServer("event", {
+      toClients("control", {
         event: "playerDisconnect",
         playerName: player
       }); //переслать на серв
@@ -122,6 +122,7 @@ io.sockets.on("connection", function(socket) {
     if (isServer) {
       toClients("control", data);
     } else {
+      if (!roomList[roomId].getPlayerId(socket)) return; //якшо нет ковнати
       const from = roomList[roomId].getPlayerId(socket); //ник от кого
       toServer("control", { event: "control", from: from, data: data });
     }
@@ -181,7 +182,7 @@ io.sockets.on("connection", function(socket) {
               playerId = roomList[roomId].addPlayer(socket, player);
               log("Joined to " + joinTo + "!");
               socket.join(data.room); //зайти
-              toServer("event", {
+              toServer("control", {
                 //оповістить
                 event: "newPlayer",
                 playerName: player

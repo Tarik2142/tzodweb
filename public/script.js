@@ -5,6 +5,11 @@ function startClient() {
   log("playerName");
   log(playerName);
   
+}
+
+function startGame() {
+  game = new Phaser.Game(config);
+  
   socket.on("control", function(data) {
     if (data.event) {
       logObj("event: ", data);
@@ -32,10 +37,6 @@ function startClient() {
       }
     }
   });
-  };
-
-function startGame() {
-  game = new Phaser.Game(config);
 }
 
 function clients(owner) {
@@ -83,44 +84,6 @@ function startServer() {
 
   closeForm();
   startGame();
-
-  //clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));
-
-  socket.on("event", function(data) {
-    if (data.event) {
-      logObj("event: ", data);
-      switch (data.event) {
-        case "newPlayer":
-          if (data.playerName != playerName) {
-            clientList.add(
-              new tank(
-                scene,
-                posx,
-                posy,
-                "tank",
-                shapes.blue,
-                guns.heavy,
-                data.playerName
-              )
-            );
-            sendControl({
-              event: "newPlayer",
-              playerName: data.playerName,
-              pos: {
-                x: posx,
-                y: posy
-              }
-            });
-          }
-
-          break;
-
-        case "playerDisconnect":
-          clientList.remove(data.playerName);
-          break;
-      }
-    }
-  });
 }
 
 const FPS = 30;
