@@ -30,6 +30,39 @@ function startGame() {
           break;
         case "control":
             logObj("control->data", data.data);
+          if (data.) {
+      clientList.getClient(data.from).fire();
+    }
+    var poz =
+      clientList.getOwner().gun.rotation -
+      Math.atan2(
+        pointer.y - clientList.getOwner().gun.y,
+        pointer.x - clientList.getOwner().gun.x
+      );
+    if ((poz > 0.05 && poz < 3.14) || poz < -3.15) {
+      //console.log("-");
+      clientList.getOwner().gun.rotation =
+        clientList.getOwner().gun.rotation - 0.05;
+    } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
+      clientList.getOwner().gun.rotation =
+        clientList.getOwner().gun.rotation + 0.05;
+      //console.log("+");
+    }
+
+    if (cursors.S.isDown) {
+      clientList.getOwner().thrustBack(0.03);
+    }
+    if (cursors.W.isDown) {
+      clientList.getOwner().thrust(0.03);
+    }
+    if (cursors.A.isDown) {
+      clientList.getOwner().setRotation(clientList.getOwner().rotation - 0.1);
+    }
+    if (cursors.D.isDown) {
+      clientList.getOwner().setRotation(clientList.getOwner().rotation + 0.1);
+    }
+  
+          
           break;
         case "playerDisconnect":
           clientList.remove(data.playerName);
