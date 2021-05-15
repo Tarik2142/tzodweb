@@ -29,7 +29,7 @@ function startGame() {
             );
           break;
         case "control":
-          if(data.key == "control"){
+          if(data.data.key == "control"){
             if (data.data.lbm) {
               clientList.getClient(data.from).fire();
             }
@@ -45,8 +45,8 @@ function startGame() {
     if (data.data.d) {
       clientList.getClient(data.from).setRotation(clientList.getClient(data.from).rotation + 0.1);
     }
-          }else if(data.key == "gun.rotation"){
-            clientList.getClient(data.from).gun.rotation = data.data.val
+          }else if(data.data.key == "gun.rotation"){
+            clientList.getClient(data.from).gun.rotation = parseFloat(data.val);
           }
           break;
         case "playerDisconnect":
@@ -316,7 +316,7 @@ function update(time, delta) {
       //console.log("-");
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation - 0.05;
-      /*sendControl({
+      sendControl({
         event: "control",
         key: "gun.rotation",
         val: clientList.getOwner().gun.rotation
@@ -324,7 +324,7 @@ function update(time, delta) {
     } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation + 0.05;
-      /*sendControl({
+      sendControl({
         event: "control",
         key: "gun.rotation",
         val: clientList.getOwner().gun.rotation
