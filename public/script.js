@@ -377,18 +377,16 @@ function update(time, delta) {
     control.w = cursors.W.isDown;
     control.a = cursors.A.isDown;
     control.d = cursors.D.isDown;
-    if (cursors.D.isDown){log(controlold);}
-    if (cursors.A.isDown){controlold = control;}
-    /*if (control != controlold){
+    if (JSON.stringify(control) !== JSON.stringify(controlold)){
       log("aaa!");
-      
-      controlold = control;
+  
+      controlold = Object.assign({}, control);
       sendControl({
         event: "control",
         key: "control",
         data: control  
       });
-    }//*/
+    }
     
     
     //*/
