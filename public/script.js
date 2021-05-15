@@ -33,20 +33,21 @@ function startGame() {
             if (data.data.lbm) {
               clientList.getClient(data.from).fire();
             }
-            if (data.data.s) {
+            if (data.data.data.s) {
+              log("S press");
       clientList.getClient(data.from).thrustBack(0.03);
     }
-    if (data.data.w) {
+    if (data.data.data.w) {
       clientList.getClient(data.from).thrust(0.03);
     }
-    if (data.data.a) {
+    if (data.data.data.a) {
       clientList.getClient(data.from).setRotation(clientList.getClient(data.from).rotation - 0.1);
     }
-    if (data.data.d) {
+    if (data.data.data.d) {
       clientList.getClient(data.from).setRotation(clientList.getClient(data.from).rotation + 0.1);
     }
           }else if(data.data.key == "gun.rotation"){
-            clientList.getClient(data.from).gun.rotation = parseFloat(data.val);
+            clientList.getClient(data.from).gun.rotation = data.val;
           }
           break;
         case "playerDisconnect":
