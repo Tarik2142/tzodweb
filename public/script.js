@@ -1,3 +1,4 @@
+
 function startClient() {
   closeForm();
   startGame();
@@ -21,6 +22,9 @@ function startClient() {
                 data.playerName
               )
             );
+          break;
+        case "control":
+            logObj("");
           break;
         case "playerDisconnect":
           clientList.remove(data.playerName);
