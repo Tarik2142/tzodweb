@@ -188,7 +188,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
     this.nickname.setScrollFactor(0);
     log(this.nickname);
     var that = this;
-    /*this.updater = scene.matter.world.on('beforeupdate', function(time, delta){//ник за игроком
+    this.updater = scene.matter.world.on('beforeupdate', function(time, delta){//ник за игроком
       that.nickname.x = that.x - 25;
     that.nickname.y = that.y - 50;
     }, this);//*/
@@ -210,7 +210,8 @@ class tank extends Phaser.Physics.Matter.Sprite {
   }
 
   kill() {
-          scene.matter.world.off(this.updater, 'beforeupdate');
+    scene.matter.world.off('beforeupdate', null, this);
+    scene.matter.world.remove(this.nickname);
     this.updater = "";
     delete this.updater;
     this.nickname = "";
