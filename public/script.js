@@ -30,7 +30,8 @@ function startGame() {
           break;
         case "control":
           if(data.data.key == "control"){
-            if (data.data.lbm) {
+            if (data.data.data.lbm) {
+              log("FIRE");
               clientList.getClient(data.from).fire();
             }
             if (data.data.data.s) {
@@ -47,7 +48,7 @@ function startGame() {
       clientList.getClient(data.from).setRotation(clientList.getClient(data.from).rotation + 0.1);
     }
           }else if(data.data.key == "gun.rotation"){
-            clientList.getClient(data.from).gun.rotation = data.val;
+            clientList.getClient(data.from).gun.rotation = data.data.val;
           }
           break;
         case "playerDisconnect":
