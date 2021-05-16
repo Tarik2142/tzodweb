@@ -211,7 +211,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
 
   kill() {
     scene.matter.world.off('beforeupdate', null, this);
-    scene.matter.world.remove(this.nickname);
+    this.nickname.destroy();
     this.updater = "";
     delete this.updater;
     this.nickname = "";
@@ -219,7 +219,6 @@ class tank extends Phaser.Physics.Matter.Sprite {
     scene.matter.world.removeConstraint(this.joint);
     this.gun.destroy();
     delete this.gun;
-    //scene.matter.composite.remove(scene.matter.world, this.joint, true);
     this.destroy();
     delete this;
   }
