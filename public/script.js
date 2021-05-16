@@ -30,7 +30,7 @@ function startGame() {
           break;
         case "control":
           if(data.data.key == "control"){
-            if (data.data.data.lbm) {
+            if (data.data.data.lmb) {
               log("FIRE");
               clientList.getClient(data.from).fire();
             }
