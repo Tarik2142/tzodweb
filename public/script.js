@@ -24,18 +24,18 @@ function startNetwork() {
           break;
         case "control":
           if (data.data.key == "control") {
-            if (data.data.data.lmb) {
+            if (data.data.lmb) {
               log("FIRE");
               clientList.getClient(data.from).fire();
             }
-            if (data.data.data.s) {
+            if (data.data.s) {
               log("S press");
               clientList.getClient(data.from).thrustBack(0.03);
             }
-            if (data.data.data.w) {
+            if (data.data.w) {
               clientList.getClient(data.from).thrust(0.03);
             }
-            if (data.data.data.a) {
+            if (data.data.a) {
               clientList
                 .getClient(data.from)
                 .setRotation(clientList.getClient(data.from).rotation - 0.1);
