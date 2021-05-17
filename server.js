@@ -112,9 +112,6 @@ io.sockets.on("connection", function(socket) {
       event: "room_created",
       roomId: roomList[roomId].chanelId
     });
-    // updateTmr = setInterval(function(){
-    //   socket.emit('update');
-    // }, 1000);
   });
 
   socket.on("control", function(data) {
