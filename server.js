@@ -117,7 +117,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("control", function(data) {
       if (!roomList[roomId].getPlayerId(socket)) return; //якшо нет ковнати
       const from = roomList[roomId].getPlayerId(socket); //ник от кого
-      toServer("control", { event: "control", from: from, data: data });
+      toServer("control", { event: "control", from: from, data });
   });
 
   socket.on("listRooms", function() {

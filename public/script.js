@@ -59,6 +59,7 @@ function startNetwork() {
 
 function startGame() {
   game = new Phaser.Game(config);
+  startNetwork();
 }
 
 function clients(owner) {
