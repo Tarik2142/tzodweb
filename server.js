@@ -75,7 +75,7 @@ io.sockets.on("connection", function(socket) {
   }
 
   socket.on("disconnect", function(data) {
-    if (!roomList[roomId]) return; //ковнати боль ше нет
+    if (!roomList[roomId]) return; //ковнати больше нет
     roomList[roomId].removePlayer(socket); //убрать дибіла
     if (isServer) {
       toClients("control", {

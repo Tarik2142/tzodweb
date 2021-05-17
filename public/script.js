@@ -1,15 +1,9 @@
-
 function startClient() {
   closeForm();
   startGame();
-  log("playerName");
-  log(playerName);
-  
 }
 
-function startGame() {
-  game = new Phaser.Game(config);
-  
+function startNetwork() {
   socket.on("control", function(data) {
     if (data.event) {
       logObj("event: ", data);
@@ -29,25 +23,29 @@ function startGame() {
             );
           break;
         case "control":
-          if(data.data.key == "control"){
+          if (data.data.key == "control") {
             if (data.data.data.lmb) {
               log("FIRE");
               clientList.getClient(data.from).fire();
             }
             if (data.data.data.s) {
               log("S press");
-      clientList.getClient(data.from).thrustBack(0.03);
-    }
-    if (data.data.data.w) {
-      clientList.getClient(data.from).thrust(0.03);
-    }
-    if (data.data.data.a) {
-      clientList.getClient(data.from).setRotation(clientList.getClient(data.from).rotation - 0.1);
-    }
-    if (data.data.data.d) {
-      clientList.getClient(data.from).setRotation(clientList.getClient(data.from).rotation + 0.1);
-    }
-          }else if(data.data.key == "gun.rotation"){
+              clientList.getClient(data.from).thrustBack(0.03);
+            }
+            if (data.data.data.w) {
+              clientList.getClient(data.from).thrust(0.03);
+            }
+            if (data.data.data.a) {
+              clientList
+                .getClient(data.from)
+                .setRotation(clientList.getClient(data.from).rotation - 0.1);
+            }
+            if (data.data.data.d) {
+              clientList
+                .getClient(data.from)
+                .setRotation(clientList.getClient(data.from).rotation + 0.1);
+            }
+          } else if (data.data.key == "gun.rotation") {
             clientList.getClient(data.from).gun.rotation = data.data.val;
           }
           break;
@@ -57,6 +55,10 @@ function startGame() {
       }
     }
   });
+}
+
+function startGame() {
+  game = new Phaser.Game(config);
 }
 
 function clients(owner) {
@@ -158,7 +160,7 @@ var game;
 var scene;
 //this.input.mouse.disableContextMenu()
 var shapes;
-var controlold= {
+var controlold = {
   w: false,
   a: false,
   s: false,
@@ -322,7 +324,7 @@ function update(time, delta) {
         event: "control",
         key: "gun.rotation",
         val: clientList.getOwner().gun.rotation
-      });//*/
+      }); //*/
     } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation + 0.05;
@@ -330,7 +332,7 @@ function update(time, delta) {
         event: "control",
         key: "gun.rotation",
         val: clientList.getOwner().gun.rotation
-      });//*/
+      }); //*/
       //console.log("+");
     } else {
       //console.log("0");
@@ -373,24 +375,23 @@ function update(time, delta) {
       control.d = false;
     }
     //*/
-    
+
     control.lmb = pointer.isDown;
     control.s = cursors.S.isDown;
     control.w = cursors.W.isDown;
     control.a = cursors.A.isDown;
     control.d = cursors.D.isDown;
-    if (JSON.stringify(control) !== JSON.stringify(controlold)){
+    if (JSON.stringify(control) !== JSON.stringify(controlold)) {
       log("aaa!");
-  
+
       controlold = Object.assign({}, control);
       sendControl({
         event: "control",
         key: "control",
-        data: control  
+        data: control
       });
     }
-    
-    
+
     //*/
   } else {
     if (pointer.isDown) {
