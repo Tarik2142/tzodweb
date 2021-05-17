@@ -13,8 +13,8 @@ function startNetwork() {
             clientList.add(
               new tank(
                 scene,
-                data.data.pos.x,
-                data.data.pos.y,
+                data.pos.x,
+                data.pos.y,
                 "tank",
                 shapes.blue,
                 guns.heavy,

@@ -181,11 +181,9 @@ io.sockets.on("connection", function(socket) {
                 //оповістить
                 event: "newPlayer",
                 playerName: player,
-                data: {
                   pos: {
                     x: 100,
                     y: 100
-                  }
                 }
               });
               socket.emit("joinResult", {
