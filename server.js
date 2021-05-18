@@ -56,31 +56,39 @@ io.sockets.on("connection", function(socket) {
   var isServer = false;
   var player;
   var playerId;
-
-  function toServer(event, data) {
-    if (roomList[roomId].socketId) {
+  
+  var network = {
+    brodcast: function(name, data){
+      io.to(roomList[roomId].chanelId).emit(name, data);
+    },
+    toServer: function(name, data){
+      if (roomList[roomId].socketId) {
       io.to(roomList[roomId].socketId).emit(event, data); //переслать на серв
     } else {
       log("not connected to server room");
     }
+    },
+    toClient(clientId, name, data){
+      io.to(roomList[roomId].socketId).emit(name, data);
+    }
   }
 
-  function toClients(event, data) {
-    io.to(roomList[roomId].chanelId).emit(event, data);
+  function toServer(event, data) {
+    
   }
 
   socket.on("disconnect", function(data) {
     if (!roomList[roomId]) return; //ковнати больше нет
     roomList[roomId].removePlayer(socket); //убрать дибіла
     if (isServer) {
-      toClients("control", {
+      network.brodcast("control", {
         event: "serverClose"
       }); //сервер вийшов в окошко
       roomList.splice(roomId, 1); //убрать ковнату
       logObj("roomList splice", roomList);
     } else {
       if (!roomList[roomId].socketId) return; //якшо такий есть
-      toClients("control", {
+      network.brodcast("control", {
         event: "playerDisconnect",
         playerName: player
       }); //переслать на серв
