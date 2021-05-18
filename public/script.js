@@ -424,7 +424,6 @@ function update(time, delta) {
   
   if(server){
     if (pointer.isDown) {
-      log("POINTER");
       clientList.getOwner().fire();
     }
     if (cursors.S.isDown) {
