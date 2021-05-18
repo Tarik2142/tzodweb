@@ -1,18 +1,10 @@
-function startClient(players) {
+function startClient() {
   closeForm();
   startGame();
-  clientList = new clients(
-    new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, players[0])
-  );
-  var counter = 1;
-  players.forEach(function(player) {
-     clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, player));
-      counter++;
-    });
-  logObj("clientList", clientList);
 }
 
 function startServer() {
+  delete startPlayers;
   server = true;
   map = $("#mapSelector").val();
   socket.emit("newRoom", {
@@ -29,7 +21,7 @@ function startServer() {
 function startGame() {
   game = new Phaser.Game(config);
   socket.on("control", function(data) {
-    if (data.data.event) {
+    if (data.event) {
       logObj("event: ", data);
       switch (data.event) {
         case "":
@@ -153,6 +145,7 @@ var config = {
 };
 
 //---------GLOBAL VARS------------
+var startPlayers;
 var playerId = 0;
 var server = false;
 var id = Math.round(100 * Math.random());
@@ -287,7 +280,17 @@ function create() {
     new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName)
   );
   }else{
-    
+    clientList = new clients(
+    new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, startPlayers[0])
+  );
+  var counter = 1;
+  startPlayers.forEach(function(player) {
+     clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, player));
+      counter++;
+    });
+  logObj("clientList", clientList);
+    startPlayers = undefined;
+    delete startPlayers;
   }
   
 }

@@ -63,7 +63,7 @@ io.sockets.on("connection", function(socket) {
     },
     toServer: function(name, data){
       if (roomList[roomId].socketId) {
-      io.to(roomList[roomId].socketId).emit(event, data); //переслать на серв
+      io.to(roomList[roomId].socketId).emit(name, data); //переслать на серв
     } else {
       log("not connected to server room");
     }
@@ -177,7 +177,7 @@ io.sockets.on("connection", function(socket) {
               playerId = roomList[roomId].addPlayer(socket, player);
               log("Joined to " + joinTo + "!");
               socket.join(data.room); //зайти
-              toServer("control", {
+              network.toServer("control", {
                 //оповістить
                 event: "newPlayer",
                 playerName: player,

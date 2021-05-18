@@ -208,6 +208,7 @@ function connectCfg() {
   socket.on('joinResult', function(data){
     if (data.result){
       map = data.map;
+      startPlayers = data.players;
       startClient();
     }else{
       alert(data.text);
