@@ -1,8 +1,3 @@
-function startClient() {
-  closeForm();
-  startGame();
-}
-
 function startNetwork() {
   socket.on("control", function(data) {
     if (data.event) {
@@ -57,6 +52,26 @@ function startNetwork() {
   });
 }
 
+function startClient() {
+  closeForm();
+  startGame();
+}
+
+function startServer() {
+  map = $("#mapSelector").val();
+  serverMode = true;
+  socket.emit("newRoom", {
+    playerId: playerName + id,
+    socketId: socket.id,
+    owner: playerName,
+    map: map,
+    password: $("#password").val()
+  });
+  closeForm();
+  startGame();
+}
+
+
 function startGame() {
   game = new Phaser.Game(config);
   startNetwork();
@@ -91,22 +106,6 @@ function clients(owner) {
 
 function sendControl(data) {
   socket.emit("control", data);
-}
-
-function startServer() {
-  map = $("#mapSelector").val();
-  serverMode = true;
-
-  socket.emit("newRoom", {
-    playerId: playerName + id,
-    socketId: socket.id,
-    owner: playerName,
-    map: map,
-    password: $("#password").val()
-  });
-
-  closeForm();
-  startGame();
 }
 
 const FPS = 30;
