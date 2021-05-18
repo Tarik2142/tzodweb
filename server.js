@@ -84,10 +84,10 @@ io.sockets.on("connection", function(socket) {
       logObj("roomList splice", roomList);
     } else {
       if (!roomList[roomId].socketId) return; //якшо такий есть
-      network.brodcast("control", {
+      network.brodcast("control", {data: {
         event: "playerDisconnect",
         playerName: player
-      }); //переслать на серв
+      }}); //переслать на серв
     }
   });
 
@@ -114,6 +114,7 @@ io.sockets.on("connection", function(socket) {
   });
 
   socket.on("control", function(data) {
+    if (!roomList[roomId]) return;
       if (!roomList[roomId].getPlayerId(socket)) return; //якшо нет ковнати
       const from = roomList[roomId].getPlayerId(socket); //ник от кого
       if (from == 0){//от сервера
@@ -177,7 +178,7 @@ io.sockets.on("connection", function(socket) {
               playerId = roomList[roomId].addPlayer(socket, player);
               log("Joined to " + joinTo + "!");
               socket.join(data.room); //зайти
-              network.toServer("control", {
+              network.toServer("control", {data: {
                 //оповістить
                 event: "newPlayer",
                 playerName: player,
@@ -185,6 +186,7 @@ io.sockets.on("connection", function(socket) {
                     x: 100,
                     y: 100
                 }
+              }
               });
               socket.emit("joinResult", {
                 result: true,

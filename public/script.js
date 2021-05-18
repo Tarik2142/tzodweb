@@ -22,9 +22,9 @@ function startGame() {
   clientList = new clients();
   game = new Phaser.Game(config);
   socket.on("control", function(data) {
-    if (data.event) {
-      logObj("event: ", data);
-      switch (data.event) {
+    logObj("control: ", data);
+    if (data.data.event) {
+      switch (data.data.event) {
         case "":
           
           break;
@@ -33,12 +33,12 @@ function startGame() {
             clientList.add(
               new tank(
                 scene,
-                data.pos.x,
-                data.pos.y,
+                data.data.pos.x,
+                data.data.pos.y,
                 "tank",
                 shapes.blue,
                 guns.heavy,
-                data.playerName
+                data.data.playerName
               )
             );
           break;
