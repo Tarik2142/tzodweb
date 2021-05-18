@@ -1,6 +1,6 @@
-function startClient() {
+function startClient(players) {
   closeForm();
-  startGame();
+  startGame(players);
 }
 
 function startServer() {
@@ -15,6 +15,9 @@ function startServer() {
   });
   closeForm();
   startGame();
+  clientList = new clients(
+    new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName)
+  );
 }
 
 function startGame() {
@@ -105,6 +108,16 @@ function sendControl(data) {
   socket.emit("control", data);
 }
 
+function logObj(text, obj) {
+  log(text);
+  log(obj);
+  log("----------");
+}
+
+function log(text) {
+  console.log(text);
+}
+
 const FPS = 30;
 var serverMode = false;
 var playerName;
@@ -134,25 +147,13 @@ var config = {
   }
 };
 
-function logObj(text, obj) {
-  log(text);
-  log(obj);
-  log("----------");
-}
-
-function log(text) {
-  console.log(text);
-}
-
+//---------GLOBAL VARS------------
 var id = Math.round(100 * Math.random());
 var posx = Math.round(500 * Math.random());
 var posy = Math.round(500 * Math.random());
-// A flag for drawing activity
 var clientList;
 var timerId = {};
 var socket = io();
-//var tilemapplus=tilemap-plus();
-
 var game;
 var scene;
 //this.input.mouse.disableContextMenu()
@@ -173,6 +174,8 @@ var control = {
   lmb: false,
   rmb: false
 };
+
+//---------GLOBAL VARS------------
 
 socket.on("GG", function() {
   log("GG");
@@ -272,9 +275,6 @@ function create() {
   );
 
   shapes = this.cache.json.get("shapes");
-  clientList = new clients(
-    new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName)
-  );
 }
 
 // function handleMove() {
