@@ -1,57 +1,3 @@
-function startNetwork() {
-  socket.on("control", function(data) {
-    if (data.data.event) {
-      logObj("event: ", data);
-      switch (data.event) {
-        case "newPlayer":
-          if (data.playerName != playerName)
-            clientList.add(
-              new tank(
-                scene,
-                data.pos.x,
-                data.pos.y,
-                "tank",
-                shapes.blue,
-                guns.heavy,
-                data.playerName
-              )
-            );
-          break;
-        case "control":
-          if (data.data.key == "control") {
-            if (data.data.data.lmb) {
-              log("FIRE");
-              clientList.getClient(data.from).fire();
-            }
-            if (data.data.data.s) {
-              log("S press");
-              clientList.getClient(data.from).thrustBack(0.03);
-            }
-            if (data.data.data.w) {
-              clientList.getClient(data.from).thrust(0.03);
-            }
-            if (data.data.data.a) {
-              clientList
-                .getClient(data.from)
-                .setRotation(clientList.getClient(data.from).rotation - 0.1);
-            }
-            if (data.data.data.d) {
-              clientList
-                .getClient(data.from)
-                .setRotation(clientList.getClient(data.from).rotation + 0.1);
-            }
-          } else if (data.data.key == "gun.rotation") {
-            clientList.getClient(data.from).gun.rotation = data.data.val;
-          }
-          break;
-        case "playerDisconnect":
-          clientList.remove(data.playerName);
-          break;
-      }
-    }
-  });
-}
-
 function startClient() {
   closeForm();
   startGame();
@@ -73,7 +19,59 @@ function startServer() {
 
 function startGame() {
   game = new Phaser.Game(config);
-  startNetwork();
+  socket.on("control", function(data) {
+    if (data.data.event) {
+      logObj("event: ", data);
+      switch (data.event) {
+        case "":
+          
+          break;
+        case "newPlayer":
+          if (data.playerName != playerName)
+            clientList.add(
+              new tank(
+                scene,
+                data.pos.x,
+                data.pos.y,
+                "tank",
+                shapes.blue,
+                guns.heavy,
+                data.playerName
+              )
+            );
+          break;
+        case "control":
+            if (data.data.data.lmb) {
+              log("FIRE");
+              clientList.getClient(data.from).fire();
+            }
+            if (data.data.data.s) {
+              log("S press");
+              clientList.getClient(data.from).thrustBack(0.03);
+            }
+            if (data.data.data.w) {
+              clientList.getClient(data.from).thrust(0.03);
+            }
+            if (data.data.data.a) {
+              clientList
+                .getClient(data.from)
+                .setRotation(clientList.getClient(data.from).rotation - 0.1);
+            }
+            if (data.data.data.d) {
+              clientList
+                .getClient(data.from)
+                .setRotation(clientList.getClient(data.from).rotation + 0.1);
+            }
+          break;
+        case "gun.rotation":
+          clientList.getClient(data.from).gun.rotation = data.data.val;
+          break;
+        case "playerDisconnect":
+          clientList.remove(data.playerName);
+          break;
+      }
+    }
+  });
 }
 
 function clients(owner) {
@@ -320,16 +318,14 @@ function update(time, delta) {
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation - 0.05;
       sendControl({
-        event: "control",
-        key: "gun.rotation",
+        event: "gun.rotation",
         val: clientList.getOwner().gun.rotation
       }); //*/
     } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
       clientList.getOwner().gun.rotation =
         clientList.getOwner().gun.rotation + 0.05;
       sendControl({
-        event: "control",
-        key: "gun.rotation",
+        event: "gun.rotation",
         val: clientList.getOwner().gun.rotation
       }); //*/
       //console.log("+");
@@ -381,12 +377,9 @@ function update(time, delta) {
     control.a = cursors.A.isDown;
     control.d = cursors.D.isDown;
     if (JSON.stringify(control) !== JSON.stringify(controlold)) {
-      log("aaa!");
-
       controlold = Object.assign({}, control);
       sendControl({
-        event: "control",
-        key: "control",
+        event: "gun.rotation",
         data: control
       });
     }
