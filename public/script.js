@@ -418,6 +418,7 @@ function update(time, delta) {
         data: control
       });
     }
+  
   if(server){
     if (pointer.isDown) {
       clientList.getOwner().fire();

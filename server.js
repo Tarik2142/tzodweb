@@ -114,10 +114,13 @@ io.sockets.on("connection", function(socket) {
   });
 
   socket.on("control", function(data) {
+    //console.log("control");
     if (!roomList[roomId]) return;
       if (!roomList[roomId].getPlayerId(socket)) return; //якшо нет ковнати
       const from = roomList[roomId].getPlayerId(socket); //ник от кого
+      console.log("from" + from);
       if (from == 0){//от сервера
+        console.log("brodcast");
         network.brodcast("control", {data});
       }else{
        network.toServer("control", {from: from, data }); 
