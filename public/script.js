@@ -25,8 +25,8 @@ function startGame() {
     logObj("control: ", data);
     if (data.data.event) {
       switch (data.data.event) {
-        case "":
-          
+        case "playersUpdate":
+            data.data.
           break;
         case "newPlayer":
           if (data.playerName != playerName)
@@ -428,12 +428,19 @@ function update(time, delta) {
     if (cursors.D.isDown) {
       clientList.getOwner().setRotation(clientList.getOwner().rotation + 0.1);
     }
-    var playerPos = {
-      
+    
+    function playerPos(x, y, gunRotation){
+      this.x = x;
+      this.y = y;
+      this.gunRotation = gunRotation;
     }
+    var positionsArr = [];
+    clientList.clientArr.forEach(function(client){
+      positionsArr.push(new playerPos(client.x, client.y, client.rotation));
+    });
     sendControl({
         event: "playersUpdate",
-        data: control
+        data: positionsArr
       });
   }
   
