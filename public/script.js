@@ -61,7 +61,7 @@ function startServer() {
   map = $("#mapSelector").val();
   serverMode = true;
   socket.emit("newRoom", {
-    playerId: playerName + id,
+    playerId: playerName + id,//болше не іспользується
     socketId: socket.id,
     owner: playerName,
     map: map,
