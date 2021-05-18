@@ -43,6 +43,7 @@ function startGame() {
             );
           break;
         case "control":
+          if (server){
             if (data.data.data.lmb) {
               log("FIRE");
               clientList.getClient(data.from).fire();
@@ -64,9 +65,16 @@ function startGame() {
                 .getClient(data.from)
                 .setRotation(clientList.getClient(data.from).rotation + 0.1);
             }
+          }else{
+            
+          }
           break;
         case "gun.rotation":
-          clientList.getClient(data.from).gun.rotation = data.data.val;
+          if (server){
+            clientList.getClient(data.from).gun.rotation = data.data.val;
+          }else{
+            
+          }
           break;
         case "playerDisconnect":
           clientList.remove(data.playerName);
@@ -400,7 +408,7 @@ function update(time, delta) {
     if (JSON.stringify(control) !== JSON.stringify(controlold)) {
       controlold = Object.assign({}, control);
       sendControl({
-        event: "gun.rotation",
+        event: "control",
         data: control
       });
     }
@@ -420,6 +428,13 @@ function update(time, delta) {
     if (cursors.D.isDown) {
       clientList.getOwner().setRotation(clientList.getOwner().rotation + 0.1);
     }
+    var playerPos = {
+      
+    }
+    sendControl({
+        event: "playersUpdate",
+        data: control
+      });
   }
   
 }
