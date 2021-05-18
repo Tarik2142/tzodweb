@@ -118,7 +118,7 @@ io.sockets.on("connection", function(socket) {
       if (!roomList[roomId].getPlayerId(socket)) return; //якшо нет ковнати
       const from = roomList[roomId].getPlayerId(socket); //ник от кого
       if (from == 0){//от сервера
-        
+        network.brodcast("control", {data});
       }else{
        network.toServer("control", {from: from, data }); 
       }
