@@ -71,7 +71,6 @@ function startServer() {
   startGame();
 }
 
-
 function startGame() {
   game = new Phaser.Game(config);
   startNetwork();
