@@ -1,6 +1,6 @@
 function startNetwork() {
   socket.on("control", function(data) {
-    if (data.event) {
+    if (data.data.event) {
       logObj("event: ", data);
       switch (data.event) {
         case "newPlayer":
