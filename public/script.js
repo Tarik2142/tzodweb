@@ -1,6 +1,15 @@
 function startClient(players) {
   closeForm();
   startGame(players);
+  clientList = new clients(
+    new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, players[0])
+  );
+  var counter = 1;
+  players.forEach(function(player) {
+     clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, player));
+      counter++;
+    });
+  logObj("clientList", clientList);
 }
 
 function startServer() {
@@ -14,10 +23,10 @@ function startServer() {
     password: $("#password").val()
   });
   closeForm();
-  startGame();
   clientList = new clients(
     new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName)
   );
+  startGame();
 }
 
 function startGame() {
@@ -148,6 +157,7 @@ var config = {
 };
 
 //---------GLOBAL VARS------------
+var playerId = 0;
 var id = Math.round(100 * Math.random());
 var posx = Math.round(500 * Math.random());
 var posy = Math.round(500 * Math.random());
@@ -275,6 +285,8 @@ function create() {
   );
 
   shapes = this.cache.json.get("shapes");
+  
+  
 }
 
 // function handleMove() {
