@@ -69,12 +69,8 @@ io.sockets.on("connection", function(socket) {
     }
     },
     toClient(clientId, name, data){
-      io.to(roomList[roomId].socketId).emit(name, data);
+      io.to(roomList[roomId].connections[clientId]).emit(name, data);
     }
-  }
-
-  function toServer(event, data) {
-    
   }
 
   socket.on("disconnect", function(data) {
