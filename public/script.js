@@ -22,17 +22,20 @@ function startGame() {
   clientList = new clients();
   game = new Phaser.Game(config);
   socket.on("control", function(data) {
+    if (data.from == clientList.ownerId) return; //пакет от самого себе
     logObj("control: ", data);
     if (data.data.event) {
       switch (data.data.event) {
         case "playersUpdate":
-          var counter = 0;
+          if (!server){
+           var counter = 0;
             data.data.data.forEach(function(player){
               clientList.clientArr[counter].setPosition(player.x, player.y);
               clientList.clientArr[counter].setRotation(player.rotation);
-              clientList.clientArr[counter].gun.setRotation(player.gunRotation);
+              //clientList.clientArr[counter].gun.setRotation(player.gunRotation);
               counter++
-            });
+            }); 
+          }
           break;
         case "newPlayer":
           if (data.playerName != playerName)
@@ -421,6 +424,7 @@ function update(time, delta) {
   
   if(server){
     if (pointer.isDown) {
+      log("POINTER");
       clientList.getOwner().fire();
     }
     if (cursors.S.isDown) {
