@@ -1,6 +1,6 @@
 function startClient(players) {
   closeForm();
-  startGame(players);
+  startGame();
   clientList = new clients(
     new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, players[0])
   );
@@ -13,8 +13,8 @@ function startClient(players) {
 }
 
 function startServer() {
+  server = true;
   map = $("#mapSelector").val();
-  serverMode = true;
   socket.emit("newRoom", {
     playerId: playerName + id,//болше не іспользується
     socketId: socket.id,
@@ -23,9 +23,6 @@ function startServer() {
     password: $("#password").val()
   });
   closeForm();
-  clientList = new clients(
-    new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName)
-  );
   startGame();
 }
 
@@ -128,7 +125,6 @@ function log(text) {
 }
 
 const FPS = 30;
-var serverMode = false;
 var playerName;
 var map;
 var config = {
@@ -158,6 +154,7 @@ var config = {
 
 //---------GLOBAL VARS------------
 var playerId = 0;
+var server = false;
 var id = Math.round(100 * Math.random());
 var posx = Math.round(500 * Math.random());
 var posy = Math.round(500 * Math.random());
@@ -285,7 +282,13 @@ function create() {
   );
 
   shapes = this.cache.json.get("shapes");
-  
+  if(server){
+    clientList = new clients(
+    new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName)
+  );
+  }else{
+    
+  }
   
 }
 
@@ -308,7 +311,7 @@ function update(time, delta) {
     this.cameras.main
   );*/
   //this.matter.world.convertTilemapLayer(belowLayer);
-  if (true) {
+
     /*if (pointer.isDown) {
       control.lmb = pointer.isDown;
       // clients[id].fire();
@@ -395,28 +398,10 @@ function update(time, delta) {
         data: control
       });
     }
-
-    //*/
-  } else {
+  if(server){
     if (pointer.isDown) {
       clientList.getOwner().fire();
     }
-    var poz =
-      clientList.getOwner().gun.rotation -
-      Math.atan2(
-        pointer.y - clientList.getOwner().gun.y,
-        pointer.x - clientList.getOwner().gun.x
-      );
-    if ((poz > 0.05 && poz < 3.14) || poz < -3.15) {
-      //console.log("-");
-      clientList.getOwner().gun.rotation =
-        clientList.getOwner().gun.rotation - 0.05;
-    } else if ((poz < -0.05 && poz > -3.14) || poz > 3.15) {
-      clientList.getOwner().gun.rotation =
-        clientList.getOwner().gun.rotation + 0.05;
-      //console.log("+");
-    }
-
     if (cursors.S.isDown) {
       clientList.getOwner().thrustBack(0.03);
     }
@@ -430,4 +415,5 @@ function update(time, delta) {
       clientList.getOwner().setRotation(clientList.getOwner().rotation + 0.1);
     }
   }
+  
 }
