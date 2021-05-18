@@ -19,6 +19,7 @@ function startServer() {
 }
 
 function startGame() {
+  clientList = new clients();
   game = new Phaser.Game(config);
   socket.on("control", function(data) {
     if (data.event) {
@@ -76,8 +77,8 @@ function startGame() {
 }
 
 function clients(owner) {
+  this.ownerId = 0;
   this.clientArr = new Array();
-  this.clientArr[0] = owner;
   this.add = function(player) {
     this.clientArr.push(player);
   };
@@ -97,8 +98,11 @@ function clients(owner) {
   this.getClient = function(id) {
     return this.clientArr[id];
   };
+  this.setOwner = function(id) {
+    this.ownerId = id;
+  };
   this.getOwner = function() {
-    return this.clientArr[0];
+    return this.clientArr[this.ownerId];
   };
 }
 
@@ -276,15 +280,14 @@ function create() {
 
   shapes = this.cache.json.get("shapes");
   if(server){
-    clientList = new clients(
-    new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName)
-  );
+    clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));//server
   }else{
-    clientList = new clients(
-    new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, startPlayers[0])
-  );
-  var counter = 1;
-  startPlayers.forEach(function(player) {
+    //clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, startPlayers[0]));
+    var counter = 0;
+    startPlayers.forEach(function(player) {
+      if(playerName == player){//якшо це ми
+        clientList.setOwner(counter);
+      }
      clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, player));
       counter++;
     });
