@@ -20,11 +20,6 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-// listen for requests :)
-/*const listener = app.listen(process.env.PORT, () => {
-  console.log("Your app is listening on port " + listener.address().port);
-});*/
-
 function roomObj(roomId, socketId, owner, map, password, ownerSocket) {
   this.roomId = roomId;
   this.socketId = socketId;
@@ -185,7 +180,8 @@ io.sockets.on("connection", function(socket) {
               });
               socket.emit("joinResult", {
                 result: true,
-                map: roomList[roomId].map
+                map: roomList[roomId].map,
+                players: roomList[roomId].players
               }); //оповістить клієнта
             }
           //
