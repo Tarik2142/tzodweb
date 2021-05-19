@@ -32,7 +32,9 @@ function startGame() {
             data.data.data.forEach(function(player){
               clientList.clientArr[counter].setPosition(player.x, player.y);
               clientList.clientArr[counter].setRotation(player.rotation);
-              //clientList.clientArr[counter].gun.setRotation(player.gunRotation);
+              if (!counter == clientList.ownerId){
+                clientList.clientArr[counter].gun.setRotation(player.gunRotation);
+              }
               counter++
             }); 
           }
