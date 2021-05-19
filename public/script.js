@@ -23,7 +23,7 @@ function startGame() {
   game = new Phaser.Game(config);
   socket.on("control", function(data) {
     if (data.from == clientList.ownerId) return; //пакет от самого себе
-    logObj("control: ", data);
+    //logObj("control: ", data);
     if (data.data.event) {
       switch (data.data.event) {
         case "playersUpdate":
@@ -54,11 +54,9 @@ function startGame() {
         case "control":
           if (server){
             if (data.data.data.lmb) {
-              log("FIRE");
               clientList.getClient(data.from).fire();
             }
             if (data.data.data.s) {
-              log("S press");
               clientList.getClient(data.from).thrustBack(0.03);
             }
             if (data.data.data.w) {
@@ -86,7 +84,7 @@ function startGame() {
           }
           break;
         case "playerDisconnect":
-          clientList.remove(data.playerName);
+          clientList.remove(data.data.playerName);
           break;
       }
     }
@@ -445,6 +443,7 @@ function update(time, delta) {
       this.rotation = rotation;
       this.gunRotation = gunRotation;
     }
+    
     var positionsArr = [];
     clientList.clientArr.forEach(function(client){
       positionsArr.push(new playerPos(client.x, client.y, client.rotation, client.gun.rotation));
