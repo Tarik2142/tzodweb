@@ -59,10 +59,10 @@ function startGame() {
               clientList.getClient(data.from).fire();
             }
             if (data.data.data.s) {
-              clientList.getClient(data.from).thrustBack(0.03);
+              clientList.getClient(data.from).thrustBack(-0.03);
             }
             if (data.data.data.w) {
-              clientList.getClient(data.from).thrust(0.03);
+              clientList.getClient(data.from).thrust(-0.03);
             }
             if (data.data.data.a) {
               clientList
