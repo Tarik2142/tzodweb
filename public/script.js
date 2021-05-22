@@ -99,6 +99,10 @@ function startGame() {
         case "playerDisconnect":
           clientList.remove(data.data.playerName);
           break;
+        case "serverClose":
+          alert("Server Closed");
+          window.location.reload();
+          break;
       }
     }
   });

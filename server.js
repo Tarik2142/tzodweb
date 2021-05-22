@@ -77,9 +77,9 @@ io.sockets.on("connection", function(socket) {
     if (!roomList[roomId]) return; //ковнати больше нет
     roomList[roomId].removePlayer(socket); //убрать дибіла
     if (isServer) {
-      network.brodcast("control", {
+      network.brodcast("control", {data: {
         event: "serverClose"
-      }); //сервер вийшов в окошко
+      }}); //сервер вийшов в окошко
       roomList.splice(roomId, 1); //убрать ковнату
       logObj("roomList splice", roomList);
     } else {
