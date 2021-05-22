@@ -28,6 +28,7 @@ function startGame() {
       switch (data.data.event) {
         case "playersUpdate":
           if (!server){
+            if (!clientList.getClient(data.from)) return;
            var counter = 0;
             data.data.data.forEach(function(player){
               clientList.clientArr[counter].setPosition(player.x, player.y);
@@ -94,6 +95,9 @@ function startGame() {
           }else{
             
           }
+          break;
+        case "playerDisconnect":
+          clientList.remove(data.data.playerName);
           break;
       }
     }
