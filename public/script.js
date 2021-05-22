@@ -68,15 +68,21 @@ function startGame() {
               clientList.getClient(data.from).engineTrust = 0;
             }
             if (data.data.data.a) {
-              clientList
-                .getClient(data.from)
-                .setRotation(clientList.getClient(data.from).rotation - 0.1);
+              //clientList
+               // .getClient(data.from)
+               // .setRotation(clientList.getClient(data.from).rotation - 0.1);
+              clientList.getClient(data.from).engineRotation = 1;
+            }else if (data.data.data.d) {
+              //clientList
+               // .getClient(data.from)
+               // .setRotation(clientList.getClient(data.from).rotation + 0.1);
+              clientList.getClient(data.from).engineRotation = -1;
             }
-            if (data.data.data.d) {
-              clientList
-                .getClient(data.from)
-                .setRotation(clientList.getClient(data.from).rotation + 0.1);
+            else{
+              clientList.getClient(data.from).engineRotation = 0;
             }
+            
+            
           }else{
             
           }
@@ -441,6 +447,11 @@ function update(time, delta) {
     if (cursors.D.isDown) {
       clientList.getOwner().setRotation(clientList.getOwner().rotation + 0.1);
     }
+    for(var i = 1; i < clientList.clientArr.length; i++){
+      clientList.getClient(i).thrust(clientList.getClient(i).engineTrust*0.03);
+      clientList.getClient(i).setRotation(clientList.getClient(i).rotation - clientList.getClient(i).engineRotation*0.1);
+    } 
+    
     
     function playerPos(x, y, rotation, gunRotation){
       this.x = x;
