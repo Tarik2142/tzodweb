@@ -40,7 +40,8 @@ function startGame() {
           }
           break;
         case "newPlayer":
-          if (data.playerName != playerName)
+          log("NEW PLAYER " + data.data.playerName);
+          if (data.data.playerName != playerName)
             clientList.add(
               new tank(
                 scene,
@@ -93,9 +94,6 @@ function startGame() {
           }else{
             
           }
-          break;
-        case "playerDisconnect":
-          clientList.remove(data.data.playerName);
           break;
       }
     }

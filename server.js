@@ -181,7 +181,7 @@ io.sockets.on("connection", function(socket) {
               playerId = roomList[roomId].addPlayer(socket, player);
               log("Joined to " + joinTo + "!");
               socket.join(data.room); //зайти
-              network.toServer("control", {data: {
+              network.brodcast("control", {data: {
                 //оповістить
                 event: "newPlayer",
                 playerName: player,
