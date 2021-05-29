@@ -176,7 +176,6 @@ io.sockets.on("connection", function(socket) {
                   room.password
               );
         if (checkroompas(data,room)) {
-          
               roomId = room.roomId; //індекс найденой ковнати
               playerId = roomList[roomId].addPlayer(socket, player);
               log("Joined to " + joinTo + "!");
@@ -197,12 +196,10 @@ io.sockets.on("connection", function(socket) {
                 players: roomList[roomId].players
               }); //оповістить клієнта
             }
-          //
-
-        
       }
     });
   });
+  
   function checkroompas(data,room) {
     if (!data.password) {
             //
@@ -213,7 +210,7 @@ io.sockets.on("connection", function(socket) {
             }); //оповістить клієнта
             log("Empty password!");
           } 
-    else if (parseInt(data.password) != parseInt(room.password)) {
+    else if (parseInt(data.password) != parseInt(room.password)) {//!!Пароль може бути не тільки із цифр
               socket.emit("joinResult", {
                 result: false,
                 text: "Wrong password!"
