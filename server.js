@@ -142,12 +142,8 @@ io.sockets.on("connection", function(socket) {
 
     roomList.forEach(function(room) {
       //перебор
-      var password = false;
-      if (room.password) {
-        password = true;
-      }
       responseRoomlist.push(
-        new responseRoomObj(room.chanelId, room.players, room.map, password)
+        new responseRoomObj(room.chanelId, room.players, room.map, room.password ? true : false)
       ); //добавить поддержку кастомних имен ковнат!!!!!
       counter++;
       if (counter >= roomList.length) {
