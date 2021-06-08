@@ -33,6 +33,7 @@ function startGame() {
             data.data.data.forEach(function(player){
               clientList.clientArr[counter].setPosition(player.x, player.y);
               clientList.clientArr[counter].setRotation(player.rotation);
+              if ()
               if (!counter == clientList.ownerId){
                 clientList.clientArr[counter].gun.setRotation(player.gunRotation);
               }
@@ -460,16 +461,17 @@ function update(time, delta) {
     } 
     
     
-    function playerPos(x, y, rotation, gunRotation){
+    function playerPos(x, y, rotation, gunRotation, lmb){
       this.x = x;
       this.y = y;
       this.rotation = rotation;
       this.gunRotation = gunRotation;
+      this.lmb = lmb;
     }
     
     var positionsArr = [];
     clientList.clientArr.forEach(function(client){
-      positionsArr.push(new playerPos(client.x, client.y, client.rotation, client.gun.rotation));
+      positionsArr.push(new playerPos(client.x, client.y, client.rotation, client.gun.rotation, control.lmb));
     });
     sendControl({
         event: "playersUpdate",
