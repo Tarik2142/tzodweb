@@ -210,12 +210,12 @@ class tank extends Phaser.Physics.Matter.Sprite {
       //this.kill();
       const id = this.id;
       log("killing tank width id: " + id);
-      clientList.clientArr[id].setPosition(-20, -20);
+      clientList.clientArr[id].setPosition(1000, 1000);
       this.hp = 100;
-
+      this.setNick(this.nickname2 + " [" + this.hp + "HP]");
       setTimeout(function(){
-        clientList.clientArr[id].setPosition(50, 50);
-      }, 2000);
+        clientList.clientArr[id].setPosition(55, 55);
+      }, 3000);
       //respawn
     }else{
       this.hp -= amount;
