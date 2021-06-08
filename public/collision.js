@@ -20,6 +20,13 @@ var tzodCollision = {
       
       var isBa = isBullet(bodyA);
       var isBb = isBullet(bodyB);
+      
+      if(isTank(bodyA) && isBullet(bodyB)){
+        if (getGO(bodyA)){
+          bodyA.gameObject.damage(10);
+        }
+      }
+      
       if (isBa && isBb){ //2 пули убить обе
         if (getGO(bodyA)) bodyA.gameObject.destroy(true);
         if (getGO(bodyB)) bodyB.gameObject.destroy(true);
@@ -66,6 +73,16 @@ var tzodCollision = {
         scene.matter.world.convertTilemapLayer(belowLayer);
         }
       } 
+    }
+    
+    function isTank(body){
+        if(body.label){
+          if (body.label.indexOf('tank') != -1){
+            return true;
+          }
+        }else{
+          return false;
+        }
     }
     
     function isWall(body){
