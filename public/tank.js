@@ -208,19 +208,20 @@ class tank extends Phaser.Physics.Matter.Sprite {
   damage(amount){//урон
     if(this.hp - amount <= 0){//умер
       //this.kill();
-      const id = this.id;
-      log("killing tank width id: " + id);
-      clientList.clientArr[id].setPosition(1000, 1000);
+      //const id = this.id;
+      log("killing tank width id: " + this.id);
+      if (server) clientList.clientArr[this.id].setPosition(500, 500);
       this.hp = 100;
       this.setNick(this.nickname2 + " [" + this.hp + "HP]");
-      setTimeout(function(){
-        clientList.clientArr[id].setPosition(55, 55);
-      }, 3000);
+      //setTimeout(function(){
+      //  if (server) clientList.clientArr[id].setPosition(30, 30);
+      //}, 3000);
       //respawn
     }else{
       this.hp -= amount;
       this.setNick(this.nickname2 + " [" + this.hp + "HP]");
     }
+    
   }
 
   fire() {
