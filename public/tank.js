@@ -156,6 +156,7 @@ class gunn extends Phaser.Physics.Matter.Sprite {
 
 class tank extends Phaser.Physics.Matter.Sprite {
   speed;
+  hp;
   armor;
   nickname;
   updater;
@@ -166,6 +167,7 @@ class tank extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, shape, startGun, id) {
     var label = 'tank' + id;
     super(scene.matter.world, x, y, texture, null, {label: label, shape: shape});
+    this.hp = 100;
     this.engineTrust = 0;
     this.engineRotation = 0;
     this.id = id;
@@ -183,14 +185,14 @@ class tank extends Phaser.Physics.Matter.Sprite {
       this.gun.depth = 1;
       this.joint = scene.matter.add.constraint(this, this.gun, 0, 0);
     }
-    this.nickname = scene.add.text(16, 16, id, {
+    this.nickname = scene.add.text(16, 16, id + " [" + this.hp + "HP]", {
         fontSize: '14px',
         padding: { x: 0, y: 0 },
         //backgroundColor: '#000000'
         //fill: '#ffffff'
     });
     this.nickname.setScrollFactor(0);
-    log(this.nickname);
+    //log(this.nickname);
     var that = this;
     this.updater = scene.matter.world.on('beforeupdate', function(time, delta){//ник за игроком
       that.nickname.x = that.x - 25;
@@ -200,6 +202,16 @@ class tank extends Phaser.Physics.Matter.Sprite {
   
   setNick(text){
     this.nickname.text = text;
+  }
+  
+  damage(amount){//урон
+    if(this.hp - amount <= 0){//умер
+      this.kill();
+      //respawn
+    }else{
+      this.hp -= amount;
+      this.setNick(id + " [" + this.hp + "HP]");
+    }
   }
 
   fire() {

@@ -8,7 +8,7 @@ var tzodCollision = {
   update: function(event){
     
     function handleCollisions(bodyA, bodyB){
-      
+      logObj("collision", event);
       function getGO(body){
         if (body.gameObject){
           return true;
