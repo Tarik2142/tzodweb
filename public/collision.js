@@ -24,7 +24,7 @@ var tzodCollision = {
       
       if(isTank(bodyA) && isBullet(bodyB)){
         if (getGO(bodyA)){
-          bodyA.gameObject.damage(10);
+          bodyA.gameObject.damage(bodyA.gameObject.gun.gunType.dmg);
         }
         if(getGO(bodyB)){
           bodyB.gameObject.destroy(true);

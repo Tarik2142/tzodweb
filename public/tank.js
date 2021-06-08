@@ -180,13 +180,13 @@ class tank extends Phaser.Physics.Matter.Sprite {
     this.setMass(5);
     this.setCollisionCategory(cat1);
     if (startGun){
-      this.gun = new gunn(scene, x, y, startGun, id);
+      this.gun = new gunn(scene, x, y, startGun, this.nickname2);
       this.gun.setCollisionCategory(cat2);
       this.gun.setCollidesWith(cat2);
       this.gun.depth = 1;
       this.joint = scene.matter.add.constraint(this, this.gun, 0, 0);
     }
-    this.nickname = scene.add.text(16, 16, id + " [" + this.hp + "HP]", {
+    this.nickname = scene.add.text(16, 16, this.nickname2 + " [" + this.hp + "HP]", {
         fontSize: '14px',
         padding: { x: 0, y: 0 },
         //backgroundColor: '#000000'
@@ -208,10 +208,14 @@ class tank extends Phaser.Physics.Matter.Sprite {
   damage(amount){//урон
     if(this.hp - amount <= 0){//умер
       //this.kill();
-      clientList.clientArr[this.id].setPosition(-10, -10);
+      const id = this.id;
+      log("killing tank width id: " + id);
+      clientList.clientArr[id].setPosition(-20, -20);
+      this.hp = 100;
+
       setTimeout(function(){
-        
-      }, 2000)
+        clientList.clientArr[id].setPosition(50, 50);
+      }, 2000);
       //respawn
     }else{
       this.hp -= amount;

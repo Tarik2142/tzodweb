@@ -51,8 +51,8 @@ function startGame() {
                 "tank",
                 shapes.blue,
                 guns.heavy,
-                clientList.length(),
-                data.data.playerName
+                data.data.playerName,
+                clientList.clientArr.length
               )
             );
           break;
@@ -313,7 +313,7 @@ function create() {
 
   shapes = this.cache.json.get("shapes");
   if(server){
-    clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName));//server
+    clientList.add(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, playerName, clientList.clientArr.length));//server
   }else{
     //clientList = new clients(new tank(scene, posx, posy, "tank", shapes.blue, guns.heavy, startPlayers[0]));
     var counter = 0;
