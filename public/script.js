@@ -51,6 +51,7 @@ function startGame() {
                 "tank",
                 shapes.blue,
                 guns.heavy,
+                clientList.length(),
                 data.data.playerName
               )
             );
@@ -119,7 +120,7 @@ function clients(owner) {
     //var that = this;
     this.clientArr.forEach(function(client) {
       //logObj('client:', client.id;
-      if (client.id == player) {
+      if (client.nickname2 == player) {
         client.kill();
         return;
       }

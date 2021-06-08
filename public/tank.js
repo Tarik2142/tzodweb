@@ -165,15 +165,14 @@ class tank extends Phaser.Physics.Matter.Sprite {
   engineTrust;
   engineRotation;
 
-  constructor(scene, x, y, texture, shape, startGun, id) {
-    var label = 'tank' + id;
+  constructor(scene, x, y, texture, shape, startGun, nickname2, id) {
+    var label = 'tank_' + id;
     super(scene.matter.world, x, y, texture, null, {label: label, shape: shape});
-    this.nickname2 = id;
+    this.nickname2 = nickname2;
     this.hp = 100;
     this.engineTrust = 0;
     this.engineRotation = 0;
     this.id = id;
-    log(this.id);
     scene.add.existing(this).setScale(scale, scale);
     var cat1 = scene.matter.world.nextCategory();
     var cat2 = scene.matter.world.nextCategory();
@@ -208,11 +207,15 @@ class tank extends Phaser.Physics.Matter.Sprite {
   
   damage(amount){//урон
     if(this.hp - amount <= 0){//умер
-      this.kill();
+      //this.kill();
+      clientList.clientArr[this.id].setPosition(-10, -10);
+      setTimeout(function(){
+        
+      }, 2000)
       //respawn
     }else{
       this.hp -= amount;
-      this.setNick(id + " [" + this.hp + "HP]");
+      this.setNick(this.nickname2 + " [" + this.hp + "HP]");
     }
   }
 
