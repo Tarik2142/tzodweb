@@ -10,6 +10,7 @@ var tzodCollision = {
     function handleCollisions(bodyA, bodyB){
       logObj("bodyA", bodyA);
       logObj("bodyB", bodyB);
+      
       function getGO(body){
         if (body.gameObject){
           return true;
@@ -24,6 +25,9 @@ var tzodCollision = {
       if(isTank(bodyA) && isBullet(bodyB)){
         if (getGO(bodyA)){
           bodyA.gameObject.damage(10);
+        }
+        if(getGO(bodyB)){
+          bodyB.gameObject.destroy(true);
         }
       }
       
@@ -98,7 +102,7 @@ var tzodCollision = {
     function isBullet(body){
         if(body.label){
           //log(body.label);
-          if (body.label.indexOf('type_bullet') != -1){
+          if (body.label.indexOf('bullet') != -1){
             return true;
           }
         }else{
