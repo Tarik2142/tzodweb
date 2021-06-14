@@ -51,8 +51,10 @@ var tzodCollision = {
         var tileBody = bodyA.label === "collides" ? bodyA : bodyB;
         if (tileBody.gameObject) {
           
+          
           var tileWrapper = tileBody.gameObject;
           if (tileWrapper.tile) {
+            log(tileWrapper);
             var tile = tileWrapper.tile;
             if (tile.properties.hp!=0) { 
               for(var damag=damagg;damag>0;){
