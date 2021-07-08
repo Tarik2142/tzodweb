@@ -441,11 +441,11 @@ function update(time, delta) {
         data: control
       });
     }
-  
-  if(server){
-    if (pointer.isDown) {
+  if (pointer.isDown) {
+    log("FIRE");
       clientList.getOwner().fire();
     }
+  if(server){
     if (cursors.S.isDown) {
       clientList.getOwner().thrustBack(0.03);
     }
