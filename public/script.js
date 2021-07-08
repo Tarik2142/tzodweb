@@ -292,6 +292,7 @@ function create() {
   belowLayer.renderDebug(debugGraphics, {});*/
   //ilemapLayer = this.matter.world.convertTilemapLayer(belowLayer);
   this.matter.world.convertTilemapLayer(belowLayer);
+  console.log(this.matter.world);
 
   //obstacle = this.matter.add.sprite( 64, 64,"tank", null, {shape: shapes.blue});//
   //this.matter.world.convertTiles(tileset);
