@@ -26,6 +26,9 @@ function startGame() {
     //logObj("control: ", data);
     if (data.data.event) {
       switch (data.data.event) {
+        case "kill":
+          
+          break;
         case "playersUpdate":
           if (!server){
             if (!clientList.getClient(data.from)) return;

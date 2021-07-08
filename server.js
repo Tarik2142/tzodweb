@@ -137,8 +137,8 @@ io.sockets.on("connection", function(socket) {
       this.password = password;
     }
 
-    var responseRoomlist = [];
-    var counter = 0;
+    let responseRoomlist = [];
+    let counter = 0;
 
     roomList.forEach(function(room) {
       //перебор
@@ -156,9 +156,9 @@ io.sockets.on("connection", function(socket) {
     //клієнт
     player = data.name;
     const joinTo = data.room; //
-    var joined = false;
-    var data = data;
-    var room;
+    let joined = false;
+    //var data = data;
+    let room;
     log("Join to " + joinTo);
     roomList.forEach(function(room) {
       //перебрать всі ковнати
